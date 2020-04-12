@@ -4,11 +4,12 @@ using MoreMountains.Tools;
 using System.Collections.Generic;
 
 namespace MoreMountains.TopDownEngine
-{	
+{
     /// <summary>
     /// a controller to move a rigidbody2D and collider2D around in top down view
     /// </summary>
-	public class TopDownController2D : TopDownController 
+    [AddComponentMenu("TopDown Engine/Character/Core/TopDown Controller 2D")]
+    public class TopDownController2D : TopDownController 
 	{
         [MMReadOnly]
         /// whether or not the character is above a hole right now

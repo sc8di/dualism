@@ -11,6 +11,7 @@ namespace MoreMountains.TopDownEngine
     /// A generic level manager meant to handle multiplayer scenes (specifically spawn and camera modes
     /// It's recommended to extend it to implement your own specific gameplay rules
     /// </summary>
+    [AddComponentMenu("TopDown Engine/Managers/MultiplayerLevelManager")]
     public class MultiplayerLevelManager : LevelManager
     {
         [Header("Multiplayer spawn")]

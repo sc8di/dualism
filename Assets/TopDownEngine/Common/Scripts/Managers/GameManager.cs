@@ -9,6 +9,20 @@ namespace MoreMountains.TopDownEngine
 {
     /// <summary>
     /// A list of the possible TopDown Engine base events
+    /// LevelStart : triggered by the LevelManager when a level starts
+    ///	LevelComplete : can be triggered when the end of a level is reached
+    /// LevelEnd : same thing
+    ///	Pause : triggered when a pause is starting
+    ///	UnPause : triggered when a pause is ending and going back to normal
+    ///	PlayerDeath : triggered when the player character dies
+    ///	RespawnStarted : triggered when the player character respawn sequence starts
+    ///	RespawnComplete : triggered when the player character respawn sequence ends
+    ///	StarPicked : triggered when a star bonus gets picked
+    ///	GameOver : triggered by the LevelManager when all lives are lost
+    /// CharacterSwap : triggered when the character gets swapped
+    /// CharacterSwitch : triggered when the character gets switched
+    /// Repaint : triggered to ask for a UI refresh
+    /// TogglePause : triggered to request a pause (or unpause)
     /// </summary>
     public enum TopDownEngineEventTypes
 	{
@@ -24,8 +38,9 @@ namespace MoreMountains.TopDownEngine
 		GameOver,
         CharacterSwap,
         CharacterSwitch,
-        Repaint
-	}
+        Repaint,
+        TogglePause
+    }
 
 	/// <summary>
 	/// A type of events used to signal level start and end (for now)
@@ -315,8 +330,9 @@ namespace MoreMountains.TopDownEngine
 			if (_inventoryOpen)
 			{
 				_inventoryOpen = false;
-			}
-		}
+            }
+            LevelManager.Instance.ToggleCharacterPause();
+        }
         
         /// <summary>
         /// Stores the points of entry for the level whose name you pass as a parameter.
@@ -446,6 +462,16 @@ namespace MoreMountains.TopDownEngine
 		{
 			switch (engineEvent.EventType)
 			{
+                case TopDownEngineEventTypes.TogglePause:
+                    if (Paused)
+                    {
+                        TopDownEngineEvent.Trigger(TopDownEngineEventTypes.UnPause, null);
+                    }
+                    else
+                    {
+                        TopDownEngineEvent.Trigger(TopDownEngineEventTypes.Pause, null);
+                    }
+                    break;
 				case TopDownEngineEventTypes.Pause:
 					Pause ();
 					break;

@@ -101,6 +101,7 @@ namespace MoreMountains.TopDownEngine
             }
             MMTimeScaleEvent.Trigger(MMTimeScaleMethods.For, 0f, 0f, false, 0f, true);
             _gameOver = true;
+            SoundManager.Instance.StopAllLoopingSounds();
             TopDownEngineEvent.Trigger(TopDownEngineEventTypes.GameOver, null);
         }
 
@@ -159,6 +160,7 @@ namespace MoreMountains.TopDownEngine
                     || (Input.GetButton("Player3_Jump"))
                     || (Input.GetButton("Player4_Jump")) )
                 {
+                    MMTimeScaleEvent.Trigger(MMTimeScaleMethods.Reset, 1f, 0f, false, 0f, true);
                     LoadingSceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
             }
