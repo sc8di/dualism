@@ -91,7 +91,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
+  serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5711182018631022405, guid: f02876d4c0bc6514a9b63767edda8e6d, type: 3}
@@ -106,7 +106,8 @@ GameObject:
   - component: {fileID: 7521665661022559552}
   - component: {fileID: 679036955368558918}
   - component: {fileID: 791438197235493372}
-  - component: {fileID: 4981318769938619088}
+  - component: {fileID: 4047358151821441345}
+  - component: {fileID: 241871721729846619}
   m_Layer: 0
   m_Name: SO_CeilingFan_Blade
   m_TagString: Untagged
@@ -175,8 +176,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4981318769938619088
-MeshCollider:
+--- !u!65 &4047358151821441345
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -185,7 +186,19 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2240116112679463600, guid: f02876d4c0bc6514a9b63767edda8e6d, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.18337917, y: 0.030854404, z: 1.8211075}
+  m_Center: {x: -0.0021858215, y: 0.09668003, z: -7.840808e-16}
+--- !u!65 &241871721729846619
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7344489105414140419}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.8211074, y: 0.030854404, z: 0.19825983}
+  m_Center: {x: 0, y: 0.09668003, z: 0.0017414689}
