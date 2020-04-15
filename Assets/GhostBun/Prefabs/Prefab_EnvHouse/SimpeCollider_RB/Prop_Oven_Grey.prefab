@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1832433328325996082}
   - component: {fileID: 1585291059692805735}
   - component: {fileID: 1125773604928984855}
-  - component: {fileID: 1322213416768052889}
   - component: {fileID: 1386503427367234333}
+  - component: {fileID: 2088510327983618107}
   m_Layer: 0
   m_Name: Prop_Oven_Grey
   m_TagString: Untagged
@@ -81,19 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &1322213416768052889
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9147461735249187933}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.66, y: 0.83199656, z: 0.7275455}
-  m_Center: {x: 0, y: 0.41599828, z: 2.137668e-15}
 --- !u!54 &1386503427367234333
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -110,3 +97,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!208 &2088510327983618107
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9147461735249187933}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.33, y: 0.415, z: 0.36400002}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.41, z: 0}
+  m_TimeToStationary: 0.5

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 826521926865517551}
   - component: {fileID: 3975033637327023251}
   - component: {fileID: 6521949826845228790}
+  - component: {fileID: 4569754724722448955}
+  - component: {fileID: 2572449806995435446}
   m_Layer: 0
   m_Name: SA_Prop_BuildingRuin_04
   m_TagString: Untagged
@@ -79,3 +81,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4569754724722448955
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5592816184589294097}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4327555, y: 1.4752358, z: 1.918125}
+  m_Center: {x: 0.42367724, y: 0.68627256, z: -9.401973e-16}
+--- !u!65 &2572449806995435446
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5592816184589294097}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.72373533, y: 1.4752358, z: 1.284308}
+  m_Center: {x: -0.6607592, y: 0.68627256, z: -0.3169086}

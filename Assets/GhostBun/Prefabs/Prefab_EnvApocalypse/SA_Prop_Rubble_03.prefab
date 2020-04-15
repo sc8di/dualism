@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 706788733438210104}
   - component: {fileID: 4074705281762177887}
   - component: {fileID: 3386946008892346576}
+  - component: {fileID: 2107527485881419506}
   m_Layer: 0
   m_Name: SA_Prop_Rubble_03
   m_TagString: Untagged
@@ -79,3 +80,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2107527485881419506
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8123437432830449814}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.6997585, y: 2.6116133, z: 6.9653177}
+  m_Center: {x: -0.0022964478, y: 0.69967866, z: -0.25981665}

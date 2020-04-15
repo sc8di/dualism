@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6415894086521126019}
   - component: {fileID: 4280730388243307454}
   - component: {fileID: 4949358181545351668}
-  - component: {fileID: 5503369608803557499}
+  - component: {fileID: 3931097636753735986}
   m_Layer: 0
   m_Name: Prop_Cupboard_Blue
   m_TagString: Untagged
@@ -80,7 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &5503369608803557499
+--- !u!65 &3931097636753735986
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

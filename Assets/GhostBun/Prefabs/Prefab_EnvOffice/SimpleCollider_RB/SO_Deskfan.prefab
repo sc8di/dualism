@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 5940551367091447455}
   - component: {fileID: 6156825599672321229}
   - component: {fileID: 4251302289464079189}
+  - component: {fileID: 1379747185651840948}
   m_Layer: 0
   m_Name: SO_Deskfan
   m_TagString: Untagged
@@ -232,3 +233,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.10987854, y: 0.087496996, z: 0.13384518}
   m_Center: {x: 0.0012302399, y: 0.24110305, z: -0.039037347}
+--- !u!208 &1379747185651840948
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8926188715815338652}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.147, y: 0.194, z: 0.106000006}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.194, z: 0}
+  m_TimeToStationary: 0.5

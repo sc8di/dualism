@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1899488210462553248}
   - component: {fileID: 964786779697508284}
   - component: {fileID: 5509284520998933633}
+  - component: {fileID: 3371175041543571938}
   m_Layer: 0
   m_Name: SA_Prop_LawnFlamingo_01
   m_TagString: Untagged
@@ -79,3 +80,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!54 &3371175041543571938
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446652222617163312}
+  serializedVersion: 2
+  m_Mass: 0.02
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

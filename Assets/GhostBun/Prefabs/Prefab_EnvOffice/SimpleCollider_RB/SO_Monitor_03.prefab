@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2486899786697376102}
   - component: {fileID: 1450511216553517517}
   - component: {fileID: 829766761099505915}
+  - component: {fileID: 5205218743874149336}
   m_Layer: 0
   m_Name: SO_Monitor_03
   m_TagString: Untagged
@@ -138,3 +139,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.60205483, y: 0.58461034, z: 0.48526508}
   m_Center: {x: 0, y: 0.449359, z: 0.031980902}
+--- !u!208 &5205218743874149336
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4033015958816553}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.30100003, y: 0.372, z: 0.275}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.372, z: 0}
+  m_TimeToStationary: 0.5
