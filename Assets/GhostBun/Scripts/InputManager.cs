@@ -6,6 +6,9 @@ using UnityEngine.AI;
 public class InputManager : MonoBehaviour
 {
     [SerializeField]
+    float anchorVerticalOffset = 2f;
+
+    [SerializeField]
     float rotateSpeed = 50f;
 
     [SerializeField]
@@ -65,7 +68,7 @@ public class InputManager : MonoBehaviour
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(ray, out hit, 100, mask))
                     {
-                        anchor.transform.position = hit.point;
+                        anchor.transform.position = hit.point + Vector3.up * anchorVerticalOffset;
                     }
                     if (!force.activeInHierarchy)
                     {
