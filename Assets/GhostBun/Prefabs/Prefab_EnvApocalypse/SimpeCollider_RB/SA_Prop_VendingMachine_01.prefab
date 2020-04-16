@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8953441943639566349}
   - component: {fileID: 2860210570536472301}
   - component: {fileID: 7415904768199684618}
-  - component: {fileID: 2453829869829477360}
   m_Layer: 0
   m_Name: SA_Prop_VendingMachine_01
   m_TagString: Untagged
@@ -114,16 +113,3 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1.3060001, z: 0}
   m_TimeToStationary: 0.5
---- !u!65 &2453829869829477360
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9037172896847019253}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2329694, y: 2.61116, z: 0.86584586}
-  m_Center: {x: 0, y: 1.30558, z: 0}

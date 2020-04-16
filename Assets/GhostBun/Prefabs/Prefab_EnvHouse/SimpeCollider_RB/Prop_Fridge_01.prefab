@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2653930659629358633}
   - component: {fileID: -4583515066590322107}
   - component: {fileID: 8511634353238610459}
-  - component: {fileID: 2469988675771898827}
   m_Layer: 0
   m_Name: Prop_Fridge_01
   m_TagString: Untagged
@@ -114,16 +113,3 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.68, z: 0}
   m_TimeToStationary: 0.5
---- !u!65 &2469988675771898827
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7592532461041926013}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.66, y: 1.3601156, z: 0.7178083}
-  m_Center: {x: 0, y: 0.6800578, z: 0}
