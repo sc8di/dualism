@@ -22,9 +22,9 @@ TagManager:
   - Player
   - ObstaclesDoors
   - NoPathfinding
-  - Enemies
-  - NoCollisions
-  - Hole
+  - GhostBun
+  - TelekineticField
+  - Objects
   - MovingPlatform
   - FallingPlatform
   - Projectile

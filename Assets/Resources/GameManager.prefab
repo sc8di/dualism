@@ -192,9 +192,9 @@ MonoBehaviour:
   musicFirstSource: {fileID: 2231834372182413071}
   musicSecondSource: {fileID: 2231834371856075497}
   clips:
-  - {fileID: 8300000, guid: 23d4e5f22f1be834692f5ac1f76567d8, type: 3}
-  - {fileID: 8300000, guid: fa180d9104a5f4d43a911d8fc357d603, type: 3}
-  - {fileID: 8300000, guid: c5b1f688f0ca2d94fae4695e0c7e40e4, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   crossFadeRate: 1.5
 --- !u!114 &2231834371757520843
 MonoBehaviour:
