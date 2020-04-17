@@ -6,7 +6,8 @@
     "CustomOutputPath": "/JMO Assets/Toony Colors Pro/Shaders Generated/",
     "LastImplementationExportImportPath": "E:/Git/Dualism/dualism/Assets",
     "OpenedFoldouts": [
-        "SURFACE"
+        "LIGHTING",
+        "STYLIZATION"
     ],
     "UseCustomFont": true,
     "CustomFont": {
