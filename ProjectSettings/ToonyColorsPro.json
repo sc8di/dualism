@@ -7,5 +7,12 @@
     "LastImplementationExportImportPath": "E:/Git/Dualism/dualism/Assets",
     "OpenedFoldouts": [
         "SURFACE"
-    ]
+    ],
+    "UseCustomFont": true,
+    "CustomFont": {
+        "fileID": 12800000,
+        "guid": "8a406076b7de34849be1f35585875a66",
+        "type": 3
+    },
+    "CustomFontInitialized": true
 }
