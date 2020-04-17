@@ -58,7 +58,7 @@ MonoBehaviour:
   TrajectoryZOffsetMax: 6.37
   EffectOnCollisionRef: 1
   SoundOnCollisionRef: 1
-  HeatSeekingRef: 1
+  HeatSeekingRef: 0
   AbilityType: 0
   DamageType: 0
   SupportType: 0
@@ -70,4 +70,4 @@ MonoBehaviour:
   UseCustomAbilityIcon: 0
   UseCastEffect: 0
   ArrowProjectileRef: 0
-  AbilityEditorTabs: 0
+  AbilityEditorTabs: 1

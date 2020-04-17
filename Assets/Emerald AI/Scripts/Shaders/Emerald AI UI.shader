@@ -1,6 +1,6 @@
 // Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
 
-Shader "UI/Default+1"
+Shader "UI/Default (Equal)"
 {
 	Properties
 	{
@@ -22,7 +22,7 @@ Shader "UI/Default+1"
 	{
 		Tags
 		{ 
-			"Queue"="Geometry+4000" 
+			"Queue"="Geometry" 
 			"IgnoreProjector"="True" 
 			"RenderType"="Transparent" 
 			"PreviewType"="Plane"

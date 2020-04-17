@@ -14,6 +14,7 @@ namespace EmeraldAI
         float BlockTimer;
         bool BackupDelayActive;
         float BackupDistance;
+        bool SearchDelayActive = false;
 
         void Start()
         {
@@ -78,12 +79,14 @@ namespace EmeraldAI
             }
 
             //If our AI target dies, search for another target
-            if (EmeraldComponent.TargetTypeRef == EmeraldAISystem.TargetType.AI)
+            if (EmeraldComponent.TargetTypeRef == EmeraldAISystem.TargetType.AI && !SearchDelayActive)
             {
                 if (EmeraldComponent.TargetEmerald != null)
                 {
                     if (EmeraldComponent.TargetEmerald.CurrentHealth <= 0 && !EmeraldComponent.DeathDelayActive)
                     {
+                        EmeraldComponent.OnKillTargetEvent.Invoke();
+
                         EmeraldComponent.EmeraldDetectionComponent.m_LookLerpValue = 0;
                         EmeraldComponent.DestinationAdjustedAngle = 100;
                         EmeraldComponent.AIAnimator.ResetTrigger("Attack");
@@ -96,10 +99,38 @@ namespace EmeraldAI
                         {
                             EmeraldComponent.EmeraldDetectionComponent.PreviousTarget = EmeraldComponent.CurrentTarget;
                         }
+
+                        //Delay the SearchForTarget function by 0.75 seconds
+                        SearchDelayActive = true;
+                        Invoke("DelaySearch", 0.75f);
+                    }
+                }
+            }
+            else if (EmeraldComponent.TargetTypeRef == EmeraldAISystem.TargetType.Player) //If our player target dies, search for another target
+            {
+                if (EmeraldComponent.CurrentTarget == null)
+                {
+                    if (!EmeraldComponent.DeathDelayActive)
+                    {
+                        EmeraldComponent.OnKillTargetEvent.Invoke();
+
+                        EmeraldComponent.EmeraldDetectionComponent.PreviousTarget = EmeraldComponent.CurrentTarget;
+                        EmeraldComponent.EmeraldDetectionComponent.m_LookLerpValue = 0;
+                        EmeraldComponent.DestinationAdjustedAngle = 100;
+                        EmeraldComponent.AIAnimator.ResetTrigger("Attack");
                         EmeraldComponent.EmeraldDetectionComponent.SearchForTarget();
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Invoked to delay the SearchForTarget function which allows an AI not immediately attack another target after having just killed one.
+        /// </summary>
+        public void DelaySearch ()
+        {
+            SearchDelayActive = false;
+            EmeraldComponent.EmeraldDetectionComponent.SearchForTarget();
         }
 
         /// <summary>
@@ -198,7 +229,9 @@ namespace EmeraldAI
                     if (EmeraldComponent.TargetEmerald != null)
                     {
                         if (EmeraldComponent.TargetEmerald.CurrentHealth <= 0 && !EmeraldComponent.DeathDelayActive)
-                        {                          
+                        {
+                            EmeraldComponent.OnKillTargetEvent.Invoke();
+
                             EmeraldComponent.DestinationAdjustedAngle = 100;
                             EmeraldComponent.AIAnimator.ResetTrigger("Attack");
 
@@ -264,6 +297,23 @@ namespace EmeraldAI
         /// </summary>
         public void CautiousBehavior()
         {
+            if (EmeraldComponent.CurrentTarget)
+            {
+                Vector3 CurrentTargetPos = EmeraldComponent.CurrentTarget.position;
+                CurrentTargetPos.y = 0;
+                Vector3 CurrentPos = transform.position;
+                CurrentPos.y = 0;
+                EmeraldComponent.DistanceFromTarget = Vector3.Distance(CurrentTargetPos, CurrentPos);
+
+                //If our target exceeds the Detection Radius distance, clear the target and resume wander type by returning to the default state.
+                //Also, reset the CautiousTimer to 0.
+                if (EmeraldComponent.DistanceFromTarget > EmeraldComponent.DetectionRadius)
+                {
+                    DefaultState();
+                    EmeraldComponent.CautiousTimer = 0;
+                }
+            }
+
             EmeraldComponent.CautiousTimer += Time.deltaTime;
 
             if (EmeraldComponent.CautiousTimer >= EmeraldComponent.CautiousSeconds)
@@ -356,7 +406,10 @@ namespace EmeraldAI
                 {
                     if (EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Attack1Animation ||
                         EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Attack2Animation ||
-                        EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Attack3Animation)
+                        EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Attack3Animation || 
+                        EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Attack4Animation ||
+                        EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Attack5Animation ||
+                        EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Attack6Animation)
                     {
                         EmeraldComponent.Attacking = true;
 
@@ -391,7 +444,10 @@ namespace EmeraldAI
             {
                 if (EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Hit1Animation || 
                     EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Hit2Animation || 
-                    EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Hit3Animation)
+                    EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Hit3Animation ||
+                    EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Hit4Animation ||
+                    EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Hit5Animation ||
+                    EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Hit6Animation)
                 {
                     EmeraldComponent.GettingHit = true;
                 }
@@ -402,7 +458,14 @@ namespace EmeraldAI
 
                 if (EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Emote1Animation ||
                     EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Emote2Animation ||
-                    EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Emote3Animation)
+                    EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Emote3Animation ||
+                    EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Emote4Animation ||
+                    EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Emote5Animation ||
+                    EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Emote6Animation ||
+                    EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Emote7Animation ||
+                    EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Emote8Animation ||
+                    EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Emote9Animation ||
+                    EmeraldComponent.CurrentAnimationClip == EmeraldComponent.Emote10Animation)
                 {
                     EmeraldComponent.EmoteAnimationActive = true;
                 }
@@ -417,7 +480,10 @@ namespace EmeraldAI
                 {
                     if (EmeraldComponent.CurrentAnimationClip == EmeraldComponent.CombatHit1Animation ||
                         EmeraldComponent.CurrentAnimationClip == EmeraldComponent.CombatHit2Animation ||
-                        EmeraldComponent.CurrentAnimationClip == EmeraldComponent.CombatHit3Animation)
+                        EmeraldComponent.CurrentAnimationClip == EmeraldComponent.CombatHit3Animation ||
+                        EmeraldComponent.CurrentAnimationClip == EmeraldComponent.CombatHit4Animation ||
+                        EmeraldComponent.CurrentAnimationClip == EmeraldComponent.CombatHit5Animation ||
+                        EmeraldComponent.CurrentAnimationClip == EmeraldComponent.CombatHit6Animation)
                     {
                         EmeraldComponent.GettingHit = true;
                         EmeraldComponent.CurrentBlockingState = EmeraldAISystem.BlockingState.NotBlocking;
@@ -432,7 +498,10 @@ namespace EmeraldAI
                 {
                     if (EmeraldComponent.CurrentAnimationClip == EmeraldComponent.RangedCombatHit1Animation ||
                         EmeraldComponent.CurrentAnimationClip == EmeraldComponent.RangedCombatHit2Animation ||
-                        EmeraldComponent.CurrentAnimationClip == EmeraldComponent.RangedCombatHit3Animation)
+                        EmeraldComponent.CurrentAnimationClip == EmeraldComponent.RangedCombatHit3Animation ||
+                        EmeraldComponent.CurrentAnimationClip == EmeraldComponent.RangedCombatHit4Animation ||
+                        EmeraldComponent.CurrentAnimationClip == EmeraldComponent.RangedCombatHit5Animation ||
+                        EmeraldComponent.CurrentAnimationClip == EmeraldComponent.RangedCombatHit6Animation)
                     {
                         EmeraldComponent.GettingHit = true;
                     }
@@ -616,7 +685,7 @@ namespace EmeraldAI
 
             if (EmeraldComponent.CombatStateRef == EmeraldAISystem.CombatState.Active && !EmeraldComponent.DeathDelayActive && !EmeraldComponent.m_SwitchingWeaponTypes)
             {
-                if (EmeraldComponent.m_NavMeshAgent.remainingDistance < EmeraldComponent.m_NavMeshAgent.stoppingDistance && !EmeraldComponent.m_NavMeshAgent.pathPending && !EmeraldComponent.IsMoving && !EmeraldComponent.Attacking)
+                if (EmeraldComponent.m_NavMeshAgent.remainingDistance < EmeraldComponent.m_NavMeshAgent.stoppingDistance && !EmeraldComponent.IsMoving && !EmeraldComponent.Attacking)
                 {                    
                     EmeraldComponent.AttackTimer += Time.deltaTime;                    
 
@@ -656,32 +725,29 @@ namespace EmeraldAI
                                 float AbilityOddsRoll = Random.Range(0f, 1f);
                                 AbilityOddsRoll = AbilityOddsRoll * 100;
 
-                                if (!EmeraldComponent.m_AbilityPicked && EmeraldComponent.SupportAbilitiesList.Count > 0 && !EmeraldComponent.HealingCooldownActive && 
+                                if (!EmeraldComponent.m_AbilityPicked && EmeraldComponent.SupportAbilities.Count > 0 && !EmeraldComponent.HealingCooldownActive && 
                                     ((float)EmeraldComponent.CurrentHealth / EmeraldComponent.StartingHealth*100) < EmeraldComponent.HealthPercentageToHeal)
                                 {
-                                    EmeraldComponent.CurrentAnimationIndex = EmeraldComponent.Ability2AnimationIndex + 1;
-                                    EmeraldComponent.AttackAnimationNumber = 2;
-                                    EmeraldComponent.AIAnimator.SetInteger("Attack Index", EmeraldComponent.CurrentAnimationIndex);
+                                    EmeraldAICombatManager.GenerateSupportAbility(EmeraldComponent);
+                                    EmeraldComponent.AIAnimator.SetInteger("Attack Index", EmeraldComponent.CurrentAnimationIndex+1);
                                     EmeraldComponent.AIAnimator.SetTrigger("Attack");
                                     EmeraldComponent.m_AbilityPicked = true;
                                 }
-                                else if (!EmeraldComponent.m_AbilityPicked && EmeraldComponent.TotalSummonedAI < EmeraldComponent.MaxAllowedSummonedAI && EmeraldComponent.SummoningAbilitiesList.Count > 0)
+                                else if (!EmeraldComponent.m_AbilityPicked && EmeraldComponent.TotalSummonedAI < EmeraldComponent.MaxAllowedSummonedAI && EmeraldComponent.SummoningAbilities.Count > 0)
                                 {
-                                    EmeraldComponent.CurrentAnimationIndex = EmeraldComponent.Ability3AnimationIndex + 1;
-                                    EmeraldComponent.AttackAnimationNumber = 3;
-                                    EmeraldComponent.AIAnimator.SetInteger("Attack Index", EmeraldComponent.CurrentAnimationIndex);
+                                    EmeraldAICombatManager.GenerateSummoningAbility(EmeraldComponent);
+                                    EmeraldComponent.AIAnimator.SetInteger("Attack Index", EmeraldComponent.CurrentAnimationIndex+1);
                                     EmeraldComponent.AIAnimator.SetTrigger("Attack");
                                     EmeraldComponent.m_AbilityPicked = true;
                                 }
-                                else if (!EmeraldComponent.m_AbilityPicked && EmeraldComponent.OffensiveAbilitiesList.Count > 0)                             
+                                else if (!EmeraldComponent.m_AbilityPicked && EmeraldComponent.OffensiveAbilities.Count > 0)                             
                                 {                                    
                                     if (!EmeraldComponent.EmeraldDetectionComponent.m_LookAtInProgress && EmeraldComponent.UseHeadLookRef == EmeraldAISystem.YesOrNo.Yes ||
                                         EmeraldComponent.UseHeadLookRef == EmeraldAISystem.YesOrNo.No)
                                     {
-                                        EmeraldComponent.CurrentAnimationIndex = EmeraldComponent.Ability1AnimationIndex + 1;
-                                        EmeraldComponent.AttackAnimationNumber = 1;
+                                        EmeraldAICombatManager.GenerateOffensiveAbility(EmeraldComponent);
                                         EmeraldComponent.m_InitialTargetPosition = EmeraldComponent.CurrentTarget.position;
-                                        EmeraldComponent.AIAnimator.SetInteger("Attack Index", EmeraldComponent.CurrentAnimationIndex);
+                                        EmeraldComponent.AIAnimator.SetInteger("Attack Index", EmeraldComponent.CurrentAnimationIndex+1);
                                         EmeraldComponent.AIAnimator.SetTrigger("Attack");
                                         EmeraldComponent.m_AbilityPicked = true;
                                     }
@@ -692,14 +758,11 @@ namespace EmeraldAI
                                     }
                                 }
                             }
-                            else if (EmeraldComponent.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee)
-                            {
-                                EmeraldComponent.AttackAnimationNumber = Random.Range(1, EmeraldComponent.TotalAttackAnimations + 1);
-                            }
 
                             if (EmeraldComponent.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee)
                             {
-                                EmeraldComponent.AIAnimator.SetInteger("Attack Index", EmeraldComponent.AttackAnimationNumber);
+                                EmeraldAICombatManager.GenerateMeleeAttack(EmeraldComponent);
+                                EmeraldComponent.AIAnimator.SetInteger("Attack Index", EmeraldComponent.CurrentAnimationIndex + 1);
                                 EmeraldComponent.AIAnimator.SetTrigger("Attack");
                             }
 
@@ -738,14 +801,16 @@ namespace EmeraldAI
                             if (EmeraldComponent.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.No ||
                                 EmeraldComponent.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.Yes && EmeraldComponent.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee)
                             {
-                                EmeraldComponent.RunAttackAnimationNumber = Random.Range(1, EmeraldComponent.TotalRunAttackAnimations + 1);
+                                EmeraldAICombatManager.GenerateMeleeRunAttack(EmeraldComponent);
+                                EmeraldComponent.AIAnimator.SetInteger("Run Attack Index", EmeraldComponent.CurrentRunAttackAnimationIndex + 1);
+                                EmeraldComponent.AIAnimator.SetTrigger("Run Attack");
                             }
                             else
                             {
-                                EmeraldComponent.RunAttackAnimationNumber = Random.Range(1, EmeraldComponent.TotalRangedRunAttackAnimations + 1);
+                                EmeraldAICombatManager.GenerateMeleeRunAttack(EmeraldComponent);
+                                EmeraldComponent.AIAnimator.SetInteger("Run Attack Index", EmeraldComponent.CurrentRunAttackAnimationIndex + 1);
+                                EmeraldComponent.AIAnimator.SetTrigger("Run Attack");
                             }
-                            EmeraldComponent.AIAnimator.SetInteger("Run Attack Index", EmeraldComponent.RunAttackAnimationNumber);
-                            EmeraldComponent.AIAnimator.SetTrigger("Run Attack");
                             EmeraldComponent.RunAttackSpeed = Random.Range(EmeraldComponent.MinimumRunAttackSpeed, EmeraldComponent.MaximumRunAttackSpeed);
                             EmeraldComponent.RunAttackTimer = 0;
                         }
@@ -866,7 +931,7 @@ namespace EmeraldAI
                 }
             }
 
-            //Return if these conditions are met to step an AI from backing up
+            //Return if these conditions are met to stop an AI from backing up
             if (EmeraldComponent.CurrentTarget == null || EmeraldComponent.DeathDelayActive || BackupDistance <= 1)
             {
                 EmeraldComponent.AIAnimator.SetBool("Walk Backwards", false);
@@ -901,7 +966,8 @@ namespace EmeraldAI
 
                     if (EmeraldComponent.UseRunAttacksRef == EmeraldAISystem.UseRunAttacks.Yes)
                     {
-                        EmeraldComponent.AIAnimator.SetInteger("Run Attack Index", Random.Range(1, EmeraldComponent.TotalRunAttackAnimations + 1));
+                        EmeraldAICombatManager.GenerateMeleeRunAttack(EmeraldComponent);
+                        EmeraldComponent.AIAnimator.SetInteger("Run Attack Index", EmeraldComponent.CurrentRunAttackAnimationIndex + 1);
                         EmeraldComponent.AIAnimator.SetTrigger("Run Attack");
                     }
                 }

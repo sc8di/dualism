@@ -9,13 +9,17 @@ namespace EmeraldAI
     {
         public int Health = 50;
         public List<string> ActiveEffects = new List<string>();
+        EmeraldAISystem EmeraldComponent;
 
         /// <summary>
         /// Manages Non-AI damage with an external script that can be customized as needed.
         /// </summary>
-        public void SendNonAIDamage(int DamageAmount, Transform Target)
+        public void SendNonAIDamage(int DamageAmount, Transform Target, bool CriticalHit = false)
         {
             DefaultDamage(DamageAmount, Target);
+
+            //Creates damage text on the player's position, if enabled.
+            CombatTextSystem.Instance.CreateCombatText(DamageAmount, transform.position, CriticalHit, false, false);
         }
 
         void DefaultDamage(int DamageAmount, Transform Target)
@@ -27,13 +31,15 @@ namespace EmeraldAI
                 Debug.Log("The Non-AI Target has died.");
                 gameObject.layer = 0;
                 gameObject.tag = "Untagged";
-                EmeraldAISystem EmeraldComponent = Target.GetComponent<EmeraldAISystem>();
-                EmeraldComponent.EmeraldDetectionComponent.m_LookLerpValue = 0;
-                EmeraldComponent.EmeraldDetectionComponent.m_TurnLerpValue = 0;
-                EmeraldComponent.EmeraldDetectionComponent.LookWeightLerp2 = 0;
+                EmeraldComponent = Target.GetComponent<EmeraldAISystem>();
                 EmeraldComponent.EmeraldDetectionComponent.PreviousTarget = EmeraldComponent.CurrentTarget;
-                EmeraldComponent.EmeraldDetectionComponent.SearchForTarget();               
+                Invoke("DelaySearchForTarget", 0.75f);             
             }
+        }
+
+        void DelaySearchForTarget ()
+        {
+            EmeraldComponent.EmeraldDetectionComponent.SearchForTarget();
         }
     }
 }

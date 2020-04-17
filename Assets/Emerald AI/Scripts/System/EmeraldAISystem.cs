@@ -9,7 +9,6 @@ using EmeraldAI.Utility;
 namespace EmeraldAI
 {
     [RequireComponent(typeof(BoxCollider))]
-    [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(AudioSource))]  
     [RequireComponent(typeof(EmeraldAIDetection))]
@@ -21,10 +20,75 @@ namespace EmeraldAI
     public class EmeraldAISystem : MonoBehaviour
     {
         #region Variables
-        //Abilities
-        public List<EmeraldAIAbility> OffensiveAbilitiesList = new List<EmeraldAIAbility>();
-        public List<EmeraldAIAbility> SupportAbilitiesList = new List<EmeraldAIAbility>();
-        public List<EmeraldAIAbility> SummoningAbilitiesList = new List<EmeraldAIAbility>();
+        public EmeraldAIAbility m_EmeraldAIAbility;
+
+        public List<string> StringFactionListTest = new List<string>();
+
+        //Melee Attacks
+        public int MeleeAttackIndex = 0;
+        public enum MeleeAttackPickTypeEnum { Odds, Order, Random };
+        public MeleeAttackPickTypeEnum MeleeAttackPickType = MeleeAttackPickTypeEnum.Order;
+        public List<MeleeAttackClass> MeleeAttacks = new List<MeleeAttackClass>();
+        public int MeleeAttacksListIndex = 0;
+
+        //Melee Run Attacks
+        public int MeleeRunAttackIndex = 0;
+        public enum MeleeRunAttackPickTypeEnum { Odds, Order, Random };
+        public MeleeRunAttackPickTypeEnum MeleeRunAttackPickType = MeleeRunAttackPickTypeEnum.Order;
+        public List<MeleeAttackClass> MeleeRunAttacks = new List<MeleeAttackClass>();
+        public int MeleeRunAttacksListIndex = 0;
+
+        [System.Serializable]
+        public class MeleeAttackClass
+        {
+            public int AttackAnimaition;
+            public int MinDamage = 5;
+            public int MaxDamage = 5;
+            public int AttackOdds = 25;
+        }
+
+        //Offensive Abilities
+        public int OffensiveAbilityIndex = 0;
+        public enum OffensiveAbilityPickTypeEnum { Odds, Order, Random };
+        public OffensiveAbilityPickTypeEnum OffensiveAbilityPickType = OffensiveAbilityPickTypeEnum.Order;
+        public List<OffensiveAbilitiesClass> OffensiveAbilities = new List<OffensiveAbilitiesClass>();
+
+        [System.Serializable]
+        public class OffensiveAbilitiesClass
+        {
+            public EmeraldAIAbility OffensiveAbility;
+            public int AbilityAnimaition;
+            public int AbilityOdds = 25;
+        }
+
+        //Support Abilities
+        public int SupportAbilityIndex = 0;
+        public enum SupportAbilityPickTypeEnum { Odds, Order, Random };
+        public SupportAbilityPickTypeEnum SupportAbilityPickType = SupportAbilityPickTypeEnum.Order;
+        public List<SupportAbilitiesClass> SupportAbilities = new List<SupportAbilitiesClass>();
+
+        [System.Serializable]
+        public class SupportAbilitiesClass
+        {
+            public EmeraldAIAbility SupportAbility;
+            public int AbilityAnimaition;
+            public int AbilityOdds = 25;
+        }
+
+        //Summoning Abilities
+        public int SummoningAbilityIndex = 0;
+        public enum SummoningAbilityPickTypeEnum { Odds, Order, Random };
+        public SummoningAbilityPickTypeEnum SummoningAbilityPickType = SummoningAbilityPickTypeEnum.Order;
+        public List<SummoningAbilitiesClass> SummoningAbilities = new List<SummoningAbilitiesClass>();
+
+        [System.Serializable]
+        public class SummoningAbilitiesClass
+        {
+            public EmeraldAIAbility SummoningAbility;
+            public int AbilityAnimaition;
+            public int AbilityOdds = 25;
+        }
+
 
         AnimatorStateInfo CurrentStateInfo;
         float AggroDelay;
@@ -32,13 +96,9 @@ namespace EmeraldAI
         public bool CriticalHit = false;
         public bool TargetInAngleLimit = false;
         public int CurrentAnimationIndex = 0;
+        public int CurrentRunAttackAnimationIndex = 0;
         public List<string> ActiveEffects = new List<string>();
         public EmeraldAIProjectile CurrentlyCreatedAbility;
-        public int Ability1AnimationIndex;
-        public int Ability1Odds = 70;
-        public int Ability2AnimationIndex;
-        public int Ability3AnimationIndex;
-        public int Ability3Odds = 30;
         public enum EnableDisable { Enabled = 0, Disabled};
         public EnableDisable SummonsMultipleAI = EnableDisable.Disabled;
         public int MaxAllowedSummonedAI = 1;
@@ -66,6 +126,8 @@ namespace EmeraldAI
         public EmeraldAIHealthBar m_HealthBarComponent;
         public EnableDisable DebugLogMissingAnimations = EnableDisable.Enabled;
         public float AttackHeight = 5;
+        public enum CurrentMeleeAttackTypes { StationaryAttack, RunAttack };
+        public CurrentMeleeAttackTypes CurrentMeleeAttackType = CurrentMeleeAttackTypes.StationaryAttack;
 
         public bool m_AttackAnimationClipMissing = false;
         public float ProjectileCollisionPointY = 0.5f;
@@ -120,7 +182,6 @@ namespace EmeraldAI
         //Blocking
         public YesOrNo UseBlockingRef = YesOrNo.No;
         float BlockTimer;
-        float BlockAngle;
         float AdjustedBlockAngle;
         public int MitigationAmount = 50;
         public int MaxBlockAngle = 75;
@@ -252,6 +313,7 @@ namespace EmeraldAI
         //Emerald AI Events
         public UnityEvent DeathEvent;
         public UnityEvent DamageEvent;
+        public UnityEvent OnDoDamageEvent;
         public UnityEvent ReachedDestinationEvent;
         public UnityEvent OnStartEvent;
         public UnityEvent OnEnabledEvent;
@@ -282,11 +344,40 @@ namespace EmeraldAI
         public enum RelationType { Enemy = 0, Neutral = 1, Friendly = 2 };
         public RelationType RelationTypeRef;
         public List<int> FactionRelations = new List<int>();
-        public int FactionRelation1;
-        public int FactionRelation2;
-        public int FactionRelation3;
-        public int FactionRelation4;
-        public int FactionRelation5;
+
+        [SerializeField]
+        public List<FactionsList> FactionRelationsList = new List<FactionsList>();
+
+        [System.Serializable]
+        public class FactionsList
+        {
+            public int FactionIndex;
+            public enum RelationType { Enemy = 0, Neutral = 1, Friendly = 2 };
+            public RelationType RelationTypeRef;
+
+            public FactionsList(int m_FactionIndex, int m_RelationTypeRef)
+            {
+                FactionIndex = m_FactionIndex;
+                RelationTypeRef = (RelationType)m_RelationTypeRef;
+            }
+        }
+
+        [SerializeField]
+        public List<PlayerFactionClass> PlayerFaction = new List<PlayerFactionClass> { new PlayerFactionClass("Player", 0) };
+
+        [System.Serializable]
+        public class PlayerFactionClass
+        {
+            public string PlayerTag = "Player";
+            public enum RelationType { Enemy = 0, Neutral = 1, Friendly = 2 };
+            public RelationType RelationTypeRef;
+
+            public PlayerFactionClass(string m_PlayerTag, int m_RelationTypeRef)
+            {
+                PlayerTag = m_PlayerTag;
+                RelationTypeRef = (RelationType)m_RelationTypeRef;
+            }
+        }
 
         public static GameObject ObjectPool;
         public static GameObject CombatTextSystemObject;
@@ -360,19 +451,23 @@ namespace EmeraldAI
         public List<AnimationClass> RangedDeathAnimationList = new List<AnimationClass>();
 
         public AnimationClip CurrentAnimationClip;
-        public AnimationClip Attack1Animation, Attack2Animation, Attack3Animation, RunAttack1Animation, RunAttack2Animation, RunAttack3Animation;
-        public AnimationClip Idle1Animation, Idle2Animation, Idle3Animation, IdleWarningAnimation;
+        public AnimationClip Attack1Animation, Attack2Animation, Attack3Animation, Attack4Animation, Attack5Animation, Attack6Animation, RunAttack1Animation, RunAttack2Animation, RunAttack3Animation;
+        public AnimationClip Idle1Animation, Idle2Animation, Idle3Animation, Idle4Animation, Idle5Animation, Idle6Animation, IdleWarningAnimation;
         public AnimationClip NonCombatTurnLeftAnimation, NonCombatTurnRightAnimation, CombatTurnLeftAnimation, CombatTurnRightAnimation;
-        public AnimationClip NonCombatIdleAnimation, WalkLeftAnimation, WalkStraightAnimation, WalkRightAnimation, RunLeftAnimation, RunStraightAnimation, RunRightAnimation, Emote1Animation, Emote2Animation, Emote3Animation;
+        public AnimationClip NonCombatIdleAnimation, WalkLeftAnimation, WalkStraightAnimation, WalkRightAnimation, RunLeftAnimation, RunStraightAnimation, RunRightAnimation;
+        public AnimationClip Emote1Animation, Emote2Animation, Emote3Animation, Emote4Animation, Emote5Animation, Emote6Animation, Emote7Animation, Emote8Animation, Emote9Animation, Emote10Animation;
         public AnimationClip CombatIdleAnimation, CombatWalkLeftAnimation, CombatWalkStraightAnimation, CombatWalkBackAnimation, CombatWalkRightAnimation, CombatRunLeftAnimation, CombatRunStraightAnimation, CombatRunRightAnimation;
-        public AnimationClip Hit1Animation, Hit2Animation, Hit3Animation, CombatHit1Animation, CombatHit2Animation, CombatHit3Animation, BlockIdleAnimation, BlockHitAnimation, PutAwayWeaponAnimation, PullOutWeaponAnimation;
-        public AnimationClip Death1Animation, Death2Animation, Death3Animation;
+        public AnimationClip Hit1Animation, Hit2Animation, Hit3Animation, Hit4Animation, Hit5Animation, Hit6Animation, CombatHit1Animation, CombatHit2Animation, CombatHit3Animation, CombatHit4Animation, 
+            CombatHit5Animation, CombatHit6Animation, BlockIdleAnimation, BlockHitAnimation, PutAwayWeaponAnimation, PullOutWeaponAnimation;
+        public AnimationClip Death1Animation, Death2Animation, Death3Animation, Death4Animation, Death5Animation, Death6Animation;
 
         public AnimationClip RangedCombatIdleAnimation, RangedCombatWalkLeftAnimation, RangedCombatWalkStraightAnimation, RangedCombatWalkBackAnimation, RangedCombatWalkRightAnimation, 
             RangedCombatRunLeftAnimation, RangedCombatRunStraightAnimation, RangedCombatRunRightAnimation, RangedIdleWarningAnimation, RangedPutAwayWeaponAnimation, RangedPullOutWeaponAnimation;
-        public AnimationClip RangedAttack1Animation, RangedAttack2Animation, RangedAttack3Animation, RangedRunAttack1Animation, RangedRunAttack2Animation, RangedRunAttack3Animation;
-        public AnimationClip RangedCombatHit1Animation, RangedCombatHit2Animation, RangedCombatHit3Animation, RangedCombatTurnLeftAnimation, RangedCombatTurnRightAnimation;
-        public AnimationClip RangedDeath1Animation, RangedDeath2Animation, RangedDeath3Animation;
+        public AnimationClip RangedAttack1Animation, RangedAttack2Animation, RangedAttack3Animation, RangedAttack4Animation, RangedAttack5Animation, RangedAttack6Animation, RangedRunAttack1Animation, 
+            RangedRunAttack2Animation, RangedRunAttack3Animation;
+        public AnimationClip RangedCombatHit1Animation, RangedCombatHit2Animation, RangedCombatHit3Animation, RangedCombatHit4Animation, RangedCombatHit5Animation, RangedCombatHit6Animation, 
+            RangedCombatTurnLeftAnimation, RangedCombatTurnRightAnimation;
+        public AnimationClip RangedDeath1Animation, RangedDeath2Animation, RangedDeath3Animation, RangedDeath4Animation, RangedDeath5Animation, RangedDeath6Animation;
 
         [SerializeField]
         public bool AnimatorControllerGenerated = false;
@@ -392,9 +487,6 @@ namespace EmeraldAI
         public int DetectionRadius = 18;
         public int CurrentDamageAmount = 5;
 
-        public int DamageAmount1 = 5;
-        public int DamageAmount2 = 5;
-        public int DamageAmount3 = 5;
         public int DamageAmountRun = 5;
         public int WanderRadius = 25;
         public int TabNumber = 0;
@@ -410,6 +502,7 @@ namespace EmeraldAI
         public int RunAttackAnimationNumber = 1;
         public int IdleAnimationNumber = 1;
         public int CombatTabNumber = 0;
+        public int FactionsAndTagTabNumber = 0;
         public int EventTabNumber = 0;
 
         public int MinimumWaitTime = 3;
@@ -427,12 +520,6 @@ namespace EmeraldAI
         public int MinimumAttackSpeed = 1;
         public int MaximumAttackSpeed = 3;
 
-        public int MinimumDamageAmount1 = 2;
-        public int MaximumDamageAmount1 = 5;
-        public int MinimumDamageAmount2 = 2;
-        public int MaximumDamageAmount2 = 5;
-        public int MinimumDamageAmount3 = 2;
-        public int MaximumDamageAmount3 = 5;
         public int MinimumDamageAmountRun = 2;
         public int MaximumDamageAmountRun = 5;
         public int CritChance = 15;
@@ -478,41 +565,26 @@ namespace EmeraldAI
         public float MaxZAngle = 5;
         public int HealthPercentageToFlee = 10;
 
-        public float Idle1AnimationSpeed = 1;
-        public float Idle2AnimationSpeed = 1;
-        public float Idle3AnimationSpeed = 1;
+        public float Idle1AnimationSpeed = 1, Idle2AnimationSpeed = 1, Idle3AnimationSpeed = 1, Idle4AnimationSpeed = 1, Idle5AnimationSpeed = 1, Idle6AnimationSpeed = 1;
         public float IdleWarningAnimationSpeed = 1;
         public float RangedIdleWarningAnimationSpeed = 1;
         public float IdleCombatAnimationSpeed = 1;
         public float RangedIdleCombatAnimationSpeed = 1;
         public float IdleNonCombatAnimationSpeed = 1;
-        public float Attack1AnimationSpeed = 1;
-        public float Attack2AnimationSpeed = 1;
-        public float Attack3AnimationSpeed = 1;
-        public float RangedAttack1AnimationSpeed = 1;
-        public float RangedAttack2AnimationSpeed = 1;
-        public float RangedAttack3AnimationSpeed = 1;
-        public float RunAttack1AnimationSpeed = 1;
-        public float RunAttack2AnimationSpeed = 1;
-        public float RunAttack3AnimationSpeed = 1;
-        public float RangedRunAttack1AnimationSpeed = 1;
-        public float RangedRunAttack2AnimationSpeed = 1;
-        public float RangedRunAttack3AnimationSpeed = 1;
+        public float Attack1AnimationSpeed = 1, Attack2AnimationSpeed = 1, Attack3AnimationSpeed = 1, Attack4AnimationSpeed = 1, Attack5AnimationSpeed = 1, Attack6AnimationSpeed = 1;
+        public float RangedAttack1AnimationSpeed = 1, RangedAttack2AnimationSpeed = 1, RangedAttack3AnimationSpeed = 1, RangedAttack4AnimationSpeed = 1, RangedAttack5AnimationSpeed = 1, RangedAttack6AnimationSpeed = 1;
+        public float RunAttack1AnimationSpeed = 1, RunAttack2AnimationSpeed = 1, RunAttack3AnimationSpeed = 1;
+        public float RangedRunAttack1AnimationSpeed = 1, RangedRunAttack2AnimationSpeed = 1, RangedRunAttack3AnimationSpeed = 1;
         public float TurnLeftAnimationSpeed = 1;
         public float TurnRightAnimationSpeed = 1;
         public float CombatTurnLeftAnimationSpeed = 1;
         public float CombatTurnRightAnimationSpeed = 1;
         public float RangedCombatTurnLeftAnimationSpeed = 1;
         public float RangedCombatTurnRightAnimationSpeed = 1;
-        public float Death1AnimationSpeed = 1;
-        public float Death2AnimationSpeed = 1;
-        public float Death3AnimationSpeed = 1;
-        public float RangedDeath1AnimationSpeed = 1;
-        public float RangedDeath2AnimationSpeed = 1;
-        public float RangedDeath3AnimationSpeed = 1;
-        public float Emote1AnimationSpeed = 1;
-        public float Emote2AnimationSpeed = 1;
-        public float Emote3AnimationSpeed = 1;
+        public float Death1AnimationSpeed = 1, Death2AnimationSpeed = 1, Death3AnimationSpeed = 1, Death4AnimationSpeed = 1, Death5AnimationSpeed = 1, Death6AnimationSpeed = 1;
+        public float RangedDeath1AnimationSpeed = 1, RangedDeath2AnimationSpeed = 1, RangedDeath3AnimationSpeed = 1, RangedDeath4AnimationSpeed = 1, RangedDeath5AnimationSpeed = 1, RangedDeath6AnimationSpeed = 1;
+        public float Emote1AnimationSpeed = 1, Emote2AnimationSpeed = 1, Emote3AnimationSpeed = 1, Emote4AnimationSpeed = 1, Emote5AnimationSpeed = 1, Emote6AnimationSpeed = 1, 
+            Emote7AnimationSpeed = 1, Emote8AnimationSpeed = 1, Emote9AnimationSpeed = 1, Emote10AnimationSpeed = 1;
         public float WalkAnimationSpeed = 1;
         public float RunAnimationSpeed = 1;
         public float NonCombatWalkAnimationSpeed = 1;
@@ -521,15 +593,10 @@ namespace EmeraldAI
         public float CombatRunAnimationSpeed = 1;
         public float RangedCombatWalkAnimationSpeed = 1;
         public float RangedCombatRunAnimationSpeed = 1;
-        public float Hit1AnimationSpeed = 1;
-        public float Hit2AnimationSpeed = 1;
-        public float Hit3AnimationSpeed = 1;
-        public float CombatHit1AnimationSpeed = 1;
-        public float CombatHit2AnimationSpeed = 1;
-        public float CombatHit3AnimationSpeed = 1;
-        public float RangedCombatHit1AnimationSpeed = 1;
-        public float RangedCombatHit2AnimationSpeed = 1;
-        public float RangedCombatHit3AnimationSpeed = 1;
+        public float Hit1AnimationSpeed = 1, Hit2AnimationSpeed = 1, Hit3AnimationSpeed = 1, Hit4AnimationSpeed = 1, Hit5AnimationSpeed = 1, Hit6AnimationSpeed = 1;
+        public float CombatHit1AnimationSpeed = 1, CombatHit2AnimationSpeed = 1, CombatHit3AnimationSpeed = 1, CombatHit4AnimationSpeed = 1, CombatHit5AnimationSpeed = 1, CombatHit6AnimationSpeed = 1;
+        public float RangedCombatHit1AnimationSpeed = 1, RangedCombatHit2AnimationSpeed = 1, RangedCombatHit3AnimationSpeed = 1, 
+            RangedCombatHit4AnimationSpeed = 1, RangedCombatHit5AnimationSpeed = 1, RangedCombatHit6AnimationSpeed = 1;
 
         public int StartingBehaviorRef;
         public int StartingConfidenceRef;
@@ -595,9 +662,6 @@ namespace EmeraldAI
         public enum RefillHealth {Disable = 0, Instantly = 1, OverTime = 2};
         public RefillHealth RefillHealthType = RefillHealth.OverTime;
 
-        public enum OpposingFactionsEnum { One = 0, Two = 1, Three = 2, Four = 3, Five = 4 };
-        public OpposingFactionsEnum OpposingFactionsEnumRef = OpposingFactionsEnum.Two;
-
         public enum WanderType { Dynamic = 0, Waypoints = 1, Stationary = 2, Destination = 3 };
         public WanderType WanderTypeRef = WanderType.Dynamic;
 
@@ -619,11 +683,8 @@ namespace EmeraldAI
         public enum ActionAnimation { Eat = 0, Sleep = 1, Talk = 2, Work = 3, Interact = 4 };
         public ActionAnimation ActionAnimationRef = ActionAnimation.Talk;
 
-        public enum PickTargetMethod { Closest = 0, FirstDetected = 1 };
+        public enum PickTargetMethod { Closest = 0, FirstDetected = 1, Random = 2 };
         public PickTargetMethod PickTargetMethodRef = PickTargetMethod.Closest;
-
-        public enum AIAttacksPlayer { Never = 0, Always = 1, OnlyIfAttacked = 2 };
-        public AIAttacksPlayer AIAttacksPlayerRef = AIAttacksPlayer.Always;
 
         public enum UseNonAITag { No = 0, Yes = 1 };
         public UseNonAITag UseNonAITagRef = UseNonAITag.No;
@@ -719,12 +780,6 @@ namespace EmeraldAI
         public List<int> AIFactionsList = new List<int>();
         public int TargetTagsIndex;
 
-        public int OpposingFaction1 = 1;
-        public int OpposingFaction2 = 1;
-        public int OpposingFaction3 = 1;
-        public int OpposingFaction4 = 1;
-        public int OpposingFaction5 = 1;
-
         public Vector3 BloodPosOffset;
         public enum BloodEffectPositionType {BaseTransform = 0, HitTransform};
         public BloodEffectPositionType BloodEffectPositionTypeRef = BloodEffectPositionType.HitTransform;
@@ -768,7 +823,6 @@ namespace EmeraldAI
         public float CautiousTimer;
         public BoxCollider AIBoxCollider;
         public Renderer AIRenderer;
-        public Rigidbody AIRigidbody;
         public EmeraldAISystem TargetEmerald;
         public GameObject HealthBar;
         public TextMesh TextName;
@@ -928,7 +982,7 @@ namespace EmeraldAI
         }
 
         void Update()
-        {         
+        {
             if (DisableAIWhenNotInViewRef == YesOrNo.Yes && HasMultipleLODsRef == YesOrNo.Yes)
             {
                 CheckAIRenderers();
@@ -974,6 +1028,13 @@ namespace EmeraldAI
                         {
                             Wander();
                         }
+                    }
+                }
+                else
+                {
+                    if (m_NavMeshAgent.hasPath && BehaviorRef == CurrentBehavior.Cautious && ConfidenceRef > 0)
+                    {
+                        m_NavMeshAgent.ResetPath();
                     }
                 }
 
@@ -1054,7 +1115,7 @@ namespace EmeraldAI
                     if (EmeraldDetectionComponent.CurrentObstruction != null && EmeraldDetectionComponent.CurrentObstruction.CompareTag(EmeraldTag))
                     {
                         m_ObstructedTimer += Time.deltaTime;
-                        //Debug.Log(m_ObstructedTimer);
+
                         if (m_ObstructedTimer >= 2.5f)
                         {
                             int m_ReceivedFaction = EmeraldDetectionComponent.CurrentObstruction.GetComponent<EmeraldAISystem>().CurrentFaction;
@@ -1181,7 +1242,7 @@ namespace EmeraldAI
                         m_NavMeshAgent.speed = WalkSpeed;
                     }
                 }
-                else if (Attacking && !BackingUp)
+                else if (Attacking && AttackTimer >= AttackSpeed && !BackingUp)
                 {
                     m_NavMeshAgent.speed = 0;
                 }
@@ -1719,7 +1780,7 @@ namespace EmeraldAI
                             {
                                 NavMeshHit hit;
 
-                                if (NavMesh.SamplePosition(NewDestination, out hit, 4, 1))
+                                if (NavMesh.SamplePosition(NewDestination, out hit, 4, m_NavMeshAgent.areaMask))
                                 {
                                     AIAnimator.SetBool("Idle Active", false);
                                     m_NavMeshAgent.destination = hit.position;
@@ -1748,10 +1809,10 @@ namespace EmeraldAI
 
                 if (AdjustedAngle <= 180)
                 {
-                    if (AttackAnimationNumber == 1 && OffensiveAbilitiesList.Count > 0) //Offensive
+                    if (m_EmeraldAIAbility.AbilityType == EmeraldAIAbility.AbilityTypeEnum.Damage && OffensiveAbilities.Count > 0) //Offensive
                     {
                         OnAttackEvent.Invoke();
-                        EmeraldAIAbility m_EmeraldAIAbility = OffensiveAbilitiesList[Random.Range(0, OffensiveAbilitiesList.Count)];
+
                         CurrentProjectile = EmeraldAIObjectPool.SpawnEffect(m_EmeraldAIAbility.AbilityEffect, RangedAttackTransform.position, 
                             Quaternion.identity, m_EmeraldAIAbility.AbilityEffectTimeoutSeconds);                 
 
@@ -1778,9 +1839,8 @@ namespace EmeraldAI
                         CurrentProjectile.transform.SetParent(ObjectPool.transform);
                         CalculateRangedProjectile(CurrentProjectile);
                     }
-                    else if (AttackAnimationNumber == 2 && SupportAbilitiesList.Count > 0 && !HealingCooldownActive) //Support
+                    else if (m_EmeraldAIAbility.AbilityType == EmeraldAIAbility.AbilityTypeEnum.Support && SupportAbilities.Count > 0 && !HealingCooldownActive) //Support
                     {
-                        EmeraldAIAbility m_EmeraldAIAbility = SupportAbilitiesList[Random.Range(0, SupportAbilitiesList.Count)];
                         GameObject AbilityEffect = EmeraldAIObjectPool.SpawnEffect(m_EmeraldAIAbility.AbilityEffect, transform.position, Quaternion.identity, m_EmeraldAIAbility.AbilityEffectTimeoutSeconds);
                         if (m_EmeraldAIAbility.AbilityType == EmeraldAIAbility.AbilityTypeEnum.Support && m_EmeraldAIAbility.SupportType == EmeraldAIAbility.SupportTypeEnum.OverTime)
                         {
@@ -1806,10 +1866,9 @@ namespace EmeraldAI
                         HealingCooldownTimer = 0;
                         HealingCooldownActive = true;
                     }
-                    else if (AttackAnimationNumber == 3 && SummoningAbilitiesList.Count > 0 && TotalSummonedAI < MaxAllowedSummonedAI) //Summon
+                    else if (m_EmeraldAIAbility.AbilityType == EmeraldAIAbility.AbilityTypeEnum.Summon && SummoningAbilities.Count > 0 && TotalSummonedAI < MaxAllowedSummonedAI) //Summon
                     {
-                        TotalSummonedAI++;
-                        EmeraldAIAbility m_EmeraldAIAbility = SummoningAbilitiesList[Random.Range(0, SummoningAbilitiesList.Count)];                       
+                        TotalSummonedAI++;                     
                         Vector3 m_SummonRadius = transform.position + m_EmeraldAIAbility.SummonRadius * new Vector3(Random.insideUnitSphere.x, 0, Random.insideUnitSphere.z);
                         GameObject m_SummonedObject = EmeraldAIObjectPool.Spawn(m_EmeraldAIAbility.SummonObject, m_SummonRadius + Vector3.up, Quaternion.identity);                      
                         EmeraldAISystem m_SummonedAI = m_SummonedObject.GetComponent<EmeraldAISystem>();
@@ -1855,7 +1914,7 @@ namespace EmeraldAI
             AIObject.EmeraldEventsManagerComponent.SetFollowerTarget(transform);
             AIObject.AIFactionsList = new List<int>(AIFactionsList);
             AIObject.CurrentFaction = CurrentFaction;
-            AIObject.AIAttacksPlayerRef = AIAttacksPlayerRef;
+            AIObject.PlayerFaction[0].RelationTypeRef = PlayerFaction[0].RelationTypeRef;
             AIObject.EmeraldDetectionComponent.SearchForRandomTarget = true;
             AIObject.EmeraldDetectionComponent.SearchForTarget();
             AIObject.EmeraldDetectionComponent.DetectTargetType(AIObject.CurrentTarget);
@@ -2032,7 +2091,7 @@ namespace EmeraldAI
                     }
                     else if(WeaponTypeRef == WeaponType.Ranged)
                     {
-                        CurrentAttackDistance = RangedAttackDistance;
+                        CurrentAttackDistance = RangedAttackDistance;                       
                     }
                 }
 
@@ -2049,20 +2108,23 @@ namespace EmeraldAI
                             if (CurrentTarget.GetComponent<EmeraldAIPlayerDamage>() != null)
                             {
                                 CurrentTarget.GetComponent<EmeraldAIPlayerDamage>().SendPlayerDamage(CurrentDamageAmount, this.transform, GetComponent<EmeraldAISystem>(), CriticalHit);
+                                OnDoDamageEvent.Invoke();
                                 EmeraldEventsManagerComponent.PlayImpactSound();
                             }
                             else //If no EmeraldAIPlayerDamage script is detected on the player, add one.
                             {
                                 CurrentTarget.gameObject.AddComponent<EmeraldAIPlayerDamage>();
                                 CurrentTarget.GetComponent<EmeraldAIPlayerDamage>().SendPlayerDamage(CurrentDamageAmount, this.transform, GetComponent<EmeraldAISystem>(), CriticalHit);
+                                OnDoDamageEvent.Invoke();
                                 EmeraldEventsManagerComponent.PlayImpactSound();
                             }
                         }
                         else if (TargetTypeRef == TargetType.AI && TargetEmerald != null)
                         {                          
                             TargetEmerald.Damage(CurrentDamageAmount, TargetType.AI, this.transform, SentRagdollForceAmount, CriticalHit);
+                            OnDoDamageEvent.Invoke();
 
-                            if (TargetEmerald.CurrentBlockingState != EmeraldAISystem.BlockingState.Blocking && !TargetEmerald.IsDead)
+                            if (TargetEmerald.CurrentBlockingState != BlockingState.Blocking && !TargetEmerald.IsDead)
                             {
                                 EmeraldEventsManagerComponent.PlayImpactSound();
                             }
@@ -2071,13 +2133,15 @@ namespace EmeraldAI
                         {
                             if (CurrentTarget.GetComponent<EmeraldAINonAIDamage>() != null)
                             {
-                                CurrentTarget.GetComponent<EmeraldAINonAIDamage>().SendNonAIDamage(CurrentDamageAmount, this.transform);
+                                CurrentTarget.GetComponent<EmeraldAINonAIDamage>().SendNonAIDamage(CurrentDamageAmount, this.transform, CriticalHit);
+                                OnDoDamageEvent.Invoke();
                                 EmeraldEventsManagerComponent.PlayImpactSound();
                             }
                             else
                             {                                
                                 CurrentTarget.gameObject.AddComponent<EmeraldAINonAIDamage>();
-                                CurrentTarget.GetComponent<EmeraldAINonAIDamage>().SendNonAIDamage(CurrentDamageAmount, this.transform);
+                                CurrentTarget.GetComponent<EmeraldAINonAIDamage>().SendNonAIDamage(CurrentDamageAmount, this.transform, CriticalHit);
+                                OnDoDamageEvent.Invoke();
                                 EmeraldEventsManagerComponent.PlayImpactSound();
                             }
                         }
@@ -2162,7 +2226,7 @@ namespace EmeraldAI
                             TargetTypeRef = (TargetType)TypeOfTarget;
                         }
 
-                        if (TargetTypeRef == TargetType.AI || TargetTypeRef == TargetType.Player && AIAttacksPlayerRef != AIAttacksPlayer.Never || TargetTypeRef == TargetType.NonAITarget)
+                        if (TargetTypeRef == TargetType.AI || TargetTypeRef == TargetType.Player && PlayerFaction[0].RelationTypeRef != PlayerFactionClass.RelationType.Friendly || TargetTypeRef == TargetType.NonAITarget)
                         {
                             DeathDelayActive = false;
                             CurrentTarget = AttackerTransform;
@@ -2211,7 +2275,7 @@ namespace EmeraldAI
                 {
                     if (AttackerTransform.CompareTag(PlayerTag))
                     {
-                        AIAttacksPlayerRef = AIAttacksPlayer.Always;
+                        PlayerFaction[0].RelationTypeRef = PlayerFactionClass.RelationType.Enemy;
                     }
                     BehaviorRef = CurrentBehavior.Cautious;
                     MaxChaseDistance = ExpandedChaseDistance;
@@ -2225,8 +2289,7 @@ namespace EmeraldAI
             if (AttackerTransform != null)
             {
                 ForceTransform = AttackerTransform;
-                BlockAngle = Vector3.Angle(new Vector3(AttackerTransform.position.x, 0, AttackerTransform.position.z) - new Vector3(transform.position.x, 0, transform.position.z), transform.forward);
-                AdjustedBlockAngle = Mathf.Abs(BlockAngle);
+                AdjustedBlockAngle = TargetAngle();
             }
 
             if (AIAnimator.GetBool("Blocking") && AIAnimator.GetBool("Attack"))
@@ -2303,7 +2366,7 @@ namespace EmeraldAI
                     }
                     AIAnimator.ResetTrigger("Attack");
                     AIAnimator.SetTrigger("Hit");
-                    if (CurrentlyPlayingActionAnimation != CombatIdleAnimation && !Attacking)
+                    if (CurrentlyPlayingActionAnimation != CombatIdleAnimation && !Attacking && !IsTurning)
                     {
                         EmeraldEventsManagerComponent.PlayBlockSound();
                     }
@@ -2387,32 +2450,24 @@ namespace EmeraldAI
         {
             if (RandomizeDamageRef == RandomizeDamage.Yes)
             {
-                if (AttackAnimationNumber == 1)
+                if (CurrentMeleeAttackType == CurrentMeleeAttackTypes.StationaryAttack)
                 {
-                    CurrentDamageAmount = Random.Range(MinimumDamageAmount1, MaximumDamageAmount1 + 1);
+                    CurrentDamageAmount = Random.Range(MeleeAttacks[MeleeAttacksListIndex].MinDamage, MeleeAttacks[MeleeAttacksListIndex].MaxDamage);
                 }
-                else if (AttackAnimationNumber == 2)
+                else if (CurrentMeleeAttackType == CurrentMeleeAttackTypes.RunAttack)
                 {
-                    CurrentDamageAmount = Random.Range(MinimumDamageAmount2, MaximumDamageAmount2 + 1);
-                }
-                else if (AttackAnimationNumber == 3)
-                {
-                    CurrentDamageAmount = Random.Range(MinimumDamageAmount3, MaximumDamageAmount3 + 1);
+                    CurrentDamageAmount = Random.Range(MeleeRunAttacks[MeleeRunAttacksListIndex].MinDamage, MeleeRunAttacks[MeleeRunAttacksListIndex].MaxDamage);
                 }
             }
             else if (RandomizeDamageRef == RandomizeDamage.No)
             {
-                if (AttackAnimationNumber == 1)
+                if (CurrentMeleeAttackType == CurrentMeleeAttackTypes.StationaryAttack)
                 {
-                    CurrentDamageAmount = DamageAmount1;
+                    CurrentDamageAmount = MeleeAttacks[MeleeAttacksListIndex].MinDamage;
                 }
-                else if (AttackAnimationNumber == 2)
+                else if (CurrentMeleeAttackType == CurrentMeleeAttackTypes.RunAttack)
                 {
-                    CurrentDamageAmount = DamageAmount2;
-                }
-                else if (AttackAnimationNumber == 3)
-                {
-                    CurrentDamageAmount = DamageAmount3;
+                    CurrentDamageAmount = MeleeRunAttacks[MeleeRunAttacksListIndex].MinDamage;
                 }
             }
 

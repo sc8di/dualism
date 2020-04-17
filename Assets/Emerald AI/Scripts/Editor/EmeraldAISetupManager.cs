@@ -73,13 +73,27 @@ namespace EmeraldAI.Utility
             GUILayout.Space(15);
 
             EditorGUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
             EditorGUILayout.BeginVertical("Box");
             var style = new GUIStyle(EditorStyles.boldLabel) { alignment = TextAnchor.MiddleCenter };
             EditorGUILayout.LabelField(new GUIContent(SettingsIcon), style, GUILayout.ExpandWidth(true), GUILayout.Height(32));
             EditorGUILayout.LabelField("Emerald AI Setup Manager", style, GUILayout.ExpandWidth(true));
-            EditorGUILayout.HelpBox("With the Emerald AI Setup Manager, you can apply an Emerald AI component to an object. Be aware that closing the Emerald Setup Manager will lose all references you've entered below. Make sure you select 'Setup AI' before closing, if you'd like your changes to be applied.", MessageType.None, true);
+            EditorGUILayout.HelpBox("The Emerald AI Setup Manager applies all needed settings and components to automatically create an AI on the applied object. Be aware that closing the Emerald Setup Manager will lose all references you've entered below. Make sure you select 'Setup AI' before closing, if you'd like your changes to be applied.", MessageType.None, true);
             GUILayout.Space(4);
+
+            var HelpButtonStyle = new GUIStyle(GUI.skin.button);
+            HelpButtonStyle.normal.textColor = Color.white;
+            HelpButtonStyle.fontStyle = FontStyle.Bold;
+
+            GUI.backgroundColor = new Color(1f, 1, 0.25f, 0.25f);
+            EditorGUILayout.LabelField("For a detailed tutorial on setting up an AI from start to finish, please see the Getting Started Tutorial below.", EditorStyles.helpBox);
+            GUI.backgroundColor = new Color(0, 0.65f, 0, 0.8f);
+            if (GUILayout.Button("See the Getting Started Tutorial", HelpButtonStyle, GUILayout.Height(20)))
+            {
+                Application.OpenURL("https://github.com/Black-Horizon-Studios/Emerald-AI/wiki/Creating-a-New-AI");
+            }
+            GUI.backgroundColor = Color.white;
+            GUILayout.Space(10);
+
             EditorGUILayout.EndVertical();
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
@@ -182,7 +196,14 @@ namespace EmeraldAI.Utility
                 if (EditorUtility.DisplayDialog("Emerald AI Setup Manager", "Are you sure you'd like to setup an AI on this object?", "Setup", "Cancel"))
                 {
                     #if UNITY_2018_3_OR_NEWER
-                    PrefabUtility.UnpackPrefabInstance(ObjectToSetup,PrefabUnpackMode.Completely,InteractionMode.AutomatedAction);
+                    
+                    PrefabAssetType m_AssetType = PrefabUtility.GetPrefabAssetType(ObjectToSetup);
+
+                    //Only unpack prefab if the ObjectToSetup is a prefab.
+                    if (m_AssetType != PrefabAssetType.NotAPrefab)
+                    {
+                        PrefabUtility.UnpackPrefabInstance(ObjectToSetup, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+                    }
                     #else
                     PrefabUtility.DisconnectPrefabInstance(ObjectToSetup);
                     #endif
@@ -332,23 +353,23 @@ namespace EmeraldAI.Utility
                 Emerald.CombatHitAnimationList.Add(null);
                 Emerald.DeathAnimationList.Add(null);
 
+                //4.2
+                /*
+                if (Emerald.PlayerFaction.Count == 0)
+                {
+                    Emerald.PlayerFaction.Add(new EmeraldAISystem.PlayerFactionClass(Emerald.PlayerTag, 0));
+                }
+                */
+
                 Component[] AllComponents = ObjectToSetup.GetComponents<Component>();
 
                 for (int i = 0; i < AllComponents.Length; i++)
                 {
                     UnityEditorInternal.ComponentUtility.MoveComponentUp(Emerald);
                 }
-              
-                ObjectToSetup.GetComponent<BoxCollider>().size = new Vector3(Emerald.AIRenderer.bounds.size.x / 3, Emerald.AIRenderer.bounds.size.y, Emerald.AIRenderer.bounds.size.z / 3);
-                ObjectToSetup.GetComponent<BoxCollider>().center = new Vector3(ObjectToSetup.GetComponent<BoxCollider>().center.x, ObjectToSetup.GetComponent<BoxCollider>().size.y / 2, ObjectToSetup.GetComponent<BoxCollider>().center.z);
 
-                /*
-                float Ycenter = ObjectToSetup.GetComponent<BoxCollider>().center.y;
-                Vector3 AdjustedSize = new Vector3(ObjectToSetup.GetComponent<BoxCollider>().size.x, Ycenter * 2 * 0.9f, ObjectToSetup.GetComponent<BoxCollider>().size.z);
-                ObjectToSetup.GetComponent<BoxCollider>().size = AdjustedSize;
-                Vector3 AdjustedCenter = new Vector3(ObjectToSetup.GetComponent<BoxCollider>().center.x, Ycenter * 0.9f, ObjectToSetup.GetComponent<BoxCollider>().center.z);
-                ObjectToSetup.GetComponent<BoxCollider>().center = AdjustedCenter;
-                */
+                ObjectToSetup.GetComponent<BoxCollider>().size = new Vector3(Emerald.AIRenderer.bounds.size.x / 3 / ObjectToSetup.transform.localScale.y, Emerald.AIRenderer.bounds.size.y / ObjectToSetup.transform.localScale.y, Emerald.AIRenderer.bounds.size.z / 3 / ObjectToSetup.transform.localScale.y);
+                ObjectToSetup.GetComponent<BoxCollider>().center = new Vector3(ObjectToSetup.GetComponent<BoxCollider>().center.x, ObjectToSetup.GetComponent<BoxCollider>().size.y / 2, ObjectToSetup.GetComponent<BoxCollider>().center.z);
 
                 if (!DontShowDisplayConfirmation)
                 {

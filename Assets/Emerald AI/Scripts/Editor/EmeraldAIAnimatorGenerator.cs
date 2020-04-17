@@ -38,6 +38,33 @@ namespace EmeraldAI.Utility
                     EmeraldComponent.TotalAttackAnimations = 3;
                 }
             }
+            if (EmeraldComponent.AttackAnimationList.Count >= 4)
+            {
+                EmeraldComponent.Attack4Animation = EmeraldComponent.AttackAnimationList[3].AnimationClip;
+                EmeraldComponent.Attack4AnimationSpeed = EmeraldComponent.AttackAnimationList[3].AnimationSpeed;
+                if (EmeraldComponent.AttackAnimationList[3] != null)
+                {
+                    EmeraldComponent.TotalAttackAnimations = 4;
+                }
+            }
+            if (EmeraldComponent.AttackAnimationList.Count >= 5)
+            {
+                EmeraldComponent.Attack5Animation = EmeraldComponent.AttackAnimationList[4].AnimationClip;
+                EmeraldComponent.Attack5AnimationSpeed = EmeraldComponent.AttackAnimationList[4].AnimationSpeed;
+                if (EmeraldComponent.AttackAnimationList[4] != null)
+                {
+                    EmeraldComponent.TotalAttackAnimations = 5;
+                }
+            }
+            if (EmeraldComponent.AttackAnimationList.Count >= 6)
+            {
+                EmeraldComponent.Attack6Animation = EmeraldComponent.AttackAnimationList[5].AnimationClip;
+                EmeraldComponent.Attack6AnimationSpeed = EmeraldComponent.AttackAnimationList[5].AnimationSpeed;
+                if (EmeraldComponent.AttackAnimationList[5] != null)
+                {
+                    EmeraldComponent.TotalAttackAnimations = 6;
+                }
+            }
 
             //Update Ranged Attack Animations
             if (EmeraldComponent.RangedAttackAnimationList.Count >= 1)
@@ -62,6 +89,33 @@ namespace EmeraldAI.Utility
                 if (EmeraldComponent.RangedAttackAnimationList[2] != null)
                 {
                     EmeraldComponent.TotalRangedAttackAnimations = 3;
+                }
+            }
+            if (EmeraldComponent.RangedAttackAnimationList.Count >= 4)
+            {
+                EmeraldComponent.RangedAttack4Animation = EmeraldComponent.RangedAttackAnimationList[3].AnimationClip;
+                EmeraldComponent.RangedAttack4AnimationSpeed = EmeraldComponent.RangedAttackAnimationList[3].AnimationSpeed;
+                if (EmeraldComponent.RangedAttackAnimationList[3] != null)
+                {
+                    EmeraldComponent.TotalRangedAttackAnimations = 4;
+                }
+            }
+            if (EmeraldComponent.RangedAttackAnimationList.Count >= 5)
+            {
+                EmeraldComponent.RangedAttack5Animation = EmeraldComponent.RangedAttackAnimationList[4].AnimationClip;
+                EmeraldComponent.RangedAttack5AnimationSpeed = EmeraldComponent.RangedAttackAnimationList[4].AnimationSpeed;
+                if (EmeraldComponent.RangedAttackAnimationList[4] != null)
+                {
+                    EmeraldComponent.TotalRangedAttackAnimations = 5;
+                }
+            }
+            if (EmeraldComponent.RangedAttackAnimationList.Count >= 6)
+            {
+                EmeraldComponent.RangedAttack6Animation = EmeraldComponent.RangedAttackAnimationList[5].AnimationClip;
+                EmeraldComponent.RangedAttack6AnimationSpeed = EmeraldComponent.RangedAttackAnimationList[5].AnimationSpeed;
+                if (EmeraldComponent.RangedAttackAnimationList[5] != null)
+                {
+                    EmeraldComponent.TotalRangedAttackAnimations = 6;
                 }
             }
 
@@ -90,6 +144,33 @@ namespace EmeraldAI.Utility
                     EmeraldComponent.TotalIdleAnimations = 3;
                 }
             }
+            if (EmeraldComponent.IdleAnimationList.Count >= 4)
+            {
+                EmeraldComponent.Idle4Animation = EmeraldComponent.IdleAnimationList[3].AnimationClip;
+                EmeraldComponent.Idle4AnimationSpeed = EmeraldComponent.IdleAnimationList[3].AnimationSpeed;
+                if (EmeraldComponent.IdleAnimationList[3] != null)
+                {
+                    EmeraldComponent.TotalIdleAnimations = 4;
+                }
+            }
+            if (EmeraldComponent.IdleAnimationList.Count >= 5)
+            {
+                EmeraldComponent.Idle5Animation = EmeraldComponent.IdleAnimationList[4].AnimationClip;
+                EmeraldComponent.Idle5AnimationSpeed = EmeraldComponent.IdleAnimationList[4].AnimationSpeed;
+                if (EmeraldComponent.IdleAnimationList[4] != null)
+                {
+                    EmeraldComponent.TotalIdleAnimations = 5;
+                }
+            }
+            if (EmeraldComponent.IdleAnimationList.Count >= 6)
+            {
+                EmeraldComponent.Idle6Animation = EmeraldComponent.IdleAnimationList[5].AnimationClip;
+                EmeraldComponent.Idle6AnimationSpeed = EmeraldComponent.IdleAnimationList[5].AnimationSpeed;
+                if (EmeraldComponent.IdleAnimationList[5] != null)
+                {
+                    EmeraldComponent.TotalIdleAnimations = 6;
+                }
+            }
 
             //Update Hit Animations
             if (EmeraldComponent.HitAnimationList.Count >= 1)
@@ -114,6 +195,33 @@ namespace EmeraldAI.Utility
                 if (EmeraldComponent.HitAnimationList[2] != null)
                 {
                     EmeraldComponent.TotalHitAnimations = 3;
+                }
+            }
+            if (EmeraldComponent.HitAnimationList.Count >= 4)
+            {
+                EmeraldComponent.Hit4Animation = EmeraldComponent.HitAnimationList[3].AnimationClip;
+                EmeraldComponent.Hit4AnimationSpeed = EmeraldComponent.HitAnimationList[3].AnimationSpeed;
+                if (EmeraldComponent.HitAnimationList[3] != null)
+                {
+                    EmeraldComponent.TotalHitAnimations = 4;
+                }
+            }
+            if (EmeraldComponent.HitAnimationList.Count >= 5)
+            {
+                EmeraldComponent.Hit5Animation = EmeraldComponent.HitAnimationList[4].AnimationClip;
+                EmeraldComponent.Hit5AnimationSpeed = EmeraldComponent.HitAnimationList[4].AnimationSpeed;
+                if (EmeraldComponent.HitAnimationList[4] != null)
+                {
+                    EmeraldComponent.TotalHitAnimations = 5;
+                }
+            }
+            if (EmeraldComponent.HitAnimationList.Count >= 6)
+            {
+                EmeraldComponent.Hit6Animation = EmeraldComponent.HitAnimationList[5].AnimationClip;
+                EmeraldComponent.Hit6AnimationSpeed = EmeraldComponent.HitAnimationList[5].AnimationSpeed;
+                if (EmeraldComponent.HitAnimationList[5] != null)
+                {
+                    EmeraldComponent.TotalHitAnimations = 6;
                 }
             }
 
@@ -142,6 +250,33 @@ namespace EmeraldAI.Utility
                     EmeraldComponent.TotalCombatHitAnimations = 3;
                 }
             }
+            if (EmeraldComponent.CombatHitAnimationList.Count >= 4)
+            {
+                EmeraldComponent.CombatHit4Animation = EmeraldComponent.CombatHitAnimationList[3].AnimationClip;
+                EmeraldComponent.CombatHit4AnimationSpeed = EmeraldComponent.CombatHitAnimationList[3].AnimationSpeed;
+                if (EmeraldComponent.CombatHitAnimationList[3] != null)
+                {
+                    EmeraldComponent.TotalCombatHitAnimations = 4;
+                }
+            }
+            if (EmeraldComponent.CombatHitAnimationList.Count >= 5)
+            {
+                EmeraldComponent.CombatHit5Animation = EmeraldComponent.CombatHitAnimationList[4].AnimationClip;
+                EmeraldComponent.CombatHit5AnimationSpeed = EmeraldComponent.CombatHitAnimationList[4].AnimationSpeed;
+                if (EmeraldComponent.CombatHitAnimationList[4] != null)
+                {
+                    EmeraldComponent.TotalCombatHitAnimations = 5;
+                }
+            }
+            if (EmeraldComponent.CombatHitAnimationList.Count >= 6)
+            {
+                EmeraldComponent.CombatHit6Animation = EmeraldComponent.CombatHitAnimationList[5].AnimationClip;
+                EmeraldComponent.CombatHit6AnimationSpeed = EmeraldComponent.CombatHitAnimationList[5].AnimationSpeed;
+                if (EmeraldComponent.CombatHitAnimationList[5] != null)
+                {
+                    EmeraldComponent.TotalCombatHitAnimations = 6;
+                }
+            }
 
             //Update Ranged Combat Hit Animations
             if (EmeraldComponent.RangedCombatHitAnimationList.Count >= 1)
@@ -166,6 +301,33 @@ namespace EmeraldAI.Utility
                 if (EmeraldComponent.RangedCombatHitAnimationList[2] != null)
                 {
                     EmeraldComponent.TotalRangedCombatHitAnimations = 3;
+                }
+            }
+            if (EmeraldComponent.RangedCombatHitAnimationList.Count >= 4)
+            {
+                EmeraldComponent.RangedCombatHit4Animation = EmeraldComponent.RangedCombatHitAnimationList[3].AnimationClip;
+                EmeraldComponent.RangedCombatHit4AnimationSpeed = EmeraldComponent.RangedCombatHitAnimationList[3].AnimationSpeed;
+                if (EmeraldComponent.RangedCombatHitAnimationList[3] != null)
+                {
+                    EmeraldComponent.TotalRangedCombatHitAnimations = 4;
+                }
+            }
+            if (EmeraldComponent.RangedCombatHitAnimationList.Count >= 5)
+            {
+                EmeraldComponent.RangedCombatHit5Animation = EmeraldComponent.RangedCombatHitAnimationList[4].AnimationClip;
+                EmeraldComponent.RangedCombatHit5AnimationSpeed = EmeraldComponent.RangedCombatHitAnimationList[4].AnimationSpeed;
+                if (EmeraldComponent.RangedCombatHitAnimationList[4] != null)
+                {
+                    EmeraldComponent.TotalRangedCombatHitAnimations = 5;
+                }
+            }
+            if (EmeraldComponent.RangedCombatHitAnimationList.Count >= 6)
+            {
+                EmeraldComponent.RangedCombatHit6Animation = EmeraldComponent.RangedCombatHitAnimationList[5].AnimationClip;
+                EmeraldComponent.RangedCombatHit6AnimationSpeed = EmeraldComponent.RangedCombatHitAnimationList[5].AnimationSpeed;
+                if (EmeraldComponent.RangedCombatHitAnimationList[5] != null)
+                {
+                    EmeraldComponent.TotalRangedCombatHitAnimations = 6;
                 }
             }
 
@@ -246,6 +408,33 @@ namespace EmeraldAI.Utility
                     EmeraldComponent.TotalDeathAnimations = 3;
                 }
             }
+            if (EmeraldComponent.DeathAnimationList.Count >= 4)
+            {
+                EmeraldComponent.Death4Animation = EmeraldComponent.DeathAnimationList[3].AnimationClip;
+                EmeraldComponent.Death4AnimationSpeed = EmeraldComponent.DeathAnimationList[3].AnimationSpeed;
+                if (EmeraldComponent.DeathAnimationList[3] != null)
+                {
+                    EmeraldComponent.TotalDeathAnimations = 4;
+                }
+            }
+            if (EmeraldComponent.DeathAnimationList.Count >= 5)
+            {
+                EmeraldComponent.Death5Animation = EmeraldComponent.DeathAnimationList[4].AnimationClip;
+                EmeraldComponent.Death5AnimationSpeed = EmeraldComponent.DeathAnimationList[4].AnimationSpeed;
+                if (EmeraldComponent.DeathAnimationList[4] != null)
+                {
+                    EmeraldComponent.TotalDeathAnimations = 5;
+                }
+            }
+            if (EmeraldComponent.DeathAnimationList.Count >= 6)
+            {
+                EmeraldComponent.Death6Animation = EmeraldComponent.DeathAnimationList[5].AnimationClip;
+                EmeraldComponent.Death6AnimationSpeed = EmeraldComponent.DeathAnimationList[5].AnimationSpeed;
+                if (EmeraldComponent.DeathAnimationList[5] != null)
+                {
+                    EmeraldComponent.TotalDeathAnimations = 6;
+                }
+            }
 
             //Update Ranged Death Animations
             if (EmeraldComponent.RangedDeathAnimationList.Count >= 1)
@@ -272,6 +461,33 @@ namespace EmeraldAI.Utility
                     EmeraldComponent.TotalRangedDeathAnimations = 3;
                 }
             }
+            if (EmeraldComponent.RangedDeathAnimationList.Count >= 4)
+            {
+                EmeraldComponent.RangedDeath4Animation = EmeraldComponent.RangedDeathAnimationList[3].AnimationClip;
+                EmeraldComponent.RangedDeath4AnimationSpeed = EmeraldComponent.RangedDeathAnimationList[3].AnimationSpeed;
+                if (EmeraldComponent.RangedDeathAnimationList[3] != null)
+                {
+                    EmeraldComponent.TotalRangedDeathAnimations = 4;
+                }
+            }
+            if (EmeraldComponent.RangedDeathAnimationList.Count >= 5)
+            {
+                EmeraldComponent.RangedDeath5Animation = EmeraldComponent.RangedDeathAnimationList[4].AnimationClip;
+                EmeraldComponent.RangedDeath5AnimationSpeed = EmeraldComponent.RangedDeathAnimationList[4].AnimationSpeed;
+                if (EmeraldComponent.RangedDeathAnimationList[4] != null)
+                {
+                    EmeraldComponent.TotalRangedDeathAnimations = 5;
+                }
+            }
+            if (EmeraldComponent.RangedDeathAnimationList.Count >= 6)
+            {
+                EmeraldComponent.RangedDeath6Animation = EmeraldComponent.RangedDeathAnimationList[5].AnimationClip;
+                EmeraldComponent.RangedDeath6AnimationSpeed = EmeraldComponent.RangedDeathAnimationList[5].AnimationSpeed;
+                if (EmeraldComponent.RangedDeathAnimationList[5] != null)
+                {
+                    EmeraldComponent.TotalRangedDeathAnimations = 6;
+                }
+            }
 
             //Update Emote Animations
             if (EmeraldComponent.EmoteAnimationList.Count >= 1)
@@ -295,6 +511,62 @@ namespace EmeraldAI.Utility
                     EmeraldComponent.TotalEmoteAnimations = 3;
                 }
             }
+            if (EmeraldComponent.EmoteAnimationList.Count >= 4)
+            {
+                EmeraldComponent.Emote4Animation = EmeraldComponent.EmoteAnimationList[3].EmoteAnimationClip;
+                if (EmeraldComponent.EmoteAnimationList[3].EmoteAnimationClip != null)
+                {
+                    EmeraldComponent.TotalEmoteAnimations = 4;
+                }
+            }
+            if (EmeraldComponent.EmoteAnimationList.Count >= 5)
+            {
+                EmeraldComponent.Emote5Animation = EmeraldComponent.EmoteAnimationList[4].EmoteAnimationClip;
+                if (EmeraldComponent.EmoteAnimationList[4].EmoteAnimationClip != null)
+                {
+                    EmeraldComponent.TotalEmoteAnimations = 5;
+                }
+            }
+            if (EmeraldComponent.EmoteAnimationList.Count >= 6)
+            {
+                EmeraldComponent.Emote6Animation = EmeraldComponent.EmoteAnimationList[5].EmoteAnimationClip;
+                if (EmeraldComponent.EmoteAnimationList[5].EmoteAnimationClip != null)
+                {
+                    EmeraldComponent.TotalEmoteAnimations = 6;
+                }
+            }
+            if (EmeraldComponent.EmoteAnimationList.Count >= 7)
+            {
+                EmeraldComponent.Emote7Animation = EmeraldComponent.EmoteAnimationList[6].EmoteAnimationClip;
+                if (EmeraldComponent.EmoteAnimationList[6].EmoteAnimationClip != null)
+                {
+                    EmeraldComponent.TotalEmoteAnimations = 7;
+                }
+            }
+            if (EmeraldComponent.EmoteAnimationList.Count >= 8)
+            {
+                EmeraldComponent.Emote8Animation = EmeraldComponent.EmoteAnimationList[7].EmoteAnimationClip;
+                if (EmeraldComponent.EmoteAnimationList[7].EmoteAnimationClip != null)
+                {
+                    EmeraldComponent.TotalEmoteAnimations = 8;
+                }
+            }
+            if (EmeraldComponent.EmoteAnimationList.Count >= 9)
+            {
+                EmeraldComponent.Emote9Animation = EmeraldComponent.EmoteAnimationList[8].EmoteAnimationClip;
+                if (EmeraldComponent.EmoteAnimationList[8].EmoteAnimationClip != null)
+                {
+                    EmeraldComponent.TotalEmoteAnimations = 9;
+                }
+            }
+            if (EmeraldComponent.EmoteAnimationList.Count >= 10)
+            {
+                EmeraldComponent.Emote10Animation = EmeraldComponent.EmoteAnimationList[9].EmoteAnimationClip;
+                if (EmeraldComponent.EmoteAnimationList[9].EmoteAnimationClip != null)
+                {
+                    EmeraldComponent.TotalEmoteAnimations = 10;
+                }
+            }
 
             //Go through each sub-state by name and assign the animation to each state within the sub-state using an index
             for (int i = 0; i < m_AnimatorController.layers[0].stateMachine.stateMachines.Length; i++)
@@ -307,6 +579,17 @@ namespace EmeraldAI.Utility
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[1].state.speed = EmeraldComponent.Idle2AnimationSpeed;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.motion = EmeraldComponent.Idle3Animation;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.speed = EmeraldComponent.Idle3AnimationSpeed;
+
+                    //Only update Animator Controllers who's states are greater than 3 to avoid issues with Emerald AI 2.3 Animator Controllers.
+                    if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states.Length > 3)
+                    {
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.motion = EmeraldComponent.Idle4Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.speed = EmeraldComponent.Idle4AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.motion = EmeraldComponent.Idle5Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.speed = EmeraldComponent.Idle5AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.motion = EmeraldComponent.Idle6Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.speed = EmeraldComponent.Idle6AnimationSpeed;
+                    }
                 }
                 else if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.name == "Hit States")
                 {
@@ -316,6 +599,17 @@ namespace EmeraldAI.Utility
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[1].state.speed = EmeraldComponent.Hit2AnimationSpeed;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.motion = EmeraldComponent.Hit3Animation;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.speed = EmeraldComponent.Hit3AnimationSpeed;
+
+                    //Only update Animator Controllers who's states are greater than 3 to avoid issues with Emerald AI 2.3 Animator Controllers.
+                    if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states.Length > 3)
+                    {
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.motion = EmeraldComponent.Hit4Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.speed = EmeraldComponent.Hit4AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.motion = EmeraldComponent.Hit5Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.speed = EmeraldComponent.Hit5AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.motion = EmeraldComponent.Hit6Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.speed = EmeraldComponent.Hit6AnimationSpeed;
+                    }
                 }
                 else if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.name == "Emote States")
                 {
@@ -325,6 +619,25 @@ namespace EmeraldAI.Utility
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[1].state.speed = EmeraldComponent.Emote2AnimationSpeed;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.motion = EmeraldComponent.Emote3Animation;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.speed = EmeraldComponent.Emote3AnimationSpeed;
+
+                    //Only update Animator Controllers who's states are greater than 3 to avoid issues with Emerald AI 2.3 Animator Controllers.
+                    if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states.Length > 3)
+                    {
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.motion = EmeraldComponent.Emote4Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.speed = EmeraldComponent.Emote4AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.motion = EmeraldComponent.Emote5Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.speed = EmeraldComponent.Emote5AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.motion = EmeraldComponent.Emote6Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.speed = EmeraldComponent.Emote6AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[6].state.motion = EmeraldComponent.Emote7Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[6].state.speed = EmeraldComponent.Emote7AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[7].state.motion = EmeraldComponent.Emote8Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[7].state.speed = EmeraldComponent.Emote8AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[8].state.motion = EmeraldComponent.Emote9Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[8].state.speed = EmeraldComponent.Emote9AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[9].state.motion = EmeraldComponent.Emote10Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[9].state.speed = EmeraldComponent.Emote10AnimationSpeed;
+                    }
                 }
                 else if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.name == "Combat Hit States")
                 {
@@ -334,6 +647,17 @@ namespace EmeraldAI.Utility
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[1].state.speed = EmeraldComponent.CombatHit2AnimationSpeed;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.motion = EmeraldComponent.CombatHit3Animation;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.speed = EmeraldComponent.CombatHit3AnimationSpeed;
+
+                    //Only update Animator Controllers who's states are greater than 3 to avoid issues with Emerald AI 2.3 Animator Controllers.
+                    if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states.Length > 3)
+                    {
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.motion = EmeraldComponent.CombatHit4Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.speed = EmeraldComponent.CombatHit4AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.motion = EmeraldComponent.CombatHit5Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.speed = EmeraldComponent.CombatHit5AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.motion = EmeraldComponent.CombatHit6Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.speed = EmeraldComponent.CombatHit6AnimationSpeed;
+                    }
                 }
                 else if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.name == "Combat Hit States (Ranged)")
                 {
@@ -343,6 +667,17 @@ namespace EmeraldAI.Utility
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[1].state.speed = EmeraldComponent.RangedCombatHit2AnimationSpeed;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.motion = EmeraldComponent.RangedCombatHit3Animation;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.speed = EmeraldComponent.RangedCombatHit3AnimationSpeed;
+
+                    //Only update Animator Controllers who's states are greater than 3 to avoid issues with Emerald AI 2.3 Animator Controllers.
+                    if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states.Length > 3)
+                    {
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.motion = EmeraldComponent.RangedCombatHit4Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.speed = EmeraldComponent.RangedCombatHit4AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.motion = EmeraldComponent.RangedCombatHit5Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.speed = EmeraldComponent.RangedCombatHit5AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.motion = EmeraldComponent.RangedCombatHit6Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.speed = EmeraldComponent.RangedCombatHit6AnimationSpeed;
+                    }
                 }
                 else if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.name == "Attack States")
                 {
@@ -352,6 +687,17 @@ namespace EmeraldAI.Utility
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[1].state.speed = EmeraldComponent.Attack2AnimationSpeed;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.motion = EmeraldComponent.Attack3Animation;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.speed = EmeraldComponent.Attack3AnimationSpeed;
+
+                    //Only update Animator Controllers who's states are greater than 3 to avoid issues with Emerald AI 2.3 Animator Controllers.
+                    if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states.Length > 3)
+                    {
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.motion = EmeraldComponent.Attack4Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.speed = EmeraldComponent.Attack4AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.motion = EmeraldComponent.Attack5Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.speed = EmeraldComponent.Attack5AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.motion = EmeraldComponent.Attack6Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.speed = EmeraldComponent.Attack6AnimationSpeed;
+                    }
                 }
                 else if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.name == "Attack States (Ranged)")
                 {
@@ -361,6 +707,17 @@ namespace EmeraldAI.Utility
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[1].state.speed = EmeraldComponent.RangedAttack2AnimationSpeed;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.motion = EmeraldComponent.RangedAttack3Animation;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.speed = EmeraldComponent.RangedAttack3AnimationSpeed;
+
+                    //Only update Animator Controllers who's states are greater than 3 to avoid issues with Emerald AI 2.3 Animator Controllers.
+                    if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states.Length > 3)
+                    {
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.motion = EmeraldComponent.RangedAttack4Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.speed = EmeraldComponent.RangedAttack4AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.motion = EmeraldComponent.RangedAttack5Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.speed = EmeraldComponent.RangedAttack5AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.motion = EmeraldComponent.RangedAttack6Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.speed = EmeraldComponent.RangedAttack6AnimationSpeed;
+                    }
                 }
                 else if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.name == "Run Attack States")
                 {
@@ -388,6 +745,17 @@ namespace EmeraldAI.Utility
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[1].state.speed = EmeraldComponent.Death2AnimationSpeed;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.motion = EmeraldComponent.Death3Animation;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.speed = EmeraldComponent.Death3AnimationSpeed;
+
+                    //Only update Animator Controllers who's states are greater than 3 to avoid issues with Emerald AI 2.3 Animator Controllers.
+                    if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states.Length > 3)
+                    {
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.motion = EmeraldComponent.Death4Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.speed = EmeraldComponent.Death4AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.motion = EmeraldComponent.Death5Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.speed = EmeraldComponent.Death5AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.motion = EmeraldComponent.Death6Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.speed = EmeraldComponent.Death6AnimationSpeed;
+                    }
                 }
                 else if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.name == "Death States (Ranged)")
                 {
@@ -397,6 +765,17 @@ namespace EmeraldAI.Utility
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[1].state.speed = EmeraldComponent.RangedDeath2AnimationSpeed;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.motion = EmeraldComponent.RangedDeath3Animation;
                     m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[2].state.speed = EmeraldComponent.RangedDeath3AnimationSpeed;
+
+                    //Only update Animator Controllers who's states are greater than 3 to avoid issues with Emerald AI 2.3 Animator Controllers.
+                    if (m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states.Length > 3)
+                    {
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.motion = EmeraldComponent.RangedDeath4Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[3].state.speed = EmeraldComponent.RangedDeath4AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.motion = EmeraldComponent.RangedDeath5Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[4].state.speed = EmeraldComponent.RangedDeath5AnimationSpeed;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.motion = EmeraldComponent.RangedDeath6Animation;
+                        m_AnimatorController.layers[0].stateMachine.stateMachines[i].stateMachine.states[5].state.speed = EmeraldComponent.RangedDeath6AnimationSpeed;
+                    }
                 }
             }
 

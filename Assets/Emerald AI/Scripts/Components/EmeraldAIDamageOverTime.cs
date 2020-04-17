@@ -115,17 +115,20 @@ namespace EmeraldAI.Utility
                 if (m_TargetType == EmeraldAISystem.TargetType.AI)
                 {
                     m_TargetEmeraldComponent.Damage(m_DamageAmount);
+                    m_AttackerEmeraldComponent.OnDoDamageEvent.Invoke();
                 }
                 else if (m_TargetType == EmeraldAISystem.TargetType.Player) //Apply damage over time to the player
                 {
                     if (m_TargetTransform.GetComponent<EmeraldAIPlayerDamage>() != null)
                     {
                         m_TargetTransform.GetComponent<EmeraldAIPlayerDamage>().SendPlayerDamage(m_DamageAmount, m_AttackerEmeraldComponent.transform, m_AttackerEmeraldComponent);
+                        m_AttackerEmeraldComponent.OnDoDamageEvent.Invoke();
                     }
                     else
                     {
                         m_TargetTransform.gameObject.AddComponent<EmeraldAIPlayerDamage>();
                         m_TargetTransform.GetComponent<EmeraldAIPlayerDamage>().SendPlayerDamage(m_DamageAmount, m_AttackerEmeraldComponent.transform, m_AttackerEmeraldComponent);
+                        m_AttackerEmeraldComponent.OnDoDamageEvent.Invoke();
                     }
                 }
                 else if (m_TargetType == EmeraldAISystem.TargetType.NonAITarget) //Apply the damage over time to a non-AI target
@@ -133,11 +136,13 @@ namespace EmeraldAI.Utility
                     if (m_TargetTransform.GetComponent<EmeraldAINonAIDamage>() != null)
                     {
                         m_TargetTransform.GetComponent<EmeraldAINonAIDamage>().SendNonAIDamage(m_DamageAmount, m_AttackerEmeraldComponent.transform);
+                        m_AttackerEmeraldComponent.OnDoDamageEvent.Invoke();
                     }
                     else
                     {
                         m_TargetTransform.gameObject.AddComponent<EmeraldAINonAIDamage>();
                         m_TargetTransform.GetComponent<EmeraldAINonAIDamage>().SendNonAIDamage(m_DamageAmount, m_AttackerEmeraldComponent.transform);
+                        m_AttackerEmeraldComponent.OnDoDamageEvent.Invoke();
                     }
                 }
 

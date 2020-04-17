@@ -92,7 +92,7 @@ namespace EmeraldAI.Utility
             GUI.backgroundColor = Color.white;
             EditorGUILayout.Space();
 
-            self.GatherResourceAnimationIndex = EditorGUILayout.IntSlider("Gather Animation Index", self.GatherResourceAnimationIndex, 1, 3);
+            self.GatherResourceAnimationIndex = EditorGUILayout.IntSlider("Gather Animation Index", self.GatherResourceAnimationIndex, 1, 6);
             GUI.backgroundColor = new Color(0.1f, 0.1f, 0.1f, 0.19f);
             EditorGUILayout.LabelField("Controls the animation that will be used when an AI at a resource location. This is based off of your AI's Idle Animation List index.", EditorStyles.helpBox);
             GUI.backgroundColor = Color.white;

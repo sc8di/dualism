@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
+using UnityEditor.SceneManagement;
 using UnityEditor.IMGUI.Controls;
 using System.IO;
 using System.Text.RegularExpressions;
+using UnityEditorInternal;
 
 namespace EmeraldAI.Utility
 {
@@ -15,6 +18,9 @@ namespace EmeraldAI.Utility
         Vector2 scrollPos;
         float MessageTimer;
         bool MessageDisplay;
+        SerializedObject serializedObject;
+        ReorderableList FactionListProp;
+        EmeraldAIFactionData FactionData;
 
         public List<string> FactionList = new List<string>();
         public string Faction = "New Faction";
@@ -67,7 +73,7 @@ namespace EmeraldAI.Utility
             if (!FactionList.Contains(Faction))
             {
                 FactionList.Add(Faction);
-                SaveFactionData();
+                AddFactionData(Faction);
             }
         }
 
@@ -83,7 +89,7 @@ namespace EmeraldAI.Utility
             EditorGUILayout.LabelField(new GUIContent(FactionIcon), style, GUILayout.ExpandWidth(true), GUILayout.Height(50));
             EditorGUILayout.LabelField("Emerald AI Faction Manager - v2.0", style, GUILayout.ExpandWidth(true));
             EditorGUILayout.HelpBox("With the Emerald AI Faction Manager, you can create factions that your AI will use to to determine who is an enemy and who is an ally. " +
-                "Factions created here will be globally available for all Emerald AI agents to use. These can be found under your AI's Tag Options.", MessageType.None, true);
+                "Factions created here will be globally available for all Emerald AI agents to use. These can be found under your AI's Detection & Tags>Faction Options tab.", MessageType.None, true);
             GUILayout.Space(4);
             EditorGUILayout.EndVertical();
             GUILayout.FlexibleSpace();
@@ -174,6 +180,8 @@ namespace EmeraldAI.Utility
 
             GUILayout.Space(5);
 
+            //FactionListProp.DoLayoutList();
+            
             foreach (string s in FactionList.ToArray())
             {
                 GUI.backgroundColor = new Color(1f, 1f, 1f, 0.5f);
@@ -215,60 +223,60 @@ namespace EmeraldAI.Utility
 
         void LoadFactionData()
         {
-            string path = AssetDatabase.GetAssetPath(Resources.Load("EmeraldAIFactions"));
+            string path = AssetDatabase.GetAssetPath(Resources.Load("Faction Data"));
+            EmeraldAIFactionData FactionData = (EmeraldAIFactionData)AssetDatabase.LoadAssetAtPath(path, typeof(EmeraldAIFactionData));
+            serializedObject = new SerializedObject(FactionData);
 
-            TextAsset FactionData = (TextAsset)AssetDatabase.LoadAssetAtPath(path, typeof(TextAsset));
-
-            if (FactionData != null)
+            foreach (string s in FactionData.FactionNameList)
             {
-                string[] textLines = FactionData.text.Split(',');
-
-                FactionList.Clear();
-
-                foreach (string s in textLines)
+                if (!FactionData.FactionNameList.Contains(s) && s != "")
                 {
-                    if (!EmeraldAISystem.StringFactionList.Contains(s) && s != "")
-                    {
-                        EmeraldAISystem.StringFactionList.Add(s);
-                    }
+                    FactionData.FactionNameList.Add(s);
                 }
-
-                FactionList = new List<string>(EmeraldAISystem.StringFactionList);
             }
+
+            FactionList = new List<string>(FactionData.FactionNameList);
+
+            FactionListProp = new ReorderableList(serializedObject, serializedObject.FindProperty("FactionNameList"), true, true, true, true);
+            FactionListProp.drawHeaderCallback = rect =>
+            {
+                EditorGUI.LabelField(rect, "Faction List", EditorStyles.boldLabel);
+            };
+            FactionListProp.drawElementCallback =
+                (Rect rect, int index, bool isActive, bool isFocused) =>
+                {
+                    var element = FactionListProp.serializedProperty.GetArrayElementAtIndex(index);
+                    EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), element, GUIContent.none);
+                };
         }
 
-        void SaveFactionData()
+        void AddFactionData(string FactionToAdd)
         {
-            string path = AssetDatabase.GetAssetPath(Resources.Load("EmeraldAIFactions"));
-            FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
-            TextWriter writer = new StreamWriter(fs);
+            string path = AssetDatabase.GetAssetPath(Resources.Load("Faction Data"));
+            EmeraldAIFactionData FactionData = (EmeraldAIFactionData)AssetDatabase.LoadAssetAtPath(path, typeof(EmeraldAIFactionData));
 
-            foreach (string s in FactionList)
+            if (!FactionData.FactionNameList.Contains(FactionToAdd) && FactionToAdd != "")
             {
-                writer.Write(s + ",");
+                FactionData.FactionNameList.Add(FactionToAdd);
             }
 
-            EmeraldAISystem.StringFactionList = new List<string>(FactionList);
-            writer.Close();
-            AssetDatabase.Refresh();
+            FactionList = new List<string>(FactionData.FactionNameList);
+            EmeraldAISystem.StringFactionList = FactionList;
+
+            EditorUtility.SetDirty(FactionData);
+            EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
         }
 
         void RemoveFactionData(string FactionToRemove)
         {
-            string path = AssetDatabase.GetAssetPath(Resources.Load("EmeraldAIFactions"));
-            var fs = new FileStream(path, FileMode.Truncate);
-            TextWriter writer = new StreamWriter(fs);
+            string path = AssetDatabase.GetAssetPath(Resources.Load("Faction Data"));
+            EmeraldAIFactionData FactionData = (EmeraldAIFactionData)AssetDatabase.LoadAssetAtPath(path, typeof(EmeraldAIFactionData));
+            FactionData.FactionNameList.Remove(FactionToRemove);
+            FactionList = new List<string>(FactionData.FactionNameList);
+            EmeraldAISystem.StringFactionList = FactionList;
 
-            FactionList.Remove(FactionToRemove);
-
-            foreach (string s in FactionList)
-            {
-                writer.Write(s + ",");
-            }
-
-            EmeraldAISystem.StringFactionList = new List<string>(FactionList);
-            writer.Close();
-            AssetDatabase.Refresh();
+            EditorUtility.SetDirty(FactionData);
+            EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
         }
     }
 }

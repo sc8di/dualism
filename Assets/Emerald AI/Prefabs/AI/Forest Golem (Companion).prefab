@@ -2155,7 +2155,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1042880153122474}
-  m_LocalRotation: {x: 0.6963642, y: -0.12278831, z: 0.6963642, w: -0.12278817}
+  m_LocalRotation: {x: 0.6963642, y: -0.1227883, z: 0.6963642, w: -0.12278816}
   m_LocalPosition: {x: -0.020842934, y: 0.29620126, z: 0.28718647}
   m_LocalScale: {x: 0.9281604, y: 0.9281604, z: 0.9281604}
   m_Children:
@@ -2353,7 +2353,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1979840163394376}
-  m_LocalRotation: {x: -0.32535994, y: -0.33223313, z: -0.5127293, w: 0.7217137}
+  m_LocalRotation: {x: -0.32535997, y: -0.33223313, z: -0.51272935, w: 0.7217137}
   m_LocalPosition: {x: -0.13848782, y: -0.030967522, z: -0.067672394}
   m_LocalScale: {x: 1.0000001, y: 1, z: 0.9999999}
   m_Children:
@@ -3558,7 +3558,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1647708583438164}
-  m_LocalRotation: {x: -0.32535994, y: -0.33223313, z: -0.5127293, w: 0.7217137}
+  m_LocalRotation: {x: -0.32535997, y: -0.33223313, z: -0.51272935, w: 0.7217137}
   m_LocalPosition: {x: 0.0025403977, y: -0.019674396, z: -0.071625665}
   m_LocalScale: {x: 1.0000001, y: 1, z: 0.9999999}
   m_Children:
@@ -5297,7 +5297,7 @@ Animator:
   m_GameObject: {fileID: 1117380127409372}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0fd053b0bb4e3f64f9348aa052d23541, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4f2d1657f4184d74dbc143b5c27f11ac, type: 2}
+  m_Controller: {fileID: 9100000, guid: 58f7bf4a9c8eca14785915f80d03c900, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5363,18 +5363,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 147c566cda086894c8206928a751fa91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OffensiveAbilitiesList:
-  - {fileID: 11400000, guid: 77d824358e440674db3f7c21ac56f305, type: 2}
-  SupportAbilitiesList: []
-  SummoningAbilitiesList: []
+  m_EmeraldAIAbility: {fileID: 0}
+  StringFactionListTest:
+  - Undead
+  - Creature
+  - NPC
+  - Animal
+  - Thief
+  MeleeAttackIndex: 0
+  MeleeAttackPickType: 2
+  MeleeAttacks: []
+  MeleeAttacksListIndex: 0
+  MeleeRunAttackIndex: 0
+  MeleeRunAttackPickType: 2
+  MeleeRunAttacks: []
+  MeleeRunAttacksListIndex: 0
+  OffensiveAbilityIndex: 0
+  OffensiveAbilityPickType: 0
+  OffensiveAbilities:
+  - OffensiveAbility: {fileID: 11400000, guid: 0d902a1700fabaf4d94b0aabacbbf4bf, type: 2}
+    AbilityAnimaition: 0
+    AbilityOdds: 60
+  - OffensiveAbility: {fileID: 11400000, guid: 77d824358e440674db3f7c21ac56f305, type: 2}
+    AbilityAnimaition: 0
+    AbilityOdds: 30
+  SupportAbilityIndex: 0
+  SupportAbilityPickType: 2
+  SupportAbilities: []
+  SummoningAbilityIndex: 0
+  SummoningAbilityPickType: 2
+  SummoningAbilities: []
+  AttackOnArrival: 0
+  CriticalHit: 0
+  TargetInAngleLimit: 0
   CurrentAnimationIndex: 0
+  CurrentRunAttackAnimationIndex: 0
   ActiveEffects: []
   CurrentlyCreatedAbility: {fileID: 0}
-  Ability1AnimationIndex: 0
-  Ability1Odds: 70
-  Ability2AnimationIndex: 0
-  Ability3AnimationIndex: 0
-  Ability3Odds: 30
   SummonsMultipleAI: 1
   MaxAllowedSummonedAI: 1
   TotalSummonedAI: 0
@@ -5398,6 +5423,7 @@ MonoBehaviour:
   m_HealthBarComponent: {fileID: 0}
   DebugLogMissingAnimations: 0
   AttackHeight: 5
+  CurrentMeleeAttackType: 0
   m_AttackAnimationClipMissing: 0
   ProjectileCollisionPointY: 2.55
   m_ProjectileCollisionPoint: {x: 2177, y: 73.770004, z: 2122}
@@ -5548,6 +5574,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  OnDoDamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   ReachedDestinationEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5618,6 +5649,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  OnKillTargetEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   IdleSoundsSeconds: 0
   IdleSoundsSecondsMin: 5
   IdleSoundsSecondsMax: 10
@@ -5631,14 +5667,15 @@ MonoBehaviour:
   RandomDirection: 0
   TargetInView: 0
   ProjectileFirePosition: {x: 0, y: 0, z: 0}
-  CurrentFaction: 2
+  CurrentFaction: 0
   RelationTypeRef: 0
   FactionRelations: 
-  FactionRelation1: 0
-  FactionRelation2: 0
-  FactionRelation3: 0
-  FactionRelation4: 0
-  FactionRelation5: 0
+  FactionRelationsList:
+  - FactionIndex: 1
+    RelationTypeRef: 0
+  PlayerFaction:
+  - PlayerTag: Player
+    RelationTypeRef: 2
   StartingRunSpeed: 0
   StartingRunAnimationSpeed: 0
   StationaryIdleTimer: 0
@@ -5688,12 +5725,18 @@ MonoBehaviour:
   Attack1Animation: {fileID: 7400002, guid: 5718e4e88cc938348bc7e3582f5e79e1, type: 3}
   Attack2Animation: {fileID: 0}
   Attack3Animation: {fileID: 0}
+  Attack4Animation: {fileID: 0}
+  Attack5Animation: {fileID: 0}
+  Attack6Animation: {fileID: 0}
   RunAttack1Animation: {fileID: 0}
   RunAttack2Animation: {fileID: 0}
   RunAttack3Animation: {fileID: 0}
   Idle1Animation: {fileID: 7400002, guid: d3ac7e6dcff6d42489756276610de304, type: 3}
   Idle2Animation: {fileID: 0}
   Idle3Animation: {fileID: 0}
+  Idle4Animation: {fileID: 0}
+  Idle5Animation: {fileID: 0}
+  Idle6Animation: {fileID: 0}
   IdleWarningAnimation: {fileID: 0}
   NonCombatTurnLeftAnimation: {fileID: 7400002, guid: d3ac7e6dcff6d42489756276610de304,
     type: 3}
@@ -5716,6 +5759,13 @@ MonoBehaviour:
   Emote1Animation: {fileID: 7400002, guid: 65632509296515d4ca211c086bf58dc9, type: 3}
   Emote2Animation: {fileID: 0}
   Emote3Animation: {fileID: 0}
+  Emote4Animation: {fileID: 0}
+  Emote5Animation: {fileID: 0}
+  Emote6Animation: {fileID: 0}
+  Emote7Animation: {fileID: 0}
+  Emote8Animation: {fileID: 0}
+  Emote9Animation: {fileID: 0}
+  Emote10Animation: {fileID: 0}
   CombatIdleAnimation: {fileID: 7400002, guid: d3ac7e6dcff6d42489756276610de304, type: 3}
   CombatWalkLeftAnimation: {fileID: 7400002, guid: d3ac7e6dcff6d42489756276610de304,
     type: 3}
@@ -5734,9 +5784,15 @@ MonoBehaviour:
   Hit1Animation: {fileID: 0}
   Hit2Animation: {fileID: 0}
   Hit3Animation: {fileID: 0}
+  Hit4Animation: {fileID: 0}
+  Hit5Animation: {fileID: 0}
+  Hit6Animation: {fileID: 0}
   CombatHit1Animation: {fileID: 0}
   CombatHit2Animation: {fileID: 0}
   CombatHit3Animation: {fileID: 0}
+  CombatHit4Animation: {fileID: 0}
+  CombatHit5Animation: {fileID: 0}
+  CombatHit6Animation: {fileID: 0}
   BlockIdleAnimation: {fileID: 0}
   BlockHitAnimation: {fileID: 0}
   PutAwayWeaponAnimation: {fileID: 0}
@@ -5744,6 +5800,9 @@ MonoBehaviour:
   Death1Animation: {fileID: 7400002, guid: 122a0277cf23ac949924d2ff8d9aba5d, type: 3}
   Death2Animation: {fileID: 0}
   Death3Animation: {fileID: 0}
+  Death4Animation: {fileID: 0}
+  Death5Animation: {fileID: 0}
+  Death6Animation: {fileID: 0}
   RangedCombatIdleAnimation: {fileID: 7400002, guid: d3ac7e6dcff6d42489756276610de304,
     type: 3}
   RangedCombatWalkLeftAnimation: {fileID: 7400002, guid: d3ac7e6dcff6d42489756276610de304,
@@ -5765,25 +5824,40 @@ MonoBehaviour:
   RangedPullOutWeaponAnimation: {fileID: 0}
   RangedAttack1Animation: {fileID: 7400002, guid: 5718e4e88cc938348bc7e3582f5e79e1,
     type: 3}
-  RangedAttack2Animation: {fileID: 0}
-  RangedAttack3Animation: {fileID: 0}
+  RangedAttack2Animation: {fileID: 7400002, guid: e88f802967c42884a97537ef0bb76597,
+    type: 3}
+  RangedAttack3Animation: {fileID: 7400002, guid: 5667d902e4289c541b83847bda7ef118,
+    type: 3}
+  RangedAttack4Animation: {fileID: 7400002, guid: d48dbce3bd7b3dd438377f4751a1c7d4,
+    type: 3}
+  RangedAttack5Animation: {fileID: 7400002, guid: 96b4ec34c766d3f42a4b2209b10ada70,
+    type: 3}
+  RangedAttack6Animation: {fileID: 7400002, guid: d5025a74836bd044b851d6a33d5f7990,
+    type: 3}
   RangedRunAttack1Animation: {fileID: 0}
   RangedRunAttack2Animation: {fileID: 0}
   RangedRunAttack3Animation: {fileID: 0}
   RangedCombatHit1Animation: {fileID: 0}
   RangedCombatHit2Animation: {fileID: 0}
   RangedCombatHit3Animation: {fileID: 0}
+  RangedCombatHit4Animation: {fileID: 0}
+  RangedCombatHit5Animation: {fileID: 0}
+  RangedCombatHit6Animation: {fileID: 0}
   RangedCombatTurnLeftAnimation: {fileID: 7400002, guid: d3ac7e6dcff6d42489756276610de304,
     type: 3}
   RangedCombatTurnRightAnimation: {fileID: 7400002, guid: d3ac7e6dcff6d42489756276610de304,
     type: 3}
   RangedDeath1Animation: {fileID: 7400002, guid: 122a0277cf23ac949924d2ff8d9aba5d,
     type: 3}
-  RangedDeath2Animation: {fileID: 0}
+  RangedDeath2Animation: {fileID: 7400002, guid: 122a0277cf23ac949924d2ff8d9aba5d,
+    type: 3}
   RangedDeath3Animation: {fileID: 0}
+  RangedDeath4Animation: {fileID: 0}
+  RangedDeath5Animation: {fileID: 0}
+  RangedDeath6Animation: {fileID: 0}
   AnimatorControllerGenerated: 1
   AnimationListsChanged: 0
-  FilePath: Assets/Emerald AI/Example Animators/Golem Controller.overrideController
+  FilePath: Assets/Emerald AI/Example Animators/Golem Controller (Companion).overrideController
   EmeraldTag: Respawn
   UITag: Player
   RagdollTag: Untagged
@@ -5792,27 +5866,25 @@ MonoBehaviour:
   ObstructionDetectionUpdateSeconds: 0.1
   ObstructionDetectionUpdateTimer: 0
   CurrentHealth: 0
-  StartingHealth: 30
+  StartingHealth: 75
   DetectionRadius: 20
   CurrentDamageAmount: 5
-  DamageAmount1: 5
-  DamageAmount2: 5
-  DamageAmount3: 5
   DamageAmountRun: 5
   WanderRadius: 25
-  TabNumber: 2
+  TabNumber: 1
   TemperamentTabNumber: 2
-  DetectionTagsTabNumber: 1
-  AnimationTabNumber: 3
+  DetectionTagsTabNumber: 2
+  AnimationTabNumber: 2
   SoundTabNumber: 1
   MovementTabNumber: 1
-  WeaponTypeTabNumber: 0
+  WeaponTypeTabNumber: 1
   WeaponTypeCombatTabNumber: 0
   WeaponTypeControlTabNumber: 0
   AttackAnimationNumber: 1
   RunAttackAnimationNumber: 1
   IdleAnimationNumber: 1
   CombatTabNumber: 0
+  FactionsAndTagTabNumber: 1
   EventTabNumber: 1
   MinimumWaitTime: 3
   MaximumWaitTime: 6
@@ -5823,18 +5895,15 @@ MonoBehaviour:
   DeathDelayTimer: 0
   DeathDelayMin: 1
   DeathDelayMax: 3
-  MinimumAttackSpeed: 1
-  MaximumAttackSpeed: 2
-  MinimumDamageAmount1: 2
-  MaximumDamageAmount1: 5
-  MinimumDamageAmount2: 2
-  MaximumDamageAmount2: 5
-  MinimumDamageAmount3: 2
-  MaximumDamageAmount3: 5
+  MinimumAttackSpeed: 0
+  MaximumAttackSpeed: 1
   MinimumDamageAmountRun: 2
   MaximumDamageAmountRun: 5
+  CritChance: 15
+  CritMultiplier: 2
+  UseCriticalHits: 0
   WalkBackwardsSpeed: 1
-  WalkSpeed: 2
+  WalkSpeed: 5
   RunSpeed: 5
   ExpandedFieldOfViewAngle: 300
   fieldOfViewAngle: 180
@@ -5872,6 +5941,9 @@ MonoBehaviour:
   Idle1AnimationSpeed: 1
   Idle2AnimationSpeed: 1
   Idle3AnimationSpeed: 1
+  Idle4AnimationSpeed: 1
+  Idle5AnimationSpeed: 1
+  Idle6AnimationSpeed: 1
   IdleWarningAnimationSpeed: 1
   RangedIdleWarningAnimationSpeed: 1
   IdleCombatAnimationSpeed: 1
@@ -5880,9 +5952,15 @@ MonoBehaviour:
   Attack1AnimationSpeed: 1
   Attack2AnimationSpeed: 1
   Attack3AnimationSpeed: 1
+  Attack4AnimationSpeed: 1
+  Attack5AnimationSpeed: 1
+  Attack6AnimationSpeed: 1
   RangedAttack1AnimationSpeed: 1
   RangedAttack2AnimationSpeed: 1
   RangedAttack3AnimationSpeed: 1
+  RangedAttack4AnimationSpeed: 1
+  RangedAttack5AnimationSpeed: 1
+  RangedAttack6AnimationSpeed: 1
   RunAttack1AnimationSpeed: 1
   RunAttack2AnimationSpeed: 1
   RunAttack3AnimationSpeed: 1
@@ -5898,12 +5976,25 @@ MonoBehaviour:
   Death1AnimationSpeed: 1
   Death2AnimationSpeed: 1
   Death3AnimationSpeed: 1
+  Death4AnimationSpeed: 1
+  Death5AnimationSpeed: 1
+  Death6AnimationSpeed: 1
   RangedDeath1AnimationSpeed: 1
   RangedDeath2AnimationSpeed: 1
   RangedDeath3AnimationSpeed: 1
+  RangedDeath4AnimationSpeed: 1
+  RangedDeath5AnimationSpeed: 1
+  RangedDeath6AnimationSpeed: 1
   Emote1AnimationSpeed: 1
   Emote2AnimationSpeed: 1
   Emote3AnimationSpeed: 1
+  Emote4AnimationSpeed: 1
+  Emote5AnimationSpeed: 1
+  Emote6AnimationSpeed: 1
+  Emote7AnimationSpeed: 1
+  Emote8AnimationSpeed: 1
+  Emote9AnimationSpeed: 1
+  Emote10AnimationSpeed: 1
   WalkAnimationSpeed: 1
   RunAnimationSpeed: 1
   NonCombatWalkAnimationSpeed: 1.25
@@ -5915,12 +6006,21 @@ MonoBehaviour:
   Hit1AnimationSpeed: 1
   Hit2AnimationSpeed: 1
   Hit3AnimationSpeed: 1
+  Hit4AnimationSpeed: 1
+  Hit5AnimationSpeed: 1
+  Hit6AnimationSpeed: 1
   CombatHit1AnimationSpeed: 1
   CombatHit2AnimationSpeed: 1
   CombatHit3AnimationSpeed: 1
+  CombatHit4AnimationSpeed: 1
+  CombatHit5AnimationSpeed: 1
+  CombatHit6AnimationSpeed: 1
   RangedCombatHit1AnimationSpeed: 1
   RangedCombatHit2AnimationSpeed: 1
   RangedCombatHit3AnimationSpeed: 1
+  RangedCombatHit4AnimationSpeed: 1
+  RangedCombatHit5AnimationSpeed: 1
+  RangedCombatHit6AnimationSpeed: 1
   StartingBehaviorRef: 0
   StartingConfidenceRef: 0
   SingleDestination: {x: 0, y: 0, z: 0}
@@ -5938,17 +6038,14 @@ MonoBehaviour:
   TargetTypeRef: 0
   CombatStateRef: 0
   CreateHealthBarsRef: 1
-  UseCombatTextRef: 0
   CombatTypeRef: 0
   RandomizeDamageRef: 1
   CustomizeHealthBarRef: 0
   UseCustomFontRef: 0
-  AnimateCombatTextRef: 0
   DisplayAINameRef: 1
   DisplayAITitleRef: 0
   DisplayAILevelRef: 0
   RefillHealthType: 2
-  OpposingFactionsEnumRef: 2
   WanderTypeRef: 0
   WaypointTypeRef: 0
   AlignAIWithGroundRef: 0
@@ -5957,7 +6054,6 @@ MonoBehaviour:
   ObstructionDetectionQualityRef: 1
   ActionAnimationRef: 2
   PickTargetMethodRef: 0
-  AIAttacksPlayerRef: 0
   UseNonAITagRef: 0
   UseRunAttacksRef: 1
   UseMagicEffectsPackRef: 0
@@ -6026,26 +6122,15 @@ MonoBehaviour:
   ImpactSounds: []
   AIFactionsList: 
   TargetTagsIndex: 0
-  OpposingFaction1: 0
-  OpposingFaction2: 4
-  OpposingFaction3: 1
-  OpposingFaction4: 1
-  OpposingFaction5: 1
   BloodPosOffset: {x: 0, y: 0, z: 0}
   BloodEffectPositionTypeRef: 1
   HealthBarCanvas: {fileID: 0}
   HealthBarImage: {fileID: 0}
   HealthBarBackgroundImage: {fileID: 0}
-  CombatTextFont: {fileID: 0}
-  CombatTextObject: {fileID: 0}
   HealthBarPos: {x: 0, y: 4.15, z: 0}
   CombatTextPos: {x: 0, y: 1.75, z: 0}
-  StartingCombatTextSize: 0.065
-  EndingCombatTextSize: 0.09
   HealthBarColor: {r: 0.120350376, g: 0.7794118, b: 0.12489559, a: 1}
   HealthBarBackgroundColor: {r: 0.14117648, g: 0.14117648, b: 0.14117648, a: 1}
-  CombatTextColor: {r: 0.77254903, g: 0.16078432, b: 0.16078432, a: 1}
-  CombatTextCriticalHitColor: {r: 0.77254903, g: 0.003921569, b: 0.003921569, a: 1}
   NameTextColor: {r: 0.120350376, g: 0.7794118, b: 0.12489559, a: 1}
   LevelTextColor: {r: 1, g: 1, b: 1, a: 1}
   HealthBarScale: {x: 0.75, y: 1, z: 1}
@@ -6060,7 +6145,7 @@ MonoBehaviour:
   IsDead: 0
   AttackSpeed: 1
   WaitTime: 5
-  CombatTextIndex: 0
+  DamageReceived: 0
   HeadLookRef: {fileID: 0}
   LineOfSightRef: {fileID: 0}
   PassiveTargetRef: {fileID: 0}
@@ -6071,15 +6156,11 @@ MonoBehaviour:
   CautiousTimer: 0
   AIBoxCollider: {fileID: 0}
   AIRenderer: {fileID: 23908111631465966}
-  AIRigidbody: {fileID: 0}
   TargetEmerald: {fileID: 0}
   HealthBar: {fileID: 0}
-  CombatTextParent: {fileID: 0}
-  CombatTextList: []
   TextName: {fileID: 0}
   TextLevel: {fileID: 0}
   HealthBarCanvasRef: {fileID: 0}
-  lookRotation: {x: 0, y: 0, z: 0, w: 0}
   WaypointsList: []
   WaypointIndex: 0
   WaypointHolder: {fileID: 0}

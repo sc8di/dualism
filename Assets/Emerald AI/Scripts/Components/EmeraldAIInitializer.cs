@@ -96,8 +96,6 @@ namespace EmeraldAI.Utility
                 R.isKinematic = false;
             }
 
-            GetComponent<Rigidbody>().isKinematic = true;
-
             if (EmeraldComponent.UseDroppableWeapon == EmeraldAISystem.YesOrNo.Yes)
             {
                 EmeraldComponent.EmeraldEventsManagerComponent.CreateDroppableWeapon();
@@ -222,50 +220,10 @@ namespace EmeraldAI.Utility
 
         void SetupFactions ()
         {
-            if (EmeraldComponent.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.One)
+            for (int i = 0; i < EmeraldComponent.FactionRelationsList.Count; i++)
             {
-                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.OpposingFaction1);
-                EmeraldComponent.FactionRelations.Add(EmeraldComponent.FactionRelation1);
-            }
-            if (EmeraldComponent.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Two)
-            {
-                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.OpposingFaction1);
-                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.OpposingFaction2);
-                EmeraldComponent.FactionRelations.Add(EmeraldComponent.FactionRelation1);
-                EmeraldComponent.FactionRelations.Add(EmeraldComponent.FactionRelation2);
-            }
-            if (EmeraldComponent.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Three)
-            {
-                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.OpposingFaction1);
-                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.OpposingFaction2);
-                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.OpposingFaction3);
-                EmeraldComponent.FactionRelations.Add(EmeraldComponent.FactionRelation1);
-                EmeraldComponent.FactionRelations.Add(EmeraldComponent.FactionRelation2);
-                EmeraldComponent.FactionRelations.Add(EmeraldComponent.FactionRelation3);
-            }
-            if (EmeraldComponent.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Four)
-            {
-                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.OpposingFaction1);
-                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.OpposingFaction2);
-                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.OpposingFaction3);
-                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.OpposingFaction4);
-                EmeraldComponent.FactionRelations.Add(EmeraldComponent.FactionRelation1);
-                EmeraldComponent.FactionRelations.Add(EmeraldComponent.FactionRelation2);
-                EmeraldComponent.FactionRelations.Add(EmeraldComponent.FactionRelation3);
-                EmeraldComponent.FactionRelations.Add(EmeraldComponent.FactionRelation4);
-            }
-            if (EmeraldComponent.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Five)
-            {
-                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.OpposingFaction1);
-                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.OpposingFaction2);
-                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.OpposingFaction3);
-                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.OpposingFaction4);
-                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.OpposingFaction5);
-                EmeraldComponent.FactionRelations.Add(EmeraldComponent.FactionRelation1);
-                EmeraldComponent.FactionRelations.Add(EmeraldComponent.FactionRelation2);
-                EmeraldComponent.FactionRelations.Add(EmeraldComponent.FactionRelation3);
-                EmeraldComponent.FactionRelations.Add(EmeraldComponent.FactionRelation4);
-                EmeraldComponent.FactionRelations.Add(EmeraldComponent.FactionRelation5);
+                EmeraldComponent.AIFactionsList.Add(EmeraldComponent.FactionRelationsList[i].FactionIndex);
+                EmeraldComponent.FactionRelations.Add((int)EmeraldComponent.FactionRelationsList[i].RelationTypeRef);
             }
         }
 
@@ -393,20 +351,20 @@ namespace EmeraldAI.Utility
 
             SetupFactions();
 
-            if (EmeraldComponent.ReverseWalkAnimation)
+            if (EmeraldComponent.ReverseWalkAnimation && EmeraldComponent.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee)
             {
-                EmeraldComponent.AIAnimator.SetFloat("Backup Speed", -1);
+                EmeraldComponent.AIAnimator.SetFloat("Backup Speed", -1f);
             }
-            else
+            else if (!EmeraldComponent.ReverseWalkAnimation && EmeraldComponent.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee)
             {
                 EmeraldComponent.AIAnimator.SetFloat("Backup Speed", 1);
             }
 
-            if (EmeraldComponent.ReverseRangedWalkAnimation)
+            if (EmeraldComponent.ReverseRangedWalkAnimation && EmeraldComponent.WeaponTypeRef == EmeraldAISystem.WeaponType.Ranged)
             {
-                EmeraldComponent.AIAnimator.SetFloat("Backup Speed", -1);
+                EmeraldComponent.AIAnimator.SetFloat("Backup Speed", -1f);
             }
-            else
+            else if (!EmeraldComponent.ReverseRangedWalkAnimation && EmeraldComponent.WeaponTypeRef == EmeraldAISystem.WeaponType.Ranged)
             {
                 EmeraldComponent.AIAnimator.SetFloat("Backup Speed", 1);
             }
@@ -573,7 +531,6 @@ namespace EmeraldAI.Utility
 
         void SetupCombatText ()
         {
-            //2.3.1
             if (EmeraldAISystem.CombatTextSystemObject == null)
             {
                 GameObject m_CombatTextSystem = Instantiate((GameObject)Resources.Load("Combat Text System") as GameObject, Vector3.zero, Quaternion.identity);
@@ -592,6 +549,14 @@ namespace EmeraldAI.Utility
             EmeraldComponent.HitPointTransform = new GameObject("AI Hit Transform").transform;
             EmeraldComponent.HitPointTransform.SetParent(transform);
             EmeraldComponent.HitPointTransform.localPosition = new Vector3(0, EmeraldComponent.ProjectileCollisionPointY/transform.localScale.y, 0);
+
+            //4.2
+            /*
+            if (EmeraldComponent.PlayerFaction.Count == 0)
+            {
+                EmeraldComponent.PlayerFaction.Add(new EmeraldAISystem.PlayerFactionClass(EmeraldComponent.PlayerTag, 0));
+            }
+            */
 
             EmeraldComponent.m_NavMeshAgent = GetComponent<NavMeshAgent>();
             EmeraldComponent.RandomOffset = Random.insideUnitSphere * EmeraldComponent.FollowingStoppingDistance;
@@ -612,11 +577,8 @@ namespace EmeraldAI.Utility
             EmeraldComponent.CurrentHealth = EmeraldComponent.StartingHealth;
             EmeraldComponent.AIBoxCollider = GetComponent<BoxCollider>();
             EmeraldComponent.m_AudioSource = GetComponent<AudioSource>();
-            EmeraldComponent.AIRigidbody = GetComponent<Rigidbody>();
-            EmeraldComponent.AIRigidbody.isKinematic = true;
             EmeraldComponent.DeathDelay = Random.Range(EmeraldComponent.DeathDelayMin, EmeraldComponent.DeathDelayMax + 1);
             EmeraldComponent.AttackTimer = EmeraldComponent.AttackSpeed;
-            EmeraldComponent.GetDamageAmount();
             EmeraldComponent.GeneratedBlockOdds = Random.Range(1, 101);
             EmeraldComponent.GeneratedBackupOdds = Random.Range(1, 101);
             EmeraldComponent.CombatStateRef = EmeraldAISystem.CombatState.NotActive;
@@ -630,6 +592,11 @@ namespace EmeraldAI.Utility
             EmeraldComponent.FirstTimeInCombat = true;
             EmeraldComponent.BackupDistance = (int)EmeraldComponent.StoppingDistance + 2;
             EmeraldComponent.GetComponent<EmeraldAIDetection>().YOffSet = EmeraldComponent.YAimOffset*-1;
+
+            if (EmeraldComponent.MeleeAttacks.Count > 0)
+            {
+                EmeraldComponent.GetDamageAmount();
+            }
 
             if (EmeraldComponent.UseHitAnimations == EmeraldAISystem.YesOrNo.No && EmeraldComponent.UseBlockingRef == EmeraldAISystem.YesOrNo.Yes)
             {
@@ -681,7 +648,7 @@ namespace EmeraldAI.Utility
             
             if (EmeraldComponent.BehaviorRef == EmeraldAISystem.CurrentBehavior.Companion)
             {
-                EmeraldComponent.AIAttacksPlayerRef = EmeraldAISystem.AIAttacksPlayer.Never;
+                EmeraldComponent.PlayerFaction[0].RelationTypeRef = EmeraldAISystem.PlayerFactionClass.RelationType.Friendly;
             }
 
             if (EmeraldComponent.BehaviorRef == EmeraldAISystem.CurrentBehavior.Aggressive && EmeraldComponent.ConfidenceRef == EmeraldAISystem.ConfidenceType.Coward)
@@ -699,7 +666,7 @@ namespace EmeraldAI.Utility
                 {
                     gameObject.layer = 0;
                 }
-                EmeraldComponent.AIAttacksPlayerRef = EmeraldAISystem.AIAttacksPlayer.Never;
+                EmeraldComponent.PlayerFaction[0].RelationTypeRef = EmeraldAISystem.PlayerFactionClass.RelationType.Friendly;
             }
 
             if (EmeraldComponent.UseRandomRotationOnStartRef == EmeraldAISystem.YesOrNo.Yes)
@@ -715,7 +682,7 @@ namespace EmeraldAI.Utility
 
         /// <summary>
         /// Double check all essential animations to esnure they have the proper events. If not, notify the user which animations 
-        /// are missing them as well as which events are needed. This is to avoid confusion as to why some functionality may not be wroking correctly.
+        /// are missing as well as which events are needed. This is to avoid confusion as to why some functionality may not be wroking correctly.
         /// </summary>
         void CheckAnimationEvents ()
         {
@@ -794,8 +761,8 @@ namespace EmeraldAI.Utility
                                 {
                                     RunAttackAnimationEventFound = true;
                                 }
-                                else if (EmeraldComponent.WeaponTypeRef == EmeraldAISystem.WeaponType.Ranged &&
-                                    EmeraldComponent.RunAttackAnimationList[l].AnimationClip.events[i].functionName == "CreateEmeraldProjectile")
+                                else if (EmeraldComponent.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee &&
+                                    EmeraldComponent.RunAttackAnimationList[l].AnimationClip.events[i].functionName == "EmeraldAttackEvent")
                                 {
                                     RunAttackAnimationEventFound = true;
                                 }
@@ -808,14 +775,6 @@ namespace EmeraldAI.Utility
                                         "Please add one or see Emerald AI's Documentation for a guide on how to do so." + "</color>" + "</b>");
                                 RunAnimationEventErrorDisplayed = true;
                             }
-                            /*
-                            else if (EmeraldComponent.WeaponTypeRef == EmeraldAISystem.WeaponType.Ranged && !RunAttackAnimationEventFound && !RunAnimationEventErrorDisplayed)
-                            {
-                                Debug.Log("<b>" + "<color=red>" + gameObject.name + "'s Run Attack " + (l + 1) + " is missing a EmeraldAttackEvent Animation Event. " +
-                                        "Please add one or see Emerald AI's Documentation for a guide on how to do so." + "</color>" + "</b>");
-                                RunAnimationEventErrorDisplayed = true;
-                            }
-                            */
                         }
                     }
                 }

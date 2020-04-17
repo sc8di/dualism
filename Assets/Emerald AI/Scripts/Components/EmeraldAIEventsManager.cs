@@ -68,7 +68,7 @@ namespace EmeraldAI
         /// Plays a random attack sound based on your AI's Attack Sounds list. Can also be called through Animation Events.
         /// </summary>
         public void PlayAttackSound()
-        {                      
+        {
             if (EmeraldComponent.AttackSounds.Count > 0)
             {
                 if (!EmeraldComponent.m_AudioSource.isPlaying)
@@ -108,7 +108,7 @@ namespace EmeraldAI
         /// Plays a random impact sound based on your AI's Impact Sounds list.
         /// </summary>
         public void PlayImpactSound()
-        {            
+        {
             if (EmeraldComponent.ImpactSounds.Count > 0)
             {
                 if (!EmeraldComponent.m_AudioSource.isPlaying)
@@ -116,7 +116,7 @@ namespace EmeraldAI
                     EmeraldComponent.m_AudioSource.volume = EmeraldComponent.ImpactVolume;
                     EmeraldComponent.m_AudioSource.PlayOneShot(EmeraldComponent.ImpactSounds[Random.Range(0, EmeraldComponent.ImpactSounds.Count)]);
                 }
-                else if(!EmeraldComponent.m_SecondaryAudioSource.isPlaying)
+                else if (!EmeraldComponent.m_SecondaryAudioSource.isPlaying)
                 {
                     EmeraldComponent.m_SecondaryAudioSource.volume = EmeraldComponent.ImpactVolume;
                     EmeraldComponent.m_SecondaryAudioSource.PlayOneShot(EmeraldComponent.ImpactSounds[Random.Range(0, EmeraldComponent.ImpactSounds.Count)]);
@@ -133,7 +133,7 @@ namespace EmeraldAI
         /// Plays a random block sound based on your AI's Block Sounds list.
         /// </summary>
         public void PlayBlockSound()
-        { 
+        {
             if (EmeraldComponent.BlockingSounds.Count > 0)
             {
                 if (!EmeraldComponent.m_AudioSource.isPlaying)
@@ -141,7 +141,7 @@ namespace EmeraldAI
                     EmeraldComponent.m_AudioSource.volume = EmeraldComponent.BlockVolume;
                     EmeraldComponent.m_AudioSource.PlayOneShot(EmeraldComponent.BlockingSounds[Random.Range(0, EmeraldComponent.BlockingSounds.Count)]);
                 }
-                else if(!EmeraldComponent.m_SecondaryAudioSource.isPlaying)
+                else if (!EmeraldComponent.m_SecondaryAudioSource.isPlaying)
                 {
                     EmeraldComponent.m_SecondaryAudioSource.volume = EmeraldComponent.BlockVolume;
                     EmeraldComponent.m_SecondaryAudioSource.PlayOneShot(EmeraldComponent.BlockingSounds[Random.Range(0, EmeraldComponent.BlockingSounds.Count)]);
@@ -158,7 +158,7 @@ namespace EmeraldAI
         /// Plays a random injured sound based on your AI's Injured Sounds list.
         /// </summary>
         public void PlayInjuredSound()
-        { 
+        {
             if (EmeraldComponent.InjuredSounds.Count > 0)
             {
                 if (!EmeraldComponent.m_AudioSource.isPlaying)
@@ -183,7 +183,7 @@ namespace EmeraldAI
         /// Plays a random death sound based on your AI's Death Sounds list. Can also be called through Animation Events.
         /// </summary>
         public void PlayDeathSound()
-        {                      
+        {
             if (EmeraldComponent.DeathSounds.Count > 0)
             {
                 if (!EmeraldComponent.m_AudioSource.isPlaying)
@@ -204,9 +204,9 @@ namespace EmeraldAI
         /// </summary>
         public void WalkFootstepSound()
         {
-            if (EmeraldComponent.AnimatorType == EmeraldAISystem.AnimatorTypeState.RootMotion && EmeraldComponent.AIAnimator.GetFloat("Speed") > 0.05f && EmeraldComponent.AIAnimator.GetFloat("Speed") <= 0.1f 
-                || EmeraldComponent.AnimatorType == EmeraldAISystem.AnimatorTypeState.NavMeshDriven && EmeraldComponent.m_NavMeshAgent.velocity.magnitude > 0.05f && EmeraldComponent.m_NavMeshAgent.velocity.magnitude <= EmeraldComponent.WalkSpeed+0.25f)
-            {                     
+            if (EmeraldComponent.AnimatorType == EmeraldAISystem.AnimatorTypeState.RootMotion && EmeraldComponent.AIAnimator.GetFloat("Speed") > 0.05f && EmeraldComponent.AIAnimator.GetFloat("Speed") <= 0.1f
+                || EmeraldComponent.AnimatorType == EmeraldAISystem.AnimatorTypeState.NavMeshDriven && EmeraldComponent.m_NavMeshAgent.velocity.magnitude > 0.05f && EmeraldComponent.m_NavMeshAgent.velocity.magnitude <= EmeraldComponent.WalkSpeed + 0.25f)
+            {
                 if (EmeraldComponent.FootStepSounds.Count > 0)
                 {
                     if (!EmeraldComponent.m_AudioSource.isPlaying)
@@ -229,7 +229,7 @@ namespace EmeraldAI
         public void RunFootstepSound()
         {
             if (EmeraldComponent.AnimatorType == EmeraldAISystem.AnimatorTypeState.RootMotion && EmeraldComponent.AIAnimator.GetFloat("Speed") > 0.1f
-                || EmeraldComponent.AnimatorType == EmeraldAISystem.AnimatorTypeState.NavMeshDriven && EmeraldComponent.m_NavMeshAgent.velocity.magnitude > EmeraldComponent.WalkSpeed+0.25f)
+                || EmeraldComponent.AnimatorType == EmeraldAISystem.AnimatorTypeState.NavMeshDriven && EmeraldComponent.m_NavMeshAgent.velocity.magnitude > EmeraldComponent.WalkSpeed + 0.25f)
             {
                 if (EmeraldComponent.FootStepSounds.Count > 0)
                 {
@@ -509,16 +509,16 @@ namespace EmeraldAI
                     }
                 }
             }
-            else if(EmeraldComponent.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.Yes)
+            else if (EmeraldComponent.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.Yes)
             {
                 if (WeaponTypeToDisable == "Melee")
                 {
                     if (EmeraldComponent.SheatheWeapon != null)
                     {
-                    EmeraldComponent.m_AudioSource.volume = EmeraldComponent.UnequipVolume;
-                    EmeraldComponent.m_SecondaryAudioSource.volume = EmeraldComponent.UnequipVolume;
+                        EmeraldComponent.m_AudioSource.volume = EmeraldComponent.UnequipVolume;
+                        EmeraldComponent.m_SecondaryAudioSource.volume = EmeraldComponent.UnequipVolume;
 
-                    if (!EmeraldComponent.m_AudioSource.isPlaying)
+                        if (!EmeraldComponent.m_AudioSource.isPlaying)
                         {
                             EmeraldComponent.m_AudioSource.PlayOneShot(EmeraldComponent.SheatheWeapon);
                         }
@@ -646,8 +646,8 @@ namespace EmeraldAI
         {
             if (EmeraldComponent.CurrentTarget != null)
             {
-                GameObject Effect = EmeraldAIObjectPool.Spawn(EffectObject, new Vector3(EmeraldComponent.CurrentTarget.position.x, 
-                    EmeraldComponent.CurrentTarget.position.y + EmeraldComponent.CurrentTarget.localScale.y/2, EmeraldComponent.CurrentTarget.position.z), Quaternion.identity);
+                GameObject Effect = EmeraldAIObjectPool.Spawn(EffectObject, new Vector3(EmeraldComponent.CurrentTarget.position.x,
+                    EmeraldComponent.CurrentTarget.position.y + EmeraldComponent.CurrentTarget.localScale.y / 2, EmeraldComponent.CurrentTarget.position.z), Quaternion.identity);
                 Effect.transform.SetParent(EmeraldAISystem.ObjectPool.transform);
 
                 if (Effect.GetComponent<EmeraldAIProjectileTimeout>() == null)
@@ -665,7 +665,7 @@ namespace EmeraldAI
         {
             if (EmeraldComponent.CurrentTarget != null)
             {
-                GameObject Effect = EmeraldAIObjectPool.Spawn(BloodSplatObject, transform.position + EmeraldComponent.BloodPosOffset, Quaternion.Euler(Random.Range(110, 160), 
+                GameObject Effect = EmeraldAIObjectPool.Spawn(BloodSplatObject, transform.position + EmeraldComponent.BloodPosOffset, Quaternion.Euler(Random.Range(110, 160),
                     EmeraldComponent.CurrentTarget.localEulerAngles.y - Random.Range(120, 240), Random.Range(0, 360)));
                 Effect.transform.SetParent(EmeraldAISystem.ObjectPool.transform);
 
@@ -793,11 +793,27 @@ namespace EmeraldAI
         }
 
         /// <summary>
+        /// Returns the AI to its starting destination
+        /// </summary>
+        public void ReturnToStart()
+        {
+            EmeraldComponent.ReturningToStartInProgress = true;
+            Invoke("DelayTargetReset ", 0.1f);
+        }
+
+        void DelayTargetReset ()
+        {
+            EmeraldComponent.m_NavMeshAgent.ResetPath();
+            EmeraldComponent.EmeraldBehaviorsComponent.DefaultState();
+            EmeraldComponent.CombatStateRef = EmeraldAISystem.CombatState.NotActive;
+        }
+
+        /// <summary>
         /// Assigns a new combat target for your AI to attack. Using this setting will override your AI's chase limit and will ignore an AI's faction.
         /// </summary>
         public void SetCombatTarget(Transform Target)
         {
-            if (EmeraldComponent.ConfidenceRef != EmeraldAISystem.ConfidenceType.Coward)
+            if (EmeraldComponent.ConfidenceRef != EmeraldAISystem.ConfidenceType.Coward && Target != null)
             {
                 EmeraldComponent.CurrentTarget = Target;
                 EmeraldComponent.EmeraldDetectionComponent.DetectTargetType(EmeraldComponent.CurrentTarget, true);
@@ -805,8 +821,12 @@ namespace EmeraldAI
                 EmeraldComponent.m_NavMeshAgent.stoppingDistance = EmeraldComponent.AttackDistance;
                 EmeraldComponent.m_NavMeshAgent.destination = Target.position;
                 EmeraldComponent.EmeraldDetectionComponent.PreviousTarget = Target;
-                EmeraldComponent.MaxChaseDistance = 2000;                
+                EmeraldComponent.MaxChaseDistance = 2000;
                 EmeraldComponent.EmeraldBehaviorsComponent.ActivateCombatState();
+            }
+            else if (Target == null)
+            {
+                Debug.Log("The SetCombatTarget paramter is null. Ensure that the target exists before calling this function.");
             }
         }
 
@@ -948,7 +968,7 @@ namespace EmeraldAI
         /// <summary>
         /// Refills the AI's health to full instantly
         /// </summary>
-        public void InstantlyRefillAIHeath ()
+        public void InstantlyRefillAIHeath()
         {
             EmeraldComponent.CurrentHealth = EmeraldComponent.StartingHealth;
         }
@@ -990,9 +1010,131 @@ namespace EmeraldAI
         /// </summary>
         public void CompanionGuardPosition(Vector3 PositionToGuard)
         {
-            Transform TempFollower = new GameObject(EmeraldComponent.AIName+"'s position to guard").transform;
+            Transform TempFollower = new GameObject(EmeraldComponent.AIName + "'s position to guard").transform;
             TempFollower.position = PositionToGuard;
             SetFollowerTarget(TempFollower);
+        }
+
+        /// <summary>
+        /// Changes the relation of the given faction. Note: The faction must be available in the AI's faction list.
+        /// </summary>
+        /// <param name="Faction"> The name of the faction to change.</param>
+        /// <param name="FactionLevel">The level to set the faction to typed as a string. The options are Enemy, Neutral, or Friendly</param>
+        public void SetFactionLevel(string Faction, string FactionLevel)
+        {
+            EmeraldAIFactionData FactionData = Resources.Load("Faction Data") as EmeraldAIFactionData;
+
+            if (FactionLevel == "Enemy")
+            {
+                for (int i = 0; i < EmeraldComponent.FactionRelationsList.Count; i++)
+                {
+                    if (EmeraldComponent.FactionRelationsList[i].FactionIndex == FactionData.FactionNameList.IndexOf(Faction))
+                    {
+                        EmeraldComponent.FactionRelationsList[i].RelationTypeRef = 0;
+                    }
+                }
+            }
+            else if (FactionLevel == "Neutral")
+            {
+                for (int i = 0; i < EmeraldComponent.FactionRelationsList.Count; i++)
+                {
+                    if (EmeraldComponent.FactionRelationsList[i].FactionIndex == FactionData.FactionNameList.IndexOf(Faction))
+                    {
+                        EmeraldComponent.FactionRelationsList[i].RelationTypeRef = (EmeraldAISystem.FactionsList.RelationType)1;
+                    }
+                }
+            }
+            else if (FactionLevel == "Friendly")
+            {
+                for (int i = 0; i < EmeraldComponent.FactionRelationsList.Count; i++)
+                {
+                    if (EmeraldComponent.FactionRelationsList[i].FactionIndex == FactionData.FactionNameList.IndexOf(Faction))
+                    {
+                        EmeraldComponent.FactionRelationsList[i].RelationTypeRef = (EmeraldAISystem.FactionsList.RelationType)2;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Adds the Faction and Faction Relation to the AI's Faction Relations List. Note: The faction must exist within the Faction Manager's Current Faction List.
+        /// </summary>
+        /// <param name="Faction"> The name of the faction to change.</param>
+        /// <param name="FactionLevel">The level to set the faction to typed as a string. The options are Enemy, Neutral, or Friendly</param>
+        public void AddFactionRelation(string Faction, string FactionLevel)
+        {
+            int FactionEnumLevel = 0;
+            EmeraldAIFactionData FactionData = Resources.Load("Faction Data") as EmeraldAIFactionData;
+            if (!FactionData.FactionNameList.Contains(Faction))
+            {
+                Debug.Log("The faction: " + Faction + " does not exist in the Faction Manager. Please add it using the Emerald AI Faction Manager.");
+                return;
+            }
+
+            if (FactionLevel == "Enemy")
+            {
+                FactionEnumLevel = 0;
+            }
+            else if (FactionLevel == "Neutral")
+            {
+                FactionEnumLevel = 1;
+            }
+            else if (FactionLevel == "Friendly")
+            {
+                FactionEnumLevel = 2;
+            }
+
+            for (int i = 0; i < EmeraldComponent.FactionRelationsList.Count; i++)
+            {
+                if (EmeraldComponent.FactionRelationsList[i].FactionIndex == FactionData.FactionNameList.IndexOf(Faction))
+                {
+                    Debug.Log("This AI already contains the faction: " + Faction + ". If you would like to modify an AI's existing faction, please use SetFactionLevel(string Faction, string FactionLevel) instead.");
+                    return;
+                }
+            }
+
+            EmeraldComponent.FactionRelationsList.Add(new EmeraldAISystem.FactionsList(FactionData.FactionNameList.IndexOf(Faction), FactionEnumLevel));
+            SetFactionLevel(Faction, FactionLevel);
+        }
+
+        /// <summary>
+        /// Returns the relation of the EmeraldTarget with this AI.
+        /// </summary>
+        public EmeraldAISystem.RelationType GetAIRelation(EmeraldAISystem EmeraldTarget)
+        {
+            EmeraldComponent.ReceivedFaction = EmeraldTarget.CurrentFaction;
+
+            if (EmeraldComponent.FactionRelations[EmeraldComponent.AIFactionsList.IndexOf(EmeraldComponent.ReceivedFaction)] == 0)
+            {
+                return EmeraldAISystem.RelationType.Enemy;
+            }
+            else if (EmeraldComponent.FactionRelations[EmeraldComponent.AIFactionsList.IndexOf(EmeraldComponent.ReceivedFaction)] == 1)
+            {
+                return EmeraldAISystem.RelationType.Neutral;
+            }
+            else
+            {
+                return EmeraldAISystem.RelationType.Friendly;
+            }
+        }
+
+        /// <summary>
+        /// Returns the relation of this AI and the player.
+        /// </summary>
+        public EmeraldAISystem.RelationType GetPlayerRelation()
+        {
+            if (EmeraldComponent.PlayerFaction[0].RelationTypeRef == EmeraldAISystem.PlayerFactionClass.RelationType.Enemy)
+            {
+                return EmeraldAISystem.RelationType.Enemy;
+            }
+            else if (EmeraldComponent.PlayerFaction[0].RelationTypeRef == EmeraldAISystem.PlayerFactionClass.RelationType.Neutral)
+            {
+                return EmeraldAISystem.RelationType.Neutral;
+            }
+            else
+            {
+                return EmeraldAISystem.RelationType.Friendly;
+            }
         }
 
         /// <summary>

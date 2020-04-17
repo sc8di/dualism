@@ -37,7 +37,8 @@ namespace EmeraldAI
         {
             if (GetComponent<EmeraldAIPlayerHealth>() != null)
             {
-                GetComponent<EmeraldAIPlayerHealth>().DamagePlayer(DamageAmount);                
+                EmeraldAIPlayerHealth PlayerHealth = GetComponent<EmeraldAIPlayerHealth>();
+                PlayerHealth.DamagePlayer(DamageAmount);
             }
         }
 

@@ -156,7 +156,7 @@ namespace EmeraldAI.Utility
                 //Handles all of the AI's looking calculations for AI
                 if (EmeraldComponent.TargetTypeRef == EmeraldAISystem.TargetType.AI)
                 {
-                    if (EmeraldComponent.CurrentTarget != null && PreviousTarget != null && EmeraldComponent.CombatStateRef == EmeraldAISystem.CombatState.Active)
+                    if (EmeraldComponent.CurrentTarget != null && PreviousTarget != null && EmeraldComponent.CombatStateRef == EmeraldAISystem.CombatState.Active && !EmeraldComponent.DeathDelayActive)
                     {
                         //Subtract the offset based on the distance of the target as the offset is needed less as the target gets closer to the AI. 
                         float m_TargetAimOffsetDistance = Vector3.Distance(EmeraldComponent.CurrentTarget.position,transform.position) / EmeraldComponent.MaxLookAtDistance;
@@ -214,14 +214,24 @@ namespace EmeraldAI.Utility
 
                             PreviousTargetPos.y = LookHeight;
 
-                            EmeraldComponent.AIAnimator.SetLookAtPosition(Vector3.Lerp(PreviousTargetPos, new Vector3(EmeraldComponent.HeadLookRef.position.x, EmeraldComponent.HeadLookRef.position.y +
-                                EmeraldComponent.HeadLookRef.localScale.y / 2 + (EmeraldComponent.HeadLookYOffset), EmeraldComponent.HeadLookRef.position.z), m_LookLerpValue));
+                            EmeraldComponent.AIAnimator.SetLookAtPosition(PreviousTargetPos);
                         }
                         else
                         {                            
                             EmeraldComponent.AIAnimator.SetLookAtPosition(new Vector3(EmeraldComponent.HeadLookRef.position.x, EmeraldComponent.HeadLookRef.position.y +
                             EmeraldComponent.HeadLookRef.localScale.y / 2 + (EmeraldComponent.HeadLookYOffset), EmeraldComponent.HeadLookRef.position.z));
                         }
+                    }
+                    else if (EmeraldComponent.HeadLookRef == null && EmeraldComponent.DeathDelayActive)
+                    {
+                        //Subtract the offset based on the distance of the target as the offset is needed less as the target gets closer to the AI. 
+                        float m_TargetAimOffsetDistance = Vector3.Distance(EmeraldComponent.CurrentTarget.position, transform.position) / EmeraldComponent.MaxLookAtDistance;
+                        m_TargetAimOffsetDistance = Mathf.Clamp(m_TargetAimOffsetDistance, 0, 1);
+
+                        //Apply the offset to the AI's hit point and do the same for using the previous target
+                        Vector3 CurrentTargetPos = EmeraldComponent.TargetEmerald.HitPointTransform.position - new Vector3(0, m_TargetAimOffsetDistance * YOffSet, 0);
+
+                        EmeraldComponent.AIAnimator.SetLookAtPosition(CurrentTargetPos);
                     }
                 }
                 //Player
@@ -311,7 +321,7 @@ namespace EmeraldAI.Utility
                     EmeraldComponent.TargetTypeRef = EmeraldAISystem.TargetType.Player;
                     EmeraldComponent.CurrentDetectionRef = EmeraldAISystem.CurrentDetection.Alert;
 
-                    if (EmeraldComponent.AIAttacksPlayerRef == EmeraldAISystem.AIAttacksPlayer.Always && EmeraldComponent.BehaviorRef != EmeraldAISystem.CurrentBehavior.Companion
+                    if (EmeraldComponent.PlayerFaction[0].RelationTypeRef == EmeraldAISystem.PlayerFactionClass.RelationType.Enemy && EmeraldComponent.BehaviorRef != EmeraldAISystem.CurrentBehavior.Companion
                         && EmeraldComponent.BehaviorRef != EmeraldAISystem.CurrentBehavior.Passive && EmeraldComponent.BehaviorRef != EmeraldAISystem.CurrentBehavior.Pet)
                     {
                         EmeraldComponent.EmeraldBehaviorsComponent.ActivateCombatState();
@@ -362,7 +372,6 @@ namespace EmeraldAI.Utility
                             EmeraldComponent.CombatStateRef = EmeraldAISystem.CombatState.Active;
                             EmeraldComponent.AIAnimator.SetBool("Idle Active", false);
                             EmeraldComponent.AIAnimator.SetBool("Combat State Active", true);
-
                             EmeraldComponent.CurrentMovementState = EmeraldAISystem.MovementState.Run;
 
                             //Pick our target depending on the AI's options
@@ -378,6 +387,12 @@ namespace EmeraldAI.Utility
                             else if (EmeraldComponent.PickTargetMethodRef == EmeraldAISystem.PickTargetMethod.Closest)
                             {
                                 SearchForTarget();
+                            }
+                            else if (EmeraldComponent.PickTargetMethodRef == EmeraldAISystem.PickTargetMethod.Random)
+                            {
+                                SearchForTarget();
+                                Invoke("StartRandomTarget", 0.9f);
+                                Invoke("SearchForTarget", 1);
                             }
                         }
                         else if (EmeraldComponent.BehaviorRef == EmeraldAISystem.CurrentBehavior.Companion)
@@ -403,6 +418,7 @@ namespace EmeraldAI.Utility
                         EmeraldComponent.CombatStateRef = EmeraldAISystem.CombatState.Active;
                         EmeraldComponent.AIAnimator.SetBool("Idle Active", false);
                         EmeraldComponent.AIAnimator.SetBool("Combat State Active", true);
+                        EmeraldComponent.CurrentMovementState = EmeraldAISystem.MovementState.Run;
 
                         //Pick our target depending on the AI's options
                         if (EmeraldComponent.PickTargetMethodRef == EmeraldAISystem.PickTargetMethod.FirstDetected)
@@ -431,7 +447,7 @@ namespace EmeraldAI.Utility
             }
             else if (EmeraldComponent.DetectionTypeRef == EmeraldAISystem.DetectionType.LineOfSight)
             {
-                if (C.CompareTag(EmeraldComponent.PlayerTag) && !EmeraldComponent.LineOfSightTargets.Contains(C.transform) && EmeraldComponent.AIAttacksPlayerRef == EmeraldAISystem.AIAttacksPlayer.Always)
+                if (C.CompareTag(EmeraldComponent.PlayerTag) && !EmeraldComponent.LineOfSightTargets.Contains(C.transform) && EmeraldComponent.PlayerFaction[0].RelationTypeRef == EmeraldAISystem.PlayerFactionClass.RelationType.Enemy)
                 {
                     EmeraldComponent.TargetTypeRef = EmeraldAISystem.TargetType.Player;
                     EmeraldComponent.CurrentDetectionRef = EmeraldAISystem.CurrentDetection.Alert;
@@ -552,7 +568,8 @@ namespace EmeraldAI.Utility
             //Do a separate OverlapSphere with only the UI Layer. If the detected object has the UITag, enable the UI system.
             UpdateAIUI();
 
-            if (EmeraldComponent != null && EmeraldComponent.CurrentTarget == null || EmeraldComponent != null && EmeraldComponent.DeathDelayActive)
+            if (EmeraldComponent != null && EmeraldComponent.CurrentTarget == null && !EmeraldComponent.ReturningToStartInProgress || 
+                EmeraldComponent != null && EmeraldComponent.DeathDelayActive && !EmeraldComponent.ReturningToStartInProgress)
             {
                 Collider[] CurrentlyDetectedTargets = Physics.OverlapSphere(transform.position, EmeraldComponent.DetectionRadius, EmeraldComponent.DetectionLayerMask);
                 m_PlayerDetected = false;
@@ -572,7 +589,8 @@ namespace EmeraldAI.Utility
 
                     if (EmeraldComponent.CurrentTarget == null && C.gameObject != this.gameObject)
                     {
-                        if (C.CompareTag(EmeraldComponent.EmeraldTag) || C.CompareTag(EmeraldComponent.PlayerTag) && EmeraldComponent.AIAttacksPlayerRef == EmeraldAISystem.AIAttacksPlayer.Always || C.tag == EmeraldComponent.NonAITag && EmeraldComponent.UseNonAITagRef == EmeraldAISystem.UseNonAITag.Yes)
+                        if (C.CompareTag(EmeraldComponent.EmeraldTag) || C.CompareTag(EmeraldComponent.PlayerTag) && EmeraldComponent.PlayerFaction[0].RelationTypeRef == EmeraldAISystem.PlayerFactionClass.RelationType.Enemy || 
+                            C.tag == EmeraldComponent.NonAITag && EmeraldComponent.UseNonAITagRef == EmeraldAISystem.UseNonAITag.Yes)
                         {
                             if (EmeraldComponent.DetectionTypeRef == EmeraldAISystem.DetectionType.Trigger)
                             {
@@ -656,7 +674,7 @@ namespace EmeraldAI.Utility
                         RaycastHit hit;
                         if (Physics.Raycast(EmeraldComponent.HeadTransform.position, direction, out hit, EmeraldComponent.DetectionRadius))
                         {
-                            if (hit.collider.CompareTag(EmeraldComponent.EmeraldTag) || hit.collider.CompareTag(EmeraldComponent.PlayerTag) && EmeraldComponent.AIAttacksPlayerRef == EmeraldAISystem.AIAttacksPlayer.Always || 
+                            if (hit.collider.CompareTag(EmeraldComponent.EmeraldTag) || hit.collider.CompareTag(EmeraldComponent.PlayerTag) && EmeraldComponent.PlayerFaction[0].RelationTypeRef == EmeraldAISystem.PlayerFactionClass.RelationType.Enemy || 
                                 hit.collider.tag == EmeraldComponent.NonAITag && EmeraldComponent.UseNonAITagRef == EmeraldAISystem.UseNonAITag.Yes)
                             {
                                 if (hit.collider.CompareTag(EmeraldComponent.EmeraldTag))
@@ -664,7 +682,7 @@ namespace EmeraldAI.Utility
                                     EmeraldComponent.ReceivedFaction = hit.collider.GetComponent<EmeraldAISystem>().CurrentFaction;
                                 }
                                 if (EmeraldComponent.AIFactionsList.Contains(EmeraldComponent.ReceivedFaction) && EmeraldComponent.FactionRelations[EmeraldComponent.AIFactionsList.IndexOf(EmeraldComponent.ReceivedFaction)] == 0 
-                                    || hit.collider.CompareTag(EmeraldComponent.PlayerTag) && EmeraldComponent.AIAttacksPlayerRef == EmeraldAISystem.AIAttacksPlayer.Always 
+                                    || hit.collider.CompareTag(EmeraldComponent.PlayerTag) && EmeraldComponent.PlayerFaction[0].RelationTypeRef == EmeraldAISystem.PlayerFactionClass.RelationType.Enemy
                                     || hit.collider.tag == EmeraldComponent.NonAITag && EmeraldComponent.UseNonAITagRef == EmeraldAISystem.UseNonAITag.Yes)
                                 {
                                     if (EmeraldComponent.AIFactionsList.Contains(EmeraldComponent.ReceivedFaction))
@@ -672,7 +690,7 @@ namespace EmeraldAI.Utility
                                         EmeraldComponent.TargetTypeRef = EmeraldAISystem.TargetType.AI;
                                         EmeraldComponent.TargetEmerald = hit.collider.GetComponent<EmeraldAISystem>();
                                     }
-                                    else if (hit.collider.CompareTag(EmeraldComponent.PlayerTag) && EmeraldComponent.AIAttacksPlayerRef == EmeraldAISystem.AIAttacksPlayer.Always)
+                                    else if (hit.collider.CompareTag(EmeraldComponent.PlayerTag) && EmeraldComponent.PlayerFaction[0].RelationTypeRef == EmeraldAISystem.PlayerFactionClass.RelationType.Enemy)
                                     {
                                         EmeraldComponent.TargetTypeRef = EmeraldAISystem.TargetType.Player;
                                     }
@@ -720,7 +738,7 @@ namespace EmeraldAI.Utility
         {          
             if (EmeraldComponent.CurrentTarget != null && EmeraldComponent.WeaponTypeRef == EmeraldAISystem.WeaponType.Ranged)
             {
-                if (EmeraldComponent.TargetTypeRef == EmeraldAISystem.TargetType.AI)
+                if (EmeraldComponent.TargetTypeRef == EmeraldAISystem.TargetType.AI && EmeraldComponent.TargetEmerald != null)
                 {
                     TargetDirection = EmeraldComponent.TargetEmerald.HitPointTransform.position - EmeraldComponent.HeadTransform.position;
                 }
@@ -762,7 +780,17 @@ namespace EmeraldAI.Utility
                             {
                                 if (EmeraldComponent.TargetObstructedActionRef == EmeraldAISystem.TargetObstructedAction.MoveCloserImmediately)
                                 {
-                                    EmeraldComponent.m_NavMeshAgent.stoppingDistance -= 5;
+                                    UnityEngine.AI.NavMeshPath path = new UnityEngine.AI.NavMeshPath();
+                                    EmeraldComponent.m_NavMeshAgent.CalculatePath(EmeraldComponent.CurrentTarget.position, path);
+
+                                    if (path.status == UnityEngine.AI.NavMeshPathStatus.PathComplete)
+                                    {
+                                        EmeraldComponent.m_NavMeshAgent.stoppingDistance -= 5;
+                                    }
+                                    else if (path.status == UnityEngine.AI.NavMeshPathStatus.PathPartial && EmeraldComponent.TargetObstructed)
+                                    {
+                                        EmeraldComponent.m_NavMeshAgent.stoppingDistance = EmeraldComponent.StoppingDistance;                                      
+                                    }
                                 }
                             }
                         }
@@ -770,10 +798,13 @@ namespace EmeraldAI.Utility
 
                     if (EmeraldComponent.CurrentTarget != null && hit.collider.gameObject == EmeraldComponent.CurrentTarget.gameObject && !EmeraldComponent.IsTurning)
                     {
+                        UnityEngine.AI.NavMeshPath path = new UnityEngine.AI.NavMeshPath();
+                        EmeraldComponent.m_NavMeshAgent.CalculatePath(EmeraldComponent.CurrentTarget.position, path);
+
                         C = Color.green;
                         EmeraldComponent.TargetObstructed = false;
                         EmeraldComponent.CurrentMovementState = EmeraldAISystem.MovementState.Run;
-                        if (!EmeraldComponent.BackingUp)
+                        if (!EmeraldComponent.BackingUp && path.status == UnityEngine.AI.NavMeshPathStatus.PathComplete)
                         {
                             EmeraldComponent.m_NavMeshAgent.stoppingDistance = EmeraldComponent.AttackDistance;
                         }
@@ -793,9 +824,11 @@ namespace EmeraldAI.Utility
         //Once found, use Emerald's custom tag system to find matches for potential targets. Once found, apply them to a list for potential targets.
         //Finally, search through each target in the list and set the nearest one as our current target.
         public void SearchForTarget ()
-        {
+        {        
             Collider[] Col = Physics.OverlapSphere(transform.position, EmeraldComponent.DetectionRadius, EmeraldComponent.DetectionLayerMask);
             EmeraldComponent.CollidersInArea = Col;
+
+            EmeraldComponent.potentialTargets.Clear();
 
             foreach (Collider C in EmeraldComponent.CollidersInArea)
             {
@@ -825,7 +858,7 @@ namespace EmeraldAI.Utility
                             EmeraldComponent.TargetEmerald = C.gameObject.GetComponent<EmeraldAISystem>();
                         }
                     }
-                    else if (C.gameObject.CompareTag(EmeraldComponent.PlayerTag) && EmeraldComponent.AIAttacksPlayerRef == EmeraldAISystem.AIAttacksPlayer.Always)
+                    else if (C.gameObject.CompareTag(EmeraldComponent.PlayerTag) && EmeraldComponent.PlayerFaction[0].RelationTypeRef == EmeraldAISystem.PlayerFactionClass.RelationType.Enemy)
                     {
                         if (EmeraldComponent.BehaviorRef != EmeraldAISystem.CurrentBehavior.Companion || EmeraldComponent.BehaviorRef == EmeraldAISystem.CurrentBehavior.Companion && C.gameObject.transform != EmeraldComponent.CurrentFollowTarget)
                         {
@@ -850,7 +883,7 @@ namespace EmeraldAI.Utility
                     EmeraldComponent.TargetTypeRef = EmeraldAISystem.TargetType.AI;
                     EmeraldComponent.TargetEmerald = EmeraldComponent.CurrentTarget.GetComponent<EmeraldAISystem>();
                 }
-                else if (EmeraldComponent.CurrentTarget.tag == EmeraldComponent.PlayerTag && EmeraldComponent.AIAttacksPlayerRef == EmeraldAISystem.AIAttacksPlayer.Always)
+                else if (EmeraldComponent.CurrentTarget.tag == EmeraldComponent.PlayerTag && EmeraldComponent.PlayerFaction[0].RelationTypeRef == EmeraldAISystem.PlayerFactionClass.RelationType.Enemy)
                 {
                     EmeraldComponent.TargetTypeRef = EmeraldAISystem.TargetType.Player;
                     EmeraldComponent.TargetEmerald = null;
@@ -860,6 +893,9 @@ namespace EmeraldAI.Utility
                     EmeraldComponent.TargetTypeRef = EmeraldAISystem.TargetType.NonAITarget;
                     EmeraldComponent.TargetEmerald = null;
                 }
+
+                SearchForRandomTarget = false;
+                return;
             }
 
             //No targets were found within the AI's trigger radius. Set AI back to its default state.
@@ -996,7 +1032,7 @@ namespace EmeraldAI.Utility
                     EmeraldComponent.TargetTypeRef = EmeraldAISystem.TargetType.AI;
                     EmeraldComponent.TargetEmerald = Target.GetComponent<EmeraldAISystem>();
                 }
-                else if (Target.tag == EmeraldComponent.PlayerTag && EmeraldComponent.AIAttacksPlayerRef == EmeraldAISystem.AIAttacksPlayer.Always)
+                else if (Target.tag == EmeraldComponent.PlayerTag && EmeraldComponent.PlayerFaction[0].RelationTypeRef == EmeraldAISystem.PlayerFactionClass.RelationType.Enemy)
                 {
                     EmeraldComponent.TargetTypeRef = EmeraldAISystem.TargetType.Player;
                     EmeraldComponent.TargetEmerald = null;
@@ -1007,6 +1043,11 @@ namespace EmeraldAI.Utility
                     EmeraldComponent.TargetEmerald = null;
                 }
             }
+        }
+
+        public void StartRandomTarget ()
+        {
+            SearchForRandomTarget = true;
         }
     }
 }

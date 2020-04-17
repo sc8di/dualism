@@ -14,8 +14,12 @@ namespace EmeraldAI.Utility
     [CanEditMultipleObjects]
     public class EmeraldAIEditor : Editor
     {
-        string[] options;
-        string[] BlankOptions = { "No Ranged Attack Animations" };
+        string[] RangedEnumAnimations;
+        string[] MeleeEnumAnimations;
+        string[] RunMeleeEnumAnimations;
+        string[] RangedBlankOptions = { "No Ranged Attack Animations" };
+        string[] MeleeBlankOptions = { "No Attack Animations" };
+        string[] RunMeleeBlankOptions = { "No Run Attack Animations" };
 
         #region Serialized Properties
         //Head Look
@@ -27,13 +31,12 @@ namespace EmeraldAI.Utility
 
         //ints
         SerializedProperty TabNumberProp, TemperamentTabNumberProp, DetectionTagsTabNumberProp, AnimationTabNumberProp, SoundTabNumberProp, MovementTabNumberProp, fieldOfViewAngleProp, BackUpOddsProp,
-        DetectionRadiusProp, WanderRadiusProp, MinimumWaitTimeProp, MaximumWaitTimeProp, WalkSpeedProp, RunSpeedProp, StartingHealthProp, MinimumDamageAmount1Prop, ExpandedChaseDistanceProp, WeaponTypeControlTabNumberProp,
-        MinimumDamageAmount2Prop, MinimumDamageAmount3Prop, MaximumDamageAmount1Prop, MaximumDamageAmount2Prop, MaximumDamageAmount3Prop, MinimumDamageAmountRunProp, TotalAggroHitsProp, SecondsToDisableProp,
-        MaximumDamageAmountRunProp, DamageAmount1Prop, DamageAmount2Prop, DamageAmount3Prop, DamageAmountRunProp, StationaryTurningSpeedCombatProp, BackupTurningSpeedProp, CritChanceProp, CritMultiplierProp,
-        MinimumFollowWaitTimeProp, MaximumFollowWaitTimeProp, MaxChaseDistanceProp, HealthPercentageToFleeProp, DeactivateDelayProp, HealthRegRateProp, RegenerateAmountProp, MaxSlopeLimitProp, 
+        DetectionRadiusProp, WanderRadiusProp, MinimumWaitTimeProp, MaximumWaitTimeProp, WalkSpeedProp, RunSpeedProp, StartingHealthProp, ExpandedChaseDistanceProp, WeaponTypeControlTabNumberProp,
+        TotalAggroHitsProp, SecondsToDisableProp, StationaryTurningSpeedCombatProp, BackupTurningSpeedProp, CritChanceProp, CritMultiplierProp,
+        MinimumFollowWaitTimeProp, MaximumFollowWaitTimeProp, MaxChaseDistanceProp, HealthPercentageToFleeProp, DeactivateDelayProp, HealthRegRateProp, RegenerateAmountProp, MaxSlopeLimitProp,
         DeathDelayMinProp, DeathDelayMaxProp, CurrentFactionProp, ExpandedFieldOfViewAngleProp, ExpandedDetectionRadiusProp, StationaryIdleSecondsMinProp, StationaryIdleSecondsMaxProp, CautiousSecondsProp,
-        IdleSoundsSecondsMinProp, IdleSoundsSecondsMaxProp, SentRagdollForceProp, ObstructionSecondsProp, FactionRelation1Prop, FactionRelation2Prop, FactionRelation3Prop, EventTabNumberProp, WeaponTypeCombatTabNumberProp,
-        FactionRelation4Prop, FactionRelation5Prop, CombatTabNumberProp, WeaponTypeTabNumberProp, Ability1AnimationIndexProp, Ability2AnimationIndexProp, Ability3AnimationIndexProp, BackupSecondsMinProp,
+        IdleSoundsSecondsMinProp, IdleSoundsSecondsMaxProp, SentRagdollForceProp, ObstructionSecondsProp, EventTabNumberProp, WeaponTypeCombatTabNumberProp,
+        CombatTabNumberProp, WeaponTypeTabNumberProp, BackupSecondsMinProp, FactionsAndTagTabNumberProp,
             MaxAllowedSummonedAIProp, HealthPercentageToHealProp, WalkBackwardsSpeedProp, PlayerDetectionEventCooldownProp, SwitchWeaponTypesDistanceProp, SwitchWeaponTypesCooldownProp, BackupSecondsMaxProp;
 
         //floats
@@ -49,13 +52,13 @@ namespace EmeraldAI.Utility
 
         //enums
         SerializedProperty BehaviorProp, ConfidenceProp, RandomizeDamageProp, DetectionTypeProp, MaxChaseDistanceTypeProp, CombatTypeProp, CreateHealthBarsProp,
-            CustomizeHealthBarProp, DisplayAINameProp, DisplayAITitleProp, DisplayAILevelProp, OpposingFactionsEnumProp, RefillHealthTypeProp, AttackOnArrivalProp,
+            CustomizeHealthBarProp, DisplayAINameProp, DisplayAITitleProp, DisplayAILevelProp, RefillHealthTypeProp, AttackOnArrivalProp,
             WanderTypeProp, WaypointTypeProp, AlignAIWithGroundProp, CurrentMovementStateProp, UseBloodEffectProp, UseWarningAnimationProp, TotalLODsProp, HasMultipleLODsProp, TurnAnimationTypeProp,
             AlignAIOnStartProp, AlignmentQualityProp, PickTargetMethodProp, AIAttacksPlayerProp, UseNonAITagProp, BloodEffectPositionTypeProp, AggroActionProp, MaxBlockingAngleProp,
             WeaponTypeProp, UseRunAttacksProp, ObstructionDetectionQualityProp, AvoidanceQualityProp, UseBlockingProp, BlockingOddsProp, UseAggroProp, SpawnedWithCruxProp, SummonsMultipleAIProp,
             UseEquipAnimationProp, AnimatorTypeProp, UseWeaponObjectProp, UseHitAnimationsProp, TargetObstructedActionProp, EnableDebuggingPop, DrawRaycastsEnabledProp, UseAIAvoidanceProp,
-            DebugLogTargetsEnabledProp, DebugLogObstructionsEnabledProp, UseRandomRotationOnStartProp, UseDeactivateDelayProp, DisableAIWhenNotInViewProp, 
-            DeathTypeRefProp, UseDroppableWeaponProp, BackupTypeProp, AutoEnableAnimatePhysicsProp, DebugLogMissingAnimationsProp, UseCriticalHitsProp;
+            DebugLogTargetsEnabledProp, DebugLogObstructionsEnabledProp, UseRandomRotationOnStartProp, UseDeactivateDelayProp, DisableAIWhenNotInViewProp, SupportAbilityPickTypeProp, SummoningAbilityPickTypeProp,
+            DeathTypeRefProp, UseDroppableWeaponProp, BackupTypeProp, AutoEnableAnimatePhysicsProp, DebugLogMissingAnimationsProp, UseCriticalHitsProp, OffensiveAbilityPickTypeProp, MeleeAttackPickTypeProp, MeleeRunAttackPickTypeProp;
 
         //strings
         SerializedProperty AINameProp, AITitleProp, AILevelProp, PlayerTagProp, FollowTagProp, UITagProp, NonAITagProp, EmeraldTagProp, RagdollTagProp, CameraTagProp;
@@ -71,9 +74,6 @@ namespace EmeraldAI.Utility
 
         //color
         SerializedProperty HealthBarColorProp, HealthBarBackgroundColorProp, NameTextColorProp, LevelTextColorProp;
-
-        //Factions
-        SerializedProperty OpposingFaction1Prop, OpposingFaction2Prop, OpposingFaction3Prop, OpposingFaction4Prop, OpposingFaction5Prop;
 
         //bools
         SerializedProperty HealthBarsFoldoutProp, CombatTextFoldoutProp, NameTextFoldoutProp, AnimationsUpdatedProp, BehaviorFoldout, ConfidenceFoldout, WanderFoldout, CombatStyleFoldout,
@@ -97,10 +97,10 @@ namespace EmeraldAI.Utility
 
         //Events
         SerializedProperty DeathEventProp, DamageEventProp, ReachedDestinationEventProp, OnStartEventProp, OnAttackEventProp, OnFleeEventProp, OnStartCombatEventProp, OnEnabledEventProp,
-            OnPlayerDetectionEventProp;
+            OnPlayerDetectionEventProp, OnKillTargetEventProp, OnDoDamageEventProp;
 
         //Spell lists
-        ReorderableList OffensiveAbilitiesList, SupportAbilitiesList, SummoningAbilitiesList, BloodEffectsList;
+        ReorderableList OffensiveAbilities, SupportAbilities, SummoningAbilities, BloodEffectsList;
 
         //Sound lists
         ReorderableList AttackSoundsList, InjuredSoundsList, WarningSoundsList, DeathSoundsList, FootStepSoundsList, IdleSoundsList, ImpactSoundsList, BlockSoundsList;
@@ -110,10 +110,12 @@ namespace EmeraldAI.Utility
             ItemList, RangedCombatHitAnimationList, RangedAttackAnimationList, RangedRunAttackAnimationList, RangedDeathAnimationList;
         #endregion
 
+        ReorderableList FactionsList, PlayerFaction, MeleeAttacks, MeleeRunAttacks;
+
         Texture TemperamentIcon, SettingsIcon, DetectTagsIcon, UIIcon, SoundIcon, WaypointEditorIcon, AnimationIcon, DocumentationIcon;
         string MeleeWeaponString, RangedWeaponString;
 
-        void UpdateAbilityAnimationEnums ()
+        void UpdateAbilityAnimationEnums()
         {
             EmeraldAISystem Ref = (EmeraldAISystem)target;
 
@@ -121,20 +123,111 @@ namespace EmeraldAI.Utility
             {
                 if (Ref.RangedAttackAnimationList.Count == 1 && Ref.RangedAttackAnimationList.Count == 1 && Ref.RangedAttackAnimationList[0].AnimationClip != null)
                 {
-                    options = new string[] { Ref.RangedAttackAnimationList[0].AnimationClip.name };
+                    RangedEnumAnimations = new string[] { Ref.RangedAttackAnimationList[0].AnimationClip.name };
                 }
                 else if (Ref.RangedAttackAnimationList.Count == 2 && Ref.RangedAttackAnimationList.Count == 2 && Ref.RangedAttackAnimationList[0].AnimationClip != null && Ref.RangedAttackAnimationList[1].AnimationClip != null)
                 {
-                    options = new string[] { Ref.RangedAttackAnimationList[0].AnimationClip.name, Ref.RangedAttackAnimationList[1].AnimationClip.name };
+                    RangedEnumAnimations = new string[] { Ref.RangedAttackAnimationList[0].AnimationClip.name, Ref.RangedAttackAnimationList[1].AnimationClip.name };
                 }
                 else if (Ref.RangedAttackAnimationList.Count == 3 && Ref.RangedAttackAnimationList.Count == 3 && Ref.RangedAttackAnimationList[0].AnimationClip != null &&
                     Ref.RangedAttackAnimationList[1].AnimationClip != null && Ref.RangedAttackAnimationList[2].AnimationClip != null)
                 {
-                    options = new string[] { Ref.RangedAttackAnimationList[0].AnimationClip.name, Ref.RangedAttackAnimationList[1].AnimationClip.name, Ref.RangedAttackAnimationList[2].AnimationClip.name };
+                    RangedEnumAnimations = new string[] { Ref.RangedAttackAnimationList[0].AnimationClip.name, Ref.RangedAttackAnimationList[1].AnimationClip.name, Ref.RangedAttackAnimationList[2].AnimationClip.name };
+                }
+                else if (Ref.RangedAttackAnimationList.Count == 4 && Ref.RangedAttackAnimationList.Count == 4 && Ref.RangedAttackAnimationList[0].AnimationClip != null &&
+                    Ref.RangedAttackAnimationList[1].AnimationClip != null && Ref.RangedAttackAnimationList[2].AnimationClip != null && Ref.RangedAttackAnimationList[3].AnimationClip != null)
+                {
+                    RangedEnumAnimations = new string[] { Ref.RangedAttackAnimationList[0].AnimationClip.name, Ref.RangedAttackAnimationList[1].AnimationClip.name, Ref.RangedAttackAnimationList[2].AnimationClip.name, Ref.RangedAttackAnimationList[3].AnimationClip.name };
+                }
+                else if (Ref.RangedAttackAnimationList.Count == 5 && Ref.RangedAttackAnimationList.Count == 5 && Ref.RangedAttackAnimationList[0].AnimationClip != null &&
+                    Ref.RangedAttackAnimationList[1].AnimationClip != null && Ref.RangedAttackAnimationList[2].AnimationClip != null && Ref.RangedAttackAnimationList[3].AnimationClip != null && Ref.RangedAttackAnimationList[4].AnimationClip != null)
+                {
+                    RangedEnumAnimations = new string[] { Ref.RangedAttackAnimationList[0].AnimationClip.name, Ref.RangedAttackAnimationList[1].AnimationClip.name, Ref.RangedAttackAnimationList[2].AnimationClip.name, Ref.RangedAttackAnimationList[3].AnimationClip.name, Ref.RangedAttackAnimationList[4].AnimationClip.name };
+                }
+                else if (Ref.RangedAttackAnimationList.Count == 6 && Ref.RangedAttackAnimationList.Count == 6 && Ref.RangedAttackAnimationList[0].AnimationClip != null &&
+                    Ref.RangedAttackAnimationList[1].AnimationClip != null && Ref.RangedAttackAnimationList[2].AnimationClip != null && Ref.RangedAttackAnimationList[3].AnimationClip != null && Ref.RangedAttackAnimationList[4].AnimationClip != null && Ref.RangedAttackAnimationList[5].AnimationClip != null)
+                {
+                    RangedEnumAnimations = new string[] { Ref.RangedAttackAnimationList[0].AnimationClip.name, Ref.RangedAttackAnimationList[1].AnimationClip.name, Ref.RangedAttackAnimationList[2].AnimationClip.name,
+                        Ref.RangedAttackAnimationList[3].AnimationClip.name, Ref.RangedAttackAnimationList[4].AnimationClip.name, Ref.RangedAttackAnimationList[5].AnimationClip.name };
                 }
                 else
                 {
-                    options = null;
+                    RangedEnumAnimations = null;
+                }
+            }
+
+            if (Ref.WeaponTypeRef == EmeraldAISystem.WeaponType.Both || Ref.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee)
+            {
+                if (Ref.AttackAnimationList.Count == 1 && Ref.AttackAnimationList.Count == 1 && Ref.AttackAnimationList[0].AnimationClip != null)
+                {
+                    MeleeEnumAnimations = new string[] { Ref.AttackAnimationList[0].AnimationClip.name };
+                }
+                else if (Ref.AttackAnimationList.Count == 2 && Ref.AttackAnimationList.Count == 2 && Ref.AttackAnimationList[0].AnimationClip != null && Ref.AttackAnimationList[1].AnimationClip != null)
+                {
+                    MeleeEnumAnimations = new string[] { Ref.AttackAnimationList[0].AnimationClip.name, Ref.AttackAnimationList[1].AnimationClip.name };
+                }
+                else if (Ref.AttackAnimationList.Count == 3 && Ref.AttackAnimationList.Count == 3 && Ref.AttackAnimationList[0].AnimationClip != null &&
+                    Ref.AttackAnimationList[1].AnimationClip != null && Ref.AttackAnimationList[2].AnimationClip != null)
+                {
+                    MeleeEnumAnimations = new string[] { Ref.AttackAnimationList[0].AnimationClip.name, Ref.AttackAnimationList[1].AnimationClip.name, Ref.AttackAnimationList[2].AnimationClip.name };
+                }
+                else if (Ref.AttackAnimationList.Count == 4 && Ref.AttackAnimationList.Count == 4 && Ref.AttackAnimationList[0].AnimationClip != null &&
+                    Ref.AttackAnimationList[1].AnimationClip != null && Ref.AttackAnimationList[2].AnimationClip != null && Ref.AttackAnimationList[3].AnimationClip != null)
+                {
+                    MeleeEnumAnimations = new string[] { Ref.AttackAnimationList[0].AnimationClip.name, Ref.AttackAnimationList[1].AnimationClip.name, Ref.AttackAnimationList[2].AnimationClip.name, Ref.AttackAnimationList[3].AnimationClip.name };
+                }
+                else if (Ref.AttackAnimationList.Count == 5 && Ref.AttackAnimationList.Count == 5 && Ref.AttackAnimationList[0].AnimationClip != null &&
+                    Ref.AttackAnimationList[1].AnimationClip != null && Ref.AttackAnimationList[2].AnimationClip != null && Ref.AttackAnimationList[3].AnimationClip != null && Ref.AttackAnimationList[4].AnimationClip != null)
+                {
+                    MeleeEnumAnimations = new string[] { Ref.AttackAnimationList[0].AnimationClip.name, Ref.AttackAnimationList[1].AnimationClip.name, Ref.AttackAnimationList[2].AnimationClip.name, Ref.AttackAnimationList[3].AnimationClip.name, Ref.AttackAnimationList[4].AnimationClip.name };
+                }
+                else if (Ref.AttackAnimationList.Count == 6 && Ref.AttackAnimationList.Count == 6 && Ref.AttackAnimationList[0].AnimationClip != null &&
+                    Ref.AttackAnimationList[1].AnimationClip != null && Ref.AttackAnimationList[2].AnimationClip != null && Ref.AttackAnimationList[3].AnimationClip != null && Ref.AttackAnimationList[4].AnimationClip != null && Ref.AttackAnimationList[5].AnimationClip != null)
+                {
+                    MeleeEnumAnimations = new string[] { Ref.AttackAnimationList[0].AnimationClip.name, Ref.AttackAnimationList[1].AnimationClip.name, Ref.AttackAnimationList[2].AnimationClip.name,
+                        Ref.AttackAnimationList[3].AnimationClip.name, Ref.AttackAnimationList[4].AnimationClip.name, Ref.AttackAnimationList[5].AnimationClip.name };
+                }
+                else
+                {
+                    MeleeEnumAnimations = null;
+                }
+            }
+
+            if (Ref.WeaponTypeRef == EmeraldAISystem.WeaponType.Both && Ref.UseRunAttacksRef == EmeraldAISystem.UseRunAttacks.Yes ||
+                Ref.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee && Ref.UseRunAttacksRef == EmeraldAISystem.UseRunAttacks.Yes)
+            {
+                if (Ref.RunAttackAnimationList.Count == 1 && Ref.RunAttackAnimationList.Count == 1 && Ref.RunAttackAnimationList[0].AnimationClip != null)
+                {
+                    RunMeleeEnumAnimations = new string[] { Ref.RunAttackAnimationList[0].AnimationClip.name };
+                }
+                else if (Ref.RunAttackAnimationList.Count == 2 && Ref.RunAttackAnimationList.Count == 2 && Ref.RunAttackAnimationList[0].AnimationClip != null && Ref.RunAttackAnimationList[1].AnimationClip != null)
+                {
+                    RunMeleeEnumAnimations = new string[] { Ref.RunAttackAnimationList[0].AnimationClip.name, Ref.RunAttackAnimationList[1].AnimationClip.name };
+                }
+                else if (Ref.RunAttackAnimationList.Count == 3 && Ref.RunAttackAnimationList.Count == 3 && Ref.RunAttackAnimationList[0].AnimationClip != null &&
+                    Ref.RunAttackAnimationList[1].AnimationClip != null && Ref.RunAttackAnimationList[2].AnimationClip != null)
+                {
+                    RunMeleeEnumAnimations = new string[] { Ref.RunAttackAnimationList[0].AnimationClip.name, Ref.RunAttackAnimationList[1].AnimationClip.name, Ref.RunAttackAnimationList[2].AnimationClip.name };
+                }
+                else if (Ref.RunAttackAnimationList.Count == 4 && Ref.RunAttackAnimationList.Count == 4 && Ref.RunAttackAnimationList[0].AnimationClip != null &&
+                    Ref.RunAttackAnimationList[1].AnimationClip != null && Ref.RunAttackAnimationList[2].AnimationClip != null && Ref.RunAttackAnimationList[3].AnimationClip != null)
+                {
+                    RunMeleeEnumAnimations = new string[] { Ref.RunAttackAnimationList[0].AnimationClip.name, Ref.RunAttackAnimationList[1].AnimationClip.name, Ref.RunAttackAnimationList[2].AnimationClip.name, Ref.RunAttackAnimationList[3].AnimationClip.name };
+                }
+                else if (Ref.RunAttackAnimationList.Count == 5 && Ref.RunAttackAnimationList.Count == 5 && Ref.RunAttackAnimationList[0].AnimationClip != null &&
+                    Ref.RunAttackAnimationList[1].AnimationClip != null && Ref.RunAttackAnimationList[2].AnimationClip != null && Ref.RunAttackAnimationList[3].AnimationClip != null && Ref.RunAttackAnimationList[4].AnimationClip != null)
+                {
+                    RunMeleeEnumAnimations = new string[] { Ref.RunAttackAnimationList[0].AnimationClip.name, Ref.RunAttackAnimationList[1].AnimationClip.name, Ref.RunAttackAnimationList[2].AnimationClip.name, Ref.RunAttackAnimationList[3].AnimationClip.name, Ref.RunAttackAnimationList[4].AnimationClip.name };
+                }
+                else if (Ref.RunAttackAnimationList.Count == 6 && Ref.RunAttackAnimationList.Count == 6 && Ref.RunAttackAnimationList[0].AnimationClip != null &&
+                    Ref.RunAttackAnimationList[1].AnimationClip != null && Ref.RunAttackAnimationList[2].AnimationClip != null && Ref.RunAttackAnimationList[3].AnimationClip != null && Ref.RunAttackAnimationList[4].AnimationClip != null && Ref.RunAttackAnimationList[5].AnimationClip != null)
+                {
+                    RunMeleeEnumAnimations = new string[] { Ref.RunAttackAnimationList[0].AnimationClip.name, Ref.RunAttackAnimationList[1].AnimationClip.name, Ref.RunAttackAnimationList[2].AnimationClip.name,
+                        Ref.RunAttackAnimationList[3].AnimationClip.name, Ref.RunAttackAnimationList[4].AnimationClip.name, Ref.RunAttackAnimationList[5].AnimationClip.name };
+                }
+                else
+                {
+                    RunMeleeEnumAnimations = null;
                 }
             }
         }
@@ -150,6 +243,11 @@ namespace EmeraldAI.Utility
             }
 
             UpdateAbilityAnimationEnums();
+
+            if (self.PlayerFaction.Count == 0)
+            {
+                self.PlayerFaction.Add(new EmeraldAISystem.PlayerFactionClass(self.PlayerTag, 0));
+            }
 
             #region Serialized Properties
             //Head Look
@@ -179,6 +277,7 @@ namespace EmeraldAI.Utility
             WeaponTypeCombatTabNumberProp = serializedObject.FindProperty("WeaponTypeCombatTabNumber");
             WeaponTypeControlTabNumberProp = serializedObject.FindProperty("WeaponTypeControlTabNumber");
             CombatTabNumberProp = serializedObject.FindProperty("CombatTabNumber");
+            FactionsAndTagTabNumberProp = serializedObject.FindProperty("FactionsAndTagTabNumber");
             EventTabNumberProp = serializedObject.FindProperty("EventTabNumber");
             fieldOfViewAngleProp = serializedObject.FindProperty("fieldOfViewAngle");
             DetectionRadiusProp = serializedObject.FindProperty("DetectionRadius");
@@ -189,18 +288,6 @@ namespace EmeraldAI.Utility
             WalkBackwardsSpeedProp = serializedObject.FindProperty("WalkBackwardsSpeed");
             RunSpeedProp = serializedObject.FindProperty("RunSpeed");
             StartingHealthProp = serializedObject.FindProperty("StartingHealth");
-            MinimumDamageAmount1Prop = serializedObject.FindProperty("MinimumDamageAmount1");
-            MaximumDamageAmount1Prop = serializedObject.FindProperty("MaximumDamageAmount1");
-            MinimumDamageAmount2Prop = serializedObject.FindProperty("MinimumDamageAmount2");
-            MaximumDamageAmount2Prop = serializedObject.FindProperty("MaximumDamageAmount2");
-            MinimumDamageAmount3Prop = serializedObject.FindProperty("MinimumDamageAmount3");
-            MaximumDamageAmount3Prop = serializedObject.FindProperty("MaximumDamageAmount3");
-            MinimumDamageAmountRunProp = serializedObject.FindProperty("MinimumDamageAmountRun");
-            MaximumDamageAmountRunProp = serializedObject.FindProperty("MaximumDamageAmountRun");
-            DamageAmount1Prop = serializedObject.FindProperty("DamageAmount1");
-            DamageAmount2Prop = serializedObject.FindProperty("DamageAmount2");
-            DamageAmount3Prop = serializedObject.FindProperty("DamageAmount3");
-            DamageAmountRunProp = serializedObject.FindProperty("DamageAmountRun");
             StationaryTurningSpeedCombatProp = serializedObject.FindProperty("StationaryTurningSpeedCombat");
             BackupTurningSpeedProp = serializedObject.FindProperty("BackupTurningSpeed");
             CritChanceProp = serializedObject.FindProperty("CritChance");
@@ -227,20 +314,11 @@ namespace EmeraldAI.Utility
             BackupSecondsMinProp = serializedObject.FindProperty("BackingUpSecondsMin");
             BackupSecondsMaxProp = serializedObject.FindProperty("BackingUpSecondsMax");
             CautiousSecondsProp = serializedObject.FindProperty("CautiousSeconds");
-            Ability1AnimationIndexProp = serializedObject.FindProperty("Ability1AnimationIndex");
-            Ability2AnimationIndexProp = serializedObject.FindProperty("Ability2AnimationIndex");
-            Ability3AnimationIndexProp = serializedObject.FindProperty("Ability3AnimationIndex");
             MaxAllowedSummonedAIProp = serializedObject.FindProperty("MaxAllowedSummonedAI");
             HealthPercentageToHealProp = serializedObject.FindProperty("HealthPercentageToHeal");
             PlayerDetectionEventCooldownProp = serializedObject.FindProperty("PlayerDetectionEventCooldown");
             SwitchWeaponTypesDistanceProp = serializedObject.FindProperty("SwitchWeaponTypesDistance");
             SwitchWeaponTypesCooldownProp = serializedObject.FindProperty("SwitchWeaponTypesCooldown");
-
-            FactionRelation1Prop = serializedObject.FindProperty("FactionRelation1");
-            FactionRelation2Prop = serializedObject.FindProperty("FactionRelation2");
-            FactionRelation3Prop = serializedObject.FindProperty("FactionRelation3");
-            FactionRelation4Prop = serializedObject.FindProperty("FactionRelation4");
-            FactionRelation5Prop = serializedObject.FindProperty("FactionRelation5");
 
             //floats
             MinimumAttackSpeedProp = serializedObject.FindProperty("MinimumAttackSpeed");
@@ -319,7 +397,6 @@ namespace EmeraldAI.Utility
             DisplayAINameProp = serializedObject.FindProperty("DisplayAINameRef");
             DisplayAITitleProp = serializedObject.FindProperty("DisplayAITitleRef");
             DisplayAILevelProp = serializedObject.FindProperty("DisplayAILevelRef");
-            OpposingFactionsEnumProp = serializedObject.FindProperty("OpposingFactionsEnumRef");
             RefillHealthTypeProp = serializedObject.FindProperty("RefillHealthType");
             WanderTypeProp = serializedObject.FindProperty("WanderTypeRef");
             WaypointTypeProp = serializedObject.FindProperty("WaypointTypeRef");
@@ -332,7 +409,6 @@ namespace EmeraldAI.Utility
             AlignAIOnStartProp = serializedObject.FindProperty("AlignAIOnStartRef");
             AlignmentQualityProp = serializedObject.FindProperty("AlignmentQualityRef");
             PickTargetMethodProp = serializedObject.FindProperty("PickTargetMethodRef");
-            AIAttacksPlayerProp = serializedObject.FindProperty("AIAttacksPlayerRef");
             UseNonAITagProp = serializedObject.FindProperty("UseNonAITagRef");
             WeaponTypeProp = serializedObject.FindProperty("WeaponTypeRef");
             UseRunAttacksProp = serializedObject.FindProperty("UseRunAttacksRef");
@@ -361,6 +437,11 @@ namespace EmeraldAI.Utility
             DebugLogMissingAnimationsProp = serializedObject.FindProperty("DebugLogMissingAnimations");
             UseCriticalHitsProp = serializedObject.FindProperty("UseCriticalHits");
             AttackOnArrivalProp = serializedObject.FindProperty("AttackOnArrival");
+            OffensiveAbilityPickTypeProp = serializedObject.FindProperty("OffensiveAbilityPickType");
+            SupportAbilityPickTypeProp = serializedObject.FindProperty("SupportAbilityPickType");
+            SummoningAbilityPickTypeProp = serializedObject.FindProperty("SummoningAbilityPickType");
+            MeleeAttackPickTypeProp = serializedObject.FindProperty("MeleeAttackPickType");
+            MeleeRunAttackPickTypeProp = serializedObject.FindProperty("MeleeRunAttackPickType");
 
 #if CRUX_PRESENT
             SpawnedWithCruxProp = serializedObject.FindProperty("UseMagicEffectsPackRef");
@@ -453,12 +534,6 @@ namespace EmeraldAI.Utility
             WanderFoldout = serializedObject.FindProperty("WanderFoldout");
             CombatStyleFoldout = serializedObject.FindProperty("CombatStyleFoldout");
 
-            OpposingFaction1Prop = serializedObject.FindProperty("OpposingFaction1");
-            OpposingFaction2Prop = serializedObject.FindProperty("OpposingFaction2");
-            OpposingFaction3Prop = serializedObject.FindProperty("OpposingFaction3");
-            OpposingFaction4Prop = serializedObject.FindProperty("OpposingFaction4");
-            OpposingFaction5Prop = serializedObject.FindProperty("OpposingFaction5");
-
             Renderer1Prop = serializedObject.FindProperty("Renderer1");
             Renderer2Prop = serializedObject.FindProperty("Renderer2");
             Renderer3Prop = serializedObject.FindProperty("Renderer3");
@@ -513,6 +588,7 @@ namespace EmeraldAI.Utility
             //Events
             DeathEventProp = serializedObject.FindProperty("DeathEvent");
             DamageEventProp = serializedObject.FindProperty("DamageEvent");
+            OnDoDamageEventProp = serializedObject.FindProperty("OnDoDamageEvent");
             ReachedDestinationEventProp = serializedObject.FindProperty("ReachedDestinationEvent");
             OnStartEventProp = serializedObject.FindProperty("OnStartEvent");
             OnPlayerDetectionEventProp = serializedObject.FindProperty("OnPlayerDetectionEvent");
@@ -520,9 +596,10 @@ namespace EmeraldAI.Utility
             OnAttackEventProp = serializedObject.FindProperty("OnAttackEvent");
             OnFleeEventProp = serializedObject.FindProperty("OnFleeEvent");
             OnStartCombatEventProp = serializedObject.FindProperty("OnStartCombatEvent");
-#endregion
+            OnKillTargetEventProp = serializedObject.FindProperty("OnKillTargetEvent");
+            #endregion
 
-#region Editor Icons
+            #region Editor Icons
             if (TemperamentIcon == null) TemperamentIcon = Resources.Load("TemperamentIcon") as Texture;
             if (SettingsIcon == null) SettingsIcon = Resources.Load("SettingsIcon") as Texture;
             if (DetectTagsIcon == null) DetectTagsIcon = Resources.Load("DetectTagsIcon") as Texture;
@@ -531,9 +608,9 @@ namespace EmeraldAI.Utility
             if (WaypointEditorIcon == null) WaypointEditorIcon = Resources.Load("WaypointEditorIcon") as Texture;
             if (AnimationIcon == null) AnimationIcon = Resources.Load("AnimationIcon") as Texture;
             if (DocumentationIcon == null) DocumentationIcon = Resources.Load("DocumentationIcon") as Texture;
-#endregion
+            #endregion
 
-#region Reorderable Lists
+            #region Reorderable Lists
             //Put our sound lists into reorderable lists because Unity allows these lists to be serialized
             //Attack Sounds
             AttackSoundsList = new ReorderableList(serializedObject, serializedObject.FindProperty("AttackSounds"), true, true, true, true);
@@ -729,7 +806,6 @@ namespace EmeraldAI.Utility
                 AnimationListsChangedProp.boolValue = true;
             };
 
-            //New Idle
             IdleAnimationList = new ReorderableList(serializedObject, serializedObject.FindProperty("IdleAnimationList"), true, true, true, true);
             IdleAnimationList.drawElementCallback =
                 (Rect rect, int index, bool isActive, bool isFocused) =>
@@ -807,7 +883,7 @@ namespace EmeraldAI.Utility
                     if (EditorGUI.EndChangeCheck())
                     {
                         AnimationListsChangedProp.boolValue = true;
-                        
+
                     }
                 };
 
@@ -817,7 +893,7 @@ namespace EmeraldAI.Utility
             };
             RangedAttackAnimationList.onChangedCallback = (RangedAttackAnimationList) =>
             {
-                AnimationListsChangedProp.boolValue = true;               
+                AnimationListsChangedProp.boolValue = true;
             };
 
             //Run Attack Animations
@@ -996,44 +1072,204 @@ namespace EmeraldAI.Utility
                 EditorGUI.LabelField(rect, "   ID  " + "         Item Object", EditorStyles.boldLabel);
             };
 
-            //Attack 1 Abilities
-            OffensiveAbilitiesList = new ReorderableList(serializedObject, serializedObject.FindProperty("OffensiveAbilitiesList"), true, true, true, true);
+            //Melee Attacks
+            MeleeAttacks = new ReorderableList(serializedObject, serializedObject.FindProperty("MeleeAttacks"), true, true, true, true);
 
-            OffensiveAbilitiesList.drawHeaderCallback = rect => {
-                EditorGUI.LabelField(rect, "Offensive Abilities List", EditorStyles.boldLabel);
+            MeleeAttacks.drawHeaderCallback = rect => {
+                EditorGUI.LabelField(rect, "Melee Attacks", EditorStyles.boldLabel);
             };
 
-            OffensiveAbilitiesList.drawElementCallback =
+            MeleeAttacks.drawElementCallback =
                 (Rect rect, int index, bool isActive, bool isFocused) => {
-                    var element = OffensiveAbilitiesList.serializedProperty.GetArrayElementAtIndex(index);
-                    EditorGUI.ObjectField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), element, GUIContent.none);
+                    var element = MeleeAttacks.serializedProperty.GetArrayElementAtIndex(index);
+
+                    if (self.AttackAnimationList.Count > 0 && MeleeEnumAnimations != null)
+                    {
+                        CustomPopup(new Rect(rect.x + 125, rect.y + 10, rect.width - 125, EditorGUIUtility.singleLineHeight), new GUIContent(), element.FindPropertyRelative("AttackAnimaition"), "Attack Animation", MeleeEnumAnimations);
+                        EditorGUI.PrefixLabel(new Rect(rect.x, rect.y + 10, 125, EditorGUIUtility.singleLineHeight), new GUIContent("Attack Animation", "The animation that will be used for this melee attack. Note: Animations are based off of your AI's Attack Animation List."));
+                    }
+                    else
+                    {
+                        EditorGUI.Popup(new Rect(rect.x + 125, rect.y + 10, rect.width - 125, EditorGUIUtility.singleLineHeight), 0, MeleeBlankOptions);
+                        EditorGUI.PrefixLabel(new Rect(rect.x, rect.y + 10, 125, EditorGUIUtility.singleLineHeight), new GUIContent("Attack Animation"));
+                    }
+
+                    if (self.RandomizeDamageRef == EmeraldAISystem.RandomizeDamage.Yes)
+                    {
+                        MeleeAttacks.elementHeight = EditorGUIUtility.singleLineHeight * 7;
+                        element.FindPropertyRelative("MinDamage").intValue = EditorGUI.IntField(new Rect(rect.x, rect.y + 35, rect.width, EditorGUIUtility.singleLineHeight), new GUIContent("Min Damage", "The minimum damage this attack can do."), element.FindPropertyRelative("MinDamage").intValue);
+                        element.FindPropertyRelative("MaxDamage").intValue = EditorGUI.IntField(new Rect(rect.x, rect.y + 60, rect.width, EditorGUIUtility.singleLineHeight), new GUIContent("Max Damage", "The maximum damage this attack can do."), element.FindPropertyRelative("MaxDamage").intValue);
+                        EditorGUI.BeginDisabledGroup(self.MeleeAttackPickType != EmeraldAISystem.MeleeAttackPickTypeEnum.Odds);
+                        element.FindPropertyRelative("AttackOdds").intValue = EditorGUI.IntSlider(new Rect(rect.x, rect.y + 85, rect.width, EditorGUIUtility.singleLineHeight), new GUIContent("Attack Odds",
+                            "The odds that this melee attack will use when an AI uses a melee attack (When using the Odds Pick type)."), element.FindPropertyRelative("AttackOdds").intValue, 1, 100);
+                        EditorGUI.EndDisabledGroup();
+                    }
+                    else
+                    {
+                        MeleeAttacks.elementHeight = EditorGUIUtility.singleLineHeight * 5.5f;
+                        element.FindPropertyRelative("MinDamage").intValue = EditorGUI.IntField(new Rect(rect.x, rect.y + 35, rect.width, EditorGUIUtility.singleLineHeight), new GUIContent("Damage", "The damage this attack can do."), element.FindPropertyRelative("MinDamage").intValue);
+                        EditorGUI.BeginDisabledGroup(self.MeleeAttackPickType != EmeraldAISystem.MeleeAttackPickTypeEnum.Odds);
+                        element.FindPropertyRelative("AttackOdds").intValue = EditorGUI.IntSlider(new Rect(rect.x, rect.y + 60, rect.width, EditorGUIUtility.singleLineHeight), new GUIContent("Attack Odds",
+                            "The odds that this melee attack will use when an AI uses a melee attack (When using the Odds Pick type)."), element.FindPropertyRelative("AttackOdds").intValue, 1, 100);
+                        EditorGUI.EndDisabledGroup();
+                    }
                 };
+
+            MeleeAttacks.drawHeaderCallback = rect =>
+            {
+                EditorGUI.LabelField(rect, "Melee Attacks", EditorStyles.boldLabel);
+            };
+
+            //Melee Run Attacks
+            MeleeRunAttacks = new ReorderableList(serializedObject, serializedObject.FindProperty("MeleeRunAttacks"), true, true, true, true);
+
+            MeleeRunAttacks.drawHeaderCallback = rect => {
+                EditorGUI.LabelField(rect, "Melee Run Attacks", EditorStyles.boldLabel);
+            };
+
+            MeleeRunAttacks.drawElementCallback =
+                (Rect rect, int index, bool isActive, bool isFocused) => {
+                    var element = MeleeRunAttacks.serializedProperty.GetArrayElementAtIndex(index);
+
+                    if (self.RunAttackAnimationList.Count > 0 && RunMeleeEnumAnimations != null)
+                    {
+                        CustomPopup(new Rect(rect.x + 125, rect.y + 10, rect.width - 125, EditorGUIUtility.singleLineHeight), new GUIContent(), element.FindPropertyRelative("AttackAnimaition"), "Attack Animation", RunMeleeEnumAnimations);
+                        EditorGUI.PrefixLabel(new Rect(rect.x, rect.y + 10, 125, EditorGUIUtility.singleLineHeight), new GUIContent("Attack Animation", "The animation that will be used for this running melee attack. Note: Animations are based off of your AI's Run Attack Animation List."));
+                    }
+                    else
+                    {
+                        EditorGUI.Popup(new Rect(rect.x + 125, rect.y + 10, rect.width - 125, EditorGUIUtility.singleLineHeight), 0, RunMeleeBlankOptions);
+                        EditorGUI.PrefixLabel(new Rect(rect.x, rect.y + 10, 125, EditorGUIUtility.singleLineHeight), new GUIContent("Attack Animation"));
+                    }
+
+                    if (self.RandomizeDamageRef == EmeraldAISystem.RandomizeDamage.Yes)
+                    {
+                        MeleeRunAttacks.elementHeight = EditorGUIUtility.singleLineHeight * 7;
+                        element.FindPropertyRelative("MinDamage").intValue = EditorGUI.IntField(new Rect(rect.x, rect.y + 35, rect.width, EditorGUIUtility.singleLineHeight), new GUIContent("Min Damage", "The minimum damage this run attack can do."), element.FindPropertyRelative("MinDamage").intValue);
+                        element.FindPropertyRelative("MaxDamage").intValue = EditorGUI.IntField(new Rect(rect.x, rect.y + 60, rect.width, EditorGUIUtility.singleLineHeight), new GUIContent("Max Damage", "The maximum damage this run attack can do."), element.FindPropertyRelative("MaxDamage").intValue);
+                        EditorGUI.BeginDisabledGroup(self.MeleeAttackPickType != EmeraldAISystem.MeleeAttackPickTypeEnum.Odds);
+                        element.FindPropertyRelative("AttackOdds").intValue = EditorGUI.IntSlider(new Rect(rect.x, rect.y + 85, rect.width, EditorGUIUtility.singleLineHeight), new GUIContent("Attack Odds",
+                            "The odds that this melee attack will use when an AI uses a running melee attack (When using the Odds Pick type)."), element.FindPropertyRelative("AttackOdds").intValue, 1, 100);
+                        EditorGUI.EndDisabledGroup();
+                    }
+                    else
+                    {
+                        MeleeRunAttacks.elementHeight = EditorGUIUtility.singleLineHeight * 5.5f;
+                        element.FindPropertyRelative("MinDamage").intValue = EditorGUI.IntField(new Rect(rect.x, rect.y + 35, rect.width, EditorGUIUtility.singleLineHeight), new GUIContent("Damage", "The damage this run attack can do."), element.FindPropertyRelative("MinDamage").intValue);
+                        EditorGUI.BeginDisabledGroup(self.MeleeAttackPickType != EmeraldAISystem.MeleeAttackPickTypeEnum.Odds);
+                        element.FindPropertyRelative("AttackOdds").intValue = EditorGUI.IntSlider(new Rect(rect.x, rect.y + 60, rect.width, EditorGUIUtility.singleLineHeight), new GUIContent("Attack Odds",
+                            "The odds that this melee attack will use when an AI uses a running melee attack (When using the Odds Pick type)."), element.FindPropertyRelative("AttackOdds").intValue, 1, 100);
+                        EditorGUI.EndDisabledGroup();
+                    }
+                };
+
+            MeleeRunAttacks.drawHeaderCallback = rect =>
+            {
+                EditorGUI.LabelField(rect, "Melee Run Attacks", EditorStyles.boldLabel);
+            };
+
+            //Offsenive Abilities
+            OffensiveAbilities = new ReorderableList(serializedObject, serializedObject.FindProperty("OffensiveAbilities"), true, true, true, true);
+
+            OffensiveAbilities.drawHeaderCallback = rect => {
+                EditorGUI.LabelField(rect, "Offensive Abilities", EditorStyles.boldLabel);
+            };
+
+            OffensiveAbilities.drawElementCallback =
+                (Rect rect, int index, bool isActive, bool isFocused) => {
+                    var element = OffensiveAbilities.serializedProperty.GetArrayElementAtIndex(index);
+                    OffensiveAbilities.elementHeight = EditorGUIUtility.singleLineHeight * 5.5f;
+
+                    if (self.RangedAttackAnimationList.Count > 0 && RangedEnumAnimations != null)
+                    {
+                        //element.FindPropertyRelative("AbilityAnimaition").intValue = EditorGUI.Popup(new Rect(rect.x + 125, rect.y + 10, rect.width - 125, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("AbilityAnimaition").intValue, RangedEnumAnimations);
+                        CustomPopup(new Rect(rect.x + 125, rect.y + 10, rect.width - 125, EditorGUIUtility.singleLineHeight), new GUIContent(), element.FindPropertyRelative("AbilityAnimaition"), "Ability Animaition", RangedEnumAnimations);
+                        EditorGUI.PrefixLabel(new Rect(rect.x, rect.y + 10, 125, EditorGUIUtility.singleLineHeight), new GUIContent("Ability Animation", "The animation that will be used for this offsensive ability. Note: Animations are based off of your AI's Ranged Attack Animation List."));
+                    }
+                    else
+                    {
+                        EditorGUI.Popup(new Rect(rect.x + 125, rect.y + 10, rect.width - 125, EditorGUIUtility.singleLineHeight), 0, RangedBlankOptions);
+                        EditorGUI.PrefixLabel(new Rect(rect.x, rect.y + 10, 125, EditorGUIUtility.singleLineHeight), new GUIContent("Ability Animation"));
+                    }
+
+                    EditorGUI.ObjectField(new Rect(rect.x, rect.y + 35, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("OffensiveAbility"), new GUIContent("Ability Object", "The ability object that will be used for this offsensive ability."));
+                    EditorGUI.BeginDisabledGroup(self.OffensiveAbilityPickType != EmeraldAISystem.OffensiveAbilityPickTypeEnum.Odds);
+                    element.FindPropertyRelative("AbilityOdds").intValue = EditorGUI.IntSlider(new Rect(rect.x, rect.y + 60, rect.width, EditorGUIUtility.singleLineHeight), new GUIContent("Ability Odds", "The odds that this ability will use when an AI uses its offensive abilities when using the Odds Pick type."), element.FindPropertyRelative("AbilityOdds").intValue, 1, 100);
+                    EditorGUI.EndDisabledGroup();
+                };
+
+            OffensiveAbilities.drawHeaderCallback = rect =>
+            {
+                EditorGUI.LabelField(rect, "Offensive Abilities", EditorStyles.boldLabel);
+            };
 
             //Support Abilities
-            SupportAbilitiesList = new ReorderableList(serializedObject, serializedObject.FindProperty("SupportAbilitiesList"), true, true, true, true);
+            SupportAbilities = new ReorderableList(serializedObject, serializedObject.FindProperty("SupportAbilities"), true, true, true, true);
 
-            SupportAbilitiesList.drawHeaderCallback = rect => {
-                EditorGUI.LabelField(rect, "Support Abilities List", EditorStyles.boldLabel);
+            SupportAbilities.drawHeaderCallback = rect => {
+                EditorGUI.LabelField(rect, "Support Abilities", EditorStyles.boldLabel);
             };
 
-            SupportAbilitiesList.drawElementCallback =
+            SupportAbilities.drawElementCallback =
                 (Rect rect, int index, bool isActive, bool isFocused) => {
-                    var element = SupportAbilitiesList.serializedProperty.GetArrayElementAtIndex(index);
-                    EditorGUI.ObjectField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), element, GUIContent.none);
+                    var element = SupportAbilities.serializedProperty.GetArrayElementAtIndex(index);
+                    SupportAbilities.elementHeight = EditorGUIUtility.singleLineHeight * 5.5f;
+
+                    if (self.RangedAttackAnimationList.Count > 0 && RangedEnumAnimations != null)
+                    {
+                        CustomPopup(new Rect(rect.x + 125, rect.y + 10, rect.width - 125, EditorGUIUtility.singleLineHeight), new GUIContent(), element.FindPropertyRelative("AbilityAnimaition"), "Ability Animaition", RangedEnumAnimations);
+                        EditorGUI.PrefixLabel(new Rect(rect.x, rect.y + 10, 125, EditorGUIUtility.singleLineHeight), new GUIContent("Ability Animation", "The animation that will be used for this offsensive ability. Note: Animations are based off of your AI's Ranged Attack Animation List."));
+                    }
+                    else
+                    {
+                        EditorGUI.Popup(new Rect(rect.x + 125, rect.y + 10, rect.width - 125, EditorGUIUtility.singleLineHeight), 0, RangedBlankOptions);
+                        EditorGUI.PrefixLabel(new Rect(rect.x, rect.y + 10, 125, EditorGUIUtility.singleLineHeight), new GUIContent("Ability Animation"));
+                    }
+
+                    EditorGUI.ObjectField(new Rect(rect.x, rect.y + 35, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("SupportAbility"), new GUIContent("Ability Object", "The ability object that will be used for this offsensive ability."));
+                    EditorGUI.BeginDisabledGroup(self.SupportAbilityPickType != EmeraldAISystem.SupportAbilityPickTypeEnum.Odds);
+                    element.FindPropertyRelative("AbilityOdds").intValue = EditorGUI.IntSlider(new Rect(rect.x, rect.y + 60, rect.width, EditorGUIUtility.singleLineHeight), new GUIContent("Ability Odds", "The odds that this ability will use when an AI uses its Support abilities when using the Odds Pick type."), element.FindPropertyRelative("AbilityOdds").intValue, 1, 100);
+                    EditorGUI.EndDisabledGroup();
                 };
+
+            SupportAbilities.drawHeaderCallback = rect =>
+            {
+                EditorGUI.LabelField(rect, "Support Abilities", EditorStyles.boldLabel);
+            };
 
             //Summoning Abilities
-            SummoningAbilitiesList = new ReorderableList(serializedObject, serializedObject.FindProperty("SummoningAbilitiesList"), true, true, true, true);
+            SummoningAbilities = new ReorderableList(serializedObject, serializedObject.FindProperty("SummoningAbilities"), true, true, true, true);
 
-            SummoningAbilitiesList.drawHeaderCallback = rect => {
-                EditorGUI.LabelField(rect, "Summoning Abilities List", EditorStyles.boldLabel);
+            SummoningAbilities.drawHeaderCallback = rect => {
+                EditorGUI.LabelField(rect, "Summoning Abilities", EditorStyles.boldLabel);
             };
 
-            SummoningAbilitiesList.drawElementCallback =
+            SummoningAbilities.drawElementCallback =
                 (Rect rect, int index, bool isActive, bool isFocused) => {
-                    var element = SummoningAbilitiesList.serializedProperty.GetArrayElementAtIndex(index);
-                    EditorGUI.ObjectField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), element, GUIContent.none);
+                    var element = SummoningAbilities.serializedProperty.GetArrayElementAtIndex(index);
+                    SummoningAbilities.elementHeight = EditorGUIUtility.singleLineHeight * 5.5f;
+
+                    if (self.RangedAttackAnimationList.Count > 0 && RangedEnumAnimations != null)
+                    {
+                        CustomPopup(new Rect(rect.x + 125, rect.y + 10, rect.width - 125, EditorGUIUtility.singleLineHeight), new GUIContent(), element.FindPropertyRelative("AbilityAnimaition"), "Ability Animaition", RangedEnumAnimations);
+                        EditorGUI.PrefixLabel(new Rect(rect.x, rect.y + 10, 125, EditorGUIUtility.singleLineHeight), new GUIContent("Ability Animation", "The animation that will be used for this offsensive ability. Note: Animations are based off of your AI's Ranged Attack Animation List."));
+                    }
+                    else
+                    {
+                        EditorGUI.Popup(new Rect(rect.x + 125, rect.y + 10, rect.width - 125, EditorGUIUtility.singleLineHeight), 0, RangedBlankOptions);
+                        EditorGUI.PrefixLabel(new Rect(rect.x, rect.y + 10, 125, EditorGUIUtility.singleLineHeight), new GUIContent("Ability Animation"));
+                    }
+
+                    EditorGUI.ObjectField(new Rect(rect.x, rect.y + 35, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("SummoningAbility"), new GUIContent("Ability Object", "The ability object that will be used for this offsensive ability."));
+                    EditorGUI.BeginDisabledGroup(self.SummoningAbilityPickType != EmeraldAISystem.SummoningAbilityPickTypeEnum.Odds);
+                    element.FindPropertyRelative("AbilityOdds").intValue = EditorGUI.IntSlider(new Rect(rect.x, rect.y + 60, rect.width, EditorGUIUtility.singleLineHeight), new GUIContent("Ability Odds", "The odds that this ability will use when an AI uses its Summoning abilities when using the Odds Pick type."), element.FindPropertyRelative("AbilityOdds").intValue, 1, 100);
+                    EditorGUI.EndDisabledGroup();
                 };
+
+            SummoningAbilities.drawHeaderCallback = rect =>
+            {
+                EditorGUI.LabelField(rect, "Summoning Abilities", EditorStyles.boldLabel);
+            };
 
             //Blood Effects List
             BloodEffectsList = new ReorderableList(serializedObject, serializedObject.FindProperty("BloodEffectsList"), true, true, true, true);
@@ -1047,20 +1283,88 @@ namespace EmeraldAI.Utility
                     var element = BloodEffectsList.serializedProperty.GetArrayElementAtIndex(index);
                     EditorGUI.ObjectField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), element, GUIContent.none);
                 };
+
+            //Factions List
+            FactionsList = new ReorderableList(serializedObject, serializedObject.FindProperty("FactionRelationsList"), true, true, true, true);
+            FactionsList.drawElementCallback =
+                (Rect rect, int index, bool isActive, bool isFocused) =>
+                {
+                    var element = FactionsList.serializedProperty.GetArrayElementAtIndex(index);
+                    FactionsList.elementHeight = EditorGUIUtility.singleLineHeight * 3.75f;
+
+                    if (element.FindPropertyRelative("RelationTypeRef").intValue == 0)
+                    {
+                        EditorGUI.DrawRect(new Rect(rect.x - 16, rect.y + 2f, rect.width + 17, EditorGUIUtility.singleLineHeight * 3.5f), new Color(1.0f, 0.0f, 0.0f, 0.15f));
+                    }
+                    else if (element.FindPropertyRelative("RelationTypeRef").intValue == 1)
+                    {
+                        EditorGUI.DrawRect(new Rect(rect.x - 16, rect.y + 2f, rect.width + 17, EditorGUIUtility.singleLineHeight * 3.5f), new Color(0.1f, 0.1f, 0.1f, 0.1f));
+                    }
+                    else if (element.FindPropertyRelative("RelationTypeRef").intValue == 2)
+                    {
+                        EditorGUI.DrawRect(new Rect(rect.x - 16, rect.y + 2f, rect.width + 17, EditorGUIUtility.singleLineHeight * 3.5f), new Color(0.0f, 1.0f, 0.0f, 0.15f));
+                    }
+                    EditorGUI.PropertyField(new Rect(rect.x, rect.y + 35, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("RelationTypeRef"), new GUIContent("Relation Type", "The type of relation this AI has with this faction."));
+
+                    CustomPopup(new Rect(rect.x + 125, rect.y + 10, rect.width - 125, EditorGUIUtility.singleLineHeight), new GUIContent(), element.FindPropertyRelative("FactionIndex"), "Faction", EmeraldAISystem.StringFactionList.ToArray());
+
+                    EditorGUI.PrefixLabel(new Rect(rect.x, rect.y + 10, 125, EditorGUIUtility.singleLineHeight),
+                        new GUIContent("Faction", "Factions are based on all factions within the Faction Manager. An AI can have as many faction relations as needed."));
+                };
+
+            FactionsList.drawHeaderCallback = rect =>
+            {
+                EditorGUI.LabelField(rect, "AI Faction Relations", EditorStyles.boldLabel);
+            };
+
+            //Player Faction
+            PlayerFaction = new ReorderableList(serializedObject, serializedObject.FindProperty("PlayerFaction"), false, true, false, false);
+            PlayerFaction.drawElementCallback =
+                (Rect rect, int index, bool isActive, bool isFocused) =>
+                {
+                    EditorGUI.BeginChangeCheck();
+                    var element = PlayerFaction.serializedProperty.GetArrayElementAtIndex(index);
+                    PlayerFaction.elementHeight = EditorGUIUtility.singleLineHeight * 4.1f;
+
+                    if (element.FindPropertyRelative("RelationTypeRef").intValue == 0)
+                    {
+                        EditorGUI.DrawRect(new Rect(rect.x - 2, rect.y + 1f, rect.width + 3, EditorGUIUtility.singleLineHeight * 4f), new Color(1.0f, 0.0f, 0.0f, 0.15f));
+                    }
+                    else if (element.FindPropertyRelative("RelationTypeRef").intValue == 1)
+                    {
+                        EditorGUI.DrawRect(new Rect(rect.x - 2, rect.y + 1f, rect.width + 3, EditorGUIUtility.singleLineHeight * 4f), new Color(0.1f, 0.1f, 0.1f, 0.1f));
+                    }
+                    else if (element.FindPropertyRelative("RelationTypeRef").intValue == 2)
+                    {
+                        EditorGUI.DrawRect(new Rect(rect.x - 2, rect.y + 1f, rect.width + 3, EditorGUIUtility.singleLineHeight * 4f), new Color(0.0f, 1.0f, 0.0f, 0.15f));
+                    }
+                    EditorGUI.PropertyField(new Rect(rect.x, rect.y + 35, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("RelationTypeRef"), new GUIContent("Relation Type", "The type of relation this AI has with this faction."));
+
+                    //element.FindPropertyRelative("PlayerTag").stringValue = EditorGUI.TagField(new Rect(rect.x + 125, rect.y + 10, rect.width - 125, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("PlayerTag").stringValue);
+                    CustomTag(new Rect(rect.x + 125, rect.y + 10, rect.width - 125, EditorGUIUtility.singleLineHeight), new GUIContent(), element.FindPropertyRelative("PlayerTag"));
+                    PlayerTagProp.stringValue = element.FindPropertyRelative("PlayerTag").stringValue;
+
+                    EditorGUI.PrefixLabel(new Rect(rect.x, rect.y + 10, 125, EditorGUIUtility.singleLineHeight),
+                        new GUIContent("Player Tag", "The Player Tag is the Unity Tag used to detect player targets."));
+                };
+
+            PlayerFaction.drawHeaderCallback = rect =>
+            {
+                EditorGUI.LabelField(rect, "Player Relation", EditorStyles.boldLabel);
+            };
+
             #endregion
         }
 
         void LoadFactionData()
         {
-            string path = AssetDatabase.GetAssetPath(Resources.Load("EmeraldAIFactions"));
-
-            TextAsset FactionData = (TextAsset)AssetDatabase.LoadAssetAtPath(path, typeof(TextAsset));
+            EmeraldAISystem.StringFactionList.Clear();
+            string path = AssetDatabase.GetAssetPath(Resources.Load("Faction Data"));
+            EmeraldAIFactionData FactionData = (EmeraldAIFactionData)AssetDatabase.LoadAssetAtPath(path, typeof(EmeraldAIFactionData));
 
             if (FactionData != null)
             {
-                string[] textLines = FactionData.text.Split(',');
-
-                foreach (string s in textLines)
+                foreach (string s in FactionData.FactionNameList)
                 {
                     if (!EmeraldAISystem.StringFactionList.Contains(s) && s != "")
                     {
@@ -1068,6 +1372,9 @@ namespace EmeraldAI.Utility
                     }
                 }
             }
+
+            EmeraldAISystem self = (EmeraldAISystem)target;
+            self.StringFactionListTest = new List<string>(FactionData.FactionNameList);
         }
 
         public override void OnInspectorGUI()
@@ -1091,28 +1398,41 @@ namespace EmeraldAI.Utility
             {
                 GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
                 EditorGUILayout.HelpBox("The AI's Head Transform has not been applied and is needed for accurate raycast calculations, " +
-                    "please apply it. This is located under Detections & Tags>Detection options.", MessageType.Warning);
+                    "please apply it. This is located under Detections & Tags>Detection Options.", MessageType.Warning);
                 GUI.backgroundColor = Color.white;
                 EditorGUILayout.Space();
             }
-            else if (self.WeaponTypeRef == EmeraldAISystem.WeaponType.Ranged || self.WeaponTypeRef == EmeraldAISystem.WeaponType.Both)
+            else if (self.FactionRelationsList.Count == 0)
             {
-                if (!self.RangedAttackTransform)
-                {
-                    GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
-                    EditorGUILayout.HelpBox("There is currently no applied Ranged Attack Transform for this AI. To apply one, go to AI's Settings>Combat>Damage Settings.", MessageType.Warning);
-                    GUI.backgroundColor = Color.white;
-                    EditorGUILayout.Space();
-                }
-
-                if (self.OffensiveAbilitiesList.Count == 0 && self.SupportAbilitiesList.Count == 0 && self.SummoningAbilitiesList.Count == 0)
-                {
-                    GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
-                    EditorGUILayout.HelpBox("There currently aren't any abilities applied to this AI. Please ensure there is at least 1 Ability Object applied to one of the Ability Categories. This " +
-                        "can be found under AI's Settings>Combat>Damage Settings.", MessageType.Warning);
-                    GUI.backgroundColor = Color.white;
-                    EditorGUILayout.Space();
-                }
+                GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
+                EditorGUILayout.HelpBox("This AI needs at least 1 Faction Relation to function properly. " +
+                    "Please apply one by going to the Detections & Tags>Faction Options tab.", MessageType.Warning);
+                GUI.backgroundColor = Color.white;
+                EditorGUILayout.Space();
+            }
+            else if (self.WeaponTypeRef == EmeraldAISystem.WeaponType.Ranged && !self.RangedAttackTransform || self.WeaponTypeRef == EmeraldAISystem.WeaponType.Both && !self.RangedAttackTransform)
+            {
+                GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
+                EditorGUILayout.HelpBox("There is currently no applied Ranged Attack Transform for this AI. To apply one, go to AI's Settings>Combat>Damage Settings.", MessageType.Warning);
+                GUI.backgroundColor = Color.white;
+                EditorGUILayout.Space();
+            }
+            else if (self.WeaponTypeRef == EmeraldAISystem.WeaponType.Ranged && self.OffensiveAbilities.Count == 0 && self.SupportAbilities.Count == 0 && self.SummoningAbilities.Count == 0 ||
+                self.WeaponTypeRef == EmeraldAISystem.WeaponType.Both && self.OffensiveAbilities.Count == 0 && self.SupportAbilities.Count == 0 && self.SummoningAbilities.Count == 0)
+            {
+                GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
+                EditorGUILayout.HelpBox("There currently aren't any abilities applied to this AI. Please ensure there is at least 1 Ability Object applied to one of the Ability Categories. This " +
+                    "can be found under AI's Settings>Combat>Damage Settings.", MessageType.Warning);
+                GUI.backgroundColor = Color.white;
+                EditorGUILayout.Space();
+            }
+            else if (self.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee && self.MeleeAttacks.Count == 0 || self.WeaponTypeRef == EmeraldAISystem.WeaponType.Both && self.MeleeAttacks.Count == 0)
+            {
+                GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
+                EditorGUILayout.HelpBox("There currently aren't any melee attacks applied to this AI. Please ensure there is at least 1 Melee Attack applied to one of the Melee Attacks List. This " +
+                    "can be found under AI's Settings>Combat>Damage Settings.", MessageType.Warning);
+                GUI.backgroundColor = Color.white;
+                EditorGUILayout.Space();
             }
 
             GUIStyle myFoldoutStyle = new GUIStyle(EditorStyles.foldout);
@@ -1130,9 +1450,16 @@ namespace EmeraldAI.Utility
             GUIContent[] TabButtons = new GUIContent[8] {new GUIContent("Temperament", TemperamentIcon), new GUIContent("AI's Settings", SettingsIcon), new GUIContent(" Detection \n & Tags", DetectTagsIcon),
             new GUIContent("UI Settings", UIIcon), new GUIContent("Sounds", SoundIcon), new GUIContent(" Waypoint\nEditor", WaypointEditorIcon), new GUIContent("Animations", AnimationIcon), new GUIContent("Docs", DocumentationIcon)};
 
+            GUIStyle SelectionGridStyle = new GUIStyle(EditorStyles.miniButton);
+            SelectionGridStyle.fixedHeight = 35;
+
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            TabNumberProp.intValue = GUILayout.SelectionGrid(TabNumberProp.intValue, TabButtons, 4, EditorStyles.miniButtonRight, GUILayout.Height(68), GUILayout.Width(85 * Screen.width / Screen.dpi));
+            #if UNITY_2019_3_OR_NEWER
+                TabNumberProp.intValue = GUILayout.SelectionGrid(TabNumberProp.intValue, TabButtons, 4, SelectionGridStyle, GUILayout.Height(68), GUILayout.Width(85 * Screen.width / Screen.dpi));
+            #else
+                TabNumberProp.intValue = GUILayout.SelectionGrid(TabNumberProp.intValue, TabButtons, 4, EditorStyles.miniButtonRight, GUILayout.Height(68), GUILayout.Width(85 * Screen.width / Screen.dpi));
+            #endif
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
 
@@ -1359,7 +1686,7 @@ namespace EmeraldAI.Utility
 
                     if (self.WanderTypeRef == EmeraldAISystem.WanderType.Dynamic)
                     {
-                        CustomEditorProperties.CustomIntSlider(new Rect(), new GUIContent(), WanderRadiusProp, "Dynamic Wander Radius", ((int)self.StoppingDistance+3), 300);
+                        CustomEditorProperties.CustomIntSlider(new Rect(), new GUIContent(), WanderRadiusProp, "Dynamic Wander Radius", ((int)self.StoppingDistance + 3), 300);
                         CustomHelpLabelField("Controls the radius that the AI uses to wander. The AI will randomly pick waypoints within this radius.", true);
 
                         CustomEditorProperties.CustomIntSlider(new Rect(), new GUIContent(), MaxSlopeLimitProp, "Max Slope Limit", 10, 60);
@@ -1478,7 +1805,7 @@ namespace EmeraldAI.Utility
                     EditorGUILayout.LabelField("The Combat section controls all combat related settings. Some AI, such as Cautious AI with a Coward Confidence Type, " +
                         "will not use the Combat section.", EditorStyles.helpBox);
 
-                    GUIContent[] CombatButtons = new GUIContent[3] {new GUIContent("Damage Settings"), new GUIContent("Combat Actions"), new GUIContent("Hit Effect")};
+                    GUIContent[] CombatButtons = new GUIContent[3] { new GUIContent("Damage Settings"), new GUIContent("Combat Actions"), new GUIContent("Hit Effect") };
                     CombatTabNumberProp.intValue = GUILayout.Toolbar(CombatTabNumberProp.intValue, CombatButtons, EditorStyles.miniButton, GUILayout.Height(25));
 
                     EditorGUILayout.EndVertical();
@@ -1488,7 +1815,7 @@ namespace EmeraldAI.Utility
                     if (CombatTabNumberProp.intValue == 0)
                     {
                         if (!Application.isPlaying)
-                        {                           
+                        {
                             if (self.WeaponTypeRef == EmeraldAISystem.WeaponType.Both)
                             {
                                 self.EnableBothWeaponTypes = EmeraldAISystem.YesOrNo.Yes;
@@ -1526,10 +1853,10 @@ namespace EmeraldAI.Utility
                                     EditorGUILayout.Space();
                                     CustomEditorProperties.CustomFloatSlider(new Rect(), new GUIContent(), AttackHeightProp, "Attack Height", 0.5f, 20f);
                                     CustomHelpLabelField("Controls the height allowed in order for an AI to trigger a melee attack. Note: Setting this value too low can result in the " +
-                                        "AI not being able to attack properly. This setting is intended to stop AI from being able to attack too far above or below the player.", true);
+                                        "AI not being able to attack properly. This setting is intended to stop AI from attacking their target that is too far above or below them.", true);
 
                                     EditorGUILayout.PropertyField(AttackOnArrivalProp, new GUIContent("Attack on Arrival"));
-                                    CustomHelpLabelField("Controls whether your AI will attack its target right when it comes within range. After the initial hit, the AI will rely on its attack speed.", true);
+                                    CustomHelpLabelField("Controls whether an AI will attack its target right when it comes within range. After the initial hit, the AI will rely on its attack speed.", true);
                                 }
 
                                 CustomEditorProperties.CustomFloatSlider(new Rect(), new GUIContent(), TooCloseDistanceProp, "Too Close Distance", 0f, 25);
@@ -1592,7 +1919,7 @@ namespace EmeraldAI.Utility
                             EditorGUILayout.Space();
                         }
 
-                        if (self.WeaponTypeRef == EmeraldAISystem.WeaponType.Ranged && self.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.No 
+                        if (self.WeaponTypeRef == EmeraldAISystem.WeaponType.Ranged && self.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.No
                             || self.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.Yes && WeaponTypeControlTabNumberProp.intValue == 1)
                         {
                             if (self.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.Yes)
@@ -1653,7 +1980,7 @@ namespace EmeraldAI.Utility
                             EditorGUILayout.LabelField("Projectiles", EditorStyles.boldLabel);
                             CustomHelpLabelField("Total projectile amounts are based on how many attack animations your AI is currently using.", false);
                         }
-                        else if (self.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee && self.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.No 
+                        else if (self.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee && self.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.No
                             || self.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.Yes && WeaponTypeControlTabNumberProp.intValue == 0)
                         {
                             if (self.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.Yes)
@@ -1680,7 +2007,7 @@ namespace EmeraldAI.Utility
 
                             CustomEditorProperties.CustomIntSlider(new Rect(), new GUIContent(), MaxDamageAngleProp, "Max Damage Angle", 45, 180);
                             CustomHelpLabelField("Controls the max angle that will allow attacks to damage targets. For example, if this setting is set to 90, the AI will be able to damage its" +
-                                " target while it's within 90 degrees of the AI. Anything greater than this amount will stop damage from being inflicted.", true);                        
+                                " target while it's within 90 degrees of the AI. Anything greater than this amount will stop damage from being inflicted.", true);
 
                             EditorGUILayout.LabelField("Damage Amounts", EditorStyles.boldLabel);
                             CustomHelpLabelField("Total damage amounts are based on how many attack animations your AI is currently using.", false);
@@ -1716,92 +2043,38 @@ namespace EmeraldAI.Utility
                             }
                         }
 
-                        //Melee Attack 1
-                        if (self.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee && self.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.No 
+                        if (self.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee && self.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.No
                             || self.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.Yes && WeaponTypeControlTabNumberProp.intValue == 0)
                         {
                             EditorGUILayout.Space();
-                            GUI.backgroundColor = new Color(0.2f, 0.2f, 0.2f, 0.25f);
-                            EditorGUILayout.BeginVertical("Box");
-                            EditorGUILayout.LabelField("Attack 1", EditorStyles.boldLabel);
-                            GUI.backgroundColor = Color.white;
-                            EditorGUILayout.EndVertical();
-                            GUI.backgroundColor = Color.white;
+                            EditorGUILayout.PropertyField(MeleeAttackPickTypeProp, new GUIContent("Pick Type"));
+                            CustomHelpLabelField("Controls how Melee Attacks are picked.", false);
 
-                            if (self.RandomizeDamageRef == EmeraldAISystem.RandomizeDamage.Yes)
+                            if (self.MeleeAttackPickType == EmeraldAISystem.MeleeAttackPickTypeEnum.Odds)
                             {
-                                CustomEditorProperties.CustomIntField(new Rect(), new GUIContent(), MinimumDamageAmount1Prop, "Min Damage");
-                                CustomHelpLabelField("Controls the minimum damage your AI can do with Attack 1. This amount will be randomized with your maximum damage.", false);
-                                CustomEditorProperties.CustomIntField(new Rect(), new GUIContent(), MaximumDamageAmount1Prop, "Max Damage");
-                                CustomHelpLabelField("Controls the maximum damage your AI can do with Attack 1. This amount will be randomized with your minimum damage.", false);
+                                CustomHelpLabelField("Odds - Melee Attacks are picked based off of each of the Melee Attack's odds.", true);
                             }
-                            if (self.RandomizeDamageRef == EmeraldAISystem.RandomizeDamage.No)
+                            else if (self.MeleeAttackPickType == EmeraldAISystem.MeleeAttackPickTypeEnum.Order)
                             {
-                                CustomEditorProperties.CustomIntField(new Rect(), new GUIContent(), DamageAmount1Prop, "Attack 1 Damage");
-                                CustomHelpLabelField("Controls how much damage your AI can do with Attack 1.", false);
+                                CustomHelpLabelField("Order - Melee Attacks are picked based on the order of the AI's Melee Attacks list.", true);
                             }
-                        }                       
-                        //Melee Attack 1
-
-                        //Melee Attack 2
-                        if (self.TotalAttackAnimations >= 2)
-                        {
-                            if (self.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee && self.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.No && self.TotalAttackAnimations >= 2
-                                || self.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.Yes && WeaponTypeControlTabNumberProp.intValue == 0 && self.TotalAttackAnimations >= 2)
+                            else if (self.MeleeAttackPickType == EmeraldAISystem.MeleeAttackPickTypeEnum.Random)
                             {
-                                EditorGUILayout.Space();
-                                EditorGUILayout.Space();
-                                GUI.backgroundColor = new Color(0.2f, 0.2f, 0.2f, 0.25f);
-                                EditorGUILayout.BeginVertical("Box");
-                                EditorGUILayout.LabelField("Attack 2", EditorStyles.boldLabel);
-                                GUI.backgroundColor = Color.white;
-                                EditorGUILayout.EndVertical();
-                                GUI.backgroundColor = Color.white;
-
-                                if (self.RandomizeDamageRef == EmeraldAISystem.RandomizeDamage.Yes)
-                                {
-                                    CustomEditorProperties.CustomIntField(new Rect(), new GUIContent(), MinimumDamageAmount2Prop, "Min Damage");
-                                    CustomHelpLabelField("Controls the minimum damage your AI can do with Attack 2. This amount will be randomized with your maximum damage.", false);
-                                    CustomEditorProperties.CustomIntField(new Rect(), new GUIContent(), MaximumDamageAmount2Prop, "Max Damage");
-                                    CustomHelpLabelField("Controls the maximum damage your AI can do with Attack 2. This amount will be randomized with your minimum damage.", false);
-                                }
-                                if (self.RandomizeDamageRef == EmeraldAISystem.RandomizeDamage.No)
-                                {
-                                    CustomEditorProperties.CustomIntField(new Rect(), new GUIContent(), DamageAmount2Prop, "Attack 2 Damage");
-                                    CustomHelpLabelField("Controls how much damage your AI can do with Attack 2.", false);
-                                }
+                                CustomHelpLabelField("Random - Melee Attacks are picked randomly from the AI's Melee Attacks list.", true);
                             }
-                        }
-                        //Melee Attack 2
+                            EditorGUILayout.Space();
 
-                        //Melee Attack 3
-                        if (self.TotalAttackAnimations == 3)
-                        {
-                            if (self.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee && self.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.No
-                                || self.EnableBothWeaponTypes == EmeraldAISystem.YesOrNo.Yes && WeaponTypeControlTabNumberProp.intValue == 0)
+                            CustomHelpLabelField("A list of an AI's melee attacks. You can hover the mouse over each setting to view its tooltip.", false);
+                            if (self.AttackAnimationList.Count == 0 || MeleeEnumAnimations == null)
                             {
-                                EditorGUILayout.Space();
-                                EditorGUILayout.Space();
-                                GUI.backgroundColor = new Color(0.2f, 0.2f, 0.2f, 0.25f);
-                                EditorGUILayout.BeginVertical("Box");
-                                EditorGUILayout.LabelField("Attack 3", EditorStyles.boldLabel);
+                                GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
+                                EditorGUILayout.HelpBox("Please add at least 1 Melee Attack animation to the Melee Attack Animation list (located under Animations>Combat) to " +
+                                    "choose the type of animations these melee attacks will use.", MessageType.Warning);
                                 GUI.backgroundColor = Color.white;
-                                EditorGUILayout.EndVertical();
-                                GUI.backgroundColor = Color.white;
-
-                                if (self.RandomizeDamageRef == EmeraldAISystem.RandomizeDamage.Yes)
-                                {
-                                    CustomEditorProperties.CustomIntField(new Rect(), new GUIContent(), MinimumDamageAmount3Prop, "Min Damage");
-                                    CustomHelpLabelField("Controls the minimum damage your AI can do with Attack 3. This amount will be randomized with your maximum damage.", false);
-                                    CustomEditorProperties.CustomIntField(new Rect(), new GUIContent(), MaximumDamageAmount3Prop, "Max Damage");
-                                    CustomHelpLabelField("Controls the maximum damage your AI can do with Attack 3. This amount will be randomized with your minimum damage.", true);
-                                }
-                                if (self.RandomizeDamageRef == EmeraldAISystem.RandomizeDamage.No)
-                                {
-                                    CustomEditorProperties.CustomIntField(new Rect(), new GUIContent(), DamageAmount3Prop, "Attack 3 Damage");
-                                    CustomHelpLabelField("Controls how much damage your AI can do with Attack 3.", true);
-                                }
                             }
+                            MeleeAttacks.DoLayoutList();
+                            EditorGUILayout.Space();
+                            EditorGUILayout.Space();
                         }
 
                         EditorGUILayout.EndVertical();
@@ -1818,10 +2091,10 @@ namespace EmeraldAI.Utility
                                 GUI.backgroundColor = new Color(0.2f, 0.2f, 0.2f, 0.25f);
                                 EditorGUILayout.BeginVertical("Box");
                                 EditorGUILayout.LabelField("Abilities", style3);
-                                GUI.backgroundColor = Color.white;                                                            
+                                GUI.backgroundColor = Color.white;
                                 EditorGUILayout.EndVertical();
                                 CustomHelpLabelField("Below you can customize what abilities an AI will use. This can be as simple as an offensive arrow projectile for an " +
-                                    "archer or a mage that can utilize all ability categories.", false);                              
+                                    "archer or a mage that can utilize all ability categories.", false);
 
                                 GUI.backgroundColor = new Color(1f, 1, 0.25f, 0.25f);
                                 EditorGUILayout.LabelField("Note: You will need to ensure you are applying the Ability Objects to the proper categories. " +
@@ -1829,7 +2102,7 @@ namespace EmeraldAI.Utility
                                 GUI.backgroundColor = new Color(0, 0.65f, 0, 0.8f);
                                 if (GUILayout.Button("See Tutorial", HelpButtonStyle, GUILayout.Height(20)))
                                 {
-                                    Application.OpenURL("https://docs.google.com/document/d/1DJ8sc96Q3DqANYkAwDhtR5JlmhkgrcLoD92bSA5FYdQ/edit");
+                                    Application.OpenURL("https://github.com/Black-Horizon-Studios/Emerald-AI/wiki/Creating-an-AI-Ability-Object");
                                 }
                                 GUI.backgroundColor = Color.white;
                                 EditorGUILayout.Space();
@@ -1845,22 +2118,33 @@ namespace EmeraldAI.Utility
                                 GUI.backgroundColor = Color.white;
                                 EditorGUILayout.EndVertical();
 
-                                if (options != null)
+                                //Offensive
+                                EditorGUILayout.PropertyField(OffensiveAbilityPickTypeProp, new GUIContent("Pick Type"));
+                                CustomHelpLabelField("Controls how Offensive Abilities are picked.", false);
+
+                                if (self.OffensiveAbilityPickType == EmeraldAISystem.OffensiveAbilityPickTypeEnum.Odds)
                                 {
-                                    Ability1AnimationIndexProp.intValue = EditorGUILayout.Popup("Offensive Animation", Ability1AnimationIndexProp.intValue, options, EditorStyles.popup);
-                                    CustomHelpLabelField("The animation that all offensive abilities will use. These are based off of this AI's attack animation list.", true);
+                                    CustomHelpLabelField("Odds - Offensive Abilities are picked based off of each of the ability's odds.", true);
                                 }
-                                else
+                                else if (self.OffensiveAbilityPickType == EmeraldAISystem.OffensiveAbilityPickTypeEnum.Order)
                                 {
-                                    EditorGUILayout.Popup("Offensive Animation", 0, BlankOptions, EditorStyles.popup);
+                                    CustomHelpLabelField("Order - Offensive Abilities are picked based on the order of the AI's Offensive Abilities list.", true);
+                                }
+                                else if (self.OffensiveAbilityPickType == EmeraldAISystem.OffensiveAbilityPickTypeEnum.Random)
+                                {
+                                    CustomHelpLabelField("Random - Offensive Abilities are picked randomly from the AI's Offensive Abilities list.", true);
+                                }
+                                EditorGUILayout.Space();
+
+                                CustomHelpLabelField("A list of an AI's offensive abilities. You can hover the mouse over each setting to view its tooltip", false);
+                                if (self.RangedAttackAnimationList.Count == 0 || RangedEnumAnimations == null)
+                                {
                                     GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
-                                    EditorGUILayout.LabelField("Please add at least 1 Ranged Attack animation to the Ranged Attack Animation list (located under Animations>Combat) to " +
-                                        "choose the type of animation this ability will use.", EditorStyles.helpBox);
+                                    EditorGUILayout.HelpBox("Please add at least 1 Ranged Attack animation to the Ranged Attack Animation list (located under Animations>Combat) to " +
+                                        "choose the type of animations these abilities will use.", MessageType.Warning);
                                     GUI.backgroundColor = Color.white;
                                 }
-
-                                CustomHelpLabelField("A list of an AI's offensive abilities.", false);
-                                OffensiveAbilitiesList.DoLayoutList();
+                                OffensiveAbilities.DoLayoutList();
                                 EditorGUILayout.Space();
                                 EditorGUILayout.Space();
                                 EditorGUILayout.Space();
@@ -1875,25 +2159,36 @@ namespace EmeraldAI.Utility
                                 GUI.backgroundColor = Color.white;
                                 EditorGUILayout.EndVertical();
 
-                                if (options != null)
+                                //Support
+                                EditorGUILayout.PropertyField(SupportAbilityPickTypeProp, new GUIContent("Pick Type"));
+                                CustomHelpLabelField("Controls how Support Abilities are picked.", false);
+
+                                if (self.SupportAbilityPickType == EmeraldAISystem.SupportAbilityPickTypeEnum.Odds)
                                 {
-                                    Ability2AnimationIndexProp.intValue = EditorGUILayout.Popup("Support Animation", Ability2AnimationIndexProp.intValue, options, EditorStyles.popup);
-                                    CustomHelpLabelField("The animation that all support abilities will use. These are based off of this AI's attack animation list.", true);
+                                    CustomHelpLabelField("Odds - Support Abilities are picked based off of each of the ability's odds.", true);
                                 }
-                                else
+                                else if (self.SupportAbilityPickType == EmeraldAISystem.SupportAbilityPickTypeEnum.Order)
                                 {
-                                    EditorGUILayout.Popup("Support Animation", 0, BlankOptions, EditorStyles.popup);
-                                    GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
-                                    EditorGUILayout.LabelField("Please add at least 1 Ranged Attack animation to the Ranged Attack Animation list (located under Animations>Combat) to " +
-                                        "choose the type of animation this ability will use.", EditorStyles.helpBox);
-                                    GUI.backgroundColor = Color.white;
+                                    CustomHelpLabelField("Order - Support Abilities are picked based on the order of the AI's Support Abilities list.", true);
                                 }
+                                else if (self.SupportAbilityPickType == EmeraldAISystem.SupportAbilityPickTypeEnum.Random)
+                                {
+                                    CustomHelpLabelField("Random - Support Abilities are picked randomly from the AI's Support Abilities list.", true);
+                                }
+                                EditorGUILayout.Space();
 
                                 CustomEditorProperties.CustomIntSlider(new Rect(), new GUIContent(), HealthPercentageToHealProp, "Health Percentage to Heal", 1, 100);
                                 CustomHelpLabelField("Controls the health amount needed for this AI to heal cast support abilities such as healing.", true);
 
-                                CustomHelpLabelField("A list of an AI's support abilities.", false);
-                                SupportAbilitiesList.DoLayoutList();
+                                CustomHelpLabelField("A list of an AI's Support abilities. You can hover the mouse over each setting to view its tooltip", false);
+                                if (self.RangedAttackAnimationList.Count == 0 || RangedEnumAnimations == null)
+                                {
+                                    GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
+                                    EditorGUILayout.HelpBox("Please add at least 1 Ranged Attack animation to the Ranged Attack Animation list (located under Animations>Combat) to " +
+                                        "choose the type of animations these abilities will use.", MessageType.Warning);
+                                    GUI.backgroundColor = Color.white;
+                                }
+                                SupportAbilities.DoLayoutList();
                                 EditorGUILayout.Space();
                                 EditorGUILayout.Space();
                                 EditorGUILayout.Space();
@@ -1908,19 +2203,23 @@ namespace EmeraldAI.Utility
                                 GUI.backgroundColor = Color.white;
                                 EditorGUILayout.EndVertical();
 
-                                if (options != null)
+                                //Summoning
+                                EditorGUILayout.PropertyField(SummoningAbilityPickTypeProp, new GUIContent("Pick Type"));
+                                CustomHelpLabelField("Controls how Summoning Abilities are picked.", false);
+
+                                if (self.SummoningAbilityPickType == EmeraldAISystem.SummoningAbilityPickTypeEnum.Odds)
                                 {
-                                    Ability3AnimationIndexProp.intValue = EditorGUILayout.Popup("Summon Animation", Ability3AnimationIndexProp.intValue, options, EditorStyles.popup);
-                                    CustomHelpLabelField("The animation that all summon abilities will use. These are based off of this AI's attack animation list.", true);
+                                    CustomHelpLabelField("Odds - Summoning Abilities are picked based off of each of the ability's odds.", true);
                                 }
-                                else
+                                else if (self.SummoningAbilityPickType == EmeraldAISystem.SummoningAbilityPickTypeEnum.Order)
                                 {
-                                    EditorGUILayout.Popup("Summon Animation", 0, BlankOptions, EditorStyles.popup);
-                                    GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
-                                    EditorGUILayout.LabelField("Please add at least 1 Ranged Attack animation to the Ranged Attack Animation list (located under Animations>Combat) to " +
-                                        "choose the type of animation this ability will use.", EditorStyles.helpBox);
-                                    GUI.backgroundColor = Color.white;
+                                    CustomHelpLabelField("Order - Summoning Abilities are picked based on the order of the AI's Summoning Abilities list.", true);
                                 }
+                                else if (self.SummoningAbilityPickType == EmeraldAISystem.SummoningAbilityPickTypeEnum.Random)
+                                {
+                                    CustomHelpLabelField("Random - Summoning Abilities are picked randomly from the AI's Summoning Abilities list.", true);
+                                }
+                                EditorGUILayout.Space();
 
                                 EditorGUILayout.PropertyField(SummonsMultipleAIProp, new GUIContent("Summons Multiple AI"));
                                 CustomHelpLabelField("Controls whether or not this AI can summon more than 1 after the intilial one dies. " +
@@ -1932,8 +2231,15 @@ namespace EmeraldAI.Utility
                                     CustomHelpLabelField("Controls the maximum allowed AI that this AI can have spanwed at a time.", true);
                                 }
 
-                                CustomHelpLabelField("A list of an AI's summoning abilities.", false);
-                                SummoningAbilitiesList.DoLayoutList();
+                                CustomHelpLabelField("A list of an AI's Summoning abilities. You can hover the mouse over each setting to view its tooltip", false);
+                                if (self.RangedAttackAnimationList.Count == 0 || RangedEnumAnimations == null)
+                                {
+                                    GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
+                                    EditorGUILayout.HelpBox("Please add at least 1 Ranged Attack animation to the Ranged Attack Animation list (located under Animations>Combat) to " +
+                                        "choose the type of animations these abilities will use.", MessageType.Warning);
+                                    GUI.backgroundColor = Color.white;
+                                }
+                                SummoningAbilities.DoLayoutList();
                                 EditorGUILayout.Space();
                                 EditorGUILayout.Space();
                                 EditorGUILayout.Space();
@@ -1984,18 +2290,36 @@ namespace EmeraldAI.Utility
                                     GUI.backgroundColor = Color.white;
                                     EditorGUILayout.EndVertical();
                                     GUI.backgroundColor = Color.white;
-                                    if (self.RandomizeDamageRef == EmeraldAISystem.RandomizeDamage.Yes)
+
+                                    EditorGUILayout.Space();
+                                    EditorGUILayout.PropertyField(MeleeRunAttackPickTypeProp, new GUIContent("Pick Type"));
+                                    CustomHelpLabelField("Controls how Run Melee Attacks are picked.", false);
+
+                                    if (self.MeleeRunAttackPickType == EmeraldAISystem.MeleeRunAttackPickTypeEnum.Odds)
                                     {
-                                        CustomEditorProperties.CustomIntField(new Rect(), new GUIContent(), MinimumDamageAmountRunProp, "Min Damage");
-                                        CustomHelpLabelField("Controls the minimum damage your AI can do with a Run Attack. This amount will be randomized with your maximum damage.", false);
-                                        CustomEditorProperties.CustomIntField(new Rect(), new GUIContent(), MaximumDamageAmountRunProp, "Max Damage");
-                                        CustomHelpLabelField("Controls the maximum damage your AI can do with a Run Attack. This amount will be randomized with your minimum damage.", true);
+                                        CustomHelpLabelField("Odds - Melee Run Attacks are picked based off of each of the Melee Attack's odds.", true);
                                     }
-                                    if (self.RandomizeDamageRef == EmeraldAISystem.RandomizeDamage.No)
+                                    else if (self.MeleeRunAttackPickType == EmeraldAISystem.MeleeRunAttackPickTypeEnum.Order)
                                     {
-                                        CustomEditorProperties.CustomIntField(new Rect(), new GUIContent(), DamageAmountRunProp, "Run Attack Damage");
-                                        CustomHelpLabelField("Controls how much damage your AI can do with a Run Attack.", true);
+                                        CustomHelpLabelField("Order - Melee Run Attacks are picked based on the order of the AI's Melee Run Attacks list.", true);
                                     }
+                                    else if (self.MeleeRunAttackPickType == EmeraldAISystem.MeleeRunAttackPickTypeEnum.Random)
+                                    {
+                                        CustomHelpLabelField("Random - Melee Run Attacks are picked randomly from the AI's Melee Run Attacks list.", true);
+                                    }
+                                    EditorGUILayout.Space();
+
+                                    CustomHelpLabelField("A list of an AI's melee run attacks. You can hover the mouse over each setting to view its tooltip.", false);
+                                    if (self.RunAttackAnimationList.Count == 0 || MeleeEnumAnimations == null)
+                                    {
+                                        GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
+                                        EditorGUILayout.HelpBox("Please add at least 1 Melee Run Attack animation to the Melee Run Attack Animation list (located under Animations>Combat) to " +
+                                            "choose the type of animations these run melee attacks will use.", MessageType.Warning);
+                                        GUI.backgroundColor = Color.white;
+                                    }
+                                    MeleeRunAttacks.DoLayoutList();
+                                    EditorGUILayout.Space();
+                                    EditorGUILayout.Space();
                                 }
 
                                 EditorGUILayout.EndVertical();
@@ -2083,7 +2407,7 @@ namespace EmeraldAI.Utility
                             GUI.backgroundColor = new Color(0, 0.65f, 0, 0.8f);
                             if (GUILayout.Button("See Tutorial", HelpButtonStyle, GUILayout.Height(20)))
                             {
-                                Application.OpenURL("https://docs.google.com/document/d/1_zXR1gg61soAX_bZscs6HC-7as2njM7Jx9pYlqgbtM8/edit#heading=h.tpf8u6pakj4k");
+                                Application.OpenURL("https://github.com/Black-Horizon-Studios/Emerald-AI/wiki/Setting-up-an-AIs-Sheathable-Weapons");
                             }
                             GUI.backgroundColor = Color.white;
                             EditorGUILayout.Space();
@@ -2206,7 +2530,7 @@ namespace EmeraldAI.Utility
                             CustomEditorProperties.CustomIntSlider(new Rect(), new GUIContent(), BackupSecondsMinProp, "Backup Seconds Min", 1, 8);
                             CustomHelpLabelField("Controls the minimum seconds an AI will backup for.", false);
                             CustomEditorProperties.CustomIntSlider(new Rect(), new GUIContent(), BackupSecondsMaxProp, "Backup Seconds Max", 1, 8);
-                            CustomHelpLabelField("Controls the minimum seconds an AI will backup for.", true);                          
+                            CustomHelpLabelField("Controls the minimum seconds an AI will backup for.", true);
                         }
                         else if (self.BackupTypeRef == EmeraldAISystem.BackupType.Odds)
                         {
@@ -2255,12 +2579,12 @@ namespace EmeraldAI.Utility
                             EditorGUILayout.LabelField("(Not Usable with Pet AI)", EditorStyles.helpBox);
                             GUI.backgroundColor = Color.white;
                         }
-                      
+
                         CustomEditorProperties.CustomIntSlider(new Rect(), new GUIContent(), CautiousSecondsProp, "Cautious Seconds", 3, 12);
                         CustomHelpLabelField("Controls the amount of seconds before a Cautious AI will turn aggressive and attack.", true);
 
                         CustomEditorProperties.CustomFloatSlider(new Rect(), new GUIContent(), ProjectileCollisionPointYProp, "Hit Transform", 0, self.transform.localScale.y + 4);
-                        CustomHelpLabelField("Controls the transform that other AI will use for using the head look feature allowing them to look at this transform. " +
+                        CustomHelpLabelField("Controls the transform that other AI will use when using the head look feature allowing them to look at this transform. " +
                             "This transform is also used for ranged combat allowing other AI's projectiles to hit this spot. This is to ensure an AI is always seen, " +
                             "regardless of how large or small they are.", true);
                         EditorGUILayout.Space();
@@ -2417,7 +2741,7 @@ namespace EmeraldAI.Utility
                                 EmeraldAIAnimatorGenerator.GenerateAnimatorController(self);
                             }
                         }
-                        #endif
+#endif
                     }
                     else if (self.AnimatorType == EmeraldAISystem.AnimatorTypeState.RootMotion)
                     {
@@ -2444,7 +2768,7 @@ namespace EmeraldAI.Utility
 
                     EditorGUILayout.PropertyField(TurnAnimationTypeProp, new GUIContent("Turn Animation Type"));
                     CustomHelpLabelField("Controls the type of animation your AI will use when turning in its non-combat state. Stationary will use an AI's stationary turn animation. " +
-                        "Blend Tree will use the AI's blend tree/walk turn animation. For a comparision of the two, see the button below.", true);
+                        "Blend Tree will use the AI's blend tree/walk turn animation.", true);
                     EditorGUILayout.Space();
 
                     CustomEditorProperties.CustomFloatSlider(new Rect(), new GUIContent(), StoppingDistanceProp, "Stopping Distance", 0.25f, 40);
@@ -2627,10 +2951,10 @@ namespace EmeraldAI.Utility
                     EditorGUILayout.LabelField("Controls all of the settings that can help optimize an AI such as disabling an AI when their model is culled or not visible.", EditorStyles.helpBox);
                     EditorGUILayout.Space();
 
-                    #if CRUX_PRESENT
+#if CRUX_PRESENT
                     EditorGUILayout.PropertyField(SpawnedWithCruxProp, new GUIContent("Spawned with Crux"));
                     CustomHelpLabelField("Controls whether or not this AI is being spawned with Crux - Procedural Spawner. This allows Crux to automatically remove and adjust the population of this AI when it's killed.", true);
-                    #endif
+#endif
 
                     EditorGUILayout.PropertyField(DisableAIWhenNotInViewProp, new GUIContent("Disable when Off-Screen"));
                     CustomHelpLabelField("Controls whether or not this AI is disabled when off screen or is culled.", true);
@@ -2768,7 +3092,7 @@ namespace EmeraldAI.Utility
                     EditorGUILayout.BeginVertical("Box");
                     EditorGUILayout.LabelField("Events", EditorStyles.boldLabel);
                     EditorGUILayout.LabelField("Controls all of an AI's events.", EditorStyles.helpBox);
-                    GUIContent[] EventButtons = new GUIContent[2] { new GUIContent("General"), new GUIContent("Combat")};
+                    GUIContent[] EventButtons = new GUIContent[2] { new GUIContent("General"), new GUIContent("Combat") };
                     EventTabNumberProp.intValue = GUILayout.Toolbar(EventTabNumberProp.intValue, EventButtons, EditorStyles.miniButton, GUILayout.Height(25));
                     EditorGUILayout.EndVertical();
 
@@ -2791,7 +3115,7 @@ namespace EmeraldAI.Utility
 
                         EditorGUILayout.Space();
                         CustomHelpLabelField("Triggers an event when this AI reaches their destination when using the Destination Wander Type.", false);
-                        EditorGUILayout.PropertyField(ReachedDestinationEventProp);
+                        EditorGUILayout.PropertyField(ReachedDestinationEventProp, new GUIContent("On Reached Destination Event"));
 
                         EditorGUILayout.Space();
                         CustomHelpLabelField("Triggers an event when this AI detects the player when not in combat mode. This can be useful for quests, initializing dialogue, or greetings. " +
@@ -2799,7 +3123,7 @@ namespace EmeraldAI.Utility
                         CustomHelpLabelField("Controls the Player Detection Event cooldown seconds to stop player detection events from happening too frequently. " +
                             "The Player Detection Cooldown is applied after the first time it comes in contact with an AI. ", false);
                         CustomEditorProperties.CustomIntSlider(new Rect(), new GUIContent(), PlayerDetectionEventCooldownProp, "Player Detection Cooldown", 1, 60);
-                        EditorGUILayout.PropertyField(OnPlayerDetectionEventProp);                       
+                        EditorGUILayout.PropertyField(OnPlayerDetectionEventProp);
 
                         EditorGUILayout.EndVertical();
                     }
@@ -2824,14 +3148,23 @@ namespace EmeraldAI.Utility
 
                         EditorGUILayout.Space();
                         CustomHelpLabelField("Triggers an event when the AI is damaged.", false);
-                        EditorGUILayout.PropertyField(DamageEventProp);
+                        EditorGUILayout.PropertyField(DamageEventProp, new GUIContent("On Take Damage"));
 
+                        EditorGUILayout.Space();
+                        CustomHelpLabelField("Triggers an event when the AI deals damage for both Melee or Ranged weapon types.", false);
+                        EditorGUILayout.PropertyField(OnDoDamageEventProp);
+
+                        EditorGUILayout.Space();
                         CustomHelpLabelField("Triggers an event when an AI flees. This can be useful for fleeing sounds or other added functionality.", false);
                         EditorGUILayout.PropertyField(OnFleeEventProp);
 
                         EditorGUILayout.Space();
+                        CustomHelpLabelField("Triggers an event when the AI kills a target.", false);
+                        EditorGUILayout.PropertyField(OnKillTargetEventProp);
+
+                        EditorGUILayout.Space();
                         CustomHelpLabelField("Triggers an event when the AI dies. This can be useful for triggering loot generation, quest mechanics, or other death related events.", false);
-                        EditorGUILayout.PropertyField(DeathEventProp);
+                        EditorGUILayout.PropertyField(DeathEventProp, new GUIContent("On Death Event"));
 
                         EditorGUILayout.EndVertical();
                     }
@@ -2867,7 +3200,7 @@ namespace EmeraldAI.Utility
                 EditorGUILayout.LabelField(new GUIContent(DetectTagsIcon), style, GUILayout.ExpandWidth(true), GUILayout.Height(32));
                 EditorGUILayout.LabelField("Detection & Tags", style, GUILayout.ExpandWidth(true));
                 GUILayout.Space(4);
-                GUIContent[] DetectionTagsButtons = new GUIContent[3] { new GUIContent("Detection Options"), new GUIContent("Tag Options"), new GUIContent("Head Look Options") };
+                GUIContent[] DetectionTagsButtons = new GUIContent[3] { new GUIContent("Detection Options"), new GUIContent("Tag & Faction Options"), new GUIContent("Head Look Options") };
                 DetectionTagsTabNumberProp.intValue = GUILayout.Toolbar(DetectionTagsTabNumberProp.intValue, DetectionTagsButtons, EditorStyles.miniButton, GUILayout.Height(25), GUILayout.Width(85 * Screen.width / Screen.dpi));
                 GUILayout.Space(1);
                 EditorGUILayout.EndVertical();
@@ -2922,6 +3255,11 @@ namespace EmeraldAI.Utility
                     {
                         CustomHelpLabelField("First Detected - Picks the target that is first seen or detected. This is the most realistic, but can sometimes result in " +
                             "multiple AI picking the same target.", true);
+                    }
+                    else if (self.PickTargetMethodRef == EmeraldAISystem.PickTargetMethod.Random)
+                    {
+                        CustomHelpLabelField("Random - Picks a random target from all available targets within an AI's detection radius upon entering combat. " +
+                            "This helps the AI target picking to feel more dynamic and less precise so the same, most logical target, isn’t always picked.", true);
                     }
 
                     EditorGUILayout.Space();
@@ -3050,321 +3388,180 @@ namespace EmeraldAI.Utility
 
                 if (DetectionTagsTabNumberProp.intValue == 1)
                 {
-                    EditorGUILayout.BeginVertical("Box", GUILayout.Width(85 * Screen.width / Screen.dpi));
-                    EditorGUILayout.LabelField("Tag Options", EditorStyles.boldLabel);
-                    EditorGUILayout.HelpBox("Here you can setup your AI's tags and layers. The Target Tags are tags that the AI will see as targets. It will act according to " +
-                        "its behavior type. For more infromation regarding the Tag Options, please see the docs section within the Emerald Editor.", MessageType.None, true);
+                    //EditorGUILayout.BeginVertical("Box", GUILayout.Width(85 * Screen.width / Screen.dpi));
+
+                    EditorGUILayout.Space();
+                    EditorGUILayout.Space();
+                    EditorGUILayout.BeginVertical("Box", GUILayout.Width(87 * Screen.width / Screen.dpi));
+                    EditorGUILayout.LabelField("Tag and Faction Settings", EditorStyles.boldLabel);
+                    EditorGUILayout.LabelField("The Tag Options allow you to set Unity Tags and Layers that an AI uses for detection. The Faction Options allow you to control which Factions your AI " +
+                        "sees as enemies or allies, including the relations with the AI and the player.", EditorStyles.helpBox);
+
+                    GUIContent[] CombatButtons = new GUIContent[2] { new GUIContent("Tag Options"), new GUIContent("Faction Options") };
+                    FactionsAndTagTabNumberProp.intValue = GUILayout.Toolbar(FactionsAndTagTabNumberProp.intValue, CombatButtons, EditorStyles.miniButton, GUILayout.Height(25));
+
+                    EditorGUILayout.EndVertical();
                     EditorGUILayout.Space();
                     EditorGUILayout.Space();
 
-                    CustomEditorProperties.CustomTagField(new Rect(), new GUIContent(), EmeraldTagProp, "Emerald Unity Tag");
-                    CustomHelpLabelField("The Unity Tag used to define other Emerald AI objects. This is the tag that was created using Unity's Tag pulldown at the top of " +
-                        "the gameobject.", true);
-                    EditorGUILayout.Space();
-
-                    EditorGUI.BeginChangeCheck();
-                    var layersSelection = EditorGUILayout.MaskField("Detection Layers", LayerMaskToField(DetectionLayerMaskProp.intValue), InternalEditorUtility.layers);
-                    CustomHelpLabelField("The Detection Layers controls what layers this AI can detect as possible targets, if the AI has the appropriate Emerald Unity Tag.", false);
-                    if (EditorGUI.EndChangeCheck())
+                    if (FactionsAndTagTabNumberProp.intValue == 0)
                     {
-                        Undo.RecordObject(self, "Layers changed");
-                        DetectionLayerMaskProp.intValue = FieldToLayerMask(layersSelection);
-                    }
+                        EditorGUILayout.BeginVertical("Box", GUILayout.Width(85 * Screen.width / Screen.dpi));
+                        EditorGUILayout.LabelField("Tag Options", EditorStyles.boldLabel);
+                        EditorGUILayout.HelpBox("Here you can setup your AI's Unity Tags and Layers (These are the tags are layers at the top of this game object). " +
+                            "Emerald AI needs these Unity Tags and Layers for its detection system so ensure they are setup correctly.", MessageType.None, true);
 
-                    if (DetectionLayerMaskProp.intValue == 0 || DetectionLayerMaskProp.intValue == 1)
-                    {
-                        GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
-                        EditorGUILayout.LabelField("The Detection Layers cannot contain Nothing, Default, or Everything.", EditorStyles.helpBox);
-                        GUI.backgroundColor = Color.white;
-                    }
-
-                    EditorGUILayout.Space();
-                    EditorGUILayout.Space();
-
-                    CustomEditorProperties.CustomEnum(new Rect(), new GUIContent(), CurrentFactionProp, "Faction");
-                    CustomHelpLabelField("An AI's Faction is the name used to control combat reaction with other AI. This is the name other AI will use when " +
-                        "looking for opposing targets.", true);
-
-                    CustomHelpLabelField("Factions can be created and removed using the Faction Manager. ", false);
-                    if (GUILayout.Button("Open Faction Manager"))
-                    {
-                        EditorWindow APS = EditorWindow.GetWindow(typeof(EmeraldAIFactionManager));
-                        APS.minSize = new Vector2(600f, 775f);
-                    }
-
-                    EditorGUILayout.Space();
-                    EditorGUILayout.Space();
-
-                    if (self.BehaviorRef != EmeraldAISystem.CurrentBehavior.Companion && self.BehaviorRef != EmeraldAISystem.CurrentBehavior.Pet)
-                    {
-                        GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
-                        EditorGUILayout.LabelField("(Companion AI Only)", EditorStyles.helpBox);
-                        GUI.backgroundColor = Color.white;
-                    }
-                    EditorGUILayout.HelpBox("The Follower Tag controls the Tag that this AI will follow. This happens when this AI's trigger radius hits the said tag. This feature does not have to be used. " +
-                        "If you'd like to manually set the AI's follower, you can do so programmatically.", MessageType.None, true);
-                    CustomEditorProperties.CustomTagField(new Rect(), new GUIContent(), FollowTagProp, "Follower Tag");
-                    CustomHelpLabelField("If you would like to not use this feature, you can set the Follower Tag to Untagged.", true);
-                    EditorGUILayout.Space();
-
-                    EditorGUILayout.HelpBox("You must define your Player's Unity Tag separately. This allows the AI to determine if the target is another AI or not.", MessageType.None, true);
-                    CustomEditorProperties.CustomTagField(new Rect(), new GUIContent(), PlayerTagProp, "Player Tag");
-                    CustomHelpLabelField("The Player Tag is the Unity Tag used to detect player targets.", true);
-
-                    if (self.BehaviorRef == EmeraldAISystem.CurrentBehavior.Pet)
-                    {
-                        GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
-                        EditorGUILayout.LabelField("Not Usable with Pet AI.", EditorStyles.helpBox);
-                        GUI.backgroundColor = Color.white;
-                    }
-
-                    if (self.BehaviorRef != EmeraldAISystem.CurrentBehavior.Cautious && self.ConfidenceRef != EmeraldAISystem.ConfidenceType.Coward 
-                        || self.BehaviorRef == EmeraldAISystem.CurrentBehavior.Cautious && self.ConfidenceRef != EmeraldAISystem.ConfidenceType.Coward)
-                    {
-                        EditorGUILayout.PropertyField(AIAttacksPlayerProp, new GUIContent("AI Attacks Player?"));
-                        CustomHelpLabelField("Controls whether or not this AI will attack a player with the given tag.", true);
-                    }
-                    else if (self.BehaviorRef == EmeraldAISystem.CurrentBehavior.Cautious && self.ConfidenceRef == EmeraldAISystem.ConfidenceType.Coward
-                        || self.BehaviorRef == EmeraldAISystem.CurrentBehavior.Passive && self.ConfidenceRef == EmeraldAISystem.ConfidenceType.Coward)
-                    {
-                        EditorGUILayout.PropertyField(AIAttacksPlayerProp, new GUIContent("AI Flees From Player?"));
-                        CustomHelpLabelField("Controls whether or not this AI will flee from a player with the given tag.", true);
-                    }
-
-                    EditorGUILayout.Space();
-
-                    EditorGUILayout.PropertyField(UseNonAITagProp, new GUIContent("Use Non-AI Tag?"));
-                    CustomHelpLabelField("Controls whether or not this AI will attack a non-player object with the given tag.", true);
-
-                    if (self.UseNonAITagRef == EmeraldAISystem.UseNonAITag.Yes)
-                    {
-                        EditorGUILayout.HelpBox("The Non-AI Unity Tag is another type of tag AI can use for the behavior types such as avoid cars, areas of water, or other avoidable objects that are not AI objects.", MessageType.None, true);
-                        CustomEditorProperties.CustomTagField(new Rect(), new GUIContent(), NonAITagProp, "Non-AI Tag");
                         GUI.backgroundColor = new Color(1f, 1, 0.25f, 0.25f);
-                        EditorGUILayout.LabelField("Note: The layer of a Non-AI object must be included in an AI's 'Number of Layers' list.", EditorStyles.helpBox);
+                        EditorGUILayout.LabelField("For a tutorial on setting up an AI's layers and tags, please see the tutorial below.", EditorStyles.helpBox);
+                        GUI.backgroundColor = new Color(0, 0.65f, 0, 0.8f);
+                        if (GUILayout.Button("See Tutorial", HelpButtonStyle, GUILayout.Height(20)))
+                        {
+                            Application.OpenURL("https://github.com/Black-Horizon-Studios/Emerald-AI/wiki/Setting-up-an-AIs-Layers-and-Tags");
+                        }
                         GUI.backgroundColor = Color.white;
-                    }
-
-                    EditorGUILayout.Space();
-                    EditorGUILayout.Space();
-
-                    EditorGUILayout.PropertyField(OpposingFactionsEnumProp, new GUIContent("Total Faction Relations"));
-                    CustomHelpLabelField("Controls which factions this AI sees as enemies and allies.", false);
-                    GUI.backgroundColor = new Color(1f, 1, 0.25f, 0.25f);
-                    EditorGUILayout.LabelField("Note: The Faction Relations use an AI's Faction not Unity tags.", EditorStyles.helpBox);
-                    GUI.backgroundColor = Color.white;
-                    EditorGUILayout.Space();
-                    EditorGUILayout.Space();
-
-                    EditorGUILayout.BeginHorizontal();
-                    GUILayout.Space(10);
-                    EditorGUILayout.BeginVertical();
-
-                    if (self.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.One ||
-                        self.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Two ||
-                        self.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Three ||
-                        self.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Four ||
-                        self.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Five)
-                    {
-
-                        if (FactionRelation1Prop.intValue == 0)
-                        {
-                            GUI.backgroundColor = new Color(0.8f, 0f, 0f, 1f);
-                        }
-                        else if (FactionRelation1Prop.intValue == 1)
-                        {
-                            GUI.backgroundColor = new Color(0.0f, 0.0f, 1f, 0.4f);
-                        }
-                        else if (FactionRelation1Prop.intValue == 2)
-                        {
-                            GUI.backgroundColor = new Color(0.0f, 0.75f, 0f, 1f);
-                        }
-                        EditorGUILayout.BeginVertical("Box");
-                        GUILayout.Space(5);
-
-                        var RelationStyle = new GUIStyle(EditorStyles.boldLabel) { alignment = TextAnchor.MiddleCenter };
-                        RelationStyle.normal.textColor = Color.white;
-                        EditorGUILayout.LabelField("Faction Relation 1", RelationStyle, GUILayout.ExpandWidth(true));
-                        GUILayout.Space(4);
-                        GUILayout.FlexibleSpace();
-
-                        GUILayout.Space(8);
-                        GUI.backgroundColor = Color.white;
-
-                        EditorGUILayout.BeginHorizontal();
-                        GUILayout.FlexibleSpace();
-                        CustomEditorProperties.CustomEnumColor(new Rect(), new GUIContent(), OpposingFaction1Prop, "Faction", Color.white);
-                        GUILayout.FlexibleSpace();
-                        CustomEditorProperties.CustomPopupColor(new Rect(), new GUIContent(), FactionRelation1Prop, "Relation", typeof(EmeraldAISystem.RelationType), Color.white);
-                        GUILayout.FlexibleSpace();
-                        EditorGUILayout.EndHorizontal();
-
-                        GUILayout.Space(8);
-                        EditorGUILayout.EndVertical();
                         EditorGUILayout.Space();
+                        EditorGUILayout.Space();
+                        EditorGUILayout.Space();
+
+                        CustomEditorProperties.CustomTagField(new Rect(), new GUIContent(), EmeraldTagProp, "Emerald Unity Tag");
+                        CustomHelpLabelField("The Unity Tag used to define other Emerald AI objects. This is the tag that was created using Unity's Tag pulldown at the top of " +
+                            "the gameobject.", true);
+                        EditorGUILayout.Space();
+
+                        EditorGUI.BeginChangeCheck();
+                        var layersSelection = EditorGUILayout.MaskField("Detection Layers", LayerMaskToField(DetectionLayerMaskProp.intValue), InternalEditorUtility.layers);
+                        CustomHelpLabelField("The Detection Layers controls what layers this AI can detect as possible targets, if the AI has the appropriate Emerald Unity Tag.", false);
+                        if (EditorGUI.EndChangeCheck())
+                        {
+                            Undo.RecordObject(self, "Layers changed");
+                            DetectionLayerMaskProp.intValue = FieldToLayerMask(layersSelection);
+                        }
+
+                        if (DetectionLayerMaskProp.intValue == 0 || DetectionLayerMaskProp.intValue == 1)
+                        {
+                            GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
+                            EditorGUILayout.LabelField("The Detection Layers cannot contain Nothing, Default, or Everything.", EditorStyles.helpBox);
+                            GUI.backgroundColor = Color.white;
+                        }
+
+                        EditorGUILayout.Space();
+                        EditorGUILayout.Space();
+
+                        if (self.BehaviorRef != EmeraldAISystem.CurrentBehavior.Companion && self.BehaviorRef != EmeraldAISystem.CurrentBehavior.Pet)
+                        {
+                            GUI.backgroundColor = new Color(10f, 0.0f, 0.0f, 0.25f);
+                            EditorGUILayout.LabelField("(Companion AI Only)", EditorStyles.helpBox);
+                            GUI.backgroundColor = Color.white;
+                        }
+                        EditorGUILayout.HelpBox("The Follower Tag controls the Tag that this AI will follow. This happens when this AI's trigger radius hits the said tag. This feature does not have to be used. " +
+                            "If you'd like to manually set the AI's follower, you can do so programmatically.", MessageType.None, true);
+                        CustomEditorProperties.CustomTagField(new Rect(), new GUIContent(), FollowTagProp, "Follower Tag");
+                        CustomHelpLabelField("If you would like to not use this feature, you can set the Follower Tag to Untagged.", true);
+                        EditorGUILayout.Space();
+
+                        EditorGUILayout.Space();
+
+                        EditorGUILayout.PropertyField(UseNonAITagProp, new GUIContent("Use Non-AI Tag?"));
+                        CustomHelpLabelField("Controls whether or not this AI will attack a non-player object with the given tag.", true);
+
+                        if (self.UseNonAITagRef == EmeraldAISystem.UseNonAITag.Yes)
+                        {
+                            EditorGUILayout.HelpBox("The Non-AI Unity Tag is another type of tag AI can use for the behavior types such as avoid cars, areas of water, or other avoidable objects that are not AI objects.", MessageType.None, true);
+                            CustomEditorProperties.CustomTagField(new Rect(), new GUIContent(), NonAITagProp, "Non-AI Tag");
+                            GUI.backgroundColor = new Color(1f, 1, 0.25f, 0.25f);
+                            EditorGUILayout.LabelField("Note: The layer of a Non-AI object must be included in an AI's Detection Layers.", EditorStyles.helpBox);
+                            GUI.backgroundColor = Color.white;
+                        }
+
+                        EditorGUILayout.Space();
+                        EditorGUILayout.Space();
+
+                        EditorGUILayout.EndVertical();
                     }
-                    if (self.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Two || self.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Three
-                        || self.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Four || self.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Five)
+
+                    if (FactionsAndTagTabNumberProp.intValue == 1)
                     {
+                        EditorGUILayout.BeginVertical("Box", GUILayout.Width(85 * Screen.width / Screen.dpi));
+                        EditorGUILayout.LabelField("Faction Options", EditorStyles.boldLabel);
+                        EditorGUILayout.HelpBox("The Faction Options allow you to control which Factions your AI " +
+                        "sees as enemies or allies. These options also allow you to control the relations with the AI and the player.", MessageType.None, true);
 
-                        if (FactionRelation2Prop.intValue == 0)
+                        GUI.backgroundColor = new Color(1f, 1, 0.25f, 0.25f);
+                        EditorGUILayout.LabelField("For a tutorial on setting up an AI's faction relations, please see the tutorial below.", EditorStyles.helpBox);
+                        GUI.backgroundColor = new Color(0, 0.65f, 0, 0.8f);
+                        if (GUILayout.Button("See Tutorial", HelpButtonStyle, GUILayout.Height(20)))
                         {
-                            GUI.backgroundColor = new Color(0.8f, 0f, 0f, 1f);
+                            Application.OpenURL("https://github.com/Black-Horizon-Studios/Emerald-AI/wiki/Using-Factions-and-Faction-Manager");
                         }
-                        else if (FactionRelation2Prop.intValue == 1)
-                        {
-                            GUI.backgroundColor = new Color(0.0f, 0.0f, 1f, 0.4f);
-                        }
-                        else if (FactionRelation2Prop.intValue == 2)
-                        {
-                            GUI.backgroundColor = new Color(0.0f, 0.75f, 0f, 1f);
-                        }
-                        EditorGUILayout.BeginVertical("Box");
-                        GUILayout.Space(5);
+                        GUI.backgroundColor = Color.white;
+                        EditorGUILayout.Space();
+                        EditorGUILayout.Space();
+                        EditorGUILayout.Space();
 
-                        var RelationStyle = new GUIStyle(EditorStyles.boldLabel) { alignment = TextAnchor.MiddleCenter };
-                        RelationStyle.normal.textColor = Color.white;
-                        EditorGUILayout.LabelField("Faction Relation 2", RelationStyle, GUILayout.ExpandWidth(true));
-                        GUILayout.Space(4);
-                        GUILayout.FlexibleSpace();
+                        CustomEditorProperties.CustomEnum(new Rect(), new GUIContent(), CurrentFactionProp, "Faction");
+                        CustomHelpLabelField("An AI's Faction is the name used to control combat reaction with other AI. This is the name other AI will use when " +
+                            "looking for opposing targets.", true);
 
-                        GUILayout.Space(8);
+                        CustomHelpLabelField("Factions can be created and removed using the Faction Manager. ", false);
+                        if (GUILayout.Button("Open Faction Manager"))
+                        {
+                            EditorWindow APS = EditorWindow.GetWindow(typeof(EmeraldAIFactionManager));
+                            APS.minSize = new Vector2(600f, 775f);
+                        }
+
+                        EditorGUILayout.Space();
+                        EditorGUILayout.Space();
+
+                        EditorGUILayout.Space();
+                        EditorGUILayout.Space();
+                        EditorGUILayout.LabelField("Player Relation", EditorStyles.boldLabel);
+                        CustomHelpLabelField("Controls how this AI sees the player. You can hover the mouse over each setting to view its tooltip.", false);
+                        GUI.backgroundColor = new Color(1f, 1, 0.25f, 0.25f);
+                        EditorGUILayout.HelpBox("You must define your Player's Unity Tag separately using the Player Tag below. This allows the AI to determine if the target is another AI or a player target.", MessageType.None, true);
                         GUI.backgroundColor = Color.white;
 
-                        EditorGUILayout.BeginHorizontal();
-                        GUILayout.FlexibleSpace();
-                        CustomEditorProperties.CustomEnumColor(new Rect(), new GUIContent(), OpposingFaction2Prop, "Faction", Color.white);
-                        GUILayout.FlexibleSpace();
-                        CustomEditorProperties.CustomPopupColor(new Rect(), new GUIContent(), FactionRelation2Prop, "Relation", typeof(EmeraldAISystem.RelationType), Color.white);
-                        GUILayout.FlexibleSpace();
-                        EditorGUILayout.EndHorizontal();
+                        if (self.PlayerFaction.Count > 0)
+                        {
+                            if (self.PlayerFaction[0].RelationTypeRef == EmeraldAISystem.PlayerFactionClass.RelationType.Enemy)
+                            {
+                                CustomHelpLabelField("Enemy - AI with a Player Relation of Enemy will attack, engage, or flee from all players when they're detected (Reacting according to their Behavior Type).", false);
+                            }
+                            else if (self.PlayerFaction[0].RelationTypeRef == EmeraldAISystem.PlayerFactionClass.RelationType.Neutral)
+                            {
+                                CustomHelpLabelField("Neutral - AI with a Player Relation of Neautral will ignore all players, unless they are attacked. When this happens, AI will react according to their Behavior Type.", false);
+                            }
+                            else if (self.PlayerFaction[0].RelationTypeRef == EmeraldAISystem.PlayerFactionClass.RelationType.Friendly)
+                            {
+                                CustomHelpLabelField("Friendly - AI with a Player Relation of Friendly will ignore all players, even if they are attacked.", false);
+                            }
+                        }
 
-                        GUILayout.Space(8);
-                        EditorGUILayout.EndVertical();
+                        PlayerFaction.DoLayoutList();
                         EditorGUILayout.Space();
-                    }
-                    if (self.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Three
-                        || self.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Four
-                        || self.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Five)
-                    {
+                        EditorGUILayout.Space();
 
-                        if (FactionRelation3Prop.intValue == 0)
-                        {
-                            GUI.backgroundColor = new Color(0.8f, 0f, 0f, 1f);
-                        }
-                        else if (FactionRelation3Prop.intValue == 1)
-                        {
-                            GUI.backgroundColor = new Color(0.0f, 0.0f, 1f, 0.4f);
-                        }
-                        else if (FactionRelation3Prop.intValue == 2)
-                        {
-                            GUI.backgroundColor = new Color(0.0f, 0.75f, 0f, 1f);
-                        }
-                        EditorGUILayout.BeginVertical("Box");
-                        GUILayout.Space(5);
-
-                        var RelationStyle = new GUIStyle(EditorStyles.boldLabel) { alignment = TextAnchor.MiddleCenter };
-                        RelationStyle.normal.textColor = Color.white;
-                        EditorGUILayout.LabelField("Faction Relation 3", RelationStyle, GUILayout.ExpandWidth(true));
-                        GUILayout.Space(4);
-                        GUILayout.FlexibleSpace();
-
-                        GUILayout.Space(8);
+                        EditorGUILayout.LabelField("AI Faction Relations", EditorStyles.boldLabel);
+                        CustomHelpLabelField("Controls which factions this AI sees as enemies and allies. You can hover the mouse over each setting to view its tooltip.", false);
+                        GUI.backgroundColor = new Color(1f, 1, 0.25f, 0.25f);
+                        EditorGUILayout.LabelField("Note: The AI Faction Relations use an AI's Faction not Unity tags. You can add and remove factions through the Faction Manager. " +
+                            "This can be opened by pressing the button below.", EditorStyles.helpBox);
                         GUI.backgroundColor = Color.white;
 
-                        EditorGUILayout.BeginHorizontal();
-                        GUILayout.FlexibleSpace();
-                        CustomEditorProperties.CustomEnumColor(new Rect(), new GUIContent(), OpposingFaction3Prop, "Faction", Color.white);
-                        GUILayout.FlexibleSpace();
-                        CustomEditorProperties.CustomPopupColor(new Rect(), new GUIContent(), FactionRelation3Prop, "Relation", typeof(EmeraldAISystem.RelationType), Color.white);
-                        GUILayout.FlexibleSpace();
-                        EditorGUILayout.EndHorizontal();
-
-                        GUILayout.Space(8);
-                        EditorGUILayout.EndVertical();
                         EditorGUILayout.Space();
-                    }
-                    if (self.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Four || self.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Five)
-                    {
-
-                        if (FactionRelation4Prop.intValue == 0)
+                        if (GUILayout.Button("Open Faction Manager"))
                         {
-                            GUI.backgroundColor = new Color(0.8f, 0f, 0f, 1f);
+                            EditorWindow APS = EditorWindow.GetWindow(typeof(EmeraldAIFactionManager));
+                            APS.minSize = new Vector2(600f, 775f);
                         }
-                        else if (FactionRelation4Prop.intValue == 1)
-                        {
-                            GUI.backgroundColor = new Color(0.0f, 0.0f, 1f, 0.4f);
-                        }
-                        else if (FactionRelation4Prop.intValue == 2)
-                        {
-                            GUI.backgroundColor = new Color(0.0f, 0.75f, 0f, 1f);
-                        }
-                        EditorGUILayout.BeginVertical("Box");
-                        GUILayout.Space(5);
-
-                        var RelationStyle = new GUIStyle(EditorStyles.boldLabel) { alignment = TextAnchor.MiddleCenter };
-                        RelationStyle.normal.textColor = Color.white;
-                        EditorGUILayout.LabelField("Faction Relation 4", RelationStyle, GUILayout.ExpandWidth(true));
-                        GUILayout.Space(4);
-                        GUILayout.FlexibleSpace();
-
-                        GUILayout.Space(8);
-                        GUI.backgroundColor = Color.white;
-
-                        EditorGUILayout.BeginHorizontal();
-                        GUILayout.FlexibleSpace();
-                        CustomEditorProperties.CustomEnumColor(new Rect(), new GUIContent(), OpposingFaction4Prop, "Faction", Color.white);
-                        GUILayout.FlexibleSpace();
-                        CustomEditorProperties.CustomPopupColor(new Rect(), new GUIContent(), FactionRelation4Prop, "Relation", typeof(EmeraldAISystem.RelationType), Color.white);
-                        GUILayout.FlexibleSpace();
-                        EditorGUILayout.EndHorizontal();
-
-                        GUILayout.Space(8);
-                        EditorGUILayout.EndVertical();
                         EditorGUILayout.Space();
-                    }
-                    if (self.OpposingFactionsEnumRef == EmeraldAISystem.OpposingFactionsEnum.Five)
-                    {
-
-                        if (FactionRelation5Prop.intValue == 0)
-                        {
-                            GUI.backgroundColor = new Color(0.8f, 0f, 0f, 1f);
-                        }
-                        else if (FactionRelation5Prop.intValue == 1)
-                        {
-                            GUI.backgroundColor = new Color(0.0f, 0.0f, 1f, 0.4f);
-                        }
-                        else if (FactionRelation5Prop.intValue == 2)
-                        {
-                            GUI.backgroundColor = new Color(0.0f, 0.75f, 0f, 1f);
-                        }
-                        EditorGUILayout.BeginVertical("Box");
-                        GUILayout.Space(5);
-
-                        var RelationStyle = new GUIStyle(EditorStyles.boldLabel) { alignment = TextAnchor.MiddleCenter };
-                        RelationStyle.normal.textColor = Color.white;
-                        EditorGUILayout.LabelField("Faction Relation 5", RelationStyle, GUILayout.ExpandWidth(true));
-                        GUILayout.Space(4);
-                        GUILayout.FlexibleSpace();
-
-                        GUILayout.Space(8);
-                        GUI.backgroundColor = Color.white;
-
-                        EditorGUILayout.BeginHorizontal();
-                        GUILayout.FlexibleSpace();
-                        CustomEditorProperties.CustomEnumColor(new Rect(), new GUIContent(), OpposingFaction5Prop, "Faction", Color.white);
-                        GUILayout.FlexibleSpace();
-                        CustomEditorProperties.CustomPopupColor(new Rect(), new GUIContent(), FactionRelation5Prop, "Relation", typeof(EmeraldAISystem.RelationType), Color.white);
-                        GUILayout.FlexibleSpace();
-                        EditorGUILayout.EndHorizontal();
-
-                        GUILayout.Space(8);
-                        EditorGUILayout.EndVertical();
                         EditorGUILayout.Space();
+
+                        FactionsList.DoLayoutList();
+                        EditorGUILayout.Space();
+                        EditorGUILayout.Space();
+                        EditorGUILayout.Space();
+                        EditorGUILayout.EndVertical();
                     }
-                    EditorGUILayout.EndVertical();
-                    EditorGUILayout.EndHorizontal();
-                    EditorGUILayout.EndVertical();
                 }
 
                 if (DetectionTagsTabNumberProp.intValue == 2)
@@ -3400,7 +3597,7 @@ namespace EmeraldAI.Utility
 
                         CustomEditorProperties.CustomFloatSlider(new Rect(), new GUIContent(), HeadLookYOffsetProp, "Player Y Offset", -4, 4);
                         CustomHelpLabelField("Controls the Y offset of the AI's look at position when looking at the Player. If an AI is looking too high or too " +
-                            "low at their target, you can adjust it with this setting.", true);                       
+                            "low at their target, you can adjust it with this setting.", true);
 
                         EditorGUILayout.LabelField("Non-Combat", EditorStyles.boldLabel);
                         CustomEditorProperties.CustomIntSlider(new Rect(), new GUIContent(), NonCombatLookAtLimitProp, "Angle Limit", 10, 90);
@@ -3686,7 +3883,7 @@ namespace EmeraldAI.Utility
                     EditorGUILayout.EndVertical();
                     GUI.backgroundColor = Color.white;
 
-                    CustomEditorProperties.CustomFloatSlider(new Rect(), new GUIContent(),  IdleVolumeProp, "Idle Volume", 0, 1);
+                    CustomEditorProperties.CustomFloatSlider(new Rect(), new GUIContent(), IdleVolumeProp, "Idle Volume", 0, 1);
                     CustomHelpLabelField("Controls the volume of idle sounds.", true);
 
                     CustomHelpLabelField("Controls how many idle sounds this AI will use.", true);
@@ -3727,7 +3924,7 @@ namespace EmeraldAI.Utility
                     GUI.backgroundColor = new Color(0, 0.65f, 0, 0.8f);
                     if (GUILayout.Button("See Tutorial", HelpButtonStyle, GUILayout.Height(20)))
                     {
-                        Application.OpenURL("https://docs.google.com/document/d/1_zXR1gg61soAX_bZscs6HC-7as2njM7Jx9pYlqgbtM8/edit#heading=h.aisc1wq6w60");
+                        Application.OpenURL("https://www.youtube.com/watch?feature=player_embedded&v=pL5Z-f8COcY");
                     }
                     GUI.backgroundColor = Color.white;
                     EditorGUILayout.Space();
@@ -4109,14 +4306,14 @@ namespace EmeraldAI.Utility
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Idle Animations", EditorStyles.boldLabel);
                     GUI.backgroundColor = new Color(0.1f, 0.1f, 0.1f, 0.19f);
-                    EditorGUILayout.LabelField("Controls the idle animations that will randomly play when the AI is wandering or grazing. A max of 3 can be used.", EditorStyles.helpBox);
+                    EditorGUILayout.LabelField("Controls the idle animations that will randomly play when the AI is wandering or grazing. A max of 6 can be used.", EditorStyles.helpBox);
                     GUI.backgroundColor = new Color(1f, 1, 0.25f, 0.25f);
                     GUI.backgroundColor = Color.white;
                     IdleAnimationList.DoLayoutList();
                     EditorGUILayout.Space();
 
                     //Idle
-                    if (self.IdleAnimationList.Count == 3)
+                    if (self.IdleAnimationList.Count == 6)
                     {
                         IdleAnimationList.displayAdd = false;
                     }
@@ -4137,7 +4334,7 @@ namespace EmeraldAI.Utility
                             GUI.backgroundColor = Color.white;
                         }
                     }
-                    CustomFloatAnimationField(new Rect(), new GUIContent(), IdleNonCombatAnimationSpeedProp, "Animation Speed", 0.1f ,2);
+                    CustomFloatAnimationField(new Rect(), new GUIContent(), IdleNonCombatAnimationSpeedProp, "Animation Speed", 0.1f, 2);
 
                     if (self.WeaponTypeRef != EmeraldAISystem.WeaponType.Ranged) //2.2.2 
                     {
@@ -4492,14 +4689,12 @@ namespace EmeraldAI.Utility
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Emote Animations", EditorStyles.boldLabel);
                     GUI.backgroundColor = new Color(0.1f, 0.1f, 0.1f, 0.19f);
-                    EditorGUILayout.LabelField("Controls the emote animations that will play when an AI's PlayEmoteAnimation function is called. The speed of each animation can be adjusted by changing the speed parameter.", EditorStyles.helpBox);
-                    GUI.backgroundColor = new Color(1f, 1, 0.25f, 0.25f);
-                    EditorGUILayout.LabelField("Note: Emote animations are not applied to the AI's Animator Controller. These animations are applied when the PlayEmoteAnimation function is called passing the emote ID as the parameter.", EditorStyles.helpBox);
+                    EditorGUILayout.LabelField("Controls the emote animations that will play when an AI's PlayEmoteAnimation function is called and passing the emote ID as the parameter. The speed of each animation can be adjusted by changing the speed parameter. A max of 10 can be used.", EditorStyles.helpBox);
                     GUI.backgroundColor = Color.white;
                     EmoteAnimationList.DoLayoutList();
 
                     //Emote
-                    if (self.EmoteAnimationList.Count == 3)
+                    if (self.EmoteAnimationList.Count == 10)
                     {
                         EmoteAnimationList.displayAdd = false;
                     }
@@ -4531,7 +4726,7 @@ namespace EmeraldAI.Utility
                 //Import
                 CustomHelpLabelField("Imports all animations from the current Animation Profile.", false);
                 EditorGUILayout.PropertyField(AnimationProfileProp);
-                    
+
                 if (GUILayout.Button("Import Animation Profile", buttonstyle))
                 {
                     var option = EditorUtility.DisplayDialog(
@@ -4540,7 +4735,7 @@ namespace EmeraldAI.Utility
                     "import with the AI's existing Animator Controller or use the Animator Controller from the Animation Profile.",
                     "Import",
                     "Cancel");
-                        
+
                     if (option)
                     {
                         var option2 = EditorUtility.DisplayDialogComplex(
@@ -4659,7 +4854,7 @@ namespace EmeraldAI.Utility
                                 }
                             }
 
-                            EmeraldAIAnimatorGenerator.GenerateAnimatorController(self);                            
+                            EmeraldAIAnimatorGenerator.GenerateAnimatorController(self);
                             serializedObject.Update();
                             self.AnimatorControllerGenerated = true;
                             AnimationsUpdatedProp.boolValue = false;
@@ -4714,7 +4909,7 @@ namespace EmeraldAI.Utility
                 CustomHelpLabelField("Contains detailed guides and tutorials to help get you started and familiar with Emerald.", false);
                 if (GUILayout.Button("Documentation", GUILayout.Height(28)))
                 {
-                    Application.OpenURL("https://docs.google.com/document/d/1_zXR1gg61soAX_bZscs6HC-7as2njM7Jx9pYlqgbtM8/edit?usp=sharing");
+                    Application.OpenURL("https://github.com/Black-Horizon-Studios/Emerald-AI/wiki");
                 }
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
@@ -4724,16 +4919,17 @@ namespace EmeraldAI.Utility
                     "Invector Third Person Controller, and Ootii Motion Controller.", false);
                 if (GUILayout.Button("Integration Tutorials", GUILayout.Height(28)))
                 {
-                    Application.OpenURL("https://docs.google.com/document/d/1QGSEdc2-6bks22KIelYlBw_601uHce2BVLM3QTq5axg/edit?usp=sharing");
+                    Application.OpenURL("https://github.com/Black-Horizon-Studios/Emerald-AI/wiki/Integration-Tutorials");
                 }
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
 
                 EditorGUILayout.LabelField("Video Tutorials", EditorStyles.boldLabel);
-                GUI.backgroundColor = new Color(0.1f,0.1f,0.1f,0.19f);
+                GUI.backgroundColor = new Color(0.1f, 0.1f, 0.1f, 0.19f);
                 EditorGUILayout.LabelField("Various video tutorials covering a wide range of features and implementations.", EditorStyles.helpBox);
                 GUI.backgroundColor = Color.white;
-                if (GUILayout.Button("Video Tutorials", GUILayout.Height(28))){
+                if (GUILayout.Button("Video Tutorials", GUILayout.Height(28)))
+                {
                     Application.OpenURL("https://www.youtube.com/playlist?list=PLlyiPBj7FznY7q4bdDQgGYgUByYpeCe07");
                 }
                 EditorGUILayout.Space();
@@ -4743,16 +4939,7 @@ namespace EmeraldAI.Utility
                 CustomHelpLabelField("All of Emerald AI's API.", false);
                 if (GUILayout.Button("Scripting Reference", GUILayout.Height(28)))
                 {
-                    Application.OpenURL("https://docs.google.com/document/d/1ns8m7Ol_gaKeYJ3YbaRjDy09xG98UoIXKCaWLGJeg74/edit");
-                }
-                EditorGUILayout.Space();
-                EditorGUILayout.Space();
-
-                EditorGUILayout.LabelField("Solutions to Possible Issues", EditorStyles.boldLabel);
-                CustomHelpLabelField("Get solutions to possible issues you may have. If you've encountered an issue, there is most likely a solution for it here.", false);
-                if (GUILayout.Button("Solutions to Possible Issues", GUILayout.Height(28)))
-                {
-                    Application.OpenURL("https://docs.google.com/document/d/1_NjuySY0x7OjRv0lTZzEEP4-AOozmItoJkxgbDgtRQ8/edit?usp=sharing");
+                    Application.OpenURL("https://github.com/Black-Horizon-Studios/Emerald-AI/wiki/Emerald-AI-API");
                 }
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
@@ -4843,7 +5030,7 @@ namespace EmeraldAI.Utility
                 style.fontStyle = FontStyle.Bold;
                 style.normal.textColor = Color.white;
                 style.alignment = TextAnchor.MiddleCenter;
-                Handles.Label(self.m_ProjectileCollisionPoint + Vector3.right/5 + Vector3.up / 2, "Hit Transform", style);
+                Handles.Label(self.m_ProjectileCollisionPoint + Vector3.right / 5 + Vector3.up / 2, "Hit Transform", style);
             }
 
             //Draw two arcs each with 50% of the field of view in opposite directions
@@ -4872,7 +5059,7 @@ namespace EmeraldAI.Utility
                 if (self.DisplayAINameRef == EmeraldAISystem.DisplayAIName.Yes)
                 {
                     Handles.color = self.NameTextColor;
-                    Handles.DrawLine(new Vector3(self.transform.localPosition.x, self.transform.localPosition.y, self.transform.localPosition.z), 
+                    Handles.DrawLine(new Vector3(self.transform.localPosition.x, self.transform.localPosition.y, self.transform.localPosition.z),
                         new Vector3(self.AINamePos.x, self.AINamePos.y, self.AINamePos.z) + self.transform.localPosition);
                     Handles.color = Color.white;
                 }
@@ -4880,12 +5067,11 @@ namespace EmeraldAI.Utility
                 if (self.CreateHealthBarsRef == EmeraldAISystem.CreateHealthBars.Yes)
                 {
                     Handles.color = self.HealthBarColor;
-                    Handles.DrawLine(new Vector3(self.transform.localPosition.x + 0.25f, self.transform.localPosition.y, self.transform.localPosition.z), 
+                    Handles.DrawLine(new Vector3(self.transform.localPosition.x + 0.25f, self.transform.localPosition.y, self.transform.localPosition.z),
                         new Vector3(self.HealthBarPos.x + 0.25f, self.HealthBarPos.y, self.HealthBarPos.z) + self.transform.localPosition);
                     Handles.color = Color.white;
                 }
 
-                //2.3.1
                 /*
                 if (self.UseCombatTextRef == EmeraldAISystem.UseCombatText.Yes)
                 {
@@ -4971,7 +5157,7 @@ namespace EmeraldAI.Utility
             }
         }
 
-        void DefaultCombatMovement ()
+        void DefaultCombatMovement()
         {
             EmeraldAISystem self = (EmeraldAISystem)target;
             GUIStyle myFoldoutStyle = new GUIStyle(EditorStyles.foldout);
@@ -5413,7 +5599,7 @@ namespace EmeraldAI.Utility
             }
         }
 
-        void DefaultCombatAnimations ()
+        void DefaultCombatAnimations()
         {
             EmeraldAISystem self = (EmeraldAISystem)target;
             GUIStyle myFoldoutStyle = new GUIStyle(EditorStyles.foldout);
@@ -5443,7 +5629,7 @@ namespace EmeraldAI.Utility
                 GUI.backgroundColor = new Color(0, 0.65f, 0, 0.8f);
                 if (GUILayout.Button("See Tutorial", HelpButtonStyle, GUILayout.Height(20)))
                 {
-                    Application.OpenURL("https://docs.google.com/document/d/1_zXR1gg61soAX_bZscs6HC-7as2njM7Jx9pYlqgbtM8/edit#heading=h.uae7izlggy0q");
+                    Application.OpenURL("https://github.com/Black-Horizon-Studios/Emerald-AI/wiki/Setting-up-an-AIs-Sheathable-Weapons");
                 }
                 GUI.backgroundColor = Color.white;
 
@@ -5468,7 +5654,7 @@ namespace EmeraldAI.Utility
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Attack Animations", EditorStyles.boldLabel);
-            CustomHelpLabelField("Controls the attack animations that will randomly play when the AI in combat. A max of 3 can be used. Attack animations should have 'Loop Time' unchecked.", false);
+            CustomHelpLabelField("Controls the attack animations that an will use when the AI in combat. A max of 6 can be used. Attack animations should have 'Loop Time' unchecked.", false);
             GUI.backgroundColor = new Color(1f, 1, 0.25f, 0.25f);
             EditorGUILayout.LabelField("Note: You will need to manually create an Animation Event on your AI's attack animations to allow your AI to cause Damage. " +
                 "Please refer to Emerlad's documentation for a tutorial on how to do this.", EditorStyles.helpBox);
@@ -5477,11 +5663,11 @@ namespace EmeraldAI.Utility
             {
                 if (self.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee)
                 {
-                    Application.OpenURL("https://docs.google.com/document/d/1_zXR1gg61soAX_bZscs6HC-7as2njM7Jx9pYlqgbtM8/edit#heading=h.k6lcoyggv3p");
+                    Application.OpenURL("https://github.com/Black-Horizon-Studios/Emerald-AI/wiki/Creating-Attack-Animation-Events");
                 }
                 else
                 {
-                    Application.OpenURL("https://docs.google.com/document/d/1_zXR1gg61soAX_bZscs6HC-7as2njM7Jx9pYlqgbtM8/edit#heading=h.1t5n7bjsrgr1");
+                    Application.OpenURL("https://github.com/Black-Horizon-Studios/Emerald-AI/wiki/Creating-Attack-Animation-Events");
                 }
             }
 
@@ -5491,7 +5677,7 @@ namespace EmeraldAI.Utility
             EditorGUILayout.Space();
 
             //Attack
-            if (self.AttackAnimationList.Count == 3)
+            if (self.AttackAnimationList.Count == 6)
             {
                 AttackAnimationList.displayAdd = false;
             }
@@ -5568,7 +5754,7 @@ namespace EmeraldAI.Utility
                 CombatHitAnimationList.DoLayoutList();
 
                 //Combat Hit
-                if (self.CombatHitAnimationList.Count == 3)
+                if (self.CombatHitAnimationList.Count == 6)
                 {
                     CombatHitAnimationList.displayAdd = false;
                 }
@@ -5584,7 +5770,7 @@ namespace EmeraldAI.Utility
                 EditorGUILayout.Space();
 
                 //Hit
-                if (self.HitAnimationList.Count == 3)
+                if (self.HitAnimationList.Count == 6)
                 {
                     HitAnimationList.displayAdd = false;
                 }
@@ -5610,7 +5796,7 @@ namespace EmeraldAI.Utility
             EditorGUILayout.Space();
 
             //Death
-            if (self.DeathAnimationList.Count == 3)
+            if (self.DeathAnimationList.Count == 6)
             {
                 DeathAnimationList.displayAdd = false;
             }
@@ -5650,7 +5836,7 @@ namespace EmeraldAI.Utility
                 GUI.backgroundColor = new Color(0, 0.65f, 0, 0.8f);
                 if (GUILayout.Button("See Tutorial", HelpButtonStyle, GUILayout.Height(20)))
                 {
-                    Application.OpenURL("https://docs.google.com/document/d/1_zXR1gg61soAX_bZscs6HC-7as2njM7Jx9pYlqgbtM8/edit#heading=h.uae7izlggy0q");
+                    Application.OpenURL("https://github.com/Black-Horizon-Studios/Emerald-AI/wiki/Setting-up-an-AIs-Sheathable-Weapons");
                 }
                 GUI.backgroundColor = Color.white;
 
@@ -5675,7 +5861,7 @@ namespace EmeraldAI.Utility
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Ranged Attack Animations", EditorStyles.boldLabel);
-            CustomHelpLabelField("Controls the attack animations that will randomly play when the AI in combat. A max of 3 can be used. Ranged Attack animations should have 'Loop Time' unchecked.", false);
+            CustomHelpLabelField("Controls the attack animations that an AI will use for its abilities. A max of 6 can be used. Ranged Attack animations should have 'Loop Time' unchecked.", false);
             GUI.backgroundColor = new Color(1f, 1, 0.25f, 0.25f);
             EditorGUILayout.LabelField("Note: You will need to manually create an Animation Event on your AI's attack animations to allow your AI to cause Damage. " +
                 "Please refer to Emerlad's documentation for a tutorial on how to do this.", EditorStyles.helpBox);
@@ -5684,11 +5870,11 @@ namespace EmeraldAI.Utility
             {
                 if (self.WeaponTypeRef == EmeraldAISystem.WeaponType.Melee)
                 {
-                    Application.OpenURL("https://docs.google.com/document/d/1_zXR1gg61soAX_bZscs6HC-7as2njM7Jx9pYlqgbtM8/edit#heading=h.k6lcoyggv3p");
+                    Application.OpenURL("https://github.com/Black-Horizon-Studios/Emerald-AI/wiki/Creating-Attack-Animation-Events");
                 }
                 else
                 {
-                    Application.OpenURL("https://docs.google.com/document/d/1_zXR1gg61soAX_bZscs6HC-7as2njM7Jx9pYlqgbtM8/edit#heading=h.1t5n7bjsrgr1");
+                    Application.OpenURL("https://github.com/Black-Horizon-Studios/Emerald-AI/wiki/Creating-Attack-Animation-Events");
                 }
             }
             GUI.backgroundColor = Color.white;
@@ -5697,7 +5883,7 @@ namespace EmeraldAI.Utility
             EditorGUILayout.Space();
 
             //Attack
-            if (self.RangedAttackAnimationList.Count == 3)
+            if (self.RangedAttackAnimationList.Count == 6)
             {
                 RangedAttackAnimationList.displayAdd = false;
             }
@@ -5721,7 +5907,7 @@ namespace EmeraldAI.Utility
                 RangedCombatHitAnimationList.DoLayoutList();
 
                 //Combat Hit
-                if (self.RangedCombatHitAnimationList.Count == 3)
+                if (self.RangedCombatHitAnimationList.Count == 6)
                 {
                     RangedCombatHitAnimationList.displayAdd = false;
                 }
@@ -5737,7 +5923,7 @@ namespace EmeraldAI.Utility
                 EditorGUILayout.Space();
 
                 //Hit
-                if (self.HitAnimationList.Count == 3)
+                if (self.HitAnimationList.Count == 6)
                 {
                     HitAnimationList.displayAdd = false;
                 }
@@ -5763,7 +5949,7 @@ namespace EmeraldAI.Utility
             EditorGUILayout.Space();
 
             //Death
-            if (self.RangedDeathAnimationList.Count == 3)
+            if (self.RangedDeathAnimationList.Count == 6)
             {
                 RangedDeathAnimationList.displayAdd = false;
             }
@@ -5776,6 +5962,31 @@ namespace EmeraldAI.Utility
         }
 
         #region Local Properties
+
+        void CustomPopup(Rect position, GUIContent label, SerializedProperty property, string nameOfLabel, string[] names)
+        {
+            label = EditorGUI.BeginProperty(position, label, property);
+            EditorGUI.BeginChangeCheck();
+            string[] enumNamesList = names;
+            var newValue = EditorGUI.Popup(position, property.intValue, enumNamesList);
+
+            if (EditorGUI.EndChangeCheck())
+                property.intValue = newValue;
+
+            EditorGUI.EndProperty();
+        }
+
+        void CustomTag(Rect position, GUIContent label, SerializedProperty property)
+        {
+            label = EditorGUI.BeginProperty(position, label, property);
+            EditorGUI.BeginChangeCheck();
+            var newValue = EditorGUI.TagField(position, property.stringValue);
+
+            if (EditorGUI.EndChangeCheck())
+                property.stringValue = newValue;
+
+            EditorGUI.EndProperty();
+        }
 
         void CustomFloatAnimationField(Rect position, GUIContent label, SerializedProperty property, string Name, float Min, float Max)
         {
@@ -5838,7 +6049,7 @@ namespace EmeraldAI.Utility
             EditorGUI.EndProperty();
         }
 
-        void CustomHelpLabelField (string TextInfo, bool UseSpace)
+        void CustomHelpLabelField(string TextInfo, bool UseSpace)
         {
             GUI.backgroundColor = new Color(0.1f, 0.1f, 0.1f, 0.19f);
             EditorGUILayout.LabelField(TextInfo, EditorStyles.helpBox);
@@ -5877,6 +6088,6 @@ namespace EmeraldAI.Utility
             }
             return field;
         }
-#endregion
+        #endregion
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Fire Blast
   AbilityDescription: Launches a ball of fire towards a target dealing 10 pts of damage.
-  AbilityDamage: 10
+  AbilityDamage: 5
   AbilityDamagePerIncrement: 5
   CriticalHitOdds: 6.25
   CriticalHitMultiplierMin: 1.5
@@ -71,4 +71,4 @@ MonoBehaviour:
   UseCustomAbilityIcon: 0
   UseCastEffect: 0
   ArrowProjectileRef: 0
-  AbilityEditorTabs: 2
+  AbilityEditorTabs: 1

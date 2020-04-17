@@ -17,6 +17,9 @@ namespace EmeraldAI.Utility
             m_AnimationProfile.Attack1Animation = EmeraldAIComponent.Attack1Animation;
             m_AnimationProfile.Attack2Animation = EmeraldAIComponent.Attack2Animation;
             m_AnimationProfile.Attack3Animation = EmeraldAIComponent.Attack3Animation;
+            m_AnimationProfile.Attack4Animation = EmeraldAIComponent.Attack4Animation;
+            m_AnimationProfile.Attack5Animation = EmeraldAIComponent.Attack5Animation;
+            m_AnimationProfile.Attack6Animation = EmeraldAIComponent.Attack6Animation;
             m_AnimationProfile.RunAttack1Animation = EmeraldAIComponent.RunAttack1Animation;
             m_AnimationProfile.RunAttack2Animation = EmeraldAIComponent.RunAttack2Animation;
             m_AnimationProfile.RunAttack3Animation = EmeraldAIComponent.RunAttack3Animation;
@@ -25,6 +28,9 @@ namespace EmeraldAI.Utility
             m_AnimationProfile.Idle1Animation = EmeraldAIComponent.Idle1Animation;
             m_AnimationProfile.Idle2Animation = EmeraldAIComponent.Idle2Animation;
             m_AnimationProfile.Idle3Animation = EmeraldAIComponent.Idle3Animation;
+            m_AnimationProfile.Idle4Animation = EmeraldAIComponent.Idle4Animation;
+            m_AnimationProfile.Idle5Animation = EmeraldAIComponent.Idle5Animation;
+            m_AnimationProfile.Idle6Animation = EmeraldAIComponent.Idle6Animation;
             m_AnimationProfile.IdleWarningAnimation = EmeraldAIComponent.IdleWarningAnimation;
             m_AnimationProfile.NonCombatIdleAnimation = EmeraldAIComponent.NonCombatIdleAnimation;
 
@@ -60,14 +66,27 @@ namespace EmeraldAI.Utility
             m_AnimationProfile.Emote1Animation = EmeraldAIComponent.Emote1Animation;
             m_AnimationProfile.Emote2Animation = EmeraldAIComponent.Emote2Animation;
             m_AnimationProfile.Emote3Animation = EmeraldAIComponent.Emote3Animation;
+            m_AnimationProfile.Emote4Animation = EmeraldAIComponent.Emote4Animation;
+            m_AnimationProfile.Emote5Animation = EmeraldAIComponent.Emote5Animation;
+            m_AnimationProfile.Emote6Animation = EmeraldAIComponent.Emote6Animation;
+            m_AnimationProfile.Emote7Animation = EmeraldAIComponent.Emote7Animation;
+            m_AnimationProfile.Emote8Animation = EmeraldAIComponent.Emote8Animation;
+            m_AnimationProfile.Emote9Animation = EmeraldAIComponent.Emote9Animation;
+            m_AnimationProfile.Emote10Animation = EmeraldAIComponent.Emote10Animation;
 
             //Hit Animations
             m_AnimationProfile.Hit1Animation = EmeraldAIComponent.Hit1Animation;
             m_AnimationProfile.Hit2Animation = EmeraldAIComponent.Hit2Animation;
             m_AnimationProfile.Hit3Animation = EmeraldAIComponent.Hit3Animation;
+            m_AnimationProfile.Hit4Animation = EmeraldAIComponent.Hit4Animation;
+            m_AnimationProfile.Hit5Animation = EmeraldAIComponent.Hit5Animation;
+            m_AnimationProfile.Hit6Animation = EmeraldAIComponent.Hit6Animation;
             m_AnimationProfile.CombatHit1Animation = EmeraldAIComponent.CombatHit1Animation;
             m_AnimationProfile.CombatHit2Animation = EmeraldAIComponent.CombatHit2Animation;
             m_AnimationProfile.CombatHit3Animation = EmeraldAIComponent.CombatHit3Animation;
+            m_AnimationProfile.CombatHit4Animation = EmeraldAIComponent.CombatHit4Animation;
+            m_AnimationProfile.CombatHit5Animation = EmeraldAIComponent.CombatHit5Animation;
+            m_AnimationProfile.CombatHit6Animation = EmeraldAIComponent.CombatHit6Animation;
 
             //Block Animations
             m_AnimationProfile.BlockIdleAnimation = EmeraldAIComponent.BlockIdleAnimation;
@@ -81,13 +100,19 @@ namespace EmeraldAI.Utility
             m_AnimationProfile.Death1Animation = EmeraldAIComponent.Death1Animation;
             m_AnimationProfile.Death2Animation = EmeraldAIComponent.Death2Animation;
             m_AnimationProfile.Death3Animation = EmeraldAIComponent.Death3Animation;
+            m_AnimationProfile.Death4Animation = EmeraldAIComponent.Death4Animation;
+            m_AnimationProfile.Death5Animation = EmeraldAIComponent.Death5Animation;
+            m_AnimationProfile.Death6Animation = EmeraldAIComponent.Death6Animation;
 
-            //Added ranged
+            //Ranged Death Animations
             m_AnimationProfile.RangedDeath1Animation = EmeraldAIComponent.RangedDeath1Animation;
             m_AnimationProfile.RangedDeath2Animation = EmeraldAIComponent.RangedDeath2Animation;
             m_AnimationProfile.RangedDeath3Animation = EmeraldAIComponent.RangedDeath3Animation;
+            m_AnimationProfile.RangedDeath4Animation = EmeraldAIComponent.RangedDeath4Animation;
+            m_AnimationProfile.RangedDeath5Animation = EmeraldAIComponent.RangedDeath5Animation;
+            m_AnimationProfile.RangedDeath6Animation = EmeraldAIComponent.RangedDeath6Animation;
 
-            //Rabged - Other Animations
+            //Ranged - Other Animations
             m_AnimationProfile.RangedCombatIdleAnimation = EmeraldAIComponent.RangedCombatIdleAnimation;
             m_AnimationProfile.RangedCombatWalkLeftAnimation = EmeraldAIComponent.RangedCombatWalkLeftAnimation;
             m_AnimationProfile.RangedCombatWalkStraightAnimation = EmeraldAIComponent.RangedCombatWalkStraightAnimation;
@@ -115,6 +140,9 @@ namespace EmeraldAI.Utility
             m_AnimationProfile.Idle1AnimationSpeed = EmeraldAIComponent.Idle1AnimationSpeed;
             m_AnimationProfile.Idle2AnimationSpeed = EmeraldAIComponent.Idle2AnimationSpeed;
             m_AnimationProfile.Idle3AnimationSpeed = EmeraldAIComponent.Idle3AnimationSpeed;
+            m_AnimationProfile.Idle4AnimationSpeed = EmeraldAIComponent.Idle4AnimationSpeed;
+            m_AnimationProfile.Idle5AnimationSpeed = EmeraldAIComponent.Idle5AnimationSpeed;
+            m_AnimationProfile.Idle6AnimationSpeed = EmeraldAIComponent.Idle6AnimationSpeed;
             m_AnimationProfile.IdleWarningAnimationSpeed = EmeraldAIComponent.IdleWarningAnimationSpeed;
             m_AnimationProfile.RangedIdleWarningAnimationSpeed = EmeraldAIComponent.RangedIdleWarningAnimationSpeed;
             m_AnimationProfile.IdleCombatAnimationSpeed = EmeraldAIComponent.IdleCombatAnimationSpeed;
@@ -123,9 +151,15 @@ namespace EmeraldAI.Utility
             m_AnimationProfile.Attack1AnimationSpeed = EmeraldAIComponent.Attack1AnimationSpeed;
             m_AnimationProfile.Attack2AnimationSpeed = EmeraldAIComponent.Attack2AnimationSpeed;
             m_AnimationProfile.Attack3AnimationSpeed = EmeraldAIComponent.Attack3AnimationSpeed;
+            m_AnimationProfile.Attack4AnimationSpeed = EmeraldAIComponent.Attack4AnimationSpeed;
+            m_AnimationProfile.Attack5AnimationSpeed = EmeraldAIComponent.Attack5AnimationSpeed;
+            m_AnimationProfile.Attack6AnimationSpeed = EmeraldAIComponent.Attack6AnimationSpeed;
             m_AnimationProfile.RangedAttack1AnimationSpeed = EmeraldAIComponent.RangedAttack1AnimationSpeed;
             m_AnimationProfile.RangedAttack2AnimationSpeed = EmeraldAIComponent.RangedAttack2AnimationSpeed;
             m_AnimationProfile.RangedAttack3AnimationSpeed = EmeraldAIComponent.RangedAttack3AnimationSpeed;
+            m_AnimationProfile.RangedAttack4AnimationSpeed = EmeraldAIComponent.RangedAttack4AnimationSpeed;
+            m_AnimationProfile.RangedAttack5AnimationSpeed = EmeraldAIComponent.RangedAttack5AnimationSpeed;
+            m_AnimationProfile.RangedAttack6AnimationSpeed = EmeraldAIComponent.RangedAttack6AnimationSpeed;
             m_AnimationProfile.RunAttack1AnimationSpeed = EmeraldAIComponent.RunAttack1AnimationSpeed;
             m_AnimationProfile.RunAttack2AnimationSpeed = EmeraldAIComponent.RunAttack2AnimationSpeed;
             m_AnimationProfile.RunAttack3AnimationSpeed = EmeraldAIComponent.RunAttack3AnimationSpeed;
@@ -141,12 +175,25 @@ namespace EmeraldAI.Utility
             m_AnimationProfile.Death1AnimationSpeed = EmeraldAIComponent.Death1AnimationSpeed;
             m_AnimationProfile.Death2AnimationSpeed = EmeraldAIComponent.Death2AnimationSpeed;
             m_AnimationProfile.Death3AnimationSpeed = EmeraldAIComponent.Death3AnimationSpeed;
+            m_AnimationProfile.Death4AnimationSpeed = EmeraldAIComponent.Death4AnimationSpeed;
+            m_AnimationProfile.Death5AnimationSpeed = EmeraldAIComponent.Death5AnimationSpeed;
+            m_AnimationProfile.Death6AnimationSpeed = EmeraldAIComponent.Death6AnimationSpeed;
             m_AnimationProfile.RangedDeath1AnimationSpeed = EmeraldAIComponent.RangedDeath1AnimationSpeed;
             m_AnimationProfile.RangedDeath2AnimationSpeed = EmeraldAIComponent.RangedDeath2AnimationSpeed;
             m_AnimationProfile.RangedDeath3AnimationSpeed = EmeraldAIComponent.RangedDeath3AnimationSpeed;
+            m_AnimationProfile.RangedDeath4AnimationSpeed = EmeraldAIComponent.RangedDeath4AnimationSpeed;
+            m_AnimationProfile.RangedDeath5AnimationSpeed = EmeraldAIComponent.RangedDeath5AnimationSpeed;
+            m_AnimationProfile.RangedDeath6AnimationSpeed = EmeraldAIComponent.RangedDeath6AnimationSpeed;
             m_AnimationProfile.Emote1AnimationSpeed = EmeraldAIComponent.Emote1AnimationSpeed;
             m_AnimationProfile.Emote2AnimationSpeed = EmeraldAIComponent.Emote2AnimationSpeed;
             m_AnimationProfile.Emote3AnimationSpeed = EmeraldAIComponent.Emote3AnimationSpeed;
+            m_AnimationProfile.Emote4AnimationSpeed = EmeraldAIComponent.Emote4AnimationSpeed;
+            m_AnimationProfile.Emote5AnimationSpeed = EmeraldAIComponent.Emote5AnimationSpeed;
+            m_AnimationProfile.Emote6AnimationSpeed = EmeraldAIComponent.Emote6AnimationSpeed;
+            m_AnimationProfile.Emote7AnimationSpeed = EmeraldAIComponent.Emote7AnimationSpeed;
+            m_AnimationProfile.Emote8AnimationSpeed = EmeraldAIComponent.Emote8AnimationSpeed;
+            m_AnimationProfile.Emote9AnimationSpeed = EmeraldAIComponent.Emote9AnimationSpeed;
+            m_AnimationProfile.Emote10AnimationSpeed = EmeraldAIComponent.Emote10AnimationSpeed;
             m_AnimationProfile.WalkAnimationSpeed = EmeraldAIComponent.WalkAnimationSpeed;
             m_AnimationProfile.RunAnimationSpeed = EmeraldAIComponent.RunAnimationSpeed;
             m_AnimationProfile.NonCombatWalkAnimationSpeed = EmeraldAIComponent.NonCombatWalkAnimationSpeed;
@@ -158,12 +205,21 @@ namespace EmeraldAI.Utility
             m_AnimationProfile.Hit1AnimationSpeed = EmeraldAIComponent.Hit1AnimationSpeed;
             m_AnimationProfile.Hit2AnimationSpeed = EmeraldAIComponent.Hit2AnimationSpeed;
             m_AnimationProfile.Hit3AnimationSpeed = EmeraldAIComponent.Hit3AnimationSpeed;
+            m_AnimationProfile.Hit4AnimationSpeed = EmeraldAIComponent.Hit4AnimationSpeed;
+            m_AnimationProfile.Hit5AnimationSpeed = EmeraldAIComponent.Hit5AnimationSpeed;
+            m_AnimationProfile.Hit6AnimationSpeed = EmeraldAIComponent.Hit6AnimationSpeed;
             m_AnimationProfile.CombatHit1AnimationSpeed = EmeraldAIComponent.CombatHit1AnimationSpeed;
             m_AnimationProfile.CombatHit2AnimationSpeed = EmeraldAIComponent.CombatHit2AnimationSpeed;
             m_AnimationProfile.CombatHit3AnimationSpeed = EmeraldAIComponent.CombatHit3AnimationSpeed;
+            m_AnimationProfile.CombatHit4AnimationSpeed = EmeraldAIComponent.CombatHit4AnimationSpeed;
+            m_AnimationProfile.CombatHit5AnimationSpeed = EmeraldAIComponent.CombatHit5AnimationSpeed;
+            m_AnimationProfile.CombatHit6AnimationSpeed = EmeraldAIComponent.CombatHit6AnimationSpeed;
             m_AnimationProfile.RangedCombatHit1AnimationSpeed = EmeraldAIComponent.RangedCombatHit1AnimationSpeed;
             m_AnimationProfile.RangedCombatHit2AnimationSpeed = EmeraldAIComponent.RangedCombatHit2AnimationSpeed;
             m_AnimationProfile.RangedCombatHit3AnimationSpeed = EmeraldAIComponent.RangedCombatHit3AnimationSpeed;
+            m_AnimationProfile.RangedCombatHit4AnimationSpeed = EmeraldAIComponent.RangedCombatHit4AnimationSpeed;
+            m_AnimationProfile.RangedCombatHit5AnimationSpeed = EmeraldAIComponent.RangedCombatHit5AnimationSpeed;
+            m_AnimationProfile.RangedCombatHit6AnimationSpeed = EmeraldAIComponent.RangedCombatHit6AnimationSpeed;
 
             //Mirror Animation Settings
             m_AnimationProfile.MirrorWalkLeft = EmeraldAIComponent.MirrorWalkLeft;
@@ -276,6 +332,9 @@ namespace EmeraldAI.Utility
             EmeraldAIComponent.Attack1Animation = AnimationProfileFile.Attack1Animation;
             EmeraldAIComponent.Attack2Animation = AnimationProfileFile.Attack2Animation;
             EmeraldAIComponent.Attack3Animation = AnimationProfileFile.Attack3Animation;
+            EmeraldAIComponent.Attack4Animation = AnimationProfileFile.Attack4Animation;
+            EmeraldAIComponent.Attack5Animation = AnimationProfileFile.Attack5Animation;
+            EmeraldAIComponent.Attack6Animation = AnimationProfileFile.Attack6Animation;
             EmeraldAIComponent.RunAttack1Animation = AnimationProfileFile.RunAttack1Animation;
             EmeraldAIComponent.RunAttack2Animation = AnimationProfileFile.RunAttack2Animation;
             EmeraldAIComponent.RunAttack3Animation = AnimationProfileFile.RunAttack3Animation;
@@ -284,6 +343,9 @@ namespace EmeraldAI.Utility
             EmeraldAIComponent.Idle1Animation = AnimationProfileFile.Idle1Animation;
             EmeraldAIComponent.Idle2Animation = AnimationProfileFile.Idle2Animation;
             EmeraldAIComponent.Idle3Animation = AnimationProfileFile.Idle3Animation;
+            EmeraldAIComponent.Idle4Animation = AnimationProfileFile.Idle4Animation;
+            EmeraldAIComponent.Idle5Animation = AnimationProfileFile.Idle5Animation;
+            EmeraldAIComponent.Idle6Animation = AnimationProfileFile.Idle6Animation;
             EmeraldAIComponent.IdleWarningAnimation = AnimationProfileFile.IdleWarningAnimation;
             EmeraldAIComponent.NonCombatIdleAnimation = AnimationProfileFile.NonCombatIdleAnimation;
 
@@ -319,14 +381,27 @@ namespace EmeraldAI.Utility
             EmeraldAIComponent.Emote1Animation = AnimationProfileFile.Emote1Animation;
             EmeraldAIComponent.Emote2Animation = AnimationProfileFile.Emote2Animation;
             EmeraldAIComponent.Emote3Animation = AnimationProfileFile.Emote3Animation;
+            EmeraldAIComponent.Emote4Animation = AnimationProfileFile.Emote4Animation;
+            EmeraldAIComponent.Emote5Animation = AnimationProfileFile.Emote5Animation;
+            EmeraldAIComponent.Emote6Animation = AnimationProfileFile.Emote6Animation;
+            EmeraldAIComponent.Emote7Animation = AnimationProfileFile.Emote7Animation;
+            EmeraldAIComponent.Emote8Animation = AnimationProfileFile.Emote8Animation;
+            EmeraldAIComponent.Emote9Animation = AnimationProfileFile.Emote9Animation;
+            EmeraldAIComponent.Emote10Animation = AnimationProfileFile.Emote10Animation;
 
             //Hit Animations
             EmeraldAIComponent.Hit1Animation = AnimationProfileFile.Hit1Animation;
             EmeraldAIComponent.Hit2Animation = AnimationProfileFile.Hit2Animation;
             EmeraldAIComponent.Hit3Animation = AnimationProfileFile.Hit3Animation;
+            EmeraldAIComponent.Hit4Animation = AnimationProfileFile.Hit4Animation;
+            EmeraldAIComponent.Hit5Animation = AnimationProfileFile.Hit5Animation;
+            EmeraldAIComponent.Hit6Animation = AnimationProfileFile.Hit6Animation;
             EmeraldAIComponent.CombatHit1Animation = AnimationProfileFile.CombatHit1Animation;
             EmeraldAIComponent.CombatHit2Animation = AnimationProfileFile.CombatHit2Animation;
             EmeraldAIComponent.CombatHit3Animation = AnimationProfileFile.CombatHit3Animation;
+            EmeraldAIComponent.CombatHit4Animation = AnimationProfileFile.CombatHit4Animation;
+            EmeraldAIComponent.CombatHit5Animation = AnimationProfileFile.CombatHit5Animation;
+            EmeraldAIComponent.CombatHit6Animation = AnimationProfileFile.CombatHit6Animation;
 
             //Block Animations
             EmeraldAIComponent.BlockIdleAnimation = AnimationProfileFile.BlockIdleAnimation;
@@ -340,6 +415,17 @@ namespace EmeraldAI.Utility
             EmeraldAIComponent.Death1Animation = AnimationProfileFile.Death1Animation;
             EmeraldAIComponent.Death2Animation = AnimationProfileFile.Death2Animation;
             EmeraldAIComponent.Death3Animation = AnimationProfileFile.Death3Animation;
+            EmeraldAIComponent.Death4Animation = AnimationProfileFile.Death4Animation;
+            EmeraldAIComponent.Death5Animation = AnimationProfileFile.Death5Animation;
+            EmeraldAIComponent.Death6Animation = AnimationProfileFile.Death6Animation;
+
+            //Death Ranged Animations
+            EmeraldAIComponent.RangedDeath1Animation = AnimationProfileFile.RangedDeath1Animation;
+            EmeraldAIComponent.RangedDeath2Animation = AnimationProfileFile.RangedDeath2Animation;
+            EmeraldAIComponent.RangedDeath3Animation = AnimationProfileFile.RangedDeath3Animation;
+            EmeraldAIComponent.RangedDeath4Animation = AnimationProfileFile.RangedDeath4Animation;
+            EmeraldAIComponent.RangedDeath5Animation = AnimationProfileFile.RangedDeath5Animation;
+            EmeraldAIComponent.RangedDeath6Animation = AnimationProfileFile.RangedDeath6Animation;
 
             //Ranged - Other Animations
             EmeraldAIComponent.RangedCombatIdleAnimation = AnimationProfileFile.RangedCombatIdleAnimation;
@@ -356,12 +442,18 @@ namespace EmeraldAI.Utility
             EmeraldAIComponent.RangedAttack1Animation = AnimationProfileFile.RangedAttack1Animation;
             EmeraldAIComponent.RangedAttack2Animation = AnimationProfileFile.RangedAttack2Animation;
             EmeraldAIComponent.RangedAttack3Animation = AnimationProfileFile.RangedAttack3Animation;
+            EmeraldAIComponent.RangedAttack4Animation = AnimationProfileFile.RangedAttack4Animation;
+            EmeraldAIComponent.RangedAttack5Animation = AnimationProfileFile.RangedAttack5Animation;
+            EmeraldAIComponent.RangedAttack6Animation = AnimationProfileFile.RangedAttack6Animation;
             EmeraldAIComponent.RangedRunAttack1Animation = AnimationProfileFile.RangedRunAttack1Animation;
             EmeraldAIComponent.RangedRunAttack2Animation = AnimationProfileFile.RangedRunAttack2Animation;
             EmeraldAIComponent.RangedRunAttack3Animation = AnimationProfileFile.RangedRunAttack3Animation;
             EmeraldAIComponent.RangedCombatHit1Animation = AnimationProfileFile.RangedCombatHit1Animation;
             EmeraldAIComponent.RangedCombatHit2Animation = AnimationProfileFile.RangedCombatHit2Animation;
             EmeraldAIComponent.RangedCombatHit3Animation = AnimationProfileFile.RangedCombatHit3Animation;
+            EmeraldAIComponent.RangedCombatHit4Animation = AnimationProfileFile.RangedCombatHit4Animation;
+            EmeraldAIComponent.RangedCombatHit5Animation = AnimationProfileFile.RangedCombatHit5Animation;
+            EmeraldAIComponent.RangedCombatHit6Animation = AnimationProfileFile.RangedCombatHit6Animation;
             EmeraldAIComponent.RangedCombatTurnLeftAnimation = AnimationProfileFile.RangedCombatTurnLeftAnimation;
             EmeraldAIComponent.RangedCombatTurnRightAnimation = AnimationProfileFile.RangedCombatTurnRightAnimation;
 
@@ -369,6 +461,9 @@ namespace EmeraldAI.Utility
             EmeraldAIComponent.Idle1AnimationSpeed = AnimationProfileFile.Idle1AnimationSpeed;
             EmeraldAIComponent.Idle2AnimationSpeed = AnimationProfileFile.Idle2AnimationSpeed;
             EmeraldAIComponent.Idle3AnimationSpeed = AnimationProfileFile.Idle3AnimationSpeed;
+            EmeraldAIComponent.Idle4AnimationSpeed = AnimationProfileFile.Idle4AnimationSpeed;
+            EmeraldAIComponent.Idle5AnimationSpeed = AnimationProfileFile.Idle5AnimationSpeed;
+            EmeraldAIComponent.Idle6AnimationSpeed = AnimationProfileFile.Idle6AnimationSpeed;
             EmeraldAIComponent.IdleWarningAnimationSpeed = AnimationProfileFile.IdleWarningAnimationSpeed;
             EmeraldAIComponent.RangedIdleWarningAnimationSpeed = AnimationProfileFile.RangedIdleWarningAnimationSpeed;
             EmeraldAIComponent.IdleCombatAnimationSpeed = AnimationProfileFile.IdleCombatAnimationSpeed;
@@ -377,9 +472,15 @@ namespace EmeraldAI.Utility
             EmeraldAIComponent.Attack1AnimationSpeed = AnimationProfileFile.Attack1AnimationSpeed;
             EmeraldAIComponent.Attack2AnimationSpeed = AnimationProfileFile.Attack2AnimationSpeed;
             EmeraldAIComponent.Attack3AnimationSpeed = AnimationProfileFile.Attack3AnimationSpeed;
+            EmeraldAIComponent.Attack4AnimationSpeed = AnimationProfileFile.Attack4AnimationSpeed;
+            EmeraldAIComponent.Attack5AnimationSpeed = AnimationProfileFile.Attack5AnimationSpeed;
+            EmeraldAIComponent.Attack6AnimationSpeed = AnimationProfileFile.Attack6AnimationSpeed;
             EmeraldAIComponent.RangedAttack1AnimationSpeed = AnimationProfileFile.RangedAttack1AnimationSpeed;
             EmeraldAIComponent.RangedAttack2AnimationSpeed = AnimationProfileFile.RangedAttack2AnimationSpeed;
             EmeraldAIComponent.RangedAttack3AnimationSpeed = AnimationProfileFile.RangedAttack3AnimationSpeed;
+            EmeraldAIComponent.RangedAttack4AnimationSpeed = AnimationProfileFile.RangedAttack4AnimationSpeed;
+            EmeraldAIComponent.RangedAttack5AnimationSpeed = AnimationProfileFile.RangedAttack5AnimationSpeed;
+            EmeraldAIComponent.RangedAttack6AnimationSpeed = AnimationProfileFile.RangedAttack6AnimationSpeed;
             EmeraldAIComponent.RunAttack1AnimationSpeed = AnimationProfileFile.RunAttack1AnimationSpeed;
             EmeraldAIComponent.RunAttack2AnimationSpeed = AnimationProfileFile.RunAttack2AnimationSpeed;
             EmeraldAIComponent.RunAttack3AnimationSpeed = AnimationProfileFile.RunAttack3AnimationSpeed;
@@ -395,9 +496,19 @@ namespace EmeraldAI.Utility
             EmeraldAIComponent.Death1AnimationSpeed = AnimationProfileFile.Death1AnimationSpeed;
             EmeraldAIComponent.Death2AnimationSpeed = AnimationProfileFile.Death2AnimationSpeed;
             EmeraldAIComponent.Death3AnimationSpeed = AnimationProfileFile.Death3AnimationSpeed;
+            EmeraldAIComponent.Death4AnimationSpeed = AnimationProfileFile.Death4AnimationSpeed;
+            EmeraldAIComponent.Death5AnimationSpeed = AnimationProfileFile.Death5AnimationSpeed;
+            EmeraldAIComponent.Death6AnimationSpeed = AnimationProfileFile.Death6AnimationSpeed;
             EmeraldAIComponent.Emote1AnimationSpeed = AnimationProfileFile.Emote1AnimationSpeed;
             EmeraldAIComponent.Emote2AnimationSpeed = AnimationProfileFile.Emote2AnimationSpeed;
             EmeraldAIComponent.Emote3AnimationSpeed = AnimationProfileFile.Emote3AnimationSpeed;
+            EmeraldAIComponent.Emote4AnimationSpeed = AnimationProfileFile.Emote4AnimationSpeed;
+            EmeraldAIComponent.Emote5AnimationSpeed = AnimationProfileFile.Emote5AnimationSpeed;
+            EmeraldAIComponent.Emote6AnimationSpeed = AnimationProfileFile.Emote6AnimationSpeed;
+            EmeraldAIComponent.Emote7AnimationSpeed = AnimationProfileFile.Emote7AnimationSpeed;
+            EmeraldAIComponent.Emote8AnimationSpeed = AnimationProfileFile.Emote8AnimationSpeed;
+            EmeraldAIComponent.Emote9AnimationSpeed = AnimationProfileFile.Emote9AnimationSpeed;
+            EmeraldAIComponent.Emote10AnimationSpeed = AnimationProfileFile.Emote10AnimationSpeed;
             EmeraldAIComponent.WalkAnimationSpeed = AnimationProfileFile.WalkAnimationSpeed;
             EmeraldAIComponent.RunAnimationSpeed = AnimationProfileFile.RunAnimationSpeed;
             EmeraldAIComponent.NonCombatWalkAnimationSpeed = AnimationProfileFile.NonCombatWalkAnimationSpeed;
@@ -409,12 +520,21 @@ namespace EmeraldAI.Utility
             EmeraldAIComponent.Hit1AnimationSpeed = AnimationProfileFile.Hit1AnimationSpeed;
             EmeraldAIComponent.Hit2AnimationSpeed = AnimationProfileFile.Hit2AnimationSpeed;
             EmeraldAIComponent.Hit3AnimationSpeed = AnimationProfileFile.Hit3AnimationSpeed;
+            EmeraldAIComponent.Hit4AnimationSpeed = AnimationProfileFile.Hit4AnimationSpeed;
+            EmeraldAIComponent.Hit5AnimationSpeed = AnimationProfileFile.Hit5AnimationSpeed;
+            EmeraldAIComponent.Hit6AnimationSpeed = AnimationProfileFile.Hit6AnimationSpeed;
             EmeraldAIComponent.CombatHit1AnimationSpeed = AnimationProfileFile.CombatHit1AnimationSpeed;
             EmeraldAIComponent.CombatHit2AnimationSpeed = AnimationProfileFile.CombatHit2AnimationSpeed;
             EmeraldAIComponent.CombatHit3AnimationSpeed = AnimationProfileFile.CombatHit3AnimationSpeed;
+            EmeraldAIComponent.CombatHit4AnimationSpeed = AnimationProfileFile.CombatHit4AnimationSpeed;
+            EmeraldAIComponent.CombatHit5AnimationSpeed = AnimationProfileFile.CombatHit5AnimationSpeed;
+            EmeraldAIComponent.CombatHit6AnimationSpeed = AnimationProfileFile.CombatHit6AnimationSpeed;
             EmeraldAIComponent.RangedCombatHit1AnimationSpeed = AnimationProfileFile.RangedCombatHit1AnimationSpeed;
             EmeraldAIComponent.RangedCombatHit2AnimationSpeed = AnimationProfileFile.RangedCombatHit2AnimationSpeed;
             EmeraldAIComponent.RangedCombatHit3AnimationSpeed = AnimationProfileFile.RangedCombatHit3AnimationSpeed;
+            EmeraldAIComponent.RangedCombatHit4AnimationSpeed = AnimationProfileFile.RangedCombatHit4AnimationSpeed;
+            EmeraldAIComponent.RangedCombatHit5AnimationSpeed = AnimationProfileFile.RangedCombatHit5AnimationSpeed;
+            EmeraldAIComponent.RangedCombatHit6AnimationSpeed = AnimationProfileFile.RangedCombatHit6AnimationSpeed;
 
             //Mirror Animation Settings
             EmeraldAIComponent.MirrorWalkLeft = AnimationProfileFile.MirrorWalkLeft;

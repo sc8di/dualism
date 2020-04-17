@@ -196,7 +196,7 @@ namespace EmeraldAI.Utility
         {
             if (HeatSeekingRef == HeatSeeking.Yes && ProjectileCurrentTarget != null && EmeraldSystem != null)
             {
-                float AdjustedAngle = EmeraldSystem.TargetAngle();
+                AdjustedAngle = EmeraldSystem.TargetAngle();
 
                 if (AdjustedAngle <= (EmeraldSystem.MaxFiringAngle + 5))
                 {
@@ -263,13 +263,17 @@ namespace EmeraldAI.Utility
                         AdjustTargetPosition = TargetEmeraldSystem.HitPointTransform.position - transform.position;
                         ProjectileDirectionReceived = true;
                     }
-                    else if (TargetTypeRef != TargetType.AI && !ProjectileDirectionReceived)
+                    else if (TargetTypeRef == TargetType.Player && !ProjectileDirectionReceived)
                     {
-                        //2.3.1
+                        AdjustTargetPosition = new Vector3(ProjectileDirection.x, ProjectileDirection.y + ProjectileCurrentTarget.localScale.y / 2 + EmeraldSystem.PlayerYOffset, ProjectileDirection.z);
+                        ProjectileDirectionReceived = true;
+                    }
+                    else if (TargetTypeRef == TargetType.NonAITarget && !ProjectileDirectionReceived)
+                    {
                         AdjustTargetPosition = new Vector3(ProjectileDirection.x, ProjectileDirection.y + ProjectileCurrentTarget.localScale.y / 2, ProjectileDirection.z);
                         ProjectileDirectionReceived = true;
                     }
-                    
+
                     transform.position += AdjustTargetPosition.normalized * Time.deltaTime * ProjectileSpeed;
                     transform.rotation = Quaternion.LookRotation(AdjustTargetPosition);  
                 }
@@ -282,7 +286,11 @@ namespace EmeraldAI.Utility
                         {
                             AdjustTargetPosition = TargetEmeraldSystem.HitPointTransform.position;
                         }
-                        else
+                        else if (TargetTypeRef == TargetType.Player)
+                        {
+                            AdjustTargetPosition = new Vector3(ProjectileCurrentTarget.position.x, ProjectileCurrentTarget.position.y + ProjectileCurrentTarget.localScale.y / 2 + EmeraldSystem.PlayerYOffset, ProjectileCurrentTarget.position.z);
+                        }
+                        else if (TargetTypeRef == TargetType.NonAITarget)
                         {
                             AdjustTargetPosition = new Vector3(ProjectileCurrentTarget.position.x, ProjectileCurrentTarget.position.y + ProjectileCurrentTarget.localScale.y / 2, ProjectileCurrentTarget.position.z);
                         }
@@ -337,7 +345,6 @@ namespace EmeraldAI.Utility
             }
         }
 
-        //2.3.1 bug stops target from getting damage
         void DeadTargetDetection()
         {
             if (m_PreviousPosition != Vector3.zero)
@@ -409,11 +416,13 @@ namespace EmeraldAI.Utility
                     if (AbilityType == AbilityTypeEnum.Damage && DamageType == DamageTypeEnum.Instant)
                     {
                         TargetEmeraldSystem.Damage(Damage, EmeraldAISystem.TargetType.AI, EmeraldSystem.transform, EmeraldSystem.SentRagdollForceAmount, CriticalHit);
+                        EmeraldSystem.OnDoDamageEvent.Invoke();
                     }
                     else if (AbilityType == AbilityTypeEnum.Damage && DamageType == DamageTypeEnum.OverTime)
                     {
                         //Apply the initial damage to our target
                         TargetEmeraldSystem.Damage(AbilityImpactDamage, EmeraldAISystem.TargetType.AI, EmeraldSystem.transform, EmeraldSystem.SentRagdollForceAmount);
+                        EmeraldSystem.OnDoDamageEvent.Invoke();
                         if (AbilityStacksRef == Yes_No.No && !TargetEmeraldSystem.ActiveEffects.Contains(EmeraldSystem.CurrentlyCreatedAbility.AbilityName) && AbilityName != string.Empty || AbilityStacksRef == Yes_No.Yes)
                         {
                             //Initialize the damage over time component
@@ -527,11 +536,13 @@ namespace EmeraldAI.Utility
             if (StartingTarget.GetComponent<EmeraldAIPlayerDamage>() != null)
             {
                 StartingTarget.GetComponent<EmeraldAIPlayerDamage>().SendPlayerDamage(SentDamage, EmeraldSystem.transform, EmeraldSystem, CriticalHit);
+                EmeraldSystem.OnDoDamageEvent.Invoke();
             }
             else
             {
                 StartingTarget.gameObject.AddComponent<EmeraldAIPlayerDamage>();
                 StartingTarget.GetComponent<EmeraldAIPlayerDamage>().SendPlayerDamage(SentDamage, EmeraldSystem.transform, EmeraldSystem, CriticalHit);
+                EmeraldSystem.OnDoDamageEvent.Invoke();
             }
 
             m_EmeraldAIPlayerDamage = StartingTarget.GetComponent<EmeraldAIPlayerDamage>();
@@ -542,11 +553,13 @@ namespace EmeraldAI.Utility
             if (StartingTarget.GetComponent<EmeraldAINonAIDamage>() != null)
             {
                 StartingTarget.GetComponent<EmeraldAINonAIDamage>().SendNonAIDamage(SentDamage, EmeraldSystem.transform);
+                EmeraldSystem.OnDoDamageEvent.Invoke();
             }
             else
             {
                 StartingTarget.gameObject.AddComponent<EmeraldAINonAIDamage>();
                 StartingTarget.GetComponent<EmeraldAINonAIDamage>().SendNonAIDamage(SentDamage, EmeraldSystem.transform);
+                EmeraldSystem.OnDoDamageEvent.Invoke();
             }
         }
 
