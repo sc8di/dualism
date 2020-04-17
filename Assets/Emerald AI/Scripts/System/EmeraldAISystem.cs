@@ -895,7 +895,8 @@ namespace EmeraldAI
                         "The AI's Wander Type has been set to Stationary. Please check the Waypoint #" + (WaypointIndex + 1) + " and make sure it is on the NavMesh and is reachable.");
                     m_NavMeshAgent.stoppingDistance = StoppingDistance;
                     StartingDestination = transform.position + (transform.forward * StoppingDistance);
-                    WanderTypeRef = EmeraldAISystem.WanderType.Stationary;
+                    WanderTypeRef = EmeraldAISystem.WanderType.Waypoints;
+                    //NextWaypoint();
                 }
             }
             else if (path.status == NavMeshPathStatus.PathInvalid)
