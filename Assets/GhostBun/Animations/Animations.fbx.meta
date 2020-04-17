@@ -59,7 +59,61 @@ ModelImporter:
     second: Armature|WorkOnComputer
   - first:
       74: 8259181685213785106
-    second: Armature|WorkWithPrinter
+    second: WorkWithPrinter
+  - first:
+      74: -4120507729427863617
+    second: Documents
+  - first:
+      74: -6542593203752968631
+    second: FallToStand
+  - first:
+      74: -1605088642773295762
+    second: FlightStraight
+  - first:
+      74: 7768800633687823206
+    second: FromFallToStand
+  - first:
+      74: -5705506425241660391
+    second: InteractWithDocuments
+  - first:
+      74: -7685159980649366166
+    second: InteractWithPrinter
+  - first:
+      74: 2104999889037103153
+    second: JumpDown
+  - first:
+      74: -7862423763709563315
+    second: MonsterRawr
+  - first:
+      74: 6883536567560900064
+    second: MonsterWalk
+  - first:
+      74: 1630332206105138620
+    second: NullAction
+  - first:
+      74: 3039070660679316067
+    second: PointAt
+  - first:
+      74: 903965978313826498
+    second: SitAndTalk
+  - first:
+      74: 3039969080146303238
+    second: SitOnChair
+  - first:
+      74: 2003535451250668787
+    second: SitOnChair2
+  - first:
+      74: -6448440973030468875
+    second: SitOnChair3
+  - first:
+      74: 7805707821210735735
+    second: Teeter
+  - first:
+      74: -34288485346726032
+    second: Teeter2
+  - first:
+      74: -6195844555125070974
+    second: WorkOnComputer
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -89,7 +143,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|Documents
+      name: Documents
       takeName: Armature|Documents
       internalID: 0
       firstFrame: 0
@@ -118,7 +172,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|FallToStand
+      name: FallToStand
       takeName: Armature|FallToStand
       internalID: 0
       firstFrame: 0
@@ -147,7 +201,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|FlightStraight
+      name: FlightStraight
       takeName: Armature|FlightStraight
       internalID: 0
       firstFrame: 0
@@ -176,7 +230,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|FromFallToStand
+      name: FromFallToStand
       takeName: Armature|FromFallToStand
       internalID: 0
       firstFrame: 0
@@ -205,7 +259,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|InteractWithDocuments
+      name: InteractWithDocuments
       takeName: Armature|InteractWithDocuments
       internalID: 0
       firstFrame: 0
@@ -234,7 +288,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|InteractWithPrinter
+      name: InteractWithPrinter
       takeName: Armature|InteractWithPrinter
       internalID: 0
       firstFrame: 0
@@ -263,7 +317,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|JumpDown
+      name: JumpDown
       takeName: Armature|JumpDown
       internalID: 0
       firstFrame: 0
@@ -292,7 +346,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|MonsterRawr
+      name: MonsterRawr
       takeName: Armature|MonsterRawr
       internalID: 0
       firstFrame: 0
@@ -321,7 +375,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|MonsterWalk
+      name: MonsterWalk
       takeName: Armature|MonsterWalk
       internalID: 0
       firstFrame: 0
@@ -350,7 +404,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|NullAction
+      name: NullAction
       takeName: Armature|NullAction
       internalID: 0
       firstFrame: 0
@@ -379,7 +433,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|PointAt
+      name: PointAt
       takeName: Armature|PointAt
       internalID: 0
       firstFrame: 0
@@ -408,7 +462,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|SitAndTalk
+      name: SitAndTalk
       takeName: Armature|SitAndTalk
       internalID: 0
       firstFrame: 0
@@ -437,7 +491,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|SitOnChair
+      name: SitOnChair
       takeName: Armature|SitOnChair
       internalID: 0
       firstFrame: 0
@@ -466,7 +520,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|SitOnChair2
+      name: SitOnChair2
       takeName: Armature|SitOnChair2
       internalID: 0
       firstFrame: 0
@@ -495,7 +549,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|SitOnChair3
+      name: SitOnChair3
       takeName: Armature|SitOnChair3
       internalID: 0
       firstFrame: 0
@@ -524,7 +578,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Teeter
+      name: Teeter
       takeName: Armature|Teeter
       internalID: 0
       firstFrame: 0
@@ -553,7 +607,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Teeter2
+      name: Teeter2
       takeName: Armature|Teeter2
       internalID: 0
       firstFrame: 0
@@ -582,7 +636,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|WorkOnComputer
+      name: WorkOnComputer
       takeName: Armature|WorkOnComputer
       internalID: 0
       firstFrame: 0
@@ -611,7 +665,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|WorkWithPrinter
+      name: WorkWithPrinter
       takeName: Armature|WorkWithPrinter
       internalID: 0
       firstFrame: 0
