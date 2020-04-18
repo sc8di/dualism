@@ -1,18 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class UserInputManager : MonoBehaviour
+public class UserInputManager : MonoBehaviour, IGameManager
 {
-    // Start is called before the first frame update
-    void Start()
+    public ManagerStatus Status { get; private set; }
+
+    [SerializeField] private float anchorTimer = 0.1f;
+
+    public bool gameState = true;
+
+    private float touchTimer;
+
+    public void Startup()
     {
-        
+        Debug.Log("Input manager starting...");
+
+        Status = ManagerStatus.Started;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (Input.GetButtonDown("Fire1")) touchTimer = 0;
+
+        if(Input.GetButtonUp("Fire1"))
+        {
+            // Передвижение игрока. Broadcast для MovementManager?
+        }
+
+        if (Input.GetButton("Fire1"))
+        {
+            if(touchTimer < anchorTimer) touchTimer += Time.deltaTime;
+            else
+            {
+                // Задействовать якорь. Broadcast для AnchorManager or something else?
+            }
+        }
     }
 }
