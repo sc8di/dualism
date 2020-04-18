@@ -4,34 +4,15 @@ using UnityEngine;
 
 public class TelekineticField : MonoBehaviour
 {
-    [SerializeField]
-    ForceMode forceMode;
-
-    [SerializeField]
-    [Range(0,1)]
-    float startingRadius = 1f;
-
-    [SerializeField]
-    float maximumRadius = 2f;
-
-    [SerializeField]
-    float expansionSpeed = 10f;
-
-    [SerializeField]
-    [Range(0, 1)]
-    float expansionChaos = 0f;
-
-    [SerializeField]
-    [Range(0, 1)]
-    float chaoticForse = 0f;
-
-    [SerializeField]
-    int maximumObjectsInControl = 5;
-
-    [SerializeField]
-    float force;
-    [SerializeField]
-    float chaoticForce;
+    [SerializeField] ForceMode forceMode;
+    [SerializeField] [Range(0,1)] float startingRadius = 1f;
+    [SerializeField] float maximumRadius = 2f;
+    [SerializeField] float expansionSpeed = 10f;
+    [SerializeField] [Range(0, 1)] float expansionChaos = 0f;
+    [SerializeField] [Range(0, 1)] float chaoticForse = 0f;
+    [SerializeField] int maximumObjectsInControl = 5;
+    [SerializeField] float force;
+    [SerializeField] float chaoticForce;
 
     static List<Rigidbody> rbList = new List<Rigidbody>();
 
@@ -70,18 +51,19 @@ public class TelekineticField : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+        //Здесь коллайдер растет.
         if (currentRadius < maximumRadius)
         {
             currentRadius += Time.fixedDeltaTime * (expansionSpeed + (Random.Range(-0.5f * chaoticForse, 1f * chaoticForse) * expansionChaos));
             transform.localScale = Vector3.one * currentRadius;
         }
 
-        if (rbList.Count > 1) rbList.Sort(new Sort());
+        //Сортировка по массе
+        if (rbList.Count > 1) rbList.Sort(new SortByMass());
 
+        //Непосредственное притяжение.
         for (int i = 0; (i < (rbList.Count < maximumObjectsInControl ? rbList.Count : maximumObjectsInControl)); i++)
         {
-            Debug.Log(rbList[i].name);
             if (!rbList[i])
             {
                 rbList.RemoveAt(i);
@@ -94,7 +76,7 @@ public class TelekineticField : MonoBehaviour
         }
     }
 
-    private class Sort : IComparer<Rigidbody>
+    private class SortByMass : IComparer<Rigidbody>
     {
         int IComparer<Rigidbody>.Compare(Rigidbody _objA, Rigidbody _objB)
         {
