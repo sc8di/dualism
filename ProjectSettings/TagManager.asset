@@ -20,7 +20,7 @@ TagManager:
   - Obstacles
   - Ground
   - Player
-  - ObstaclesDoors
+  - Walls
   - NoPathfinding
   - GhostBun
   - TelekineticField

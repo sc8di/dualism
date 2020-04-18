@@ -6,16 +6,10 @@ using UnityEngine.AI;
 public class InputManager : MonoBehaviour
 {
     [SerializeField]
-    float anchorVerticalOffset = 2f;
-
-    [SerializeField]
     float rotateSpeed = 50f;
 
     [SerializeField]
-    GameObject force;
-
-    [SerializeField]
-    GameObject anchor;
+    TelekineticEngine telekineticEngine;
 
     [SerializeField]
     GameObject player;
@@ -24,12 +18,17 @@ public class InputManager : MonoBehaviour
     NavMeshAgent navMeshAgent;
 
     [SerializeField]
-    LayerMask mask;
+    LayerMask walkOn;
 
     [SerializeField]
     float timerToGo = 0.1f;
 
     float touchTimer = 0;
+
+    private void Start()
+    {
+        telekineticEngine.SetPlayerAsTarget(player);
+    }
 
     private void Update()
     {
@@ -40,13 +39,15 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            anchor.SetActive(false);
+            //Отключаем телекинез
+            telekineticEngine.DisableTelekineticField();
+            //Включаем персонажу мозг.
             navMeshAgent.enabled = true;
             if (touchTimer < timerToGo)
             {
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit, 100, mask))
+                if (Physics.Raycast(ray, out hit, 100, walkOn))
                 {
                     navMeshAgent.destination = hit.point;
                 }
@@ -55,30 +56,30 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Mouse0))
         {
+            //Когда ждем на левую почку крысы
             if (touchTimer < timerToGo)
             {
+                //Жопускаем таймер.
                 touchTimer += Time.deltaTime;
             }
             else
-            {
-                if (!anchor.activeInHierarchy)
+            {                
+                //По окончанию тиканья таймера начинаем включать телекинез
+                //Если он не активен в момент после окончания работы таймера, то запускаем его процесс.
+                if (!telekineticEngine.TelekineticFieldEnabled())
                 {
-                    navMeshAgent.enabled = false;
-                    RaycastHit hit;
+                    //Кастуем позицию куда поставить телекинез.
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    if (Physics.Raycast(ray, out hit, 100, mask))
+                    //Если кастанули по нужному слою, ставим туда телекинез.
+                    if (Physics.Raycast(ray, out RaycastHit hit, 100, walkOn))
                     {
-                        anchor.transform.position = hit.point + Vector3.up * anchorVerticalOffset;
+                        telekineticEngine.SetLocation(hit.point);
                     }
-                    if (!force.activeInHierarchy)
-                    {
-                        anchor.SetActive(true);
-                    }
-                    anchor.GetComponent<Anchor>().SetDistance(Vector3.Distance(anchor.transform.position, player.transform.position));
-                    anchor.transform.LookAt(player.transform, Vector3.up);
+                    telekineticEngine.EnableTelekineticField();
+                    //Отключаем мозг персонажа.
+                    navMeshAgent.enabled = false;
                 }
-                anchor.GetComponent<Anchor>().ChangeVectorHorizontal(Input.GetAxis("Mouse X") * Time.deltaTime * rotateSpeed);
-                anchor.GetComponent<Anchor>().ChangeVectorVertical(Input.GetAxis("Mouse Y") * Time.deltaTime * rotateSpeed);
+                telekineticEngine.ChangeVectorHorizontal(Input.GetAxis("Mouse X") * Time.deltaTime * rotateSpeed);
             }
         }
     }
