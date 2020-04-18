@@ -4,82 +4,125 @@ using UnityEngine;
 
 public class TelekineticEngine : MonoBehaviour
 {
-
-    [SerializeField]
-    float verticalOffset = 1f;
+    [SerializeField] float verticalOffset = 1f;
+    [SerializeField] GameObject playerMark;
+    [SerializeField] GameObject anchorMark;
+    [SerializeField] TelekineticField teleField;
+    [SerializeField] LayerMask playerCollideOn;
+    [SerializeField] CapsuleCollider mainCollider;
+    [SerializeField] Rigidbody rb;
 
     GameObject player;
 
-    [SerializeField]
-    GameObject playerMark;
+    bool enablingPhase = false;
 
-    [SerializeField]
-    GameObject anchorMark;
+    float distanceOffset = 1f;
+    float rotationForce = 0f;
 
-    [SerializeField]
-    TelekineticField tf;
+    //Во время FixedUpdate перемещаем марки к тем позициям, где они должны быть. 
+    //С чилдами это не работает.
+    private void FixedUpdate()
+    {
+        if (!enablingPhase && TelekineticFieldEnabled())
+        {    //Добавляем скорости вращения по Y
+            rb.AddTorque(Vector3.up * rotationForce, ForceMode.Acceleration);
+            //апдейтим позиции наших марок.
+            playerMark.transform.position = transform.position + transform.forward * distanceOffset;
+            anchorMark.transform.position = transform.position - transform.forward * distanceOffset;
+            //Перетаскиваем игрока на марку игрока
+            player.transform.position = playerMark.transform.position;
+        }
+    }
 
-    [SerializeField]
-    LayerMask playerCollideOn;
+    //Это фиксит безумие физики.
+    protected void LateUpdate()
+    {
+        //Рижидбади перезаписывает вращение на фазе FixedUpdate, поэтому мы как последние извращенцы делаем это в LateUpdate, чтобы RB не успел все испортить.
+        if (enablingPhase)
+        {
+            mainCollider.enabled = true;
+            //Пересчитываем дистанцию, которая должна быть между марками
+            SetDistanceBetweenPoints(Vector3.Distance(transform.position, player.transform.position));
+            //Поворачиваем наш телекинез в сторону персонажа, чтобы красиво поднять его в воздух. Без этого он как аутист начинает телепортироваться по уровню.
+            transform.LookAt(player.transform);
+            //Активируем телекинез
+            teleField.gameObject.SetActive(true);
+            //Завершаем фазу.
+            enablingPhase = false;
+        }
 
+        if (!enablingPhase && TelekineticFieldEnabled())
+        {
+            //Несмотря на то, что мы установили ограничения по вращению X и Z, RB считает, что она умнее и при AddTorque начинает беспорядочно бесоебить.
+            //Исправляем это своими силами.
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+        }
+    }
+
+    /// <summary>
+    /// Устанавливаем кто игрок. Его будем поднимать.
+    /// </summary>
+    /// <param name="player"></param>
     public void SetPlayerAsTarget(GameObject player)
     {
         this.player = player;
     }
 
+    /// <summary>
+    /// Проверяем работает ли телекинез.
+    /// </summary>
+    /// <returns></returns>
     public bool TelekineticFieldEnabled()
     {
-        return tf.gameObject.activeInHierarchy;
+        return teleField.gameObject.activeInHierarchy;
     }
 
+    /// <summary>
+    /// Функция для запуска телекинеза. Сам процесс будет проходить в LateUpdate.
+    /// </summary>
     public void EnableTelekineticField()
     {
-        SetDistance(Vector3.Distance(transform.position, player.transform.position));
-        transform.LookAt(player.transform, Vector3.up);
-        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
-        //Включаем телекинез.
-        tf.gameObject.SetActive(true);
+        enablingPhase = true;
     }
 
+    /// <summary>
+    /// Отключаем телекинез и сбрасываем скорость вращения нашего RB.
+    /// </summary>
     public void DisableTelekineticField()
     {
-        tf.gameObject.SetActive(false);
-        transform.eulerAngles = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rotationForce = 0f;
+        rb.rotation = Quaternion.Euler(Vector3.zero);
+        teleField.gameObject.SetActive(false);
+        mainCollider.enabled = false;
     }
 
+    /// <summary>
+    /// Телепортируем телекинез в точку.
+    /// </summary>
+    /// <param name="newLocation"></param>
     public void SetLocation(Vector3 newLocation)
     {
         transform.position = newLocation + Vector3.up * verticalOffset;
     }
 
-    public void SetDistance(float distance)
+    /// <summary>
+    /// Определяем расстояние между марками. Апдейтим наш коллайдер и сбрасываем центр масс.
+    /// </summary>
+    /// <param name="distance"></param>
+    public void SetDistanceBetweenPoints(float distance)
     {
-        playerMark.transform.localPosition = transform.forward * distance;
-        anchorMark.transform.localPosition = -transform.forward * distance;
+        distanceOffset = distance;
+        mainCollider.center = distance * Vector3.forward + Vector3.up;
+        rb.centerOfMass = Vector3.zero;
     }
 
-    //Проверяем поворот по горизонту
-    public void ChangeVectorHorizontal(float angle)
+    /// <summary>
+    /// Сила для вращения телекинеза.
+    /// </summary>
+    /// <param name="force"></param>
+    public void AddRotationForce(float force)
     {
-        //Сохраняем текущие значения
-        Vector3 lastAngle = transform.eulerAngles;
-        Vector3 lastPlayerMarkPosition = playerMark.transform.position;
-        //Меняем значения
-        transform.eulerAngles += new Vector3(0, angle, 0);
-        //Проверяем возможны ли эти изменения
-        Debug.DrawLine(lastPlayerMarkPosition, playerMark.transform.position);
-        float distanceDelta = Vector3.Distance(playerMark.transform.position, lastPlayerMarkPosition);
-        if (!Physics.CapsuleCast(transform.up + lastPlayerMarkPosition, -transform.up + lastPlayerMarkPosition, 0.4f, playerMark.transform.position - lastPlayerMarkPosition, distanceDelta, playerCollideOn))
-        {
-            //Если ничего не мешает, применяем положение персонажа.
-            player.transform.position = playerMark.transform.position;
-        }
-        else
-        {
-            //Иначе отменячем изменения.
-            transform.eulerAngles = lastAngle;
-            playerMark.transform.position = lastPlayerMarkPosition;
-        }
-
+        rotationForce = force;
     }
 }

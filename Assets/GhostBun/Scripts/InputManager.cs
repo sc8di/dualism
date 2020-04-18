@@ -74,12 +74,12 @@ public class InputManager : MonoBehaviour
                     if (Physics.Raycast(ray, out RaycastHit hit, 100, walkOn))
                     {
                         telekineticEngine.SetLocation(hit.point);
+                        telekineticEngine.EnableTelekineticField();
+                        //Отключаем мозг персонажа.
+                        navMeshAgent.enabled = false;
                     }
-                    telekineticEngine.EnableTelekineticField();
-                    //Отключаем мозг персонажа.
-                    navMeshAgent.enabled = false;
                 }
-                telekineticEngine.ChangeVectorHorizontal(Input.GetAxis("Mouse X") * Time.deltaTime * rotateSpeed);
+                telekineticEngine.AddRotationForce(Input.GetAxis("Mouse X") * Time.deltaTime * rotateSpeed);
             }
         }
     }
