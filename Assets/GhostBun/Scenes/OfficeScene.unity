@@ -16833,7 +16833,7 @@ GameObject:
   - component: {fileID: 543645377}
   - component: {fileID: 543645380}
   - component: {fileID: 543645379}
-  m_Layer: 14
+  m_Layer: 10
   m_Name: TelekineticEngine
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
