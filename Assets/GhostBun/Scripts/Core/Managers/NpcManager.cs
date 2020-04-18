@@ -1,18 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class NpcManager : MonoBehaviour
+public class NpcManager : MonoBehaviour, IGameManager
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public ManagerStatus Status { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+    public void Startup()
     {
-        
+        Debug.Log("NPC manager starting...");
+
+        Status = ManagerStatus.Started;
     }
 }

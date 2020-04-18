@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OfficeEventManager : MonoBehaviour
+public class OfficeEventManager : MonoBehaviour, IGameManager
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public ManagerStatus Status { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+    public void Startup()
     {
-        
+        Debug.Log("Event manager starting...");
+
+        Status = ManagerStatus.Started;
     }
 }

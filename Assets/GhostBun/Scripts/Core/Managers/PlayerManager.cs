@@ -21,8 +21,6 @@ public class PlayerManager : MonoBehaviour, IGameManager
     {
         Debug.Log($"Player manager starting...");
 
-        score = 550;
-
         UpdateData(3, 3);
 
         Status = ManagerStatus.Started;
@@ -40,7 +38,7 @@ public class PlayerManager : MonoBehaviour, IGameManager
     }
 
     /// <summary>
-    /// Изменение данных по очкам.
+    /// Изменение данных по?
     /// </summary>
     /// <param name="value"></param>
     public void ChangeScore(int value)
@@ -59,14 +57,8 @@ public class PlayerManager : MonoBehaviour, IGameManager
     {
         health += value;
         
-        if (health > maxHealth)
-        {
-            health = maxHealth;
-        }
-        else if (health < 0)
-        {
-            health = 0;
-        }
+        if (health > maxHealth) health = maxHealth;
+        else if (health < 0) health = 0;
         
         if (health == 0) Messenger.Broadcast(GameEvent.LEVEL_FAILED);
         else StartCoroutine(Respawn());
@@ -89,7 +81,7 @@ public class PlayerManager : MonoBehaviour, IGameManager
     /// <returns></returns>
     private static IEnumerator Respawn()
     {
-        Debug.Log("Player dead. A little.;");
+        Debug.Log("Player dead. A little.");
         
         yield return new WaitForSeconds(2);
 

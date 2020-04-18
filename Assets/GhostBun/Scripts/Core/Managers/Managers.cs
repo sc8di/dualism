@@ -5,11 +5,23 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerManager))]
 [RequireComponent(typeof(AudioManager))]
 [RequireComponent(typeof(MissionManager))]
+//[RequireComponent(typeof(UserInputManager))]
+//[RequireComponent(typeof(PowerManager))]
+//[RequireComponent(typeof(DataManager))]
+//[RequireComponent(typeof(ItemsManager))]
+//[RequireComponent(typeof(NpcManager))]
+//[RequireComponent(typeof(GhostBunManager))]
 public class Managers : MonoBehaviour
 {
     public static PlayerManager Player { get; private set; }
     public static AudioManager Audio { get; private set; }
     public static MissionManager Mission { get; private set; }
+    //public static UserInputManager UserInput { get; private set; }
+    //public static PowerManager Powers { get; private set; }
+    //public static DataManager Data { get; private set; }
+    //public static ItemsManager Items { get; private set; }
+    //public static NpcManager NPC { get; private set; }
+    //public static GhostBunManager GhostBuns { get; private set; }
 
     private List<IGameManager> _startSequence;
 
@@ -20,11 +32,23 @@ public class Managers : MonoBehaviour
         Player = GetComponent<PlayerManager>();
         Audio = GetComponent<AudioManager>();
         Mission = GetComponent<MissionManager>();
+        //UserInput = GetComponent<UserInputManager>();
+        //Powers = GetComponent<PowerManager>();
+        //Data = GetComponent<DataManager>();
+        //Items = GetComponent<ItemsManager>();
+        //NPC = GetComponent<NpcManager>();
+        //GhostBuns = GetComponent<GhostBunManager>();
         
         _startSequence = new List<IGameManager>();
         _startSequence.Add(Player);
         _startSequence.Add(Audio);
         _startSequence.Add(Mission);
+        //_startSequence.Add(UserInput);
+        //_startSequence.Add(Powers);
+        //_startSequence.Add(Data);
+        //_startSequence.Add(Items);
+        //_startSequence.Add(NPC);
+        //_startSequence.Add(GhostBuns);
 
         StartCoroutine(StartupManagers());
 
