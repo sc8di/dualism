@@ -148,7 +148,7 @@
         <e p="GhostBun" t="Include">
           <e p="Scripts" t="Include">
             <e p="AlwaysLookAtCamera.cs" t="Include" />
-            <e p="Anchor.cs" t="Include" />
+            <e p="AnimationsArray.cs" t="Include" />
             <e p="Core" t="Include">
               <e p="Managers" t="Include">
                 <e p="AudioManager.cs" t="Include" />
@@ -157,24 +157,51 @@
                 <e p="GhostBunManager.cs" t="Include" />
                 <e p="IGameManager.cs" t="Include" />
                 <e p="Initializer.cs" t="Include" />
+                <e p="ItemsManager.cs" t="Include" />
                 <e p="Managers.cs" t="Include" />
                 <e p="ManagerStatus.cs" t="Include" />
                 <e p="MissionManager.cs" t="Include" />
+                <e p="MovementManager.cs" t="Include" />
                 <e p="NpcManager.cs" t="Include" />
                 <e p="OfficeEventManager.cs" t="Include" />
                 <e p="PlayerManager.cs" t="Include" />
+                <e p="Power.cs" t="Include" />
+                <e p="PowerManager.cs" t="Include" />
                 <e p="StartupController.cs" t="Include" />
                 <e p="StartupEvent.cs" t="Include" />
                 <e p="UserInputManager.cs" t="Include" />
               </e>
+              <e p="PowerTrip.cs" t="Include" />
+              <e p="UIController.cs" t="Include" />
               <e p="Utils" t="Include">
                 <e p="Messenger.cs" t="Include" />
               </e>
             </e>
             <e p="GhostBun.cs" t="Include" />
             <e p="InputManager.cs" t="Include" />
+            <e p="NavMeshComponents" t="Include">
+              <e p="Editor" t="Include">
+                <e p="NavMeshAssetManager.cs" t="Include" />
+                <e p="NavMeshComponentsEditor.asmdef" t="Include" />
+                <e p="NavMeshComponentsGUIUtility.cs" t="Include" />
+                <e p="NavMeshLinkEditor.cs" t="Include" />
+                <e p="NavMeshModifierEditor.cs" t="Include" />
+                <e p="NavMeshModifierVolumeEditor.cs" t="Include" />
+                <e p="NavMeshSurfaceEditor.cs" t="Include" />
+              </e>
+              <e p="Scripts" t="Include">
+                <e p="NavMeshComponents.asmdef" t="Include" />
+                <e p="NavMeshLink.cs" t="Include" />
+                <e p="NavMeshModifier.cs" t="Include" />
+                <e p="NavMeshModifierVolume.cs" t="Include" />
+                <e p="NavMeshSurface.cs" t="Include" />
+              </e>
+            </e>
             <e p="SimpleCameraController.cs" t="Include" />
-            <e p="TelekineticField.cs" t="Include" />
+            <e p="Telekinesis" t="Include">
+              <e p="TelekineticEngine.cs" t="Include" />
+              <e p="TelekineticField.cs" t="Include" />
+            </e>
             <e p="Work.cs" t="Include" />
           </e>
           <e p="Tool" t="Include">
@@ -190,7 +217,6 @@
           </e>
         </e>
         <e p="JMO Assets" t="Include">
-          <e p="!ToonyColorsPro Readme.txt" t="Include" />
           <e p="Toony Colors Pro" t="Include">
             <e p="!ToonyColorsPro Readme.txt" t="Include" />
             <e p="Demo TCP2" t="Include">
@@ -231,6 +257,37 @@
                     <e p="Water.shader" t="Include" />
                   </e>
                 </e>
+                <e p="Shaders URP" t="Include">
+                  <e p="Cat Demo" t="Include">
+                    <e p="Cat" t="Include">
+                      <e p="Style 1.shader" t="Include" />
+                      <e p="Style 2.shader" t="Include" />
+                      <e p="Style 3.shader" t="Include" />
+                      <e p="Style 4.shader" t="Include" />
+                      <e p="Style 5.shader" t="Include" />
+                      <e p="Style 6.shader" t="Include" />
+                    </e>
+                    <e p="Decal.shader" t="Include" />
+                    <e p="Ground.shader" t="Include" />
+                    <e p="UnityChan" t="Include">
+                      <e p="Style 1 Skin.shader" t="Include" />
+                      <e p="Style 1.shader" t="Include" />
+                      <e p="Style 3 Skin.shader" t="Include" />
+                      <e p="Style 3.shader" t="Include" />
+                      <e p="Style 4 Skin.shader" t="Include" />
+                      <e p="Style 4.shader" t="Include" />
+                      <e p="Style 5 Skin.shader" t="Include" />
+                      <e p="Style 5.shader" t="Include" />
+                      <e p="Style 6 Skin.shader" t="Include" />
+                      <e p="Style 6.shader" t="Include" />
+                    </e>
+                    <e p="Vertex Colors Emissive.shader" t="Include" />
+                    <e p="Vertex Colors Specular.shader" t="Include" />
+                    <e p="Vertex Colors.shader" t="Include" />
+                    <e p="Wall.shader" t="Include" />
+                    <e p="Water URP.shader" t="Include" />
+                  </e>
+                </e>
                 <e p="UnityChan License.txt" t="Include" />
               </e>
               <e p="SG Demo Assets" t="Include">
@@ -256,11 +313,15 @@
               </e>
               <e p="ToonyColorsPro.Demo.asmdef" t="Include" />
             </e>
-            <e p="Documentation" t="Include">
-              <e p="!ToonyColorsPro Readme.txt" t="Include" />
-            </e>
             <e p="Editor" t="Include">
-              <e p="!ToonyColorsPro Readme.txt" t="Include" />
+              <e p="Fonts" t="Include">
+                <e p="Roboto" t="Include">
+                  <e p="Roboto - Apache License.txt" t="Include" />
+                </e>
+                <e p="sen" t="Include">
+                  <e p="sen - SIL Open Font License.txt" t="Include" />
+                </e>
+              </e>
               <e p="Inspectors" t="Include">
                 <e p="MaterialInspector_SG2.cs" t="Include" />
                 <e p="TCP2_GetPosOnWater_Editor.cs" t="Include" />
@@ -416,8 +477,7 @@
                 </e>
               </e>
               <e p="User" t="Include">
-                <e p="CelShading_AmbientOcclusion.shader" t="Include" />
-                <e p="ToonyTest.shader" t="Include" />
+                <e p="My TCP2 Shader.shader" t="Include" />
               </e>
             </e>
             <e p="Shaders PBS" t="Include">
@@ -821,6 +881,8 @@
         </e>
       </e>
       <e p="dualism.sln" t="IncludeFlat" />
+      <e p="NavMeshComponents.csproj" t="IncludeRecursive" />
+      <e p="NavMeshComponentsEditor.csproj" t="IncludeRecursive" />
       <e p="Obi.csproj" t="IncludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />

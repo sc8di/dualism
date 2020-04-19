@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class InputManager : MonoBehaviour
 {
+    public bool EnablePointForce = false;
+    
+    
     [SerializeField]
     float rotateSpeed = 50f;
 
@@ -25,6 +28,10 @@ public class InputManager : MonoBehaviour
 
     float touchTimer = 0;
 
+
+    [SerializeField] private PowerTrip _PowerTrip;
+
+
     private void Start()
     {
         telekineticEngine.SetPlayerAsTarget(player);
@@ -40,7 +47,15 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             //Отключаем телекинез
-            telekineticEngine.DisableTelekineticField();
+            if (EnablePointForce)
+            {
+                _PowerTrip.DisableField();
+            }
+            else
+            { 
+                telekineticEngine.DisableTelekineticField();
+            }
+
             //Включаем персонажу мозг.
             navMeshAgent.enabled = true;
             if (touchTimer < timerToGo)
@@ -66,15 +81,24 @@ public class InputManager : MonoBehaviour
             {                
                 //По окончанию тиканья таймера начинаем включать телекинез
                 //Если он не активен в момент после окончания работы таймера, то запускаем его процесс.
-                if (!telekineticEngine.TelekineticFieldEnabled())
+                if(!telekineticEngine.TelekineticFieldEnabled() || (EnablePointForce && !_PowerTrip.gameObject.activeInHierarchy))
                 {
                     //Кастуем позицию куда поставить телекинез.
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     //Если кастанули по нужному слою, ставим туда телекинез.
                     if (Physics.Raycast(ray, out RaycastHit hit, 100, walkOn))
                     {
-                        telekineticEngine.SetLocation(hit.point);
-                        telekineticEngine.EnableTelekineticField();
+                        if (EnablePointForce)
+                        {
+                            _PowerTrip.SetLocation(hit.point);
+                            _PowerTrip.EnableField();
+                        }
+                        else
+                        {
+                            telekineticEngine.SetLocation(hit.point);
+                            telekineticEngine.EnableTelekineticField();
+                        }
+                        
                         //Отключаем мозг персонажа.
                         navMeshAgent.enabled = false;
                     }

@@ -8,7 +8,7 @@ using UnityEngine;
 //[RequireComponent(typeof(UserInputManager))]
 //[RequireComponent(typeof(PowerManager))]
 //[RequireComponent(typeof(DataManager))]
-//[RequireComponent(typeof(ItemsManager))]
+[RequireComponent(typeof(ItemsManager))]
 //[RequireComponent(typeof(NpcManager))]
 //[RequireComponent(typeof(GhostBunManager))]
 public class Managers : MonoBehaviour
@@ -19,7 +19,7 @@ public class Managers : MonoBehaviour
     //public static UserInputManager UserInput { get; private set; }
     //public static PowerManager Powers { get; private set; }
     //public static DataManager Data { get; private set; }
-    //public static ItemsManager Items { get; private set; }
+    public static ItemsManager Items { get; private set; }
     //public static NpcManager NPC { get; private set; }
     //public static GhostBunManager GhostBuns { get; private set; }
 
@@ -35,7 +35,7 @@ public class Managers : MonoBehaviour
         //UserInput = GetComponent<UserInputManager>();
         //Powers = GetComponent<PowerManager>();
         //Data = GetComponent<DataManager>();
-        //Items = GetComponent<ItemsManager>();
+        Items = GetComponent<ItemsManager>();
         //NPC = GetComponent<NpcManager>();
         //GhostBuns = GetComponent<GhostBunManager>();
         
@@ -46,7 +46,7 @@ public class Managers : MonoBehaviour
         //_startSequence.Add(UserInput);
         //_startSequence.Add(Powers);
         //_startSequence.Add(Data);
-        //_startSequence.Add(Items);
+        _startSequence.Add(Items);
         //_startSequence.Add(NPC);
         //_startSequence.Add(GhostBuns);
 

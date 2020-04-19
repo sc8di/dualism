@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 2231834371757520844}
   - component: {fileID: 2231834371757520855}
   - component: {fileID: 2231834371757520840}
+  - component: {fileID: -1250839404580665670}
   - component: {fileID: 2231834371757520843}
   - component: {fileID: 2231834371757520845}
   m_Layer: 0
@@ -191,11 +192,20 @@ MonoBehaviour:
   soundSource: {fileID: 2231834370555515547}
   musicFirstSource: {fileID: 2231834372182413071}
   musicSecondSource: {fileID: 2231834371856075497}
-  clips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  clips: []
   crossFadeRate: 1.5
+--- !u!114 &-1250839404580665670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231834371757520847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64753f4e147c3654ea0916fb0df1adb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2231834371757520843
 MonoBehaviour:
   m_ObjectHideFlags: 0
