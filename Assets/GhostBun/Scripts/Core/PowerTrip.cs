@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerTrip : MonoBehaviour
@@ -9,6 +7,7 @@ public class PowerTrip : MonoBehaviour
 
     public float mass;
     public float attachedMass;
+    public int itemsUnderControl;
 
     private Rigidbody fieldRb;
     private HashSet<Rigidbody> affectedBodies = new HashSet<Rigidbody>();
@@ -26,23 +25,30 @@ public class PowerTrip : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.attachedRigidbody != null && other.attachedRigidbody.mass <= attachedMass)
+        Rigidbody rb = other.attachedRigidbody;
+        
+        if (rb != null && 
+            rb.mass <= attachedMass &&
+            itemsUnderControl > affectedBodies.Count)
         {
-            other.attachedRigidbody.useGravity = false;
-            affectedBodies.Add(other.attachedRigidbody);
+            rb.useGravity = false;
+            affectedBodies.Add(rb);
             
-            if (!Managers.Items.BodyContains(other.attachedRigidbody))
+            if (!Managers.Items.BodyContains(rb))
             {
-                Managers.Items.AddBody(other.attachedRigidbody);
+                Managers.Items.AddBody(rb);
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.attachedRigidbody != null)
+        Rigidbody rb = other.attachedRigidbody;
+        
+        if (rb != null)
         {
-            other.attachedRigidbody.useGravity = true;
+            rb.useGravity = true;
+            affectedBodies.Remove(rb);
         }
     }
 
@@ -59,6 +65,8 @@ public class PowerTrip : MonoBehaviour
                 float strength = rb.mass * mass / distance;
                 
                 rb.AddForce(directionToPoint * strength);
+                Debug.Log($"Name:{rb.name}, velocity{rb.velocity}");
+                Debug.Log($"Name:{rb.name}, angularVelocity{rb.angularVelocity}");
             }
         }
     }

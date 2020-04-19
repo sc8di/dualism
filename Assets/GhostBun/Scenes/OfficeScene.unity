@@ -11978,7 +11978,7 @@ GameObject:
   - component: {fileID: 388341079}
   - component: {fileID: 388341082}
   - component: {fileID: 388341078}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12014,6 +12014,7 @@ MonoBehaviour:
   player: {fileID: 4520547964544577770}
   mass: 8
   attachedMass: 0.2
+  itemsUnderControl: 3
 --- !u!54 &388341080
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12038,7 +12039,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 388341077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.72, y: 1, z: 4.4}
+  m_LocalPosition: {x: -4.72, y: 0.96, z: 4.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58809,7 +58810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5aa2d199e6152429b43ad5b9bbdce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnablePointForce: 0
+  EnablePointForce: 1
   rotateSpeed: 50
   telekineticEngine: {fileID: 543645377}
   player: {fileID: 4520547964544577770}
