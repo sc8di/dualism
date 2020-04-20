@@ -10,10 +10,14 @@ public class Work : MonoBehaviour
     private EmeraldAIEventsManager eventSystem;
     private void OnTriggerEnter(Collider other)
     {
-        eventSystem = other.GetComponent<EmeraldAIEventsManager>();
+        if (other.CompareTag("NPC"))
+        {
+            eventSystem = other.GetComponent<EmeraldAIEventsManager>();
 
-        // Останавливаем движение NPC до окончания анимации
-        StartCoroutine(Working(other.GetComponent<AnimationsArray>().TalkingRingLength));
+            // Останавливаем движение NPC до окончания анимации
+            StartCoroutine(Working(other.GetComponent<AnimationsArray>().AnimationsLength[emoteAnimationIndex]));
+        }
+        
     }
 
     private IEnumerator Working(float delay)
