@@ -189,10 +189,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3f49bf7c42873478ed46140fe62fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundSource: {fileID: 2231834370555515547}
-  musicFirstSource: {fileID: 2231834372182413071}
-  musicSecondSource: {fileID: 2231834371856075497}
-  clips: []
+  _soundSource: {fileID: 2231834370555515547}
+  _musicFirstSource: {fileID: 2231834372182413071}
+  _musicSecondSource: {fileID: 2231834371856075497}
+  _clips: []
   crossFadeRate: 1.5
 --- !u!114 &-1250839404580665670
 MonoBehaviour:

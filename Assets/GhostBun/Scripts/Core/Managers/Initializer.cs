@@ -6,21 +6,21 @@ using UnityEngine;
 [InitializeOnLoad]
 public class Initializer : MonoBehaviour
 {
-    private static GameObject gameManager;
+    private static GameObject _gameManager;
 
     private static void Awake()
     {
-        DontDestroyOnLoad(gameManager);
+        DontDestroyOnLoad(_gameManager);
     }
 
     [RuntimeInitializeOnLoadMethod]
     static void CreateGameManager()
     {
-        gameManager = Instantiate(Resources.Load("GameManager", typeof(GameObject))) as GameObject;
+        _gameManager = Instantiate(Resources.Load("GameManager", typeof(GameObject))) as GameObject; // Убрать это дерьмо. Никаких обращений по именам.
     }
 
     void OnDestroy()
     {
-        Destroy(gameManager);
+        Destroy(_gameManager);
     }
 }

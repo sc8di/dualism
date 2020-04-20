@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class StartupController : MonoBehaviour
 {
     [Tooltip("Для отображения прогресса по загрузке менеджеров.")]
-    [SerializeField] private Slider progressBar;
+    [SerializeField] private Slider _progressBar;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class StartupController : MonoBehaviour
     private void OnManagersProgress(int countReady, int countModules)
     {
         float progress = (float) countReady / countModules;
-        progressBar.value = progress;
+        _progressBar.value = progress;
     }
 
     /// <summary>

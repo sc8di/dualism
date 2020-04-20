@@ -8,11 +8,11 @@ public class PlayerManager : MonoBehaviour, IGameManager
     /// <summary>
     /// Переменная для сохранения позиции игрока по последнему чекпоинту.
     /// </summary>
-    public Vector3 lastSavePosition  { get; private set; }
+    public Vector3 LastSavePosition  { get; private set; }
 
-    public int health { get; private set; }
-    public int maxHealth { get; private set; }
-    public int score { get; private set; }
+    public int Health { get; private set; }
+    public int MaxHealth { get; private set; }
+    public int Score { get; private set; }
 
     /// <summary>
     /// Инициализация менеджера.
@@ -33,8 +33,8 @@ public class PlayerManager : MonoBehaviour, IGameManager
     /// <param name="maxHealth"></param>
     public void UpdateData(int health, int maxHealth)
     {
-        this.health = health;
-        this.maxHealth = maxHealth;
+        Health = health;
+        MaxHealth = maxHealth;
     }
 
     /// <summary>
@@ -43,10 +43,15 @@ public class PlayerManager : MonoBehaviour, IGameManager
     /// <param name="value"></param>
     public void ChangeScore(int value)
     {
-        score += value;
-        if (score < 0) score = 0;
+        Score += value;
+
+        if (Score < 0)
+            Score = 0;
+
         Messenger.Broadcast(GameEvent.SCORE_UPDATED);
-        if (score == 0) Messenger.Broadcast(GameEvent.LEVEL_FAILED); 
+
+        if (Score == 0)
+            Messenger.Broadcast(GameEvent.LEVEL_FAILED); 
     }
 
     /// <summary>
@@ -55,13 +60,17 @@ public class PlayerManager : MonoBehaviour, IGameManager
     /// <param name="value"></param>
     public void ChangeHealth(int value)
     {
-        health += value;
+        Health += value;
         
-        if (health > maxHealth) health = maxHealth;
-        else if (health < 0) health = 0;
+        if (Health > MaxHealth)
+            Health = MaxHealth;
+        else if (Health < 0)
+            Health = 0;
         
-        if (health == 0) Messenger.Broadcast(GameEvent.LEVEL_FAILED);
-        else StartCoroutine(Respawn());
+        if (Health == 0)
+            Messenger.Broadcast(GameEvent.LEVEL_FAILED);
+        else 
+            StartCoroutine(Respawn());
         
         Messenger.Broadcast(GameEvent.HEALTH_UPDATED);
     }
@@ -72,7 +81,7 @@ public class PlayerManager : MonoBehaviour, IGameManager
     /// <param name="checkpoint"></param>
     public void UpdateLastAutosavePosition(Vector3 checkpoint)
     {
-        lastSavePosition = checkpoint;
+        LastSavePosition = checkpoint;
     }
     
     /// <summary>
@@ -93,6 +102,6 @@ public class PlayerManager : MonoBehaviour, IGameManager
     /// </summary>
     public void RespawnFull()
     {
-        UpdateData(maxHealth, maxHealth);
+        UpdateData(MaxHealth, MaxHealth);
     }
 }

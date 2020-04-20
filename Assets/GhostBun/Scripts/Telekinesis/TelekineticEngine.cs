@@ -1,36 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TelekineticEngine : MonoBehaviour
 {
-    [SerializeField] float verticalOffset = 1f;
-    [SerializeField] GameObject playerMark;
-    [SerializeField] GameObject anchorMark;
-    [SerializeField] TelekineticField teleField;
-    [SerializeField] LayerMask playerCollideOn;
-    [SerializeField] CapsuleCollider mainCollider;
-    [SerializeField] Rigidbody rb;
+    [SerializeField] private float _verticalOffset = 1f;
+    [SerializeField] private Transform _playerMark;
+    [SerializeField] private Transform _anchorMark;
+    [SerializeField] private Transform _player;
+    [SerializeField] private TelekineticField _teleField;
+    [SerializeField] private LayerMask _playerCollideOn;
+    [SerializeField] private CapsuleCollider _mainCollider;
+    [SerializeField] private Rigidbody _body;
 
-    GameObject player;
-
-    bool enablingPhase = false;
-
-    float distanceOffset = 1f;
-    float rotationForce = 0f;
+    private bool _enablingPhase = false;
+    private float _distanceOffset = 1f;
+    private float _rotationForce = 0f;
 
     //Во время FixedUpdate перемещаем марки к тем позициям, где они должны быть. 
     //С чилдами это не работает.
     private void FixedUpdate()
     {
-        if (!enablingPhase && TelekineticFieldEnabled())
+        if (!_enablingPhase && TelekineticFieldEnabled())
         {    //Добавляем скорости вращения по Y
-            rb.AddTorque(Vector3.up * rotationForce, ForceMode.Acceleration);
+            _body.AddTorque(Vector3.up * _rotationForce, ForceMode.Acceleration);
             //апдейтим позиции наших марок.
-            playerMark.transform.position = transform.position + transform.forward * distanceOffset;
-            anchorMark.transform.position = transform.position - transform.forward * distanceOffset;
+            _playerMark.position = transform.position + transform.forward * _distanceOffset;
+            _anchorMark.position = transform.position - transform.forward * _distanceOffset;
             //Перетаскиваем игрока на марку игрока
-            player.transform.position = playerMark.transform.position;
+            _player.position = _playerMark.transform.position;
         }
     }
 
@@ -38,20 +35,20 @@ public class TelekineticEngine : MonoBehaviour
     protected void LateUpdate()
     {
         //Рижидбади перезаписывает вращение на фазе FixedUpdate, поэтому мы как последние извращенцы делаем это в LateUpdate, чтобы RB не успел все испортить.
-        if (enablingPhase)
+        if (_enablingPhase)
         {
-            mainCollider.enabled = true;
+            _mainCollider.enabled = true;
             //Пересчитываем дистанцию, которая должна быть между марками
-            SetDistanceBetweenPoints(Vector3.Distance(transform.position, player.transform.position));
+            SetDistanceBetweenPoints(Vector3.Distance(transform.position, _player.transform.position));
             //Поворачиваем наш телекинез в сторону персонажа, чтобы красиво поднять его в воздух. Без этого он как аутист начинает телепортироваться по уровню.
-            transform.LookAt(player.transform);
+            transform.LookAt(_player.transform);
             //Активируем телекинез
-            teleField.gameObject.SetActive(true);
+            _teleField.gameObject.SetActive(true);
             //Завершаем фазу.
-            enablingPhase = false;
+            _enablingPhase = false;
         }
 
-        if (!enablingPhase && TelekineticFieldEnabled())
+        if (!_enablingPhase && TelekineticFieldEnabled())
         {
             //Несмотря на то, что мы установили ограничения по вращению X и Z, RB считает, что она умнее и при AddTorque начинает беспорядочно бесоебить.
             //Исправляем это своими силами.
@@ -59,14 +56,6 @@ public class TelekineticEngine : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Устанавливаем кто игрок. Его будем поднимать.
-    /// </summary>
-    /// <param name="player"></param>
-    public void SetPlayerAsTarget(GameObject player)
-    {
-        this.player = player;
-    }
 
     /// <summary>
     /// Проверяем работает ли телекинез.
@@ -74,7 +63,7 @@ public class TelekineticEngine : MonoBehaviour
     /// <returns></returns>
     public bool TelekineticFieldEnabled()
     {
-        return teleField.gameObject.activeInHierarchy;
+        return _teleField.gameObject.activeInHierarchy;
     }
 
     /// <summary>
@@ -82,7 +71,7 @@ public class TelekineticEngine : MonoBehaviour
     /// </summary>
     public void EnableTelekineticField()
     {
-        enablingPhase = true;
+        _enablingPhase = true;
     }
 
     /// <summary>
@@ -90,11 +79,11 @@ public class TelekineticEngine : MonoBehaviour
     /// </summary>
     public void DisableTelekineticField()
     {
-        rb.angularVelocity = Vector3.zero;
-        rotationForce = 0f;
-        rb.rotation = Quaternion.Euler(Vector3.zero);
-        teleField.gameObject.SetActive(false);
-        mainCollider.enabled = false;
+        _body.angularVelocity = Vector3.zero;
+        _rotationForce = 0f;
+        _body.rotation = Quaternion.Euler(Vector3.zero);
+        _teleField.gameObject.SetActive(false);
+        _mainCollider.enabled = false;
     }
 
     /// <summary>
@@ -103,7 +92,7 @@ public class TelekineticEngine : MonoBehaviour
     /// <param name="newLocation"></param>
     public void SetLocation(Vector3 newLocation)
     {
-        transform.position = newLocation + Vector3.up * verticalOffset;
+        transform.position = newLocation + Vector3.up * _verticalOffset;
     }
 
     /// <summary>
@@ -112,9 +101,9 @@ public class TelekineticEngine : MonoBehaviour
     /// <param name="distance"></param>
     public void SetDistanceBetweenPoints(float distance)
     {
-        distanceOffset = distance;
-        mainCollider.center = distance * Vector3.forward + Vector3.up;
-        rb.centerOfMass = Vector3.zero;
+        _distanceOffset = distance;
+        _mainCollider.center = distance * Vector3.forward + Vector3.up;
+        _body.centerOfMass = Vector3.zero;
     }
 
     /// <summary>
@@ -123,6 +112,6 @@ public class TelekineticEngine : MonoBehaviour
     /// <param name="force"></param>
     public void AddRotationForce(float force)
     {
-        rotationForce = force;
+        _rotationForce = force;
     }
 }

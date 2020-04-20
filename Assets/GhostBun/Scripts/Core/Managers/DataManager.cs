@@ -18,7 +18,7 @@ public class DataManager : MonoBehaviour, IGameManager
         Status = ManagerStatus.Started;
     }
 
-    public void SaveGameState()
+    public void SaveGameData()
     {
         //Dictionary<string, object> gameState = new Dictionary<string, object>();
         //gameState.Add();
@@ -31,7 +31,7 @@ public class DataManager : MonoBehaviour, IGameManager
         //stream.Close();
     }
 
-    public void LoadGameState()
+    public void LoadGameData()
     {
         if (!File.Exists(_filename))
         {
