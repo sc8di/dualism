@@ -5,17 +5,17 @@ public class ItemsManager : MonoBehaviour, IGameManager
 {
     public ManagerStatus Status { get; private set; }
 
-    private Dictionary<Rigidbody, BodyData> savedBodies;
+    private Dictionary<Rigidbody, BodyData> _savedBodies;
 
     public void Startup()
     {
         Debug.Log("Items manager starting...");
-        
-        savedBodies = new Dictionary<Rigidbody, BodyData>();
+
+        _savedBodies = new Dictionary<Rigidbody, BodyData>();
         
         foreach (Rigidbody rb in FindObjectsOfType<Rigidbody>()) 
         {
-        	savedBodies.Add(rb, new BodyData()
+            _savedBodies.Add(rb, new BodyData()
         	{
         	    position = rb.transform.position,
         	    rotation = rb.transform.rotation,
@@ -36,21 +36,24 @@ public class ItemsManager : MonoBehaviour, IGameManager
     
     public void RemoveBody(Rigidbody rb)
     {
-	    savedBodies.Remove(rb);
+        _savedBodies.Remove(rb);
     }
 
     public bool BodyContains(Rigidbody rb)
     {
-	    if (rb == null) return false;
+	    if (rb == null)
+            return false;
 	    
-	    if (savedBodies.ContainsKey(rb)) return true;
-	    else return false;
+	    if (_savedBodies.ContainsKey(rb))
+            return true;
+	    else
+            return false;
     }
 
 
     public void AddBody(Rigidbody rb)
     {
-    	savedBodies.Add(rb, new BodyData()
+        _savedBodies.Add(rb, new BodyData()
     	{
         	position = rb.transform.position,
         	rotation = rb.transform.rotation,

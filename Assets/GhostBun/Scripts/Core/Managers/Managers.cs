@@ -25,6 +25,7 @@ public class Managers : MonoBehaviour
 
     private List<IGameManager> _startSequence;
 
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -84,14 +85,26 @@ public class Managers : MonoBehaviour
             if (countReady > lastReady)
             {
                 Debug.Log($"Progress: {countReady}/{countModules}");
-                try { Messenger<int, int>.Broadcast(StartupEvent.MANAGERS_PROGRESS, countReady, countModules); }
-                catch { Debug.Log("Progress bar for Managers do not exist."); }              
+                try
+                {
+                    Messenger<int, int>.Broadcast(StartupEvent.MANAGERS_PROGRESS, countReady, countModules);
+                }
+                catch
+                {
+                    Debug.Log("Progress bar for Managers do not exist.");
+                }              
             }
             yield return null;
         }
         Debug.Log($"All managers started up");
 
-        try { Messenger.Broadcast(StartupEvent.MANAGERS_STARTED); }
-        catch { Debug.Log("Managers started in silent."); }        
+        try 
+        { 
+            Messenger.Broadcast(StartupEvent.MANAGERS_STARTED); 
+        }
+        catch
+        { 
+            Debug.Log("Managers started in silent."); 
+        }        
     }
 }

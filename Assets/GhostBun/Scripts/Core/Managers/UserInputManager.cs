@@ -4,11 +4,11 @@ public class UserInputManager : MonoBehaviour, IGameManager
 {
     public ManagerStatus Status { get; private set; }
 
-    [SerializeField] private float anchorTimer = 0.1f;
+    [SerializeField] private float _anchorTimer = 0.1f;
 
     public bool gameState = true;
 
-    private float touchTimer;
+    private float _touchTimer;
 
     public void Startup()
     {
@@ -19,7 +19,8 @@ public class UserInputManager : MonoBehaviour, IGameManager
 
     void FixedUpdate()
     {
-        if (Input.GetButtonDown("Fire1")) touchTimer = 0;
+        if (Input.GetButtonDown("Fire1")) 
+            _touchTimer = 0;
 
         if(Input.GetButtonUp("Fire1"))
         {
@@ -28,7 +29,8 @@ public class UserInputManager : MonoBehaviour, IGameManager
 
         if (Input.GetButton("Fire1"))
         {
-            if(touchTimer < anchorTimer) touchTimer += Time.deltaTime;
+            if(_touchTimer < _anchorTimer)
+                _touchTimer += Time.fixedDeltaTime;
             else
             {
                 // Задействовать якорь. Broadcast для AnchorManager or something else?

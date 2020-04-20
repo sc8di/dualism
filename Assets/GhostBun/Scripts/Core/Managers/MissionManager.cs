@@ -8,11 +8,11 @@ public class MissionManager : MonoBehaviour, IGameManager
     /// <summary>
     /// Текущий уровень.
     /// </summary>
-    public int curLevel { get; private set; }
+    public int CurrentLevel { get; private set; }
     /// <summary>
     /// Последний уровень.
     /// </summary>
-    public int maxLevel { get; private set; }
+    public int MaxLevel { get; private set; }
 
     /// <summary>
     /// Инициализация менеджера.
@@ -33,8 +33,8 @@ public class MissionManager : MonoBehaviour, IGameManager
     /// <param name="maxLevel">Конечный уровень.</param>
     public void UpdateData(int curLevel, int maxLevel)
     {
-        this.curLevel = curLevel;
-        this.maxLevel = maxLevel;
+        CurrentLevel = curLevel;
+        MaxLevel = maxLevel;
     }
     
     /// <summary>
@@ -42,10 +42,10 @@ public class MissionManager : MonoBehaviour, IGameManager
     /// </summary>
     public void GoToNext()
     {
-        if (curLevel < maxLevel)
+        if (CurrentLevel < MaxLevel)
         {
-            curLevel++;
-            string name = $"Level{curLevel}";
+            CurrentLevel++;
+            string name = $"Level{CurrentLevel}";
             Debug.Log($"Loading {name}.");
             SceneManager.LoadScene(name);
         }
@@ -69,7 +69,7 @@ public class MissionManager : MonoBehaviour, IGameManager
     /// </summary>
     public void RestartCurrentLevel()
     {
-        string name = $"Level{curLevel}";
+        string name = $"Level{CurrentLevel}";
         Debug.Log($"Loading {name}.");
         SceneManager.LoadScene(name);
     }

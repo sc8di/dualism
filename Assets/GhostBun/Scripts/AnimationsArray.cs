@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AnimationsArray : MonoBehaviour
 {
-    //На Start and Awake не подключает аниматор
-    [SerializeField] Animator animator;
-
-    private float talkingRingLength;
+    // На Start and Awake не подключает аниматор.
+    [SerializeField] Animator _animator;
 
     public float TalkingRingLength { get; private set; }
 
@@ -15,9 +11,10 @@ public class AnimationsArray : MonoBehaviour
     {
         GetAnimationLength();
     }
+
     private void GetAnimationLength()
     {
-        AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+        AnimationClip[] clips = _animator.runtimeAnimatorController.animationClips;
 
         foreach (AnimationClip clip in clips)
         {

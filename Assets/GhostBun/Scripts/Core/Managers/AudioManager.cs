@@ -6,38 +6,40 @@ public class AudioManager : MonoBehaviour, IGameManager
     public ManagerStatus Status { get; private set; }
 
     [Tooltip("Источник звуков.")]
-    [SerializeField] private AudioSource soundSource;
+    [SerializeField] private AudioSource _soundSource;
     [Tooltip("Первый источник музыки.")]
-    [SerializeField] private AudioSource musicFirstSource;
+    [SerializeField] private AudioSource _musicFirstSource;
     [Tooltip("Второй источник музыки.")]
-    [SerializeField] private AudioSource musicSecondSource;
+    [SerializeField] private AudioSource _musicSecondSource;
     [Tooltip("Массив треков.")]
-    [SerializeField] private AudioClip[] clips;
-
-    private AudioSource _firstMusic;
-    private AudioSource _secondMusic;
+    [SerializeField] private AudioClip[] _clips;
 
     [Tooltip("Скорость плавного перехода между треками.")]
     public float crossFadeRate = 1.5f;
-    private bool _crossFading;
 
+    private AudioSource _firstMusic;
+    private AudioSource _secondMusic;
+    private bool _crossFading;
     private float _musicVolume;
     private int _currentClipNumber = -1;
-    private bool toggleMusic = true;
+    private bool _toggleMusic = true;
 
     /// <summary>
     /// Изменение громкости музыки.
     /// </summary>
-    public float musicVolume
+    public float MusicVolume
     {
-        get { return _musicVolume; }
+        get
+        {
+            return _musicVolume;
+        }
         set
         {
             _musicVolume = value;
-            if (musicFirstSource != null && !_crossFading)
+            if (_musicFirstSource != null && !_crossFading)
             {
-                musicFirstSource.volume = _musicVolume;
-                musicSecondSource.volume = _musicVolume;
+                _musicFirstSource.volume = _musicVolume;
+                _musicSecondSource.volume = _musicVolume;
             }
         }
     }
@@ -45,23 +47,22 @@ public class AudioManager : MonoBehaviour, IGameManager
     /// <summary>
     /// Переключения мута музыки.
     /// </summary>
-    public bool musicMute
+    public bool MusicMute
     {
         get
         {
-            if (musicFirstSource != null)
+            if (_musicFirstSource != null)
             {
-                return musicFirstSource.mute;
+                return _musicFirstSource.mute;
             }
-
             return false;
         }
         set
         {
-            if (musicFirstSource != null)
+            if (_musicFirstSource != null)
             {
-                musicFirstSource.mute = value;
-                musicSecondSource.mute = value;
+                _musicFirstSource.mute = value;
+                _musicSecondSource.mute = value;
             }
         }
     }
@@ -69,19 +70,31 @@ public class AudioManager : MonoBehaviour, IGameManager
     /// <summary>
     /// Изменения громкости звука.
     /// </summary>
-    public float soundVolume
+    public float SoundVolume
     {
-        get { return AudioListener.volume; }
-        set { AudioListener.volume = value; }
+        get
+        {
+            return AudioListener.volume;
+        }
+        set
+        {
+            AudioListener.volume = value;
+        }
     }
 
     /// <summary>
     /// Переключения мута звука.
     /// </summary>
-    public bool soundMute
+    public bool SoundMute
     {
-        get { return AudioListener.pause; }
-        set { AudioListener.pause = value; }
+        get 
+        { 
+            return AudioListener.pause; 
+        }
+        set 
+        { 
+            AudioListener.pause = value; 
+        }
     }
 
     /// <summary>
@@ -91,21 +104,19 @@ public class AudioManager : MonoBehaviour, IGameManager
     {
         Debug.Log("Audio manager starting...");
 
-        musicFirstSource.ignoreListenerVolume = true;
-        musicFirstSource.ignoreListenerPause = true;
-        musicSecondSource.ignoreListenerVolume = true;
-        musicSecondSource.ignoreListenerPause = true;
+        _musicFirstSource.ignoreListenerVolume = true;
+        _musicFirstSource.ignoreListenerPause = true;
+        _musicSecondSource.ignoreListenerVolume = true;
+        _musicSecondSource.ignoreListenerPause = true;
 
-        soundVolume = 1;
-        musicVolume = .1f;
+        SoundVolume = 1;
+        MusicVolume = .1f;
 
-        if (clips.Length != 0)
-        {
-            musicFirstSource.clip = clips[0];
-        }
+        if (_clips.Length != 0)
+            _musicFirstSource.clip = _clips[0];
 
-        _firstMusic = musicFirstSource;
-        _secondMusic = musicSecondSource;
+        _firstMusic = _musicFirstSource;
+        _secondMusic = _musicSecondSource;
 
         Status = ManagerStatus.Started;
     }
@@ -116,7 +127,7 @@ public class AudioManager : MonoBehaviour, IGameManager
     /// <param name="clip"></param>
     public void PlaySound(AudioClip clip)
     {
-        soundSource.PlayOneShot(clip);
+        _soundSource.PlayOneShot(clip);
     }
 
     /// <summary>
@@ -124,13 +135,18 @@ public class AudioManager : MonoBehaviour, IGameManager
     /// </summary>
     public void NextMusic()
     {
-        if (clips.Length == 0) return;
+        if (_clips.Length == 0) 
+            return;
 
-        if (!toggleMusic) toggleMusic = true;
+        if (!_toggleMusic) 
+            _toggleMusic = true;
         
-        if (_currentClipNumber >= clips.Length - 1) _currentClipNumber = 0;
-        else _currentClipNumber++;
-        PlayMusic(Resources.Load("Music/" + clips[_currentClipNumber].name) as AudioClip);
+        if (_currentClipNumber >= _clips.Length - 1) 
+            _currentClipNumber = 0;
+        else 
+            _currentClipNumber++;
+
+        PlayMusic(Resources.Load("Music/" + _clips[_currentClipNumber].name) as AudioClip);
     }
 
     /// <summary>
@@ -138,13 +154,18 @@ public class AudioManager : MonoBehaviour, IGameManager
     /// </summary>
     public void PreviousMusic()
     {
-        if (clips.Length == 0) return;
+        if (_clips.Length == 0) 
+            return;
 
-        if (!toggleMusic) toggleMusic = true;
+        if (!_toggleMusic) 
+            _toggleMusic = true;
         
-        if (_currentClipNumber <= 0) _currentClipNumber = clips.Length - 1;
-        else _currentClipNumber--;
-        PlayMusic(Resources.Load("Music/" + clips[_currentClipNumber].name) as AudioClip);
+        if (_currentClipNumber <= 0) 
+            _currentClipNumber = _clips.Length - 1;
+        else 
+            _currentClipNumber--;
+
+        PlayMusic(Resources.Load("Music/" + _clips[_currentClipNumber].name) as AudioClip);
     }
 
     /// <summary>
@@ -153,10 +174,9 @@ public class AudioManager : MonoBehaviour, IGameManager
     /// <param name="clip"></param>
     private void PlayMusic(AudioClip clip)
     {
-        if (_crossFading)
-        {
+        if (_crossFading)        
             return;
-        }
+        
         StartCoroutine(CrossFadeMusic(clip));
     }
 
@@ -165,10 +185,8 @@ public class AudioManager : MonoBehaviour, IGameManager
     /// </summary>
     private void FixedUpdate()
     {
-        if (toggleMusic && !_firstMusic.isPlaying && !_secondMusic.isPlaying)
-        {
-            NextMusic();
-        }
+        if (_toggleMusic && !_firstMusic.isPlaying && !_secondMusic.isPlaying)        
+            NextMusic();        
     }
 
     /// <summary>
@@ -209,6 +227,6 @@ public class AudioManager : MonoBehaviour, IGameManager
     {
         _firstMusic.Stop();
         _secondMusic.Stop();
-        toggleMusic = false;
+        _toggleMusic = false;
     }
 }

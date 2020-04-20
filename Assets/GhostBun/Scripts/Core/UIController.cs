@@ -5,9 +5,9 @@ using Cursor = UnityEngine.Cursor;
 
 public class UIController : MonoBehaviour
 {
-    //[SerializeField] private SettingsPopup popup;
-    [SerializeField] private TextMeshProUGUI levelEnding;
-    [SerializeField] private GameObject[] lifes;
+    [SerializeField] private GameObject _popup;
+    [SerializeField] private TextMeshProUGUI _levelEnding;
+    [SerializeField] private GameObject[] _lifes;
 
     private void Awake()
     {
@@ -27,37 +27,24 @@ public class UIController : MonoBehaviour
     
     private void Start()
     {
-        //popup.gameObject.SetActive(false);
-        
+        //popup.SetActive(false);        
         OnHealthUpdated(); // StressUpdated?
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && _popup != null)
         {
-            bool isShowingSettings = false; // popup.gameObject.activeSelf;
-            //popup.gameObject.SetActive(!isShowingSettings);
-
-            if (isShowingSettings)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
+            _popup.gameObject.SetActive(!_popup.activeInHierarchy);
+            Cursor.visible = !Cursor.visible;
+            Cursor.lockState = Cursor.visible ? CursorLockMode.None : CursorLockMode.Locked;
         }
     }
 
     private void OnHealthUpdated() // OnStressUpdated.
     {
-        if (Managers.Player.health < Managers.Player.maxHealth)
-        {
-            lifes[Managers.Player.health].SetActive(false);
-        }
+        if (Managers.Player.Health < Managers.Player.MaxHealth)
+            _lifes[Managers.Player.Health].SetActive(false);
     }
 
     private void OnLevelComplete()
@@ -65,7 +52,7 @@ public class UIController : MonoBehaviour
         StartCoroutine(CompleteLevel());
     }
 
-    private IEnumerator CompleteLevel()
+    private static IEnumerator CompleteLevel()
     {
         // Отображение надписи о завершении уровня.
 

@@ -1,16 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using EmeraldAI;
+using System.Collections;
 using UnityEngine;
-using EmeraldAI;
 
 public class Work : MonoBehaviour
 {
-    [SerializeField] int emoteAnimationIndex;
+    [SerializeField] private int _emoteAnimationIndex;
 
-    private EmeraldAIEventsManager eventSystem;
+    private EmeraldAIEventsManager _eventSystem;
+
     private void OnTriggerEnter(Collider other)
     {
-        eventSystem = other.GetComponent<EmeraldAIEventsManager>();
+        _eventSystem = other.GetComponent<EmeraldAIEventsManager>();
 
         // Останавливаем движение NPC до окончания анимации
         StartCoroutine(Working(other.GetComponent<AnimationsArray>().TalkingRingLength));
@@ -18,12 +18,9 @@ public class Work : MonoBehaviour
 
     private IEnumerator Working(float delay)
     {
-        eventSystem.StopMovement();
-
-        eventSystem.PlayEmoteAnimation(emoteAnimationIndex);
-
+        _eventSystem.StopMovement();
+        _eventSystem.PlayEmoteAnimation(_emoteAnimationIndex);
         yield return new WaitForSeconds(delay);
-
-        eventSystem.ResumeMovement();
+        _eventSystem.ResumeMovement();
     }
 }

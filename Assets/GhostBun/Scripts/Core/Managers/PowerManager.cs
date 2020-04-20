@@ -7,42 +7,42 @@ public class PowerManager : MonoBehaviour, IGameManager
     #region Power variables.
     [Header("Telecinetic", order = 0)]
     [Range(0, 1)]
-    [SerializeField] private float startingRadiusGrab;
-    [SerializeField] private float maximumRadiusGrab;
-    [SerializeField] private float expansionSpeedGrab;
+    [SerializeField] private float _startingRadiusGrab;
+    [SerializeField] private float _maximumRadiusGrab;
+    [SerializeField] private float _expansionSpeedGrab;
     [Range(0, 1)]
-    [SerializeField] private float expansionChaosGrab;
+    [SerializeField] private float _expansionChaosGrab;
     [Range(0, 1)]
-    [SerializeField] private float chaoticForseGrab;
-    [SerializeField] private int maximumObjectsInControlGrab;
-    [SerializeField] private float forceGrab;
-    [SerializeField] private float chaoticForceGrab;
+    [SerializeField] private float _chaoticForseGrab;
+    [SerializeField] private int _maximumObjectsInControlGrab;
+    [SerializeField] private float _forceGrab;
+    [SerializeField] private float _chaoticForceGrab;
 
     [Space(10)]
     [Header("Push", order = 1)]
     [Range(0, 1)]
-    [SerializeField] private float startingRadiusPush;
-    [SerializeField] private float maximumRadiusPush;
-    [SerializeField] private float expansionSpeedPush;
-    [SerializeField] private float expansionChaosPush;
-    [SerializeField] private float chaoticForsePush;
-    [SerializeField] private int maximumObjectsInControlPush;
-    [SerializeField] private float forcePush;
-    [SerializeField] private float chaoticForcePush;
+    [SerializeField] private float _startingRadiusPush;
+    [SerializeField] private float _maximumRadiusPush;
+    [SerializeField] private float _expansionSpeedPush;
+    [SerializeField] private float _expansionChaosPush;
+    [SerializeField] private float _chaoticForsePush;
+    [SerializeField] private int _maximumObjectsInControlPush;
+    [SerializeField] private float _forcePush;
+    [SerializeField] private float _chaoticForcePush;
 
     [Space(10)]
     [Header("Rage", order = 2)]
     [Range(0, 1)]
-    [SerializeField] private float startingRadiusRage;
-    [SerializeField] private float maximumRadiusRage;
-    [SerializeField] private float expansionSpeedRage;
+    [SerializeField] private float _startingRadiusRage;
+    [SerializeField] private float _maximumRadiusRage;
+    [SerializeField] private float _expansionSpeedRage;
     [Range(0, 1)]
-    [SerializeField] private float expansionChaosRage;
+    [SerializeField] private float _expansionChaosRage;
     [Range(0, 1)]
-    [SerializeField] private float chaoticForseRage;
-    [SerializeField] private int maximumObjectsInControlRage;
-    [SerializeField] private float forceRage;
-    [SerializeField] private float chaoticForceRage;
+    [SerializeField] private float _chaoticForseRage;
+    [SerializeField] private int _maximumObjectsInControlRage;
+    [SerializeField] private float _forceRage;
+    [SerializeField] private float _chaoticForceRage;
     #endregion
 
     public Power Telecinetic;
@@ -57,41 +57,40 @@ public class PowerManager : MonoBehaviour, IGameManager
         Telecinetic = new Power()
         {
             forceMode = ForceMode.Force,
-            startingRadius = startingRadiusGrab,
-            maximumRadius = maximumRadiusGrab,
-            expansionSpeed = expansionSpeedGrab,
-            expansionChaos = expansionChaosGrab,
-            chaoticForse = chaoticForseGrab,
-            maximumObjectsInControl = maximumObjectsInControlGrab,
-            force = forceGrab,
-            chaoticForce = chaoticForceGrab
+            startingRadius = _startingRadiusGrab,
+            maximumRadius = _maximumRadiusGrab,
+            expansionSpeed = _expansionSpeedGrab,
+            expansionChaos = _expansionChaosGrab,
+            chaoticForse = _chaoticForseGrab,
+            maximumObjectsInControl = _maximumObjectsInControlGrab,
+            force = _forceGrab,
+            chaoticForce = _chaoticForceGrab
         };
         Push = new Power()
         {
             forceMode = ForceMode.Impulse,
-            startingRadius = startingRadiusPush,
-            maximumRadius = maximumRadiusPush,
-            expansionSpeed = expansionSpeedPush,
-            expansionChaos = expansionChaosPush,
-            chaoticForse = chaoticForsePush,
-            maximumObjectsInControl = maximumObjectsInControlPush,
-            force = forcePush,
-            chaoticForce = chaoticForcePush
+            startingRadius = _startingRadiusPush,
+            maximumRadius = _maximumRadiusPush,
+            expansionSpeed = _expansionSpeedPush,
+            expansionChaos = _expansionChaosPush,
+            chaoticForse = _chaoticForsePush,
+            maximumObjectsInControl = _maximumObjectsInControlPush,
+            force = _forcePush,
+            chaoticForce = _chaoticForcePush
         };
         Rage = new Power()
         {
             forceMode = ForceMode.VelocityChange,
-            startingRadius = startingRadiusRage,
-            maximumRadius = maximumRadiusRage,
-            expansionSpeed = expansionSpeedRage,
-            expansionChaos = expansionChaosRage,
-            chaoticForse = chaoticForseRage,
-            maximumObjectsInControl = maximumObjectsInControlRage,
-            force = forceRage,
-            chaoticForce = chaoticForceRage
+            startingRadius = _startingRadiusRage,
+            maximumRadius = _maximumRadiusRage,
+            expansionSpeed = _expansionSpeedRage,
+            expansionChaos = _expansionChaosRage,
+            chaoticForse = _chaoticForseRage,
+            maximumObjectsInControl = _maximumObjectsInControlRage,
+            force = _forceRage,
+            chaoticForce = _chaoticForceRage
         };
         #endregion
-
 
         Status = ManagerStatus.Started;
     }
