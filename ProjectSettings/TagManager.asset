@@ -8,6 +8,7 @@ TagManager:
   - FX
   - Enemy
   - World
+  - NPC
   layers:
   - Default
   - TransparentFX
