@@ -17300,7 +17300,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 543645376}
   m_Material: {fileID: 13400000, guid: 0fe100b93c89e194491359e03997cd7b, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -44625,7 +44625,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1359917045 stripped
 GameObject:
@@ -46799,17 +46799,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021af093044c1c459843649747946c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _forceMode: 0
-  _maximumRadius: 2
-  _expansionSpeed: 10
+  angularDestabilization: 0
+  _nullForceRadius: 0.5
+  _forceMode: 5
+  _maximumRadius: 4
+  _expansionSpeed: 1
   _maximumObjectsInControl: 5
   _force: 60
-  _chaoticForce: 0
-  _startingRadius: 1
-  _expansionChaos: 0
-  _chaoticForse: 0
---- !u!136 &1404951503
-CapsuleCollider:
+  _startingRadius: 0
+  _chaoticForce: 90
+--- !u!135 &1404951503
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -46818,9 +46818,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
+  serializedVersion: 2
   m_Radius: 1
-  m_Height: 4
-  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1405886689 stripped
 GameObject:

@@ -3,18 +3,26 @@ using UnityEngine;
 
 public class TelekineticField : MonoBehaviour
 {
+    [SerializeField] [Range(0, 1)] private float angularDestabilization;
+    [SerializeField] private float _nullForceRadius;
     [SerializeField] private ForceMode _forceMode;
     [SerializeField] private float _maximumRadius = 2f;
     [SerializeField] private float _expansionSpeed = 10f;
     [SerializeField] private int _maximumObjectsInControl = 5;
     [SerializeField] private float _force;
+    [SerializeField] private float _startingRadius = 1f;
     [SerializeField] private float _chaoticForce;
-    [SerializeField] [Range(0, 1)] private float _startingRadius = 1f;
-    [SerializeField] [Range(0, 1)] private float _expansionChaos = 0f;
-    [SerializeField] [Range(0, 1)] private float _chaoticForse = 0f;
 
     private static List<Rigidbody> _rbList;
     private float _currentRadius = 0f;
+    private Vector3 _lastFramePosition = Vector3.zero;
+    private Vector3 _deltaForce = Vector3.zero;
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, _nullForceRadius * _currentRadius);
+    }
 
     private void Start()
     {
@@ -33,16 +41,24 @@ public class TelekineticField : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         Rigidbody body = other.attachedRigidbody;
-
+        body.useGravity = true;
         if (_rbList.Contains(body))        
             _rbList.Remove(body);        
     }
 
     private void OnDisable()
     {
+        foreach (Rigidbody body in _rbList)
+            body.useGravity = true;
+
         _rbList.Clear();
         _currentRadius = _startingRadius;
         transform.localScale = Vector3.one * _currentRadius;
+    }
+
+    private void OnEnable()
+    {
+        _lastFramePosition = transform.position;
     }
 
     private void FixedUpdate()
@@ -50,7 +66,7 @@ public class TelekineticField : MonoBehaviour
         // Здесь коллайдер растет.
         if (_currentRadius < _maximumRadius)
         {
-            _currentRadius += Time.fixedDeltaTime * (_expansionSpeed + (Random.Range(-0.5f * _chaoticForse, 1f * _chaoticForse) * _expansionChaos)); // Магических чисел лучше избегать.
+            _currentRadius += Time.fixedDeltaTime * _expansionSpeed; // Магических чисел лучше избегать.
             transform.localScale = Vector3.one * _currentRadius;
         }
 
@@ -67,10 +83,32 @@ public class TelekineticField : MonoBehaviour
                 i--;
                 continue;
             }
-            Vector3 directionalForce = (transform.position - _rbList[i].transform.position).normalized * _force;
-            Vector3 randomForce = Random.insideUnitSphere * Random.Range(0, _chaoticForce) * Random.Range(0f, 2f);
-            _rbList[i].AddForce((directionalForce + randomForce) * Time.fixedDeltaTime, _forceMode);
+
+            _rbList[i].useGravity = false;
+
+            _rbList[i].angularVelocity = _rbList[i].angularVelocity * angularDestabilization;
+
+            float objectDistance = Vector3.Distance(_rbList[i].transform.position, transform.position);
+
+            Vector3 chaoticForceVector = Random.insideUnitSphere * Random.Range(0, _chaoticForce) * Random.Range(0f, 2f);
+
+            if (objectDistance > _nullForceRadius * _currentRadius)
+            {
+                Vector3 directionalForce = (transform.position - _rbList[i].transform.position).normalized * _force;
+                _rbList[i].AddForce(directionalForce * Time.fixedDeltaTime, _forceMode);
+            }
+            else
+            {
+                //Считаем изменение положения локации телекинеза.
+                _deltaForce = transform.position - _lastFramePosition;
+                //Добавляем силу для перемещения 
+                _rbList[i].AddForce(_deltaForce, ForceMode.VelocityChange);
+            }
+            _rbList[i].AddForce(chaoticForceVector * Time.fixedDeltaTime, _forceMode);
+
         }
+        //Записываем текущую позицию как предыдущую.
+        _lastFramePosition = transform.position;
     }
 
     private sealed class SortByMass : IComparer<Rigidbody>
