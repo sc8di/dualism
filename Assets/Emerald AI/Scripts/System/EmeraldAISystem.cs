@@ -896,6 +896,8 @@ namespace EmeraldAI
                     m_NavMeshAgent.stoppingDistance = StoppingDistance;
                     StartingDestination = transform.position + (transform.forward * StoppingDistance);
                     WanderTypeRef = EmeraldAISystem.WanderType.Waypoints;//Изменил со Stationary на Waypoints
+                    EmeraldEventsManagerComponent.PlayEmoteAnimation(0);
+                    
                 }
             }
             else if (path.status == NavMeshPathStatus.PathInvalid)
