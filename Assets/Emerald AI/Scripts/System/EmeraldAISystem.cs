@@ -10,7 +10,7 @@ namespace EmeraldAI
 {
     [RequireComponent(typeof(BoxCollider))]
     [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(AudioSource))]  
+    [RequireComponent(typeof(AudioSource))]
     [RequireComponent(typeof(EmeraldAIDetection))]
     [RequireComponent(typeof(EmeraldAIInitializer))]
     [RequireComponent(typeof(EmeraldAIBehaviors))]
@@ -891,11 +891,13 @@ namespace EmeraldAI
                 }
                 else if (WanderTypeRef == EmeraldAISystem.WanderType.Waypoints)
                 {
-                    Debug.LogError("The AI ''" + gameObject.name + "'s'' Waypoint #" + (WaypointIndex + 1) + " is not reachable. " +
-                        "The AI's Wander Type has been set to Stationary. Please check the Waypoint #" + (WaypointIndex + 1) + " and make sure it is on the NavMesh and is reachable.");
+                    //Debug.LogError("The AI ''" + gameObject.name + "'s'' Waypoint #" + (WaypointIndex + 1) + " is not reachable. " +
+                        //"The AI's Wander Type has been set to Stationary. Please check the Waypoint #" + (WaypointIndex + 1) + " and make sure it is on the NavMesh and is reachable.");
                     m_NavMeshAgent.stoppingDistance = StoppingDistance;
                     StartingDestination = transform.position + (transform.forward * StoppingDistance);
                     WanderTypeRef = EmeraldAISystem.WanderType.Waypoints;//Изменил со Stationary на Waypoints
+                    EmeraldEventsManagerComponent.PlayEmoteAnimation(0);
+                    
                 }
             }
             else if (path.status == NavMeshPathStatus.PathInvalid)
@@ -915,6 +917,7 @@ namespace EmeraldAI
                     m_NavMeshAgent.stoppingDistance = StoppingDistance;
                     StartingDestination = transform.position + (transform.forward * StoppingDistance);
                     WanderTypeRef = EmeraldAISystem.WanderType.Stationary;
+                    
                 }
             }
             else

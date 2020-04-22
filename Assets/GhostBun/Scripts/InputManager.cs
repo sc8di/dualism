@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using EmeraldAI;
 
 public class InputManager : MonoBehaviour
 {
@@ -12,9 +13,15 @@ public class InputManager : MonoBehaviour
     [SerializeField] private PowerTrip _PowerTrip;
 
     public bool EnablePointForce = false;
-    
+    public int indexTelekineticAnimation = 0;
+
+    private EmeraldAIEventsManager _eventManager;
     private float _touchTimer = 0;
 
+    private void Awake()
+    {
+        _eventManager = _player.GetComponent<EmeraldAIEventsManager>();
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -31,6 +38,8 @@ public class InputManager : MonoBehaviour
 
             //Включаем персонажу мозг.
             _navMeshAgent.enabled = true;
+            //Выключаеманимацию телекинеза
+            _eventManager.StopLoopEmoteAnimation(indexTelekineticAnimation);
             if (_touchTimer < _timerToGo)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -64,6 +73,8 @@ public class InputManager : MonoBehaviour
                             _telekineticEngine.EnableTelekineticField();
                         }                         
                         _navMeshAgent.enabled = false; // Отключаем мозг персонажа.
+                        //Включаем анимацию телекинеза
+                        _eventManager.LoopEmoteAnimation(indexTelekineticAnimation);
                     }
                 }
                 _telekineticEngine.AddRotationForce(Input.GetAxis("Mouse X") * Time.deltaTime * _rotateSpeed);
