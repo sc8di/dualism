@@ -7,7 +7,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private float _rotateSpeed = 50f;
     [SerializeField] private TelekineticEngine _telekineticEngine;
     [SerializeField] private GameObject _player;
-    [SerializeField] private NavMeshAgent _navMeshAgent;
+    [SerializeField] private EmeraldAISystem _emeraldAISystem;
     [SerializeField] private LayerMask _walkOn;
     [SerializeField] private float _timerToGo = .1f;
 
@@ -29,18 +29,18 @@ public class InputManager : MonoBehaviour
         {
             //Отключаем телекинез
             _telekineticEngine.DisableTelekineticField();
-            
 
             //Включаем персонажу мозг.
-            _navMeshAgent.enabled = true;
+            _emeraldAISystem.Activate();
             //Выключаеманимацию телекинеза
             _eventManager.StopLoopEmoteAnimation(indexTelekineticAnimation);
             if (_touchTimer < _timerToGo)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out RaycastHit hit, 100, _walkOn))                
-                    _navMeshAgent.destination = hit.point;                
+                if (Physics.Raycast(ray, out RaycastHit hit, 100, _walkOn))
+                    _emeraldAISystem.EmeraldEventsManagerComponent.SetDestinationPosition(hit.point);
+                //_navMeshAgent.destination = hit.point;
             }
         }
 
@@ -61,7 +61,9 @@ public class InputManager : MonoBehaviour
                         _telekineticEngine.SetLocation(hit.point);
                         _telekineticEngine.EnableTelekineticField();
                   
-                        _navMeshAgent.enabled = false; // Отключаем мозг персонажа. ЗДЕСЬ НАДО ОТРУБИТЬ ЕГО EMERALDAI :3
+                        // Отключаем мозг персонажа.
+                        _emeraldAISystem.Deactivate();
+
                         //Включаем анимацию телекинеза
                         _eventManager.LoopEmoteAnimation(indexTelekineticAnimation);
                     }

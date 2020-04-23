@@ -29,6 +29,7 @@ public class TelekineticEngine : MonoBehaviour
             _anchorMark.position = transform.position - transform.forward * _distanceOffset;
             //Перетаскиваем игрока на марку игрока
             _player.position = _playerMark.transform.position;
+            _player.LookAt(_anchorMark);
         }
     }
 

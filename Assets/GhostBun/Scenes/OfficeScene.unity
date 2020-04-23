@@ -59252,7 +59252,7 @@ MonoBehaviour:
   _rotateSpeed: 50
   _telekineticEngine: {fileID: 543645377}
   _player: {fileID: 4520547964544577770}
-  _navMeshAgent: {fileID: 4520547964544577771}
+  _emeraldAISystem: {fileID: 4520547964544577773}
   _walkOn:
     serializedVersion: 2
     m_Bits: 512
@@ -71426,12 +71426,12 @@ PrefabInstance:
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
       propertyPath: AnimationTabNumber
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
       propertyPath: TabNumber
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
@@ -71522,6 +71522,51 @@ PrefabInstance:
         type: 3}
       propertyPath: WaypointsList.Array.data[1].z
       value: 3.7574666
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: NonCombatAngleToTurn
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: AgentTurnSpeed
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: CombatTabNumber
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: m_ProjectileCollisionPoint.x
+      value: -3.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: m_ProjectileCollisionPoint.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: m_ProjectileCollisionPoint.z
+      value: 1.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: CombatAngleToTurn
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: StationaryTurningSpeedCombat
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: BackupTurningSpeed
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 1687641436783478948, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
@@ -71626,12 +71671,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3015022089514973262}
   m_PrefabAsset: {fileID: 0}
---- !u!195 &4520547964544577771 stripped
-NavMeshAgent:
-  m_CorrespondingSourceObject: {fileID: 1687641436783478949, guid: 9dfd36f2be31c86488a824f5937364e4,
+--- !u!114 &4520547964544577773 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
     type: 3}
   m_PrefabInstance: {fileID: 3015022089514973262}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4520547964544577770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 147c566cda086894c8206928a751fa91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &4520547964544577781
 Rigidbody:
   m_ObjectHideFlags: 0
