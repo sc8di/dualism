@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class TelekineticField : MonoBehaviour
 {
-    [SerializeField] [Range(0, 1)] private float angularDestabilization;
+    [SerializeField] [Range(0, 1)] private float _velocityStabilization;
+    [SerializeField] [Range(0, 1)] private float _angularStabilization;
     [SerializeField] private float _nullForceRadius;
     [SerializeField] private ForceMode _forceMode;
     [SerializeField] private float _maximumRadius = 2f;
@@ -17,6 +18,8 @@ public class TelekineticField : MonoBehaviour
     private float _currentRadius = 0f;
     private Vector3 _lastFramePosition = Vector3.zero;
     private Vector3 _deltaForce = Vector3.zero;
+
+    private const float _one = 1f;
 
     private void OnDrawGizmos()
     {
@@ -86,7 +89,7 @@ public class TelekineticField : MonoBehaviour
 
             _rbList[i].useGravity = false;
 
-            _rbList[i].angularVelocity = _rbList[i].angularVelocity * angularDestabilization;
+            _rbList[i].angularVelocity = _rbList[i].angularVelocity * (_one - _angularStabilization * Time.fixedDeltaTime);
 
             float objectDistance = Vector3.Distance(_rbList[i].transform.position, transform.position);
 
@@ -99,6 +102,7 @@ public class TelekineticField : MonoBehaviour
             }
             else
             {
+                _rbList[i].velocity = _rbList[i].velocity * (_one - _velocityStabilization * Time.fixedDeltaTime);
                 //Считаем изменение положения локации телекинеза.
                 _deltaForce = transform.position - _lastFramePosition;
                 //Добавляем силу для перемещения 

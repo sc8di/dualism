@@ -46647,9 +46647,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5021af093044c1c459843649747946c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angularDestabilization: 0
-  _nullForceRadius: 0
-  _forceMode: 1
+  _velocityStabilization: 1
+  _angularStabilization: 1
+  _nullForceRadius: 0.5
+  _forceMode: 5
   _maximumRadius: 2
   _expansionSpeed: 10
   _maximumObjectsInControl: 5
@@ -59256,8 +59257,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _timerToGo: 0.15
-  _PowerTrip: {fileID: 388341079}
-  EnablePointForce: 0
+  indexTelekineticAnimation: 0
 --- !u!4 &1787959894
 Transform:
   m_ObjectHideFlags: 0
@@ -71532,6 +71532,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478948, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1687641436783478949, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}

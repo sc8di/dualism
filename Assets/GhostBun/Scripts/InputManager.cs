@@ -10,9 +10,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private LayerMask _walkOn;
     [SerializeField] private float _timerToGo = .1f;
-    [SerializeField] private PowerTrip _PowerTrip;
 
-    public bool EnablePointForce = false;
     public int indexTelekineticAnimation = 0;
 
     private EmeraldAIEventsManager _eventManager;
@@ -30,10 +28,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             //Отключаем телекинез
-            if (EnablePointForce)
-                _PowerTrip.DisableField();            
-            else            
-                _telekineticEngine.DisableTelekineticField();
+            _telekineticEngine.DisableTelekineticField();
             
 
             //Включаем персонажу мозг.
@@ -57,22 +52,16 @@ public class InputManager : MonoBehaviour
             {                
                 //По окончанию тиканья таймера начинаем включать телекинез
                 //Если он не активен в момент после окончания работы таймера, то запускаем его процесс.
-                if(!_telekineticEngine.TelekineticFieldEnabled() || (EnablePointForce && !_PowerTrip.gameObject.activeInHierarchy))
+                if(!_telekineticEngine.TelekineticFieldEnabled())
                 {                    
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Кастуем позицию куда поставить телекинез.
                     if (Physics.Raycast(ray, out RaycastHit hit, 100, _walkOn)) // Если кастанули по нужному слою, ставим туда телекинез.
                     {
-                        if (EnablePointForce)
-                        {
-                            _PowerTrip.SetLocation(hit.point);
-                            _PowerTrip.EnableField();
-                        }
-                        else
-                        {
-                            _telekineticEngine.SetLocation(hit.point);
-                            _telekineticEngine.EnableTelekineticField();
-                        }                         
-                        _navMeshAgent.enabled = false; // Отключаем мозг персонажа.
+
+                        _telekineticEngine.SetLocation(hit.point);
+                        _telekineticEngine.EnableTelekineticField();
+                  
+                        _navMeshAgent.enabled = false; // Отключаем мозг персонажа. ЗДЕСЬ НАДО ОТРУБИТЬ ЕГО EMERALDAI :3
                         //Включаем анимацию телекинеза
                         _eventManager.LoopEmoteAnimation(indexTelekineticAnimation);
                     }
