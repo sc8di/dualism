@@ -3648,6 +3648,11 @@ PrefabInstance:
     - target: {fileID: 1518972132044387016, guid: 35c4fd33d05bcfc47a8e2306124f311e,
         type: 3}
       propertyPath: _emoteAnimationIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518972132044387016, guid: 35c4fd33d05bcfc47a8e2306124f311e,
+        type: 3}
+      propertyPath: chooseTag
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2283889261646017376, guid: 35c4fd33d05bcfc47a8e2306124f311e,
@@ -6484,7 +6489,7 @@ PrefabInstance:
     - target: {fileID: 1518972132044387016, guid: 35c4fd33d05bcfc47a8e2306124f311e,
         type: 3}
       propertyPath: _emoteAnimationIndex
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2283889261646017376, guid: 35c4fd33d05bcfc47a8e2306124f311e,
         type: 3}
@@ -6904,7 +6909,7 @@ PrefabInstance:
     - target: {fileID: 1518972132044387016, guid: 35c4fd33d05bcfc47a8e2306124f311e,
         type: 3}
       propertyPath: _emoteAnimationIndex
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2283889261646017376, guid: 35c4fd33d05bcfc47a8e2306124f311e,
         type: 3}
@@ -10814,7 +10819,12 @@ PrefabInstance:
     - target: {fileID: 1518972132044387016, guid: 35c4fd33d05bcfc47a8e2306124f311e,
         type: 3}
       propertyPath: _emoteAnimationIndex
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518972132044387016, guid: 35c4fd33d05bcfc47a8e2306124f311e,
+        type: 3}
+      propertyPath: chooseTag
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2283889261646017376, guid: 35c4fd33d05bcfc47a8e2306124f311e,
         type: 3}
@@ -11721,7 +11731,12 @@ PrefabInstance:
     - target: {fileID: 1518972132044387016, guid: 35c4fd33d05bcfc47a8e2306124f311e,
         type: 3}
       propertyPath: _emoteAnimationIndex
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518972132044387016, guid: 35c4fd33d05bcfc47a8e2306124f311e,
+        type: 3}
+      propertyPath: chooseTag
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2283889261646017376, guid: 35c4fd33d05bcfc47a8e2306124f311e,
         type: 3}
@@ -11822,17 +11837,17 @@ PrefabInstance:
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
       propertyPath: WaypointsList.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
       propertyPath: AnimationTabNumber
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
       propertyPath: TabNumber
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
@@ -11862,7 +11877,7 @@ PrefabInstance:
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
       propertyPath: TemperamentTabNumber
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
@@ -11912,7 +11927,7 @@ PrefabInstance:
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
       propertyPath: DetectionTagsTabNumber
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
@@ -11937,12 +11952,12 @@ PrefabInstance:
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
       propertyPath: CombatTabNumber
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
       propertyPath: m_ProjectileCollisionPoint.x
-      value: -3.65
+      value: 4.36
       objectReference: {fileID: 0}
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
@@ -11952,7 +11967,7 @@ PrefabInstance:
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
       propertyPath: m_ProjectileCollisionPoint.z
-      value: 1.23
+      value: 2.11
       objectReference: {fileID: 0}
     - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
@@ -11968,6 +11983,41 @@ PrefabInstance:
         type: 3}
       propertyPath: BackupTurningSpeed
       value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: WaypointsFoldout
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: WaypointsList.Array.data[4].x
+      value: 14.667629
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: WaypointsList.Array.data[4].z
+      value: 10.491728
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: DisplayAINameRef
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: DisplayAILevelRef
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: CreateHealthBarsRef
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687641436783478946, guid: 9dfd36f2be31c86488a824f5937364e4,
+        type: 3}
+      propertyPath: UseWeaponObject
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1687641436783478948, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
@@ -11987,7 +12037,7 @@ PrefabInstance:
     - target: {fileID: 1687641436783478948, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
       propertyPath: m_TagString
-      value: NPC
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1687641436783478949, guid: 9dfd36f2be31c86488a824f5937364e4,
         type: 3}
@@ -12125,7 +12175,7 @@ PrefabInstance:
     - target: {fileID: 6087823828204610870, guid: 479a4437f32ba7d4686c3c8ed762c20c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.421776
+      value: -8.92
       objectReference: {fileID: 0}
     - target: {fileID: 6087823828204610870, guid: 479a4437f32ba7d4686c3c8ed762c20c,
         type: 3}
@@ -12185,7 +12235,7 @@ PrefabInstance:
     - target: {fileID: 7072641929122256684, guid: 479a4437f32ba7d4686c3c8ed762c20c,
         type: 3}
       propertyPath: TabNumber
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7072641929122256684, guid: 479a4437f32ba7d4686c3c8ed762c20c,
         type: 3}
@@ -12210,7 +12260,7 @@ PrefabInstance:
     - target: {fileID: 7072641929122256684, guid: 479a4437f32ba7d4686c3c8ed762c20c,
         type: 3}
       propertyPath: AnimationTabNumber
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7072641929122256684, guid: 479a4437f32ba7d4686c3c8ed762c20c,
         type: 3}
@@ -12284,7 +12334,7 @@ PrefabInstance:
     - target: {fileID: 1518972132044387016, guid: 35c4fd33d05bcfc47a8e2306124f311e,
         type: 3}
       propertyPath: _emoteAnimationIndex
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2283889261646017376, guid: 35c4fd33d05bcfc47a8e2306124f311e,
         type: 3}
