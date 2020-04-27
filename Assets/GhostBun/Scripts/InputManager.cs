@@ -40,7 +40,7 @@ public class InputManager : MonoBehaviour
 
                 if (Physics.Raycast(ray, out RaycastHit hit, 100, _walkOn))
                     _emeraldAISystem.EmeraldEventsManagerComponent.SetDestinationPosition(hit.point);
-                //_navMeshAgent.destination = hit.point;
+
             }
         }
 
