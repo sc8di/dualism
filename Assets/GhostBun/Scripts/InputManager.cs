@@ -39,7 +39,7 @@ public class InputManager : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(ray, out RaycastHit hit, 100, _walkOn))
-                    _emeraldAISystem.EmeraldEventsManagerComponent.SetDestinationPosition(hit.point);
+                    _eventManager.SetDestinationPosition(hit.point);
 
             }
         }
