@@ -11,6 +11,14 @@ GameObject:
   - component: {fileID: 7376112609124399457}
   - component: {fileID: 8689820438832851054}
   - component: {fileID: 2663391919865996670}
+  - component: {fileID: 5743460097982044815}
+  - component: {fileID: 4988441230447198897}
+  - component: {fileID: 7941946029583913010}
+  - component: {fileID: 7762392647442674790}
+  - component: {fileID: 1611269464306404199}
+  - component: {fileID: 3965736611627855801}
+  - component: {fileID: 7807153300316505060}
+  - component: {fileID: 6485822278228643744}
   m_Layer: 0
   m_Name: Prop_Shelf_012
   m_TagString: Untagged
@@ -79,3 +87,113 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &5743460097982044815
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6222333467090354464}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5292852, y: 0.024962783, z: 0.3510906}
+  m_Center: {x: 0.0010784864, y: 0.9583686, z: -0.017229974}
+--- !u!54 &4988441230447198897
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6222333467090354464}
+  serializedVersion: 2
+  m_Mass: 0.2
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!208 &7941946029583913010
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6222333467090354464}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.29700002, y: 0.694, z: 0.193}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.694, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!65 &7762392647442674790
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6222333467090354464}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5595807, y: 0.037054658, z: 0.3541217}
+  m_Center: {x: -0.00019437075, y: 0.573178, z: -0.015714422}
+--- !u!65 &1611269464306404199
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6222333467090354464}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06414449, y: 1.2312059, z: 0.38554806}
+  m_Center: {x: 0.2653355, y: 0.73538256, z: -0.0000012516975}
+--- !u!65 &3965736611627855801
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6222333467090354464}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.063143134, y: 1.2272269, z: 0.38554806}
+  m_Center: {x: -0.26583427, y: 0.7410341, z: -0.0000012516975}
+--- !u!65 &7807153300316505060
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6222333467090354464}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5948136, y: 0.06792426, z: 0.38554806}
+  m_Center: {x: 0.0000009536743, y: 1.3548695, z: -0.0000012516975}
+--- !u!65 &6485822278228643744
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6222333467090354464}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5948136, y: 0.1978879, z: 0.38554806}
+  m_Center: {x: 0.0000009536743, y: 0.09894395, z: -0.0000012516975}

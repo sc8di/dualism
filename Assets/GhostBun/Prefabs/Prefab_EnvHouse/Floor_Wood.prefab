@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 86198970456082800}
   - component: {fileID: 1782652024934675775}
   - component: {fileID: 1382324688059417703}
+  - component: {fileID: 4262638582027487801}
   m_Layer: 0
   m_Name: Floor_Wood
   m_TagString: Untagged
@@ -79,3 +80,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4262638582027487801
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8724683341021619632}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.9970007, y: 0, z: 3.9970016}
+  m_Center: {x: 0.00000017881393, y: 0, z: 0.0000007748604}

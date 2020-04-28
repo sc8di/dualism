@@ -11,6 +11,12 @@ GameObject:
   - component: {fileID: 111425212939890790}
   - component: {fileID: 3137936757894464745}
   - component: {fileID: 3359072147699807687}
+  - component: {fileID: 8575777413931802016}
+  - component: {fileID: 6609848047050081377}
+  - component: {fileID: 8740005877757332683}
+  - component: {fileID: 6259800840301301284}
+  - component: {fileID: 7369826333663978918}
+  - component: {fileID: 381120973967104730}
   m_Layer: 0
   m_Name: Prop_Desk_Lamp
   m_TagString: Untagged
@@ -79,3 +85,84 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!54 &8575777413931802016
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2726441313719080978}
+  serializedVersion: 2
+  m_Mass: 0.02
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &6609848047050081377
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2726441313719080978}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.19722405, y: 0, z: 0.18352732}
+  m_Center: {x: 0, y: 0.034620523, z: -0.049117014}
+--- !u!65 &8740005877757332683
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2726441313719080978}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.057736628, y: 0.25154728, z: 0.07245034}
+  m_Center: {x: -0.0008954443, y: 0.15628752, z: -0.1310806}
+--- !u!65 &6259800840301301284
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2726441313719080978}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04806667, y: 0.26095742, z: 0.23463044}
+  m_Center: {x: -0.002317872, y: 0.4202052, z: -0.09133543}
+--- !u!65 &7369826333663978918
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2726441313719080978}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.19722405, y: 0.23412752, z: 0.23802531}
+  m_Center: {x: 0, y: 0.524088, z: 0.089637965}
+--- !u!65 &381120973967104730
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2726441313719080978}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.025215574, y: 0.017426282, z: 0.039172687}
+  m_Center: {x: 0.00033681467, y: 0.03762804, z: -0.032778744}

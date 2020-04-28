@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8473230953113091096}
   - component: {fileID: 6884305977851684853}
   - component: {fileID: 7946776584981377159}
+  - component: {fileID: 8109024304563880070}
+  - component: {fileID: 6813500597367203153}
   m_Layer: 0
   m_Name: Prop_Books_02
   m_TagString: Untagged
@@ -79,3 +81,32 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!54 &8109024304563880070
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2833661110013465335}
+  serializedVersion: 2
+  m_Mass: 0.005
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &6813500597367203153
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2833661110013465335}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.38214794, y: 0.2966801, z: 0.22743294}
+  m_Center: {x: 0.00000062584877, y: 0.14834005, z: -0.59434956}
