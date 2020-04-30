@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 5174957414184903334}
   - component: {fileID: 6611026579704178190}
   - component: {fileID: 4275123412758611109}
+  - component: {fileID: 67280102870345310}
+  - component: {fileID: 4715614017689135515}
+  - component: {fileID: 7813359152362847809}
   m_Layer: 0
   m_Name: Prop_Knife_01
   m_TagString: Untagged
@@ -79,3 +82,45 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!54 &67280102870345310
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4532297889304118763}
+  serializedVersion: 2
+  m_Mass: 0.001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &4715614017689135515
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4532297889304118763}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03610561, y: 0.033832658, z: 0.25613078}
+  m_Center: {x: 0.016063448, y: 0.016916329, z: 0.08788784}
+--- !u!65 &7813359152362847809
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4532297889304118763}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06823164, y: 0.033832658, z: 0.17492142}
+  m_Center: {x: 0.00000043213367, y: 0.016916329, z: -0.12849255}
