@@ -311,10 +311,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 99072
   detectionDistance: 8.3
+  autoDetectDistance: 1
   dpt: {fileID: 1922415783}
   viewAngle: 43.7
   _emoteAnimationIndex: 0
-  turnOffTrigerTime: 5
+  waitTimer: 10
+  lookAtPlayerEverySeconds: 3
 --- !u!1001 &87894593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6345,12 +6347,14 @@ MonoBehaviour:
   player: {fileID: 170318800}
   detectionLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 100608
   detectionDistance: 8
+  autoDetectDistance: 3.24
   dpt: {fileID: 1922415783}
   viewAngle: 30
   _emoteAnimationIndex: 0
-  turnOffTrigerTime: 10
+  waitTimer: 5
+  lookAtPlayerEverySeconds: 1
 --- !u!1001 &1054225130
 PrefabInstance:
   m_ObjectHideFlags: 0

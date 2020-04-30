@@ -11,6 +11,8 @@ public class DetectPlayer : MonoBehaviour
     LayerMask detectionLayer;
     [SerializeField]
     float detectionDistance = 8f;
+    [SerializeField]
+    float autoDetectDistance = 1f;
 
     [SerializeField] DetectPlayerTelekinesis dpt;
     [SerializeField]
@@ -18,12 +20,19 @@ public class DetectPlayer : MonoBehaviour
 
     NavMeshAgent navMeshAgent;
 
-    [SerializeField] private int _emoteAnimationIndex;
+    public float waitTimer = 10f;
 
-    public float turnOffTrigerTime = 10f;
+    Vector3 directionToPlayer;
+    float distanceToPlayer;
+    bool lookForPlayer = true;
+
+    float timeSinceLookedAtPlayer = 0f;
+    [SerializeField]
+    float lookAtPlayerEverySeconds = 3f;
 
     private void OnDrawGizmos()
     {
+        Gizmos.DrawWireSphere(transform.position, autoDetectDistance);
         Gizmos.DrawLine(transform.position, transform.forward * detectionDistance + transform.position);
         Gizmos.DrawLine(transform.position, Quaternion.Euler(0, viewAngle * 0.5f, 0) * transform.forward * detectionDistance + transform.position);
         Gizmos.DrawLine(transform.position, Quaternion.Euler(0, -viewAngle * 0.5f, 0) * transform.forward * detectionDistance + transform.position);
@@ -34,48 +43,52 @@ public class DetectPlayer : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    /// <summary>
-    /// Включаем анимацию работы  
-    /// </summary>
-    /// <param name="delay">Время после которого персанаж возобновит движение</param>
-    /// <returns></returns>
-    private IEnumerator Working(float delay)
-    {
-        navMeshAgent.isStopped = true;
-        //_eventSystem.PlayEmoteAnimation(_emoteAnimationIndex);
-        yield return new WaitForSeconds(delay);
-        navMeshAgent.isStopped = false;
-    }
-
     private void FixedUpdate()
     {
-        TestDetection();
+        if (timeSinceLookedAtPlayer > lookAtPlayerEverySeconds && lookForPlayer && CheckPlayerInView())
+        {
+            if (Physics.Raycast(transform.position, player.transform.position - transform.position, out RaycastHit hitInfo, detectionDistance, detectionLayer))
+            {
+                if (hitInfo.transform.CompareTag("Player"))
+                {
+                    dpt.PlayerDetected();
+                    lookForPlayer = false; //Делаем паузу для поиска игрока.
+                    StartEmote();
+
+                }
+            }
+            timeSinceLookedAtPlayer = 0f;
+        }
+        timeSinceLookedAtPlayer += Time.fixedDeltaTime;
     }
 
-    public void TestDetection()
+    public bool CheckPlayerInView()
     {
-        Debug.Log("Testing for player");
-        if (Physics.Raycast(transform.position, player.transform.position - transform.position, out RaycastHit hitInfo, detectionDistance, detectionLayer))
-        {
-            Vector3 characterDirection = transform.forward;
-            Vector3 playerDirection = (player.transform.position - transform.position).normalized;
-            //Debug.Log(characterDirection + " " + playerDirection + " " + Vector2.Angle(new Vector2(playerDirection.x, playerDirection.z), new Vector2(characterDirection.x, characterDirection.z)));
-            Debug.Log(hitInfo.transform.tag);
-            if (hitInfo.transform.CompareTag("Player") && viewAngle > Vector2.Angle(new Vector2(playerDirection.x, playerDirection.z), new Vector2(characterDirection.x, characterDirection.z)))
-            {
-                dpt.PlayerDetected();
-                StartEmote();
-            }
-        }
-        else
-        {
-            Debug.Log("Player not seen");
-        }
+        directionToPlayer = player.transform.position - transform.position;
+        distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+        if (distanceToPlayer < autoDetectDistance) return true;
+        return distanceToPlayer < detectionDistance && viewAngle > Vector2.Angle(new Vector2(directionToPlayer.x, directionToPlayer.z), new Vector2(transform.forward.x, transform.forward.z));
     }
 
     public void StartEmote()
     {
          // Останавливаем движение NPC до окончания анимации
-         StartCoroutine(Working(this.GetComponent<AnimationsArray>().AnimationsLength[_emoteAnimationIndex]));
+         StartCoroutine(WhoaThisDudeIsLevitating(waitTimer));
+    }
+
+
+    /// <summary>
+    /// Включаем анимацию возмущения/удивления  
+    /// </summary>
+    /// <param name="delay">Время после которого персанаж возобновит движение</param>
+    /// <returns></returns>
+    private IEnumerator WhoaThisDudeIsLevitating(float delay)
+    {
+        //Надо сделать связь с CharacterWaypointsNavigation. Останавливать персонажа нужно через него.
+        navMeshAgent.isStopped = true;
+        //Сюда вставляется анимация возмущения
+        yield return new WaitForSeconds(delay);
+        navMeshAgent.isStopped = false;
+        lookForPlayer = true;
     }
 }
