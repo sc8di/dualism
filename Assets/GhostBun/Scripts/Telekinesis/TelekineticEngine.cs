@@ -4,6 +4,9 @@ using EmeraldAI;
 
 public class TelekineticEngine : MonoBehaviour
 {
+    [SerializeField] private float telekinesisDistance = 5f;     //Это нужно.
+    [SerializeField] private float maximumRotationForce = 7f;
+    [SerializeField] private float rotationForceMultiplier = 7f;
     [SerializeField] private float _verticalOffset = 1f;
     [SerializeField] private Transform _playerMark;
     [SerializeField] private Transform _anchorMark;
@@ -23,7 +26,7 @@ public class TelekineticEngine : MonoBehaviour
     {
         if (!_enablingPhase && TelekineticFieldEnabled())
         {    //Добавляем скорости вращения по Y
-            _body.AddTorque(Vector3.up * _rotationForce, ForceMode.Acceleration);
+            _body.AddTorque(Vector3.up * _rotationForce * rotationForceMultiplier * Time.fixedDeltaTime, ForceMode.Acceleration);
             //апдейтим позиции наших марок.
             _playerMark.position = transform.position + transform.forward * _distanceOffset;
             _anchorMark.position = transform.position - transform.forward * _distanceOffset;
@@ -114,6 +117,13 @@ public class TelekineticEngine : MonoBehaviour
     /// <param name="force"></param>
     public void AddRotationForce(float force)
     {
-        _rotationForce = force;
+        if (force > maximumRotationForce || force < -maximumRotationForce)
+        {
+            _rotationForce = maximumRotationForce * Mathf.Sign(force);
+        }
+        else
+        {
+            _rotationForce = force;
+        }
     }
 }

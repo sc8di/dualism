@@ -12,7 +12,7 @@ public class Work : MonoBehaviour
 
     private EmeraldAIEventsManager _eventSystem;
 
-    public float turnOffTrigetTime = 10f;
+    public float turnOffTrigerTime = 10f;
     private void OnTriggerEnter(Collider other)
     {
         if(chooseTag == Tag.Both)
@@ -38,10 +38,8 @@ public class Work : MonoBehaviour
                 StartCoroutine(Working(other.GetComponent<AnimationsArray>().AnimationsLength[_emoteAnimationIndex]));
             }
         }
-        
-        
-
     }
+
     /// <summary>
     /// Включаем анимацию работы  
     /// </summary>
@@ -53,7 +51,7 @@ public class Work : MonoBehaviour
         _eventSystem.PlayEmoteAnimation(_emoteAnimationIndex);
         yield return new WaitForSeconds(delay);
         _eventSystem.ResumeMovement();
-        StartCoroutine(TurnOffCollider(turnOffTrigetTime));
+        StartCoroutine(TurnOffCollider(turnOffTrigerTime));
     }
 
     /// <summary>

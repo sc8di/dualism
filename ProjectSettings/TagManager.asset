@@ -20,20 +20,20 @@ TagManager:
   - 
   - Obstacles
   - Ground
-  - Player
+  - Character
   - Walls
   - NoPathfinding
   - GhostBun
   - TelekineticField
   - Objects
-  - MovingPlatform
-  - FallingPlatform
-  - Projectile
-  - Camera1
-  - Camera2
-  - Camera3
-  - Camera4
-  - PowerField
+  - PlayerTelekinesis
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
