@@ -66,6 +66,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
         _targetWaypoint = FindTheColsest();
         _navMeshAgent.SetDestination(_targetWaypoint.GetPosition());
     }
+
     private Waypoint GetNextWaypoint()
     {
         if (wpList.IndexOf(_targetWaypoint) + 1 > (wpList.Count - 1))

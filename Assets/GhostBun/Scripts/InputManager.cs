@@ -9,14 +9,11 @@ public class InputManager : MonoBehaviour
     [SerializeField] private float _rotateSpeed = 50f;
     [SerializeField] private TelekineticEngine _telekineticEngine;
     [SerializeField] private GameObject _player;
-    //[SerializeField] private EmeraldAISystem _emeraldAISystem;
     [SerializeField] private LayerMask _walkOn;
     [SerializeField] private float _timerToGo = .1f;
-    //[SerializeField] private int indexTelekineticAnimation = 0;
     [SerializeField] private float delayToWander = 2f;
 
     private NavMeshAgent _navMeshAgent;
-    //private EmeraldAIEventsManager _eventManager;
     private CharacterWaypointsNavigation _wpNavigation;
     private float _touchTimer = 0;
     private float _wanderTimer = 0;
@@ -24,9 +21,9 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         _navMeshAgent = _player.GetComponent<NavMeshAgent>();
-        //_eventManager = GetComponent<EmeraldAIEventsManager>();
         _wpNavigation = _player.GetComponent<CharacterWaypointsNavigation>();
     }
+
     private void Update()
     {
         //Запускаем движение по waypoints после достижения точки заданной игроком
@@ -53,9 +50,8 @@ public class InputManager : MonoBehaviour
 
             _wpNavigation.goToMove();
             //Включаем персонажу мозг.
-            //_emeraldAISystem.Activate();
+            _navMeshAgent.isStopped = false;
             //Выключаеманимацию телекинеза
-            //_eventManager.StopLoopEmoteAnimation(indexTelekineticAnimation);
             if (_touchTimer < _timerToGo)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -79,15 +75,12 @@ public class InputManager : MonoBehaviour
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Кастуем позицию куда поставить телекинез.
                     if (Physics.Raycast(ray, out RaycastHit hit, 100, _walkOn)) // Если кастанули по нужному слою, ставим туда телекинез.
                     {
-
                         _telekineticEngine.SetLocation(hit.point);
                         _telekineticEngine.EnableTelekineticField();
-                  
-                        // Отключаем мозг персонажа.
-                        //_emeraldAISystem.Deactivate();
 
+                        // Отключаем мозг персонажа.
+                        _navMeshAgent.isStopped = true;
                         //Включаем анимацию телекинеза
-                        //_navMeshAgent.LoopEmoteAnimation(indexTelekineticAnimation);
                     }
                 }
                 _telekineticEngine.AddRotationForce(Input.GetAxis("Mouse X") * Time.deltaTime * _rotateSpeed);
