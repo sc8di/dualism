@@ -11,6 +11,10 @@ GameObject:
   - component: {fileID: 4184364968038219131}
   - component: {fileID: 5975186785507217462}
   - component: {fileID: 1760901607392737332}
+  - component: {fileID: 7220026883513584033}
+  - component: {fileID: 1103536578410694570}
+  - component: {fileID: 3132461534367117467}
+  - component: {fileID: 2580260413549281185}
   m_Layer: 0
   m_Name: Prop_Gravy_Boat
   m_TagString: Untagged
@@ -79,3 +83,58 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!54 &7220026883513584033
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7961748024694118012}
+  serializedVersion: 2
+  m_Mass: 0.001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1103536578410694570
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7961748024694118012}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.21736968, y: 0.09139775, z: 0.17928708}
+  m_Center: {x: -0.010231346, y: 0.045698874, z: 0.00000044703484}
+--- !u!65 &3132461534367117467
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7961748024694118012}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.07950621, y: 0.123044, z: 0.021729521}
+  m_Center: {x: -0.13345724, y: 0.08910101, z: -0.00020418689}
+--- !u!65 &2580260413549281185
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7961748024694118012}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.078202724, y: 0.10842036, z: 0.14090043}
+  m_Center: {x: 0.13410899, y: 0.07497727, z: -0.0020930767}

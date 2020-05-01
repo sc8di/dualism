@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6923012062567251321}
   - component: {fileID: 445524675852865137}
   - component: {fileID: 3541847405347527124}
+  - component: {fileID: 3618743749311205041}
+  - component: {fileID: 2512827765500538657}
   m_Layer: 0
   m_Name: Prop_Plate_03
   m_TagString: Untagged
@@ -79,3 +81,32 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!54 &3618743749311205041
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5221812130514845730}
+  serializedVersion: 2
+  m_Mass: 0.001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &2512827765500538657
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5221812130514845730}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6535965, y: 0.066147685, z: 0.46360826}
+  m_Center: {x: 0, y: 0.033073843, z: 0.0000004172325}

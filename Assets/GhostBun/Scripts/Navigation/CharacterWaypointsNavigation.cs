@@ -12,9 +12,10 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     [SerializeField]
     List<Waypoint> wpList;
 
-    NavMeshAgent navMeshAgent;
-
-    Waypoint targetWaypoint;
+    Animator _animator;
+    NavMeshAgent _navMeshAgent;
+    Waypoint _targetWaypoint;
+    Waypoint _closestWp;
 
     [SerializeField]
     float distanceFalloff = 0.5f;
@@ -35,30 +36,76 @@ public class CharacterWaypointsNavigation : MonoBehaviour
 
     private void Start()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        targetWaypoint = wpList[0];
-        navMeshAgent.SetDestination(targetWaypoint.GetPosition());
+        _animator = GetComponent<Animator>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        if (wpList.Count != 0)
+        {
+            _targetWaypoint = wpList[0];
+            _navMeshAgent.SetDestination(_targetWaypoint.GetPosition());
+        }
+        else
+            Debug.Log("List of waypoints is empty");
+            
     }
 
     private void FixedUpdate()
     {
-        if (Vector3.Distance(transform.position, targetWaypoint.GetPosition()) < distanceFalloff)
+        if (Vector3.Distance(transform.position, _targetWaypoint.GetPosition()) < distanceFalloff)
         {
-            targetWaypoint = GetNextWaypoint();
-            navMeshAgent.SetDestination(targetWaypoint.GetPosition());
+            _targetWaypoint = GetNextRandoomWaypoint();
+            _navMeshAgent.SetDestination(_targetWaypoint.GetPosition());
         }
+        _animator.SetFloat("Forward", _navMeshAgent.velocity.magnitude / _navMeshAgent.speed);
     }
-
+    /// <summary>
+    /// метод запускает движение по Waypoints(точкам)
+    /// </summary>
+    public void goToMove()
+    {
+        Debug.Log("Go back to the closest waipoint");
+        _targetWaypoint = FindTheColsest();
+        _navMeshAgent.SetDestination(_targetWaypoint.GetPosition());
+    }
     private Waypoint GetNextWaypoint()
     {
-        if (wpList.IndexOf(targetWaypoint) + 1 > (wpList.Count - 1))
+        if (wpList.IndexOf(_targetWaypoint) + 1 > (wpList.Count - 1))
         {
             return wpList[0];
         }
         else
         {
-            return wpList[wpList.IndexOf(targetWaypoint) + 1];
+            return wpList[wpList.IndexOf(_targetWaypoint) + 1];
         }
+    }
+    /// <summary>
+    /// Метод случайно выбирает точку движения
+    /// </summary>
+    /// <returns>Возвращает Waypoint object</returns>
+    private Waypoint GetNextRandoomWaypoint()
+    {
+        int index = Random.Range(0, wpList.Count);
+        return wpList[index];
+    }
+    /// <summary>
+    /// Метод находит ближайшую точку 
+    /// </summary>
+    /// <returns>Возвращает Waypoint object</returns>
+    private Waypoint FindTheColsest()
+    {
+        float lowestDist = Mathf.Infinity;
+
+        for (int i = 0; i < wpList.Count; i++)
+        {
+
+            float dist = Vector3.Distance(wpList[i].transform.position, transform.position);
+
+            if (dist < lowestDist)
+            {
+                lowestDist = dist;
+                _closestWp = wpList[i];
+            }
+        }
+        return _closestWp;
     }
 }
 
