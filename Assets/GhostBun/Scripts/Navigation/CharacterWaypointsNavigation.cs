@@ -12,13 +12,14 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     [SerializeField]
     List<Waypoint> wpList;
 
+    [SerializeField]
+    float distanceFalloff = 0.5f;
+
     Animator _animator;
     NavMeshAgent _navMeshAgent;
     Waypoint _targetWaypoint;
     Waypoint _closestWp;
 
-    [SerializeField]
-    float distanceFalloff = 0.5f;
 
     private void OnDrawGizmos()
     {
@@ -45,7 +46,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
         }
         else
             Debug.Log("List of waypoints is empty");
-            
+
     }
 
     private void FixedUpdate()
@@ -84,7 +85,12 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     /// <returns>Возвращает Waypoint object</returns>
     private Waypoint GetNextRandoomWaypoint()
     {
-        int index = Random.Range(0, wpList.Count);
+        int index;
+        do
+        {
+            index = Random.Range(0, wpList.Count);
+        }
+        while (wpList[index].isAvailable == false);
         return wpList[index];
     }
     /// <summary>
@@ -100,7 +106,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
 
             float dist = Vector3.Distance(wpList[i].transform.position, transform.position);
 
-            if (dist < lowestDist)
+            if (dist < lowestDist && wpList[i].isAvailable)
             {
                 lowestDist = dist;
                 _closestWp = wpList[i];

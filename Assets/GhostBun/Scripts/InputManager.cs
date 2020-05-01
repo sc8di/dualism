@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private GameObject _player;
     [SerializeField] private LayerMask _walkOn;
     [SerializeField] private float _timerToGo = .1f;
-    [SerializeField] private float delayToWander = 2f;
+    [SerializeField] private float delayToWander = 0.5f;
 
     private NavMeshAgent _navMeshAgent;
     private CharacterWaypointsNavigation _wpNavigation;
@@ -27,13 +27,15 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         //Запускаем движение по waypoints после достижения точки заданной игроком
-        if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance < 0.5f)
+        if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance < 0.5f 
+                || _navMeshAgent.velocity == Vector3.zero)
         {
+            Debug.Log("How many times is it calls?");
             _wanderTimer += 0.001f;
-            if (_wanderTimer > _timerToGo)
+            if (_wanderTimer > delayToWander)// я не согласен что контролировать два таймера одной переменной хорошая идея
             {
                 _wpNavigation.goToMove();
-            }   
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))

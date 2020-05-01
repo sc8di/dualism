@@ -6,6 +6,13 @@ public class Waypoint : MonoBehaviour
 {
     [SerializeField] public bool isAvailable { get; protected set; } = true;
 
+    private Vector3 startPosition;
+
+    private void Start()
+    {
+        startPosition = transform.position;
+        StartCoroutine(CheckPosition());
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -27,6 +34,19 @@ public class Waypoint : MonoBehaviour
         if (!isAvailable)
         {
 
+        }
+    }
+
+    private IEnumerator CheckPosition()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            if (startPosition != transform.position)
+            {
+                SetAvailability(false);
+            }
+            Debug.Log("Is Active Waypoint: " + isAvailable);
         }
     }
 
