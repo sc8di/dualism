@@ -22,6 +22,12 @@ public class Waypoint : MonoBehaviour
         return transform.position;
     }
 
+    private void FixedUpdate()
+    {
+        if (!isAvailable)
+        {
 
+        }
+    }
 
 }
