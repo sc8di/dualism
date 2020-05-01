@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb7cf53b7c3b36a4b9f4d2b688942503, type: 3}
+  m_Name: UI Manager
+  m_EditorClassIdentifier: 
+  enableDynamicUpdate: 1
+  enableExtendedColorPicker: 1
+  editorHints: 1
+  animatedIconColor: {r: 255, g: 255, b: 255, a: 1}
+  buttonThemeType: 0
+  buttonFont: {fileID: 0}
+  buttonFontSize: 22.5
+  buttonBorderColor: {r: 255, g: 255, b: 255, a: 1}
+  buttonFilledColor: {r: 255, g: 255, b: 255, a: 1}
+  buttonTextBasicColor: {r: 255, g: 255, b: 255, a: 255}
+  buttonTextColor: {r: 255, g: 255, b: 255, a: 255}
+  buttonTextHighlightedColor: {r: 255, g: 255, b: 255, a: 255}
+  buttonIconBasicColor: {r: 255, g: 255, b: 255, a: 255}
+  buttonIconColor: {r: 255, g: 255, b: 255, a: 255}
+  buttonIconHighlightedColor: {r: 255, g: 255, b: 255, a: 255}
+  dropdownItemFont: {fileID: 0}
+  dropdownItemFontSize: 22.5
+  dropdownThemeType: 0
+  dropdownAnimationType: 0
+  dropdownFont: {fileID: 0}
+  dropdownFontSize: 22.5
+  dropdownColor: {r: 255, g: 255, b: 255, a: 1}
+  dropdownTextColor: {r: 255, g: 255, b: 255, a: 1}
+  dropdownIconColor: {r: 255, g: 255, b: 255, a: 255}
+  dropdownItemColor: {r: 255, g: 255, b: 255, a: 1}
+  dropdownItemTextColor: {r: 255, g: 255, b: 255, a: 255}
+  dropdownItemIconColor: {r: 255, g: 255, b: 255, a: 255}
+  selectorFont: {fileID: 0}
+  hSelectorFontSize: 28
+  selectorColor: {r: 255, g: 255, b: 255, a: 1}
+  selectorHighlightedColor: {r: 255, g: 255, b: 255, a: 1}
+  hSelectorInvertAnimation: 0
+  hSelectorLoopSelection: 0
+  inputFieldFont: {fileID: 0}
+  inputFieldFontSize: 28
+  inputFieldColor: {r: 255, g: 255, b: 255, a: 255}
+  modalWindowTitleFont: {fileID: 0}
+  modalWindowContentFont: {fileID: 0}
+  modalThemeType: 0
+  modalWindowTitleColor: {r: 255, g: 255, b: 255, a: 1}
+  modalWindowDescriptionColor: {r: 255, g: 255, b: 255, a: 1}
+  modalWindowIconColor: {r: 255, g: 255, b: 255, a: 1}
+  modalWindowBackgroundColor: {r: 255, g: 255, b: 255, a: 1}
+  modalWindowContentPanelColor: {r: 255, g: 255, b: 255, a: 1}
+  notificationTitleFont: {fileID: 0}
+  notificationTitleFontSize: 22.5
+  notificationDescriptionFont: {fileID: 0}
+  notificationDescriptionFontSize: 18
+  notificationThemeType: 0
+  notificationBackgroundColor: {r: 255, g: 255, b: 255, a: 1}
+  notificationTitleColor: {r: 255, g: 255, b: 255, a: 1}
+  notificationDescriptionColor: {r: 255, g: 255, b: 255, a: 1}
+  notificationIconColor: {r: 255, g: 255, b: 255, a: 1}
+  progressBarLabelFont: {fileID: 0}
+  progressBarLabelFontSize: 25
+  progressBarColor: {r: 255, g: 255, b: 255, a: 1}
+  progressBarBackgroundColor: {r: 255, g: 255, b: 255, a: 1}
+  progressBarLoopBackgroundColor: {r: 255, g: 255, b: 255, a: 1}
+  progressBarLabelColor: {r: 255, g: 255, b: 255, a: 1}
+  scrollbarColor: {r: 255, g: 255, b: 255, a: 1}
+  scrollbarBackgroundColor: {r: 255, g: 255, b: 255, a: 1}
+  sliderLabelFont: {fileID: 0}
+  sliderLabelFontSize: 24
+  sliderThemeType: 0
+  sliderColor: {r: 255, g: 255, b: 255, a: 1}
+  sliderBackgroundColor: {r: 255, g: 255, b: 255, a: 1}
+  sliderLabelColor: {r: 255, g: 255, b: 255, a: 1}
+  sliderPopupLabelColor: {r: 255, g: 255, b: 255, a: 255}
+  sliderHandleColor: {r: 255, g: 255, b: 255, a: 255}
+  switchBorderColor: {r: 255, g: 255, b: 255, a: 1}
+  switchBackgroundColor: {r: 255, g: 255, b: 255, a: 1}
+  switchHandleOnColor: {r: 255, g: 255, b: 255, a: 1}
+  switchHandleOffColor: {r: 255, g: 255, b: 255, a: 1}
+  toggleFont: {fileID: 0}
+  toggleFontSize: 35
+  toggleThemeType: 0
+  toggleTextColor: {r: 255, g: 255, b: 255, a: 255}
+  toggleBorderColor: {r: 255, g: 255, b: 255, a: 255}
+  toggleBackgroundColor: {r: 255, g: 255, b: 255, a: 255}
+  toggleCheckColor: {r: 255, g: 255, b: 255, a: 255}
+  tooltipFont: {fileID: 0}
+  tooltipFontSize: 22
+  tooltipTextColor: {r: 255, g: 255, b: 255, a: 1}
+  tooltipBackgroundColor: {r: 255, g: 255, b: 255, a: 1}
