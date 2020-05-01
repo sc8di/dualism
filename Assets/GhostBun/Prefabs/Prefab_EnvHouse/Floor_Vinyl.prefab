@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3212565851291030454}
   - component: {fileID: 3319344663232406207}
   - component: {fileID: 3797408101581153727}
+  - component: {fileID: 5765414843027233012}
   m_Layer: 0
   m_Name: Floor_Vinyl
   m_TagString: Untagged
@@ -79,3 +80,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &5765414843027233012
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753745093521214191}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.9970007, y: 0, z: 3.9970002}
+  m_Center: {x: 0.00000017881393, y: 0, z: 0}
