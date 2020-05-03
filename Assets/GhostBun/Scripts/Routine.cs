@@ -33,7 +33,8 @@ public class Routine : MonoBehaviour
             if (!waypoints[i].activated && waypoints[i].secondsBeforeAct < currentTime)
             {
                 waypoints[i].activated = true;
-                Debug.Log($"Waypoint {waypoints[i].wp.name} activated");
+                
+                //Debug.Log($"Waypoint {waypoints[i].wp.name} activated");
             }
         }
     }

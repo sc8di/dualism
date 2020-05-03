@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour, IGameManager
 {
-    public ManagerStatus Status { get; private set; }
-
     [Tooltip("Источник звуков.")]
     [SerializeField] private AudioSource _soundSource;
     [Tooltip("Первый источник музыки.")]
@@ -14,15 +12,16 @@ public class AudioManager : MonoBehaviour, IGameManager
     [Tooltip("Массив треков.")]
     [SerializeField] private AudioClip[] _clips;
 
-    [Tooltip("Скорость плавного перехода между треками.")]
-    public float crossFadeRate = 1.5f;
-
     private AudioSource _firstMusic;
     private AudioSource _secondMusic;
     private bool _crossFading;
     private float _musicVolume;
     private int _currentClipNumber = -1;
     private bool _toggleMusic = true;
+
+    [Tooltip("Скорость плавного перехода между треками.")]
+    public float crossFadeRate = 1.5f;
+    public ManagerStatus Status { get; private set; }
 
     /// <summary>
     /// Изменение громкости музыки.

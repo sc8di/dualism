@@ -3,16 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class MissionManager : MonoBehaviour, IGameManager
 {
+    private int _currentLevel;
+    private int _maxLevel;
+
+    public string CurrentScene { get; private set; }
     public ManagerStatus Status { get; private set; }
-    
-    /// <summary>
-    /// Текущий уровень.
-    /// </summary>
-    public int CurrentLevel { get; private set; }
-    /// <summary>
-    /// Последний уровень.
-    /// </summary>
-    public int MaxLevel { get; private set; }
 
     /// <summary>
     /// Инициализация менеджера.
@@ -21,33 +16,25 @@ public class MissionManager : MonoBehaviour, IGameManager
     {
         Debug.Log("Mission manager starting...");
 
-        UpdateData(0, 2);
-
+        _maxLevel = SceneManager.sceneCountInBuildSettings;
+        CurrentScene = SceneManager.GetActiveScene().name;
+        
         Status = ManagerStatus.Started;
     }
 
-    /// <summary>
-    /// Обновление данных по уровням.
-    /// </summary>
-    /// <param name="curLevel">Текущий уровень.</param>
-    /// <param name="maxLevel">Конечный уровень.</param>
-    public void UpdateData(int curLevel, int maxLevel)
-    {
-        CurrentLevel = curLevel;
-        MaxLevel = maxLevel;
-    }
     
     /// <summary>
     /// Следующий уровень.
     /// </summary>
     public void GoToNext()
     {
-        if (CurrentLevel < MaxLevel)
+        _currentLevel = SceneManager.GetActiveScene().buildIndex;
+        
+        if (_currentLevel < _maxLevel)
         {
-            CurrentLevel++;
-            string name = $"Level{CurrentLevel}";
-            Debug.Log($"Loading {name}.");
-            SceneManager.LoadScene(name);
+            _currentLevel++;
+            SceneManager.LoadScene(_currentLevel);
+            CurrentScene = SceneManager.GetSceneByBuildIndex(_currentLevel).name;
         }
         else
         {
@@ -69,8 +56,6 @@ public class MissionManager : MonoBehaviour, IGameManager
     /// </summary>
     public void RestartCurrentLevel()
     {
-        string name = $"Level{CurrentLevel}";
-        Debug.Log($"Loading {name}.");
-        SceneManager.LoadScene(name);
+        SceneManager.LoadScene(_currentLevel);
     }
 }

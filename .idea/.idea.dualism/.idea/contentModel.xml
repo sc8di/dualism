@@ -146,7 +146,6 @@
           </e>
         </e>
         <e p="GhostBun" t="Include">
-          <e p="PositionableObject.cs" t="Include" />
           <e p="Scripts" t="Include">
             <e p="AlwaysLookAtCamera.cs" t="Include" />
             <e p="AnimationsArray.cs" t="Include" />
@@ -156,26 +155,22 @@
                 <e p="AudioManager.cs" t="Include" />
                 <e p="DataManager.cs" t="Include" />
                 <e p="GameEvent.cs" t="Include" />
-                <e p="GhostBunManager.cs" t="Include" />
                 <e p="IGameManager.cs" t="Include" />
                 <e p="Initializer.cs" t="Include" />
                 <e p="ItemsManager.cs" t="Include" />
                 <e p="Managers.cs" t="Include" />
                 <e p="ManagerStatus.cs" t="Include" />
                 <e p="MissionManager.cs" t="Include" />
-                <e p="MovementManager.cs" t="Include" />
-                <e p="NpcManager.cs" t="Include" />
-                <e p="OfficeEventManager.cs" t="Include" />
                 <e p="PlayerManager.cs" t="Include" />
                 <e p="Power.cs" t="Include" />
                 <e p="PowerManager.cs" t="Include" />
                 <e p="StartupController.cs" t="Include" />
                 <e p="StartupEvent.cs" t="Include" />
-                <e p="UserInputManager.cs" t="Include" />
               </e>
+              <e p="Needs.cs" t="Include" />
               <e p="PowerTrip.cs" t="Include" />
               <e p="SettingsMenu.cs" t="Include" />
-              <e p="UIController.cs" t="Include" />
+              <e p="UI.cs" t="Include" />
               <e p="Utils" t="Include">
                 <e p="Messenger.cs" t="Include" />
               </e>
@@ -206,6 +201,7 @@
                 <e p="NavMeshSurface.cs" t="Include" />
               </e>
             </e>
+            <e p="PositionableObject.cs" t="Include" />
             <e p="Routine.cs" t="Include" />
             <e p="SimpleCameraController.cs" t="Include" />
             <e p="Telekinesis" t="Include">

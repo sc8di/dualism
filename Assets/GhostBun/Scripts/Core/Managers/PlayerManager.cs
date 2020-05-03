@@ -1,18 +1,16 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour, IGameManager
 {
+    private float _timerChangeNeeds;
+    
     public ManagerStatus Status { get; private set; }
+    public float Timer;
+    public float NeedChanger;
+    public List<Need> Needs;
 
-    /// <summary>
-    /// Переменная для сохранения позиции игрока по последнему чекпоинту.
-    /// </summary>
-    public Vector3 LastSavePosition  { get; private set; }
-
-    public int Health { get; private set; }
-    public int MaxHealth { get; private set; }
-    public int Score { get; private set; }
 
     /// <summary>
     /// Инициализация менеджера.
@@ -20,10 +18,59 @@ public class PlayerManager : MonoBehaviour, IGameManager
     public void Startup()
     {
         Debug.Log($"Player manager starting...");
+        
+        Needs = new List<Need>();
 
-        UpdateData(3, 3);
+        for (int i = 0; i < 5; i++)
+        {
+            Needs.Add(new Need(100f, $"need{i+1}"));
+        }
 
         Status = ManagerStatus.Started;
+    }
+
+    private void FixedUpdate()
+    {
+        _timerChangeNeeds += Time.fixedDeltaTime;
+        
+        if (Managers.Mission.CurrentScene != "Menu" && _timerChangeNeeds > Timer)
+        {
+            DecreaseNeedsValue(NeedChanger);
+            Messenger.Broadcast(GameEvent.NEEDS_UPDATED);
+            _timerChangeNeeds = 0;
+        }
+    }
+
+    public float AverageNeedsValue()
+    {
+        float average = 0;
+
+        for (int i = 0; i < Needs.Count; i++)
+        {
+            average += Needs[i].Value;
+        }
+
+        average = average / Needs.Count;
+        
+        return average;
+    }
+
+    public void ChangeNeed(int index, float value)
+    {
+        Needs[index].Value += value;
+    }
+
+    private void DecreaseNeedsValue(float value)
+    {
+        foreach (var need in Needs)
+        {
+            need.Value -= value;
+            if (need.Value <= 0)
+            {
+                need.Value = 0;
+                Messenger.Broadcast(GameEvent.LEVEL_FAILED);
+            }
+        }
     }
 
     /// <summary>
@@ -33,34 +80,15 @@ public class PlayerManager : MonoBehaviour, IGameManager
     /// <param name="maxHealth"></param>
     public void UpdateData(int health, int maxHealth)
     {
-        Health = health;
-        MaxHealth = maxHealth;
     }
-
-    /// <summary>
-    /// Изменение данных по?
-    /// </summary>
-    /// <param name="value"></param>
-    public void ChangeScore(int value)
-    {
-        Score += value;
-
-        if (Score < 0)
-            Score = 0;
-
-        Messenger.Broadcast(GameEvent.SCORE_UPDATED);
-
-        if (Score == 0)
-            Messenger.Broadcast(GameEvent.LEVEL_FAILED); 
-    }
-
+    
     /// <summary>
     /// Изменение количества жизней.
     /// </summary>
     /// <param name="value"></param>
     public void ChangeHealth(int value)
     {
-        Health += value;
+        /*Health += value;
         
         if (Health > MaxHealth)
             Health = MaxHealth;
@@ -72,36 +100,18 @@ public class PlayerManager : MonoBehaviour, IGameManager
         else 
             StartCoroutine(Respawn());
         
-        Messenger.Broadcast(GameEvent.HEALTH_UPDATED);
-    }
-
-    /// <summary>
-    /// Апдейт последней позиции при активации чекпоинта.
-    /// </summary>
-    /// <param name="checkpoint"></param>
-    public void UpdateLastAutosavePosition(Vector3 checkpoint)
-    {
-        LastSavePosition = checkpoint;
-    }
-    
-    /// <summary>
-    /// Респаун игрока с возвращением на чекпоинт.
-    /// </summary>
-    /// <returns></returns>
-    private static IEnumerator Respawn()
-    {
-        Debug.Log("Player dead. A little.");
-        
-        yield return new WaitForSeconds(2);
-
-        Messenger.Broadcast(GameEvent.RETURN_TO_CHECKPOINT);
-    }
-
-    /// <summary>
-    /// Респаун в начало уровня.
-    /// </summary>
-    public void RespawnFull()
-    {
-        UpdateData(MaxHealth, MaxHealth);
+        Messenger.Broadcast(GameEvent.NEEDS_UPDATED);*/
     }
 }
+
+ public class Need
+ {
+     public float Value;
+     public string Name;
+
+     public Need(float value, string name)
+     {
+         Value = value;
+         Name = name;
+     }
+ }

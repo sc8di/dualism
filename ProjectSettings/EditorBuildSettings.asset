@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/GhostBun/Scenes/Menu.unity
     guid: 2c99e4a1704736d4ba88cecd6d4b966b
   - enabled: 1
+    path: Assets/GhostBun/Scenes/BigOfficeGUI.unity
+    guid: 25f275d65f9f6284ea1195d01a44af24
+  - enabled: 0
     path: Assets/GhostBun/Scenes/BigOffice.unity
     guid: 8748b6e2deee34f42ac4cd589a3c2488
   m_configObjects: {}

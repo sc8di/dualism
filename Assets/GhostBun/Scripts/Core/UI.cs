@@ -1,17 +1,21 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Michsky.UI.ModernUIPack;
 using TMPro;
 using UnityEngine;
 using Cursor = UnityEngine.Cursor;
 
-public class UIController : MonoBehaviour
+public class UI : MonoBehaviour
 {
     [SerializeField] private GameObject _popup;
     [SerializeField] private TextMeshProUGUI _levelEnding;
-    [SerializeField] private GameObject[] _lifes;
+    [SerializeField] private RadialSlider[] _slidersOfNeeds;
 
     private void Awake()
     {
-        Messenger.AddListener(GameEvent.HEALTH_UPDATED, OnHealthUpdated); // Стресс?
+        Messenger.AddListener(GameEvent.NEEDS_UPDATED, OnNeedsUpdated);
+        
         Messenger.AddListener(GameEvent.LEVEL_COMPLETE, OnLevelComplete);
         Messenger.AddListener(GameEvent.LEVEL_FAILED, OnLevelFailed);
         Messenger.AddListener(GameEvent.GAME_COMPLETE, OnGameComplete);
@@ -19,7 +23,8 @@ public class UIController : MonoBehaviour
 
     private void OnDestroy()
     {
-        Messenger.RemoveListener(GameEvent.HEALTH_UPDATED, OnHealthUpdated); // Стресс?
+        Messenger.RemoveListener(GameEvent.NEEDS_UPDATED, OnNeedsUpdated);
+        
         Messenger.RemoveListener(GameEvent.LEVEL_COMPLETE, OnLevelComplete);
         Messenger.RemoveListener(GameEvent.LEVEL_FAILED, OnLevelFailed);
         Messenger.RemoveListener(GameEvent.GAME_COMPLETE, OnGameComplete);
@@ -27,8 +32,13 @@ public class UIController : MonoBehaviour
     
     private void Start()
     {
-        //popup.SetActive(false);        
-        OnHealthUpdated(); // StressUpdated?
+        //popup.SetActive(false);
+
+        foreach (var slider in _slidersOfNeeds)
+        {
+            Debug.Log(slider.name);
+            slider.currentValue = 100;
+        }
     }
 
     private void Update()
@@ -41,10 +51,13 @@ public class UIController : MonoBehaviour
         }
     }
 
-    private void OnHealthUpdated() // OnStressUpdated.
+    private void OnNeedsUpdated() // OnStressUpdated.
     {
-        if (Managers.Player.Health < Managers.Player.MaxHealth)
-            _lifes[Managers.Player.Health].SetActive(false);
+        for (int i = 0; i < _slidersOfNeeds.Length; i++)
+        {
+            _slidersOfNeeds[i].SliderValue = Managers.Player.Needs[i].Value;
+            _slidersOfNeeds[i].UpdateUI();
+        }
     }
 
     private void OnLevelComplete()
@@ -72,8 +85,7 @@ public class UIController : MonoBehaviour
 
         yield return new WaitForSeconds(2);
         
-        Managers.Player.RespawnFull();
-        Managers.Mission.RestartCurrentLevel();
+        // Перезапуск уровня.
     }
 
     public void SaveGame()
