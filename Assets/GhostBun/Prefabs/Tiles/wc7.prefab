@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5667516511692202342}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: wc7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ PrefabInstance:
     - target: {fileID: 6247045912676744863, guid: 77d532c80816a2f47a6f7a82ea0456a7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.078999996
+      value: 0.13300014
       objectReference: {fileID: 0}
     - target: {fileID: 6247045912676744863, guid: 77d532c80816a2f47a6f7a82ea0456a7,
         type: 3}
@@ -209,7 +209,7 @@ PrefabInstance:
     - target: {fileID: 6247045912676744863, guid: 77d532c80816a2f47a6f7a82ea0456a7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.075099945
+      value: 0.12910008
       objectReference: {fileID: 0}
     - target: {fileID: 6247045912676744863, guid: 77d532c80816a2f47a6f7a82ea0456a7,
         type: 3}
@@ -284,7 +284,7 @@ PrefabInstance:
     - target: {fileID: 5381768813841626501, guid: 28d021d78d2670f4688ec54316b25a4d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.6559999
+      value: 0.71
       objectReference: {fileID: 0}
     - target: {fileID: 5381768813841626501, guid: 28d021d78d2670f4688ec54316b25a4d,
         type: 3}
