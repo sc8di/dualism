@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Michsky.UI.ModernUIPack;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ public class SettingsMenu : MonoBehaviour
 {
     [SerializeField] private Slider _musicVolume;
     [SerializeField] private Slider _soundVolume;
+    [SerializeField] private TextMeshProUGUI _test;
     private Resolution[] _resolutions;
     private int _currentResolutionIndex;
     
@@ -19,7 +21,6 @@ public class SettingsMenu : MonoBehaviour
         foreach (var item in _resolutions)
         {
             Debug.Log(item.width);
-            
         }
         
         _currentResolutionIndex = 4;
@@ -49,14 +50,12 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetResolution(int resolutionIndex)
     {
-        Debug.Log(resolutionIndex);
-        Resolution resolution = _resolutions[resolutionIndex];
+        int width = int.Parse(ResolutionDropdown.dropdownItems[resolutionIndex].itemName.Split('x')[0]);
+        int height = int.Parse(ResolutionDropdown.dropdownItems[resolutionIndex].itemName.Split('x')[1]);
         
-        _currentResolutionIndex = resolutionIndex;
-        Debug.Log($"{resolution.width}x{resolution.height}");
+        Screen.SetResolution(width, height, Screen.fullScreen);
         
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-        ResolutionDropdown.SetupDropdown();
+        Debug.Log($"{width}x{height}");
     }
 
     /// <summary>
