@@ -30,6 +30,7 @@ public class PositionableObject : MonoBehaviour
     private void Start()
     {
         thisTrigger = GetComponent<SphereCollider>();
+        ActivateWaypoint(false);
     }
 
     private void FixedUpdate()
@@ -40,29 +41,29 @@ public class PositionableObject : MonoBehaviour
             cooldown += Time.fixedDeltaTime;
             if (cooldown > reactivateObjectAfterSeconds)
             {
-                Debug.Log("Reactivated");
-                positionableObject.GetComponent<Rigidbody>().isKinematic = false;
+                Debug.Log("Can be pulled again");
                 dontTriggerInThisFrame = true;
+                positionableObject.GetComponent<Rigidbody>().isKinematic = false;
                 reactivate = false;
                 cooldown = 0f;
-                if (thisWaypoint)
-                {
-                    thisWaypoint.SetAvailability(true);
-                }
             }
         }
     }
+
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == positionableObject && !dontTriggerInThisFrame)
         {
             Debug.Log("Deactivated");
+            dontTriggerInThisFrame = true;
             positionableObject.GetComponent<Rigidbody>().isKinematic = true;
             positionableObject.transform.SetPositionAndRotation(transform.position, transform.rotation);
             positionMarker.SetActive(false);
             reactivate = true;
             isOnPosition = true;
+            ActivateWaypoint(true);
         }
     }
 
@@ -70,12 +71,18 @@ public class PositionableObject : MonoBehaviour
     {
         if (other.gameObject == positionableObject && !dontTriggerInThisFrame)
         {
+            Debug.Log("Reactivated");
             positionMarker.SetActive(true);
             isOnPosition = false;
-            if (thisWaypoint)
-            {
-                thisWaypoint.SetAvailability(false);
-            }
+            ActivateWaypoint(false);
+        }
+    }
+
+    private void ActivateWaypoint(bool state)
+    {
+        if (thisWaypoint)
+        {
+            thisWaypoint.SetAvailability(state);
         }
     }
 }
