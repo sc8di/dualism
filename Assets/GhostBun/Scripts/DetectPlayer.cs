@@ -30,7 +30,7 @@ public class DetectPlayer : MonoBehaviour
     [SerializeField]
     float lookAtPlayerEverySeconds = 3f;
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, autoDetectDistance);
         Gizmos.DrawLine(transform.position, transform.forward * detectionDistance + transform.position);

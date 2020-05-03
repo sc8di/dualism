@@ -21,7 +21,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     Waypoint _closestWp;
 
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
         if (wpList.Count > 1)
