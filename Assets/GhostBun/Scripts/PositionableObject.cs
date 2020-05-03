@@ -15,7 +15,7 @@ public class PositionableObject : MonoBehaviour
     [SerializeField]
     Waypoint thisWaypoint;
 
-    bool isOnPosition = true;
+    bool isOnPosition = false;
     SphereCollider thisTrigger;
 
     bool reactivate = false;
@@ -45,6 +45,10 @@ public class PositionableObject : MonoBehaviour
                 dontTriggerInThisFrame = true;
                 reactivate = false;
                 cooldown = 0f;
+                if (thisWaypoint)
+                {
+                    thisWaypoint.SetAvailability(true);
+                }
             }
         }
     }
@@ -59,10 +63,6 @@ public class PositionableObject : MonoBehaviour
             positionMarker.SetActive(false);
             reactivate = true;
             isOnPosition = true;
-            if (thisWaypoint)
-            {
-                thisWaypoint.SetAvailability(true);
-            }
         }
     }
 

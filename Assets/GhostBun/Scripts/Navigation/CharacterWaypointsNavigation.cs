@@ -84,12 +84,16 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     /// <returns>Возвращает Waypoint object</returns>
     private Waypoint GetNextRandoomWaypoint()
     {
-        int index;
-        do
+        List<Waypoint> availableWaypoints = new List<Waypoint>();
+        foreach (Waypoint wp in wpList)
         {
-            index = Random.Range(0, wpList.Count);
+            if (wp.isAvailable == true)
+            {
+                availableWaypoints.Add(wp);
+            }
         }
-        while (wpList[index].isAvailable == false);
+        int index;
+        index = Random.Range(0, availableWaypoints.Count);
         return wpList[index];
     }
 

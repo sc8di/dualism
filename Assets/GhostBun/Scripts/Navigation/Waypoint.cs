@@ -14,6 +14,7 @@ public class Waypoint : MonoBehaviour
 
     public void SetAvailability(bool availability)
     {
+        Debug.Log("Activation is " + availability);
         isAvailable = availability;
     }
 
