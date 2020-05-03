@@ -12,12 +12,20 @@ public class PositionableObject : MonoBehaviour
     float reactivateObjectAfterSeconds = 3f;
     [SerializeField]
     float distanceActivation = 0.2f;
+    [SerializeField]
+    Waypoint thisWaypoint;
 
+    bool isOnPosition = true;
     SphereCollider thisTrigger;
 
     bool reactivate = false;
     float cooldown = 0f;
     bool dontTriggerInThisFrame = false;
+
+    public bool IsOnPosition()
+    {
+        return isOnPosition;
+    }
 
     private void Start()
     {
@@ -50,6 +58,11 @@ public class PositionableObject : MonoBehaviour
             positionableObject.transform.SetPositionAndRotation(transform.position, transform.rotation);
             positionMarker.SetActive(false);
             reactivate = true;
+            isOnPosition = true;
+            if (thisWaypoint)
+            {
+                thisWaypoint.SetAvailability(true);
+            }
         }
     }
 
@@ -58,6 +71,11 @@ public class PositionableObject : MonoBehaviour
         if (other.gameObject == positionableObject && !dontTriggerInThisFrame)
         {
             positionMarker.SetActive(true);
+            isOnPosition = false;
+            if (thisWaypoint)
+            {
+                thisWaypoint.SetAvailability(false);
+            }
         }
     }
 }

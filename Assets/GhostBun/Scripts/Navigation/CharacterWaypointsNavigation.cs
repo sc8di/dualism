@@ -32,7 +32,6 @@ public class CharacterWaypointsNavigation : MonoBehaviour
             }
             Gizmos.DrawLine(wpList[0].GetPosition(), wpList[wpList.Count - 1].GetPosition());
         }
-
     }
 
     private void Start()
@@ -93,6 +92,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
         while (wpList[index].isAvailable == false);
         return wpList[index];
     }
+
     /// <summary>
     /// Метод находит ближайшую точку 
     /// </summary>
