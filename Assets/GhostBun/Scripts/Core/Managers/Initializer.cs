@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿/*
+using UnityEditor;
 using UnityEngine;
 
 // Доработать/избравиться от костыля.
@@ -6,7 +7,7 @@ using UnityEngine;
 [InitializeOnLoad]
 public class Initializer : MonoBehaviour
 {
-    private static GameObject _gameManager;
+    /*private static GameObject _gameManager;
 
     private static void Awake()
     {
@@ -22,5 +23,6 @@ public class Initializer : MonoBehaviour
     void OnDestroy()
     {
         Destroy(_gameManager);
-    }
+    }#1#
 }
+*/
