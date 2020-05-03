@@ -33,7 +33,7 @@ public class InputManager : MonoBehaviour
                 || _navMeshAgent.velocity == Vector3.zero)
         {
             Debug.Log("How many times is it calls?");
-            _wanderTimer += 0.001f;
+            _wanderTimer += Time.deltaTime;
             if (_wanderTimer > delayToWander)// я не согласен что контролировать два таймера одной переменной хорошая идея
             {
                 _wpNavigation.goToMove();
@@ -57,6 +57,11 @@ public class InputManager : MonoBehaviour
             _navMeshAgent.isStopped = false;
             //Выключаеманимацию телекинеза
             _animator.SetTrigger("Walk");
+            //Добавил для остановки после телекинеза. Когда он к вейпоинту бежит сразу после телекинеза - пиздецки бесит.
+            _navMeshAgent.isStopped = true;
+            _navMeshAgent.isStopped = false;
+            _navMeshAgent.SetDestination(_player.transform.position);
+            _wanderTimer = 0;
 
             if (_touchTimer < _timerToGo)
             {
@@ -64,7 +69,6 @@ public class InputManager : MonoBehaviour
 
                 if (Physics.Raycast(ray, out RaycastHit hit, 100, _walkOn))
                     _navMeshAgent.SetDestination(hit.point);
-
             }
         }
 
