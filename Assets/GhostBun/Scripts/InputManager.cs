@@ -15,11 +15,13 @@ public class InputManager : MonoBehaviour
 
     private NavMeshAgent _navMeshAgent;
     private CharacterWaypointsNavigation _wpNavigation;
+    private Animator _animator;
     private float _touchTimer = 0;
     private float _wanderTimer = 0;
 
     private void Awake()
     {
+        _animator = _player.GetComponent<Animator>();
         _navMeshAgent = _player.GetComponent<NavMeshAgent>();
         _wpNavigation = _player.GetComponent<CharacterWaypointsNavigation>();
     }
@@ -54,6 +56,8 @@ public class InputManager : MonoBehaviour
             //Включаем персонажу мозг.
             _navMeshAgent.isStopped = false;
             //Выключаеманимацию телекинеза
+            _animator.SetTrigger("Walk");
+
             if (_touchTimer < _timerToGo)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -83,6 +87,7 @@ public class InputManager : MonoBehaviour
                         // Отключаем мозг персонажа.
                         _navMeshAgent.isStopped = true;
                         //Включаем анимацию телекинеза
+                        _animator.SetTrigger("Telekinetic");
                     }
                 }
                 _telekineticEngine.AddRotationForce(Input.GetAxis("Mouse X") * Time.deltaTime * _rotateSpeed);
