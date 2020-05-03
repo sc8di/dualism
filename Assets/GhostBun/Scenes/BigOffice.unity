@@ -719,18 +719,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2004584034}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &95103814 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
-    type: 3}
-  m_PrefabInstance: {fileID: 2004584034}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f331e08cd8902b546a13d457580e8e9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &102927459 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8316242718723166028, guid: 35c4fd33d05bcfc47a8e2306124f311e,
@@ -5313,18 +5301,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2039693378}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &665586423 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
-    type: 3}
-  m_PrefabInstance: {fileID: 2039693378}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f331e08cd8902b546a13d457580e8e9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &712632445 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2611798964416833285, guid: f4a1eca76470130438fa85bb64965789,
@@ -15568,18 +15544,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 974845190}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2116442421 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
-    type: 3}
-  m_PrefabInstance: {fileID: 974845190}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f331e08cd8902b546a13d457580e8e9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2145919939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16937,14 +16901,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navMethod: 0
   wpList:
-  - {fileID: 1599809364}
-  - {fileID: 95103814}
-  - {fileID: 2116442421}
-  - {fileID: 960902451}
-  - {fileID: 291269424}
-  - {fileID: 665586423}
-  - {fileID: 880530709}
-  - {fileID: 665586423}
+  - {fileID: 1466635806}
+  - {fileID: 58660871}
   distanceFalloff: 0.5
 --- !u!137 &4609030419023062376
 SkinnedMeshRenderer:
