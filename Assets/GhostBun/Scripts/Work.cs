@@ -29,13 +29,17 @@ public class Work : MonoBehaviour
     private NavMeshAgent _navMeshAgent;
     private CharacterWaypointsNavigation _wpNavigation;
     private Waypoint _waypoint;
+    private PlayerManager pm;
 
     [SerializeField] AnimationsArray animLength;
+    [SerializeField] float changeNeedAmount;
+    [SerializeField] [Range(0, 4)] int needID;
 
     private int _workAnimationIndex;
 
     private void Start()
     {
+        pm = FindObjectOfType<PlayerManager>();
         SetAnimationClip();
         _waypoint = GetComponent<Waypoint>();
     }
@@ -70,6 +74,11 @@ public class Work : MonoBehaviour
         }
     }
 
+    private void ChangeNeed()
+    {
+        pm.ChangeNeed(needID, changeNeedAmount);
+    }
+
     /// <summary>
     /// Включаем анимацию работы  
     /// </summary>
@@ -84,6 +93,7 @@ public class Work : MonoBehaviour
         yield return new WaitForSeconds(delay);
         StartCoroutine(TurnOffCollider(turnOffTrigerTime));
         _navMeshAgent.isStopped = false;
+        ChangeNeed(); //Изменение потребности после оконачания анимации.
         _wpNavigation.goToMove();
     }
 

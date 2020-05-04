@@ -59,6 +59,7 @@ public class PlayerManager : MonoBehaviour, IGameManager
     public void ChangeNeed(int index, float value)
     {
         Needs[index].Value += value;
+        Messenger.Broadcast(GameEvent.NEEDS_UPDATED);
     }
 
     private void DecreaseNeedsValue(float value)
