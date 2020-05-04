@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TelekineticField : MonoBehaviour
 {
-    [SerializeField] [Range(0, 1)] private float _velocityPreservation;
+    [SerializeField] [Range(0, 1)] private float _velocityFading;
     [SerializeField] [Range(0, 1)] private float _angularStabilization;
     [SerializeField] [Range(0, 1)] private float _stabilizationFieldRadius;
     [SerializeField] private ForceMode _forceMode;
@@ -68,7 +68,7 @@ public class TelekineticField : MonoBehaviour
 
     private void FixedUpdate()
     {
-        needMultiplier = pm.AverageNeedsValue() * 0.01f;
+        needMultiplier = Mathf.Clamp01(pm.AverageNeedsValue() * 0.01f);
         // Здесь коллайдер растет.
         if (_currentRadius < _maximumRadius)
         {
@@ -105,7 +105,7 @@ public class TelekineticField : MonoBehaviour
             }
             else
             {
-                _rbList[i].velocity *= _velocityPreservation * needMultiplier * (_one - Time.fixedDeltaTime);
+                _rbList[i].velocity *= (_one - _velocityFading) * needMultiplier * (_one - Time.fixedDeltaTime);
                 //Считаем изменение положения локации телекинеза.
                 _deltaForce = transform.position - _lastFramePosition;
                 //Добавляем силу для перемещения 
