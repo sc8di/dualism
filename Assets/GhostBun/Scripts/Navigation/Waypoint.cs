@@ -5,6 +5,7 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour
 {
     [SerializeField] public bool isAvailable { get; protected set; } = true;
+    [HideInInspector]
     public List<string> CurrentUser;
 
     [SerializeField] [Range(0, 10)] int WeightOfWaypoint;
