@@ -11,7 +11,8 @@ public class Routine : MonoBehaviour
     }
     [SerializeField] float dayLengthInMinutes;
     [SerializeField] int startingHour;
-    [SerializeField] public WaypointOperation[] waypoints;
+    [SerializeField] List<WaypointOperation> waypoints;
+    [SerializeField] List<GameObjectOperation> gameObjects;
     float timeFromLastGameMinute = 0f;
     float gameMinuteInSeconds = 0f;
     int currentGameHour = 0;
@@ -23,7 +24,15 @@ public class Routine : MonoBehaviour
         public Waypoint wp;
         public int hoursActivation;
         public int minutesActivation;
-        public bool activated;
+        public Operation operation;
+    }
+
+    [System.Serializable]
+    public struct GameObjectOperation
+    {
+        public GameObject go;
+        public int hoursActivation;
+        public int minutesActivation;
         public Operation operation;
     }
 
@@ -47,18 +56,52 @@ public class Routine : MonoBehaviour
             if (currentGameMinute > 59)
             {
                 currentGameHour++;
+                currentGameMinute = 0;
             }
             Debug.Log(GetGameTimeInString());
-            for (int i = 0; i < waypoints.Length; i++)
-            {
-                if (!waypoints[i].activated && waypoints[i].hoursActivation == currentGameHour && waypoints[i].minutesActivation == currentGameMinute)
-                {
-                    waypoints[i].activated = true;
-
-                    //Операции с вейпоинтами
-                }
-            }
+            CheckWaypointsActivation();
+            CheckGameObjectsActivation();
             timeFromLastGameMinute = 0;
+        }
+    }
+
+    private void CheckWaypointsActivation()
+    {
+        for (int i = 0; i < waypoints.Count; i++)
+        {
+            if (!waypoints[i].wp)
+            {
+                waypoints.RemoveAt(i);
+                i--;
+                continue;
+            }
+            if (waypoints[i].hoursActivation == currentGameHour && waypoints[i].minutesActivation == currentGameMinute)
+            {
+                //Операции с вейпоинтами
+                Debug.Log("WAYPOINT STATE CHANGED" + waypoints[i].wp.name);
+                waypoints.RemoveAt(i);
+                i--;
+            }
+        }
+    }
+    private void CheckGameObjectsActivation()
+    {
+        for (int i = 0; i < gameObjects.Count; i++)
+        {
+            if (!gameObjects[i].go)
+            {
+                gameObjects.RemoveAt(i);
+                i--;
+                continue;
+            }
+            if (gameObjects[i].hoursActivation == currentGameHour && gameObjects[i].minutesActivation == currentGameMinute)
+            {
+                //Операции с вейпоинтами
+                Debug.Log("GAMEOBJECT STATE CHANGED " + gameObjects[i].go.name);
+                gameObjects[i].go.SetActive(gameObjects[i].operation == Operation.Enable ? true : false);
+                gameObjects.RemoveAt(i);
+                i--;
+            }
         }
     }
 }

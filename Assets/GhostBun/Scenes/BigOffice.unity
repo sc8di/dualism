@@ -2445,9 +2445,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _forceMode: 0
-  _force: 0
+  _force: -50
   _bunSpeed: 5
-  _target: {fileID: 0}
+  _target: {fileID: 279984564}
   _stopThreshold: 0.2
 --- !u!54 &143182507
 Rigidbody:
@@ -3246,9 +3246,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _forceMode: 0
-  _force: 0
+  _force: -50
   _bunSpeed: 5
-  _target: {fileID: 0}
+  _target: {fileID: 279984564}
   _stopThreshold: 0.2
 --- !u!54 &226747194
 Rigidbody:
@@ -3383,6 +3383,12 @@ MonoBehaviour:
           m_StringArgument: Normal
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &279984564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5811167614768243797, guid: ab9d1c1f6246fb94c8f2ae3a365783f3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5811167616156188569}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &288222504
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5230,9 +5236,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _forceMode: 0
-  _force: 0
+  _force: -50
   _bunSpeed: 5
-  _target: {fileID: 0}
+  _target: {fileID: 279984564}
   _stopThreshold: 0.2
 --- !u!54 &446074258
 Rigidbody:
@@ -8446,7 +8452,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &791013126
 Transform:
   m_ObjectHideFlags: 0
@@ -9724,7 +9730,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &913140213
 Transform:
   m_ObjectHideFlags: 0
@@ -12228,9 +12234,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _forceMode: 0
-  _force: 0
+  _force: -50
   _bunSpeed: 5
-  _target: {fileID: 0}
+  _target: {fileID: 279984564}
   _stopThreshold: 0.2
 --- !u!54 &1158730668
 Rigidbody:
@@ -13163,7 +13169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1293629067
 Transform:
   m_ObjectHideFlags: 0
@@ -14041,7 +14047,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1387820773
 Transform:
   m_ObjectHideFlags: 0
@@ -14519,18 +14525,20 @@ MonoBehaviour:
   - wp: {fileID: 1599809364}
     hoursActivation: 0
     minutesActivation: 0
-    activated: 0
     operation: 0
   - wp: {fileID: 0}
     hoursActivation: 0
     minutesActivation: 0
-    activated: 0
     operation: 0
   - wp: {fileID: 0}
     hoursActivation: 0
     minutesActivation: 0
-    activated: 0
     operation: 0
+  gameObjects:
+  - go: {fileID: 1355556451}
+    hoursActivation: 14
+    minutesActivation: 0
+    operation: 1
 --- !u!4 &1437276795
 Transform:
   m_ObjectHideFlags: 0
@@ -19368,7 +19376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1958662068
 Transform:
   m_ObjectHideFlags: 0
@@ -21088,9 +21096,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _forceMode: 0
-  _force: 0
+  _force: -50
   _bunSpeed: 5
-  _target: {fileID: 0}
+  _target: {fileID: 279984564}
   _stopThreshold: 0.2
 --- !u!54 &2112125437
 Rigidbody:
@@ -22852,46 +22860,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TelekineticSystem
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811167614768243799, guid: ab9d1c1f6246fb94c8f2ae3a365783f3,
-        type: 3}
-      propertyPath: _angularStabilization
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811167614768243799, guid: ab9d1c1f6246fb94c8f2ae3a365783f3,
-        type: 3}
-      propertyPath: _stabilizationFieldRadius
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811167614768243799, guid: ab9d1c1f6246fb94c8f2ae3a365783f3,
-        type: 3}
-      propertyPath: _maximumRadius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811167614768243799, guid: ab9d1c1f6246fb94c8f2ae3a365783f3,
-        type: 3}
-      propertyPath: _expansionSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811167614768243799, guid: ab9d1c1f6246fb94c8f2ae3a365783f3,
-        type: 3}
-      propertyPath: _maximumObjectsInControl
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811167614768243799, guid: ab9d1c1f6246fb94c8f2ae3a365783f3,
-        type: 3}
-      propertyPath: _force
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811167614768243799, guid: ab9d1c1f6246fb94c8f2ae3a365783f3,
-        type: 3}
-      propertyPath: _startingRadius
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811167614768243799, guid: ab9d1c1f6246fb94c8f2ae3a365783f3,
-        type: 3}
-      propertyPath: _chaoticForce
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5811167615621095768, guid: ab9d1c1f6246fb94c8f2ae3a365783f3,
         type: 3}
