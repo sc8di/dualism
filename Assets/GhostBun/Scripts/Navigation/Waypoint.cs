@@ -5,7 +5,13 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour
 {
     [SerializeField] public bool isAvailable { get; protected set; } = true;
+    public string CurrentUser { get; set; }
 
+
+    //private void Update()
+    //{
+    //    Debug.Log($"Waypoint: {gameObject.name} // // is Available: {isAvailable} // // character: {CurrentUser}");
+    //}
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -14,7 +20,6 @@ public class Waypoint : MonoBehaviour
 
     public void SetAvailability(bool availability)
     {
-        Debug.Log("Activation is " + availability);
         isAvailable = availability;
     }
 
@@ -22,4 +27,5 @@ public class Waypoint : MonoBehaviour
     {
         return transform.position;
     }
+
 }
