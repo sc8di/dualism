@@ -26,11 +26,11 @@ Preset:
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _velocityPreservation
-    value: 1
+    propertyPath: _velocityFading
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: _angularDestabilization
+    propertyPath: _angularStabilization
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}

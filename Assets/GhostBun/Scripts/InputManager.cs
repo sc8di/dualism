@@ -7,12 +7,12 @@ using EmeraldAI;
 public class InputManager : MonoBehaviour
 {
     [SerializeField] private float _rotateSpeed = 50f;
-    [SerializeField] private TelekineticEngine _telekineticEngine;
     [SerializeField] private GameObject _player;
     [SerializeField] private LayerMask _walkOn;
     [SerializeField] private float _timerToGo = .1f;
     [SerializeField] private float delayToWander = 0.5f;
 
+    private TelekineticEngine _telekineticEngine;
     private NavMeshAgent _navMeshAgent;
     private CharacterWaypointsNavigation _wpNavigation;
     private Animator _animator;
@@ -21,6 +21,7 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
+        _telekineticEngine = FindObjectOfType<TelekineticEngine>();
         _animator = _player.GetComponent<Animator>();
         _navMeshAgent = _player.GetComponent<NavMeshAgent>();
         _wpNavigation = _player.GetComponent<CharacterWaypointsNavigation>();

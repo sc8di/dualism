@@ -50,7 +50,7 @@ public class DetectPlayer : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, player.transform.position - transform.position, out RaycastHit hitInfo, detectionDistance, detectionLayer))
             {
-                if (hitInfo.transform.CompareTag("Player"))
+                if (hitInfo.transform.CompareTag("PlayerTelekinesis"))
                 {
                     pm.PlayerDetected();
                     lookForPlayer = false; //Делаем паузу для поиска игрока.

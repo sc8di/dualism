@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - World
   - NPC
+  - PlayerTelekinesis
   layers:
   - Default
   - TransparentFX
