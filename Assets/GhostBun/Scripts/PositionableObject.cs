@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PositionableObject : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PositionableObject : MonoBehaviour
     GameObject positionMarker;
     [SerializeField]
     GameObject positionableObject;
+    [SerializeField]
+    Material ghostMaterial;
     [SerializeField]
     float reactivateObjectAfterSeconds = 3f;
     [SerializeField]
@@ -29,6 +32,11 @@ public class PositionableObject : MonoBehaviour
 
     private void Start()
     {
+        positionMarker = Instantiate(positionableObject, transform);
+        positionMarker.GetComponent<MeshRenderer>().material = ghostMaterial;
+        Destroy(positionMarker.GetComponent<Rigidbody>());
+        Destroy(positionMarker.GetComponent<NavMeshObstacle>());
+        Destroy(positionMarker.GetComponent<BoxCollider>());
         thisTrigger = GetComponent<SphereCollider>();
         ActivateWaypoint(false);
     }
@@ -49,8 +57,6 @@ public class PositionableObject : MonoBehaviour
             }
         }
     }
-
-
 
     private void OnTriggerEnter(Collider other)
     {
