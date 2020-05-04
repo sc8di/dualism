@@ -14,7 +14,7 @@ public class DetectPlayer : MonoBehaviour
     [SerializeField]
     float autoDetectDistance = 1f;
 
-    [SerializeField] DetectPlayerTelekinesis dpt;
+    PlayerManager pm;
     [SerializeField]
     float viewAngle = 15f;
 
@@ -40,6 +40,7 @@ public class DetectPlayer : MonoBehaviour
 
     private void Start()
     {
+        pm = FindObjectOfType<PlayerManager>();
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
@@ -51,7 +52,7 @@ public class DetectPlayer : MonoBehaviour
             {
                 if (hitInfo.transform.CompareTag("Player"))
                 {
-                    dpt.PlayerDetected();
+                    pm.PlayerDetected();
                     lookForPlayer = false; //Делаем паузу для поиска игрока.
                     StartEmote();
 

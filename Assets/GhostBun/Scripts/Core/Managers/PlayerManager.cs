@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour, IGameManager
 {
+    private int _timesPlayerDetected = 0;
     private float _timerChangeNeeds;
     
     public ManagerStatus Status { get; private set; }
@@ -101,6 +102,12 @@ public class PlayerManager : MonoBehaviour, IGameManager
             StartCoroutine(Respawn());
         
         Messenger.Broadcast(GameEvent.NEEDS_UPDATED);*/
+    }
+
+    public void PlayerDetected()
+    {
+        _timesPlayerDetected++;
+        Debug.Log($"Player Detected! Total detections: {_timesPlayerDetected}");
     }
 }
 
