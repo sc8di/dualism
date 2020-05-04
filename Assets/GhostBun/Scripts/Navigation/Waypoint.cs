@@ -5,14 +5,14 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour
 {
     [SerializeField] public bool isAvailable { get; protected set; } = true;
-    public string CurrentUser { get; set; }
+    public List<string> CurrentUser;
 
     [SerializeField] [Range(0, 10)] int WeightOfWaypoint;
 
 
     private void Update()
     {
-        Debug.Log($"Waypoint: {gameObject.name} // // is Available: {isAvailable} // // character: {CurrentUser}");
+        Debug.Log($"Waypoint: {gameObject.name} // // is Available: {isAvailable} // // ");
     }
     private void OnDrawGizmos()
     {

@@ -49,7 +49,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
         if (wpList.Count != 0)
         {
             _targetWaypoint = GetNextRandomWaypoint();
-            _targetWaypoint.CurrentUser = gameObject.name;
+            _targetWaypoint.CurrentUser.Add(gameObject.name);
             _navMeshAgent.SetDestination(_targetWaypoint.GetPosition());
         }
         else
@@ -72,10 +72,10 @@ public class CharacterWaypointsNavigation : MonoBehaviour
             }
         }
 
-        if (Vector3.Distance(transform.position, _targetWaypoint.GetPosition()) < distanceFalloff)
-        {
-            GoToRandomPoint();
-        }
+        //if (Vector3.Distance(transform.position, _targetWaypoint.GetPosition()) < distanceFalloff)
+        //{
+        //    GoToRandomPoint();
+        //}
         _animator.SetFloat("Forward", _navMeshAgent.velocity.magnitude / _navMeshAgent.speed);
     }
     /// <summary>
@@ -85,7 +85,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     {
         //Debug.Log("Go back to the closest waipoint");
         _targetWaypoint = FindTheClosest();
-        _targetWaypoint.CurrentUser = gameObject.name;
+        _targetWaypoint.CurrentUser.Add(gameObject.name);
         _navMeshAgent.SetDestination(_targetWaypoint.GetPosition());
     }
 
@@ -94,7 +94,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
         if (!isWorking)
         {
             _targetWaypoint = GetNextRandomWaypoint();
-            _targetWaypoint.CurrentUser = gameObject.name;
+            _targetWaypoint.CurrentUser.Add(gameObject.name);
             _navMeshAgent.SetDestination(_targetWaypoint.GetPosition());
         }
     }
@@ -156,13 +156,13 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     /// <summary>
     /// Метод останавливает анимацию работы
     /// </summary>
-    public void StopWork()
+    public void StopWork(string name)
     {
         Debug.Log("Stop Working");
         _animator.SetTrigger("Walk");
         Waypoint wp = FindTheClosest();
         wp.GetComponent<Work>().StopAllCoroutines();
-        wp.CurrentUser = string.Empty;
+        wp.CurrentUser.Remove(name);
         wp.SetAvailability(true);
         wp.GetComponent<BoxCollider>().enabled = true;
     }

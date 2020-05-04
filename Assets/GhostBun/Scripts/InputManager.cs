@@ -53,7 +53,7 @@ public class InputManager : MonoBehaviour
                 if (Physics.Raycast(ray, out RaycastHit hit, 100, _walkOn))
                 {
                     _navMeshAgent.SetDestination(hit.point);
-                    _wpNavigation.StopWork();
+                    _wpNavigation.StopWork(gameObject.name);
                 }
             }
         }
@@ -77,7 +77,7 @@ public class InputManager : MonoBehaviour
                         // Отключаем мозг персонажа.
                         _navMeshAgent.isStopped = true;
                         // Вырубаем аниимацию работы
-                        _wpNavigation.StopWork();
+                        _wpNavigation.StopWork(gameObject.name);
                         //Включаем анимацию телекинеза
                         _animator.SetTrigger("Telekinetic");
                     }
