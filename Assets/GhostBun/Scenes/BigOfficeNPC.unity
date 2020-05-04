@@ -100,7 +100,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 4add68d9f0ba3304cb9fc6fa0334cba0,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2829,6 +2829,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488248405}
     m_Modifications:
+    - target: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
+        type: 3}
+      propertyPath: WeightOfWaypoint
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 185073512736943433, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2920,6 +2925,11 @@ PrefabInstance:
       propertyPath: Animation
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8261090838339993458, guid: 3dc55cae8434e114bbabc2470f96c1ac,
+        type: 3}
+      propertyPath: needID
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dc55cae8434e114bbabc2470f96c1ac, type: 3}
 --- !u!1001 &213383689
@@ -2929,6 +2939,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488248405}
     m_Modifications:
+    - target: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
+        type: 3}
+      propertyPath: WeightOfWaypoint
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 185073512736943433, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3629,6 +3644,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488248405}
     m_Modifications:
+    - target: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
+        type: 3}
+      propertyPath: WeightOfWaypoint
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 185073512736943433, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6796,6 +6816,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488248405}
     m_Modifications:
+    - target: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
+        type: 3}
+      propertyPath: WeightOfWaypoint
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 185073512736943433, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10508,6 +10533,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488248405}
     m_Modifications:
+    - target: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
+        type: 3}
+      propertyPath: WeightOfWaypoint
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 185073512736943433, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10873,6 +10903,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488248405}
     m_Modifications:
+    - target: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
+        type: 3}
+      propertyPath: WeightOfWaypoint
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 185073512736943433, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13364,6 +13399,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488248405}
     m_Modifications:
+    - target: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
+        type: 3}
+      propertyPath: WeightOfWaypoint
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 185073512736943433, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14041,6 +14081,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488248405}
     m_Modifications:
+    - target: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
+        type: 3}
+      propertyPath: WeightOfWaypoint
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 185073512736943433, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17234,6 +17279,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488248405}
     m_Modifications:
+    - target: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
+        type: 3}
+      propertyPath: WeightOfWaypoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 185073512736943433, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19556,6 +19606,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488248405}
     m_Modifications:
+    - target: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
+        type: 3}
+      propertyPath: WeightOfWaypoint
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 185073512736943433, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19736,6 +19791,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488248405}
     m_Modifications:
+    - target: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
+        type: 3}
+      propertyPath: WeightOfWaypoint
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 185073512736943433, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20829,6 +20889,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488248405}
     m_Modifications:
+    - target: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
+        type: 3}
+      propertyPath: WeightOfWaypoint
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 185073512736943433, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
       propertyPath: m_LocalPosition.x

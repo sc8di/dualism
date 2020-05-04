@@ -10,14 +10,12 @@ public class InputManager : MonoBehaviour
     [SerializeField] private GameObject _player;
     [SerializeField] private LayerMask _walkOn;
     [SerializeField] private float _timerToGo = .1f;
-    [SerializeField] private float _timerToWander = 0.5f;
 
     private TelekineticEngine _telekineticEngine;
     private NavMeshAgent _navMeshAgent;
     private CharacterWaypointsNavigation _wpNavigation;
     private Animator _animator;
     private float _touchTimer = 0;
-    private float _wanderTimer = 0;
 
     private void Awake()
     {
@@ -29,23 +27,10 @@ public class InputManager : MonoBehaviour
     
     private void Update()
     {
-        //Запускаем движение по waypoints после достижения точки заданной игроком
-        if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance < 0.5f)
-        {
-
-            _wanderTimer += Time.deltaTime;
-            if (_wanderTimer > _timerToWander)// я не согласен что контролировать два таймера одной переменной хорошая идея
-            {
-                //_wpNavigation.goToMove();
-                _wpNavigation.goToMove();
-                _wanderTimer = 0f;
-            }
-        }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             _touchTimer = 0;
-            _wanderTimer = 0;
         }
         
 
