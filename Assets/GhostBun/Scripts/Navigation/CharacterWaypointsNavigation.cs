@@ -11,6 +11,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     float distanceFalloff = 0.5f;
     [SerializeField] 
     private float _timerToWander = 0.5f;
+    private int maxWeight = 0;
 
     Animator _animator;
     NavMeshAgent _navMeshAgent;
@@ -38,6 +39,13 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        //Записываем максимальный вес выподения Waypoint
+        for (int i = 0; i < wpList.Count; i++)
+        {
+            if (wpList[i].GetWaeightOfWaypoint() > maxWeight)
+                maxWeight = wpList[i].GetWaeightOfWaypoint();
+        }
+        //Старт движения
         if (wpList.Count != 0)
         {
             _targetWaypoint = GetNextRandomWaypoint();
@@ -109,9 +117,10 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     private Waypoint GetNextRandomWaypoint()
     {
         List<Waypoint> availableWaypoints = new List<Waypoint>();
+        int weight = Random.Range(0, maxWeight);
         foreach (Waypoint wp in wpList)
         {
-            if (wp.isAvailable == true)
+            if (wp.isAvailable == true && wp.GetWaeightOfWaypoint() >= weight)
             {
                 availableWaypoints.Add(wp);
             }
