@@ -4,7 +4,7 @@ using UnityEngine;
 public class TelekineticField : MonoBehaviour
 {
     [SerializeField] [Range(0, 1)] private float _velocityPreservation;
-    [SerializeField] [Range(0, 1)] private float _angularDestabilization;
+    [SerializeField] [Range(0, 1)] private float _angularStabilization;
     [SerializeField] [Range(0, 1)] private float _stabilizationFieldRadius;
     [SerializeField] private ForceMode _forceMode;
     [SerializeField] private float _maximumRadius = 2f;
@@ -18,7 +18,8 @@ public class TelekineticField : MonoBehaviour
     private float _currentRadius = 0f;
     private Vector3 _lastFramePosition = Vector3.zero;
     private Vector3 _deltaForce = Vector3.zero;
-
+    private PlayerManager pm;
+    private float needMultiplier = 1f;
     private const float _one = 1f;
 
     private void OnDrawGizmos()
@@ -29,6 +30,7 @@ public class TelekineticField : MonoBehaviour
 
     private void Start()
     {
+        pm = FindObjectOfType<PlayerManager>();
         _rbList = new List<Rigidbody>();
         transform.localScale = Vector3.one * _currentRadius;
     }
@@ -66,10 +68,11 @@ public class TelekineticField : MonoBehaviour
 
     private void FixedUpdate()
     {
+        needMultiplier = pm.AverageNeedsValue() * 0.01f;
         // Здесь коллайдер растет.
         if (_currentRadius < _maximumRadius)
         {
-            _currentRadius += Time.fixedDeltaTime * _expansionSpeed;
+            _currentRadius += Time.fixedDeltaTime * _expansionSpeed * needMultiplier + Time.fixedDeltaTime * 0.1f;
             transform.localScale = Vector3.one * _currentRadius;
         }
 
@@ -89,20 +92,20 @@ public class TelekineticField : MonoBehaviour
 
             _rbList[i].useGravity = false;
 
-            _rbList[i].angularVelocity *= _angularDestabilization * (_one - Time.fixedDeltaTime);
+            _rbList[i].angularVelocity *= _angularStabilization - needMultiplier * (_one - Time.fixedDeltaTime);
 
             float objectDistance = Vector3.Distance(_rbList[i].transform.position, transform.position);
 
-            Vector3 chaoticForceVector = Random.insideUnitSphere * Random.Range(0, _chaoticForce) * Random.Range(0f, 2f);
+            Vector3 chaoticForceVector = Random.insideUnitSphere * Random.Range(0, _chaoticForce) * (_one - needMultiplier);
 
             if (objectDistance > _stabilizationFieldRadius * _currentRadius)
             {
-                Vector3 directionalForce = (transform.position - _rbList[i].transform.position).normalized * _force;
+                Vector3 directionalForce = (transform.position - _rbList[i].transform.position).normalized * _force * needMultiplier;
                 _rbList[i].AddForce(directionalForce * Time.fixedDeltaTime, _forceMode);
             }
             else
             {
-                _rbList[i].velocity *= _velocityPreservation * (_one - Time.fixedDeltaTime);
+                _rbList[i].velocity *= _velocityPreservation * needMultiplier * (_one - Time.fixedDeltaTime);
                 //Считаем изменение положения локации телекинеза.
                 _deltaForce = transform.position - _lastFramePosition;
                 //Добавляем силу для перемещения 
