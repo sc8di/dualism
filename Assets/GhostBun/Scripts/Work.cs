@@ -47,8 +47,8 @@ public class Work : MonoBehaviour
     {
         if(chooseTag == Tag.Both)
         {
-            if (other.CompareTag("Player") && other.name == _waypoint.CurrentUser
-                || other.CompareTag("NPC") && other.name == _waypoint.CurrentUser)
+            if (other.CompareTag("Player") && _waypoint.CurrentUser.Contains(other.name)
+                || other.CompareTag("NPC") && _waypoint.CurrentUser.Contains(other.name))
             //if (other.CompareTag("Player") || other.CompareTag("NPC"))
             {
                 //Debug.Log("Worker on point: " + _emoteAnimationIndex);
@@ -58,13 +58,13 @@ public class Work : MonoBehaviour
 
                 // Останавливаем движение NPC до окончания анимации
                 StartCoroutine(Working(animLength.AnimationsLength[_workAnimationIndex], other.tag));
-                StartCoroutine(TurnOffCollider(turnOffTrigerTime + animLength.AnimationsLength[_workAnimationIndex]));
+                StartCoroutine(TurnOffCollider(turnOffTrigerTime + animLength.AnimationsLength[_workAnimationIndex], other.tag));
             }
         }
         else
         {
             //Debug.Log("Worker on point: " + _emoteAnimationIndex);
-            if (other.CompareTag(chooseTag.ToString()) && other.name == _waypoint.CurrentUser)
+            if (other.CompareTag(chooseTag.ToString()) && _waypoint.CurrentUser.Contains(other.name))
             //if (other.CompareTag(chooseTag.ToString()))
             {
                 Debug.Log("Worker on point: " + _workAnimationIndex);
@@ -73,15 +73,15 @@ public class Work : MonoBehaviour
                 _wpNavigation = other.GetComponent<CharacterWaypointsNavigation>();
 
                 // Останавливаем движение NPC до окончания анимации
-                StartCoroutine(Working(animLength.AnimationsLength[_workAnimationIndex], other.tag.ToString()));
-                StartCoroutine(TurnOffCollider(turnOffTrigerTime + animLength.AnimationsLength[_workAnimationIndex]));
+                StartCoroutine(Working(animLength.AnimationsLength[_workAnimationIndex], other.tag));
+                StartCoroutine(TurnOffCollider(turnOffTrigerTime + animLength.AnimationsLength[_workAnimationIndex], other.tag));
             }
         }
     }
 
     private void ChangeNeed()
     {
-        pm.ChangeNeed(needID, changeNeedAmount);
+        //pm.ChangeNeed(needID, changeNeedAmount);
     }
 
     /// <summary>
@@ -108,7 +108,7 @@ public class Work : MonoBehaviour
 
         if(name == "Player")
             ChangeNeed(); //Изменение потребности после оконачания анимации.
-        _wpNavigation.goToMove();
+        _wpNavigation.GoToRandomPoint();
     }
 
     /// <summary>
@@ -116,7 +116,7 @@ public class Work : MonoBehaviour
     /// </summary>
     /// <param name="delay">Время отключения колайдера</param>
     /// <returns></returns>
-    private IEnumerator TurnOffCollider(float delay)
+    private IEnumerator TurnOffCollider(float delay, string name)
     {
         gameObject.GetComponent<BoxCollider>().enabled = false;
 
@@ -124,7 +124,7 @@ public class Work : MonoBehaviour
 
         gameObject.GetComponent<BoxCollider>().enabled = true;
         _waypoint.SetAvailability(true);
-        _waypoint.CurrentUser = string.Empty;
+        _waypoint.CurrentUser.Remove(name);
     }
 
     private void SetAnimationClip()

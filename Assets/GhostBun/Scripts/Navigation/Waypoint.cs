@@ -10,10 +10,10 @@ public class Waypoint : MonoBehaviour
     [SerializeField] [Range(0, 10)] int WeightOfWaypoint;
 
 
-    private void Update()
-    {
-        Debug.Log($"Waypoint: {gameObject.name} // // is Available: {isAvailable} // // ");
-    }
+    //private void Update()
+    //{
+    //    Debug.Log($"Waypoint: {gameObject.name} // // is Available: {isAvailable} // // ");
+    //}
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
