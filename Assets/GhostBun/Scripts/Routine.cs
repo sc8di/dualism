@@ -9,33 +9,56 @@ public class Routine : MonoBehaviour
         Disable,
         Enable,
     }
+    [SerializeField] float dayLengthInMinutes;
+    [SerializeField] int startingHour;
     [SerializeField] public WaypointOperation[] waypoints;
-    float currentTime = 0f;
+    float timeFromLastGameMinute = 0f;
+    float gameMinuteInSeconds = 0f;
+    int currentGameHour = 0;
+    int currentGameMinute = 0;
 
     [System.Serializable]
     public struct WaypointOperation
     {
         public Waypoint wp;
-        public float secondsBeforeAct;
+        public int hoursActivation;
+        public int minutesActivation;
         public bool activated;
         public Operation operation;
     }
 
+    public string GetGameTimeInString()
+    {
+        return (currentGameHour < 10 ? $"0{currentGameHour}" : $"{currentGameHour}") + " : " + (currentGameMinute < 10 ? $"0{currentGameMinute}" : $"{currentGameMinute}");
+    }
+
+    private void Start()
+    {
+        gameMinuteInSeconds = dayLengthInMinutes / 9;
+        currentGameHour = startingHour;
+    }
+
     private void FixedUpdate()
     {
-        currentTime += Time.fixedDeltaTime;
-        if (currentTime%60 < 0.1f)
+        timeFromLastGameMinute += Time.fixedDeltaTime;
+        if (timeFromLastGameMinute > gameMinuteInSeconds)
         {
-            Debug.Log($"Current time is {(int)(8 + currentTime / 60)}:00");
-        }
-        for (int i = 0; i < waypoints.Length; i++)
-        {
-            if (!waypoints[i].activated && waypoints[i].secondsBeforeAct < currentTime)
+            currentGameMinute++;
+            if (currentGameMinute > 59)
             {
-                waypoints[i].activated = true;
-                
-                //Debug.Log($"Waypoint {waypoints[i].wp.name} activated");
+                currentGameHour++;
             }
+            Debug.Log(GetGameTimeInString());
+            for (int i = 0; i < waypoints.Length; i++)
+            {
+                if (!waypoints[i].activated && waypoints[i].hoursActivation == currentGameHour && waypoints[i].minutesActivation == currentGameMinute)
+                {
+                    waypoints[i].activated = true;
+
+                    //Операции с вейпоинтами
+                }
+            }
+            timeFromLastGameMinute = 0;
         }
     }
 }
