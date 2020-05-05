@@ -3133,7 +3133,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.06666667
+  m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: 488707dba229e6f45a8a9b5cc8488b28, type: 2}
 --- !u!4 &202021375
@@ -5661,7 +5661,7 @@ Transform:
   - {fileID: 1202792054}
   - {fileID: 231695809}
   m_Father: {fileID: 1488248405}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -232.583, z: 0}
 --- !u!135 &430088751
 SphereCollider:
@@ -5689,7 +5689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positionMarker: {fileID: 0}
-  positionableObject: {fileID: 0}
+  positionableObject: {fileID: 494591320}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
   distanceActivation: 0.2
@@ -6085,6 +6085,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7729442616628535313, guid: df51c16f55107c441bd4fd6f148d3732,
     type: 3}
   m_PrefabInstance: {fileID: 484978540}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &494591320 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7909543851811795047, guid: 2d0db9ffdf9583449b5bc8aa7ce12c01,
+    type: 3}
+  m_PrefabInstance: {fileID: 231695808}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &513530327
 PrefabInstance:
@@ -7532,6 +7538,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8827991600640117706, guid: 0574c3866d5de044f9de9ef36b0ed572,
     type: 3}
   m_PrefabInstance: {fileID: 665342622}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &667878654 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7909543851811795047, guid: 2d0db9ffdf9583449b5bc8aa7ce12c01,
+    type: 3}
+  m_PrefabInstance: {fileID: 126652043}
   m_PrefabAsset: {fileID: 0}
 --- !u!43 &675191872
 Mesh:
@@ -10229,6 +10241,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 929209067}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &963247212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8926188715815338652, guid: 7a32c65673e93534f932ed225792237f,
+    type: 3}
+  m_PrefabInstance: {fileID: 59369756}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &972517865
 GameObject:
   m_ObjectHideFlags: 0
@@ -11365,16 +11383,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wpList:
-  - {fileID: 1599809364}
-  - {fileID: 762746071}
   - {fileID: 1906561374}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 762746071}
+  - {fileID: 58660871}
+  - {fileID: 102959715}
   - {fileID: 1643968634}
-  - {fileID: 0}
+  - {fileID: 1202792055}
   - {fileID: 481193682}
   - {fileID: 1599809364}
-  - {fileID: 102959715}
+  - {fileID: 1420594676}
+  - {fileID: 1789953364}
+  - {fileID: 56509654}
   distanceFalloff: 1
   _timerToWander: 0.5
 --- !u!114 &1045005161
@@ -14272,7 +14291,7 @@ Transform:
   - {fileID: 272200742}
   - {fileID: 58660870}
   m_Father: {fileID: 1488248405}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &1355556451
 GameObject:
@@ -15005,7 +15024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positionMarker: {fileID: 0}
-  positionableObject: {fileID: 0}
+  positionableObject: {fileID: 667878654}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
   distanceActivation: 0.2
@@ -15810,13 +15829,13 @@ Transform:
   m_Children:
   - {fileID: 2049239910}
   - {fileID: 1378383702}
+  - {fileID: 1353458575}
   - {fileID: 273338563}
+  - {fileID: 2075216933}
   - {fileID: 547158322}
+  - {fileID: 430088750}
   - {fileID: 389207803}
   - {fileID: 1599809365}
-  - {fileID: 1353458575}
-  - {fileID: 2075216933}
-  - {fileID: 430088750}
   - {fileID: 1406219266}
   - {fileID: 2097980413}
   - {fileID: 1741918244}
@@ -18187,7 +18206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positionMarker: {fileID: 0}
-  positionableObject: {fileID: 0}
+  positionableObject: {fileID: 1880254831}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
   distanceActivation: 0.2
@@ -19314,6 +19333,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1880254831 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6628007153849382590, guid: ffaa285fa7fb843409bc3dceb860e48a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2142437206}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1881230641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21534,7 +21559,7 @@ Transform:
   - {fileID: 293652653}
   - {fileID: 894798260}
   m_Father: {fileID: 1488248405}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &2075216934
 SphereCollider:
@@ -21874,7 +21899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positionMarker: {fileID: 0}
-  positionableObject: {fileID: 0}
+  positionableObject: {fileID: 963247212}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
   distanceActivation: 0.2
@@ -23665,17 +23690,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wpList:
+  - {fileID: 1906561374}
   - {fileID: 58660871}
   - {fileID: 309258506}
-  - {fileID: 1599809364}
-  - {fileID: 481193682}
-  - {fileID: 0}
-  - {fileID: 1643968634}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 1906561374}
   - {fileID: 102959715}
-  - {fileID: 58660871}
+  - {fileID: 1643968634}
+  - {fileID: 1202792055}
+  - {fileID: 481193682}
+  - {fileID: 1599809364}
+  - {fileID: 1420594676}
+  - {fileID: 1789953364}
+  - {fileID: 56509654}
   distanceFalloff: 1
   _timerToWander: 2
 --- !u!137 &4609030419023062376
