@@ -43,15 +43,16 @@ public class InputManager : MonoBehaviour
                 if (Physics.Raycast(ray, out RaycastHit hit, 100, _walkOn))
                 {
                     _navMeshAgent.SetDestination(hit.point);
-                    _wpNavigation.StopWork(_player.name);
+                    //_wpNavigation.StopWork(_player.name);
                 }
             }
             else //В любом случае если таймер больше чем таймер ту го, то мы скорее всего юзали телекинез.
             {
+                //Debug.Log("!!!!!GO after telekinetic");
                 //Отключаем телекинез
                 _telekineticEngine.DisableTelekineticField();
                 //_wpNavigation.goToMove();
-                _wpNavigation.goToMove();
+                _wpNavigation.GoToRandomPoint();
                 //Выключаеманимацию телекинеза
                 _animator.SetTrigger("Walk");
                 //Включаем персонажу мозг.
@@ -81,6 +82,7 @@ public class InputManager : MonoBehaviour
                         // Вырубаем аниимацию работы
                         _wpNavigation.StopWork(_player.name);
                         //Включаем анимацию телекинеза
+                        //Debug.Log("Start animation telekinetic");
                         _animator.SetTrigger("Telekinetic");
                     }
                 }

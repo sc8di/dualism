@@ -24,6 +24,7 @@ public class Work : MonoBehaviour
     public WorkAnimation Animation;
 
     public float turnOffTrigerTime = 10f;
+    public Vector3 gestureMove = new Vector3(-0.5f, 1f, -0.5f);
 
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
@@ -31,6 +32,7 @@ public class Work : MonoBehaviour
     private Waypoint _waypoint;
     private PlayerManager pm;
 
+    [SerializeField] ParticleSystem gesture;
     [SerializeField] AnimationsArray animLength;
     [SerializeField] float changeNeedAmount;
     [SerializeField] [Range(0, 4)] int needID;
@@ -93,6 +95,7 @@ public class Work : MonoBehaviour
     {
         _wpNavigation.isWorking = true;
         _waypoint.SetAvailability(false);
+        gesture.transform.position += gestureMove;
 
         yield return new WaitForSeconds(_navMeshAgent.speed / 10);
 
@@ -105,8 +108,9 @@ public class Work : MonoBehaviour
 
         _navMeshAgent.isStopped = false;
         _wpNavigation.isWorking = false;
+        gesture.transform.position -= gestureMove;
 
-        if(name == "Player")
+        if (name == "Player")
             ChangeNeed(); //Изменение потребности после оконачания анимации.
         _wpNavigation.GoToRandomPoint();
     }

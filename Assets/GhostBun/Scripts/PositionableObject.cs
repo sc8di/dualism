@@ -38,7 +38,7 @@ public class PositionableObject : MonoBehaviour
         Destroy(positionMarker.GetComponent<NavMeshObstacle>());
         Destroy(positionMarker.GetComponent<BoxCollider>());
         thisTrigger = GetComponent<SphereCollider>();
-        ActivateWaypoint(false);
+        ActivateWaypoint(false , false);
     }
 
     private void FixedUpdate()
@@ -69,7 +69,7 @@ public class PositionableObject : MonoBehaviour
             positionMarker.SetActive(false);
             reactivate = true;
             isOnPosition = true;
-            ActivateWaypoint(true);
+            ActivateWaypoint(true, false);
         }
     }
 
@@ -80,15 +80,15 @@ public class PositionableObject : MonoBehaviour
             Debug.Log("Reactivated");
             positionMarker.SetActive(true);
             isOnPosition = false;
-            ActivateWaypoint(false);
+            ActivateWaypoint(false , true);
         }
     }
 
-    private void ActivateWaypoint(bool state)
+    private void ActivateWaypoint(bool state, bool moved)
     {
         if (thisWaypoint)
         {
-            thisWaypoint.SetAvailability(state);
+            thisWaypoint.SetAvailability(state, moved);
         }
     }
 }

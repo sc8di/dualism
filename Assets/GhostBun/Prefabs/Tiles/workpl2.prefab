@@ -796,7 +796,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: SO_AwardFrame
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4913282294761826266, guid: 96edc6b4dd2ac5a43a362bfd81c30b27,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3183232168710400730, guid: 96edc6b4dd2ac5a43a362bfd81c30b27, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 96edc6b4dd2ac5a43a362bfd81c30b27, type: 3}
 --- !u!4 &4560103767653484116 stripped
 Transform:
@@ -1844,6 +1850,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Floor_Carpet_Grey51
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130210060380924943, guid: c3a127f2926877c46885431e9c4693c7,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3a127f2926877c46885431e9c4693c7, type: 3}
