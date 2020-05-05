@@ -539,6 +539,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor_Carpet_Tiles (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5797483322074139924, guid: 189a344a86c134849a8a84176b522e1d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 7045093707181683540, guid: 189a344a86c134849a8a84176b522e1d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -552,7 +557,7 @@ PrefabInstance:
     - target: {fileID: 7045093707181683540, guid: 189a344a86c134849a8a84176b522e1d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.02
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 7045093707181683540, guid: 189a344a86c134849a8a84176b522e1d,
         type: 3}
@@ -689,10 +694,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor_Carpet_Tiles (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5797483322074139924, guid: 189a344a86c134849a8a84176b522e1d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 7045093707181683540, guid: 189a344a86c134849a8a84176b522e1d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7045093707181683540, guid: 189a344a86c134849a8a84176b522e1d,
         type: 3}
@@ -702,7 +712,7 @@ PrefabInstance:
     - target: {fileID: 7045093707181683540, guid: 189a344a86c134849a8a84176b522e1d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.0025005
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 7045093707181683540, guid: 189a344a86c134849a8a84176b522e1d,
         type: 3}
@@ -1064,6 +1074,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SO_Painting_01
       objectReference: {fileID: 0}
+    - target: {fileID: 5451823731184557127, guid: 37adff0192497f2469bfebb924b71c4a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 8642783944223096978, guid: 37adff0192497f2469bfebb924b71c4a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1119,7 +1134,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4571935970826190518, guid: 37adff0192497f2469bfebb924b71c4a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 37adff0192497f2469bfebb924b71c4a, type: 3}
 --- !u!4 &6886501042755740670 stripped
 Transform:
@@ -1514,6 +1530,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor_Carpet_Tiles
       objectReference: {fileID: 0}
+    - target: {fileID: 5797483322074139924, guid: 189a344a86c134849a8a84176b522e1d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 7045093707181683540, guid: 189a344a86c134849a8a84176b522e1d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1719,7 +1740,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: SO_Painting_02
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8778166553925786822, guid: e8f13c5067180ad48a5bf7587fadf707,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 557869336966369941, guid: e8f13c5067180ad48a5bf7587fadf707, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e8f13c5067180ad48a5bf7587fadf707, type: 3}
 --- !u!4 &5874421898135954119 stripped
 Transform:
@@ -2169,6 +2196,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Cupboards_Red
       objectReference: {fileID: 0}
+    - target: {fileID: 5067301344612165792, guid: f616a17f6ae0da449a0348b3afbd8609,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f616a17f6ae0da449a0348b3afbd8609, type: 3}
 --- !u!4 &7244445351113429798 stripped
@@ -2489,6 +2521,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_KitchenSink_Red
       objectReference: {fileID: 0}
+    - target: {fileID: 4187518948074782643, guid: d804901700134474ab15dafa9522cf3f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 8336417812529020994, guid: d804901700134474ab15dafa9522cf3f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2639,10 +2676,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor_Carpet_Tiles (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5797483322074139924, guid: 189a344a86c134849a8a84176b522e1d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 7045093707181683540, guid: 189a344a86c134849a8a84176b522e1d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.97
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7045093707181683540, guid: 189a344a86c134849a8a84176b522e1d,
         type: 3}
@@ -3089,6 +3131,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_TowelRail
       objectReference: {fileID: 0}
+    - target: {fileID: 778163914598708060, guid: 9a72590693b319f4890679741f284d5a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 2528261651466227575, guid: 9a72590693b319f4890679741f284d5a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3144,7 +3191,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7163173092226451600, guid: 9a72590693b319f4890679741f284d5a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a72590693b319f4890679741f284d5a, type: 3}
 --- !u!4 &5030774613796794495 stripped
 Transform:
