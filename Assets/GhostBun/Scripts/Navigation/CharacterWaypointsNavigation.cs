@@ -83,7 +83,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     /// </summary>
     public void goToMove()
     {
-        Debug.Log("Go back to the closest waipoint");
+        //Debug.Log("Go back to the closest waipoint");
         _targetWaypoint = FindTheClosest();
         _targetWaypoint.CurrentUser.Add(gameObject.name);
         _navMeshAgent.SetDestination(_targetWaypoint.GetPosition());
@@ -117,7 +117,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     private Waypoint GetNextRandomWaypoint()
     {
         List<Waypoint> availableWaypoints = new List<Waypoint>();
-        int weight = Random.Range(0, maxWeight + 1);
+        int weight = Random.Range(0, maxWeight);
         foreach (Waypoint wp in wpList)
         {
             if (wp.isAvailable == true && wp.GetWaeightOfWaypoint() >= weight)
@@ -158,8 +158,8 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     /// </summary>
     public void StopWork(string name)
     {
-        //Debug.Log("Stop Working");
-        //_animator.SetTrigger("Walk");
+        Debug.Log("Stop Working");
+        _animator.SetTrigger("Walk");
         Waypoint wp = FindTheClosest();
         wp.GetComponent<Work>().StopAllCoroutines();
         wp.CurrentUser.Remove(name);
