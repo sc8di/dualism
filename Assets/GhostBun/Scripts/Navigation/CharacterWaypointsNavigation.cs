@@ -67,7 +67,10 @@ public class CharacterWaypointsNavigation : MonoBehaviour
             {
                 //Debug.Log("I am staying");
                 //_wpNavigation.goToMove();
-                GoToRandomPoint();
+                if (gameObject.tag == "Player")
+                    goToMove();
+                else 
+                    GoToRandomPoint();
                 _wanderTimer = 0f;
             }
         }
