@@ -109,8 +109,6 @@ public class UI : MonoBehaviour
 
     private void OnLevelComplete()
     {
-        _endWords.SetActive(true);
-        SetTimeScale(0);
     }
 
     private void OnLevelFailed()
@@ -139,6 +137,7 @@ public class UI : MonoBehaviour
 
     private void OnGameComplete()
     {
-        // Отображение надписи о завершении игры.
+        _endWords.SetActive(true);
+        SetTimeScale(0);
     }
 }

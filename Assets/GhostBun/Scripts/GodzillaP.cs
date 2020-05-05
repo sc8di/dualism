@@ -18,7 +18,11 @@ public class GodzillaP : MonoBehaviour
 
     private void PushByStep()
     {
-        
         allrb.AddForceToAll(transform.up + Random.onUnitSphere * force, forceMode);
+    }
+
+    private void DisableMe()
+    {
+        gameObject.SetActive(false);
     }
 }
