@@ -112,6 +112,7 @@ public class Work : MonoBehaviour
 
         if (name == "Player")
             ChangeNeed(); //Изменение потребности после оконачания анимации.
+        yield return new WaitForEndOfFrame();
         _wpNavigation.GoToRandomPoint();
     }
 
