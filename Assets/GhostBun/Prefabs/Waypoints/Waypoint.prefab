@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f331e08cd8902b546a13d457580e8e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentUser: []
+  WeightOfWaypoint: 0
+  gesture: {fileID: 7187059500878637082}
 --- !u!54 &1881248347908516783
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -78,6 +81,7 @@ MonoBehaviour:
   chooseTag: 0
   Animation: 3
   turnOffTrigerTime: 10
+  gesture: {fileID: 7187059500878637082}
   animLength: {fileID: 0}
   changeNeedAmount: 0
   needID: 0

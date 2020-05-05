@@ -9,8 +9,14 @@ public class Waypoint : MonoBehaviour
     public List<string> CurrentUser;
 
     [SerializeField] [Range(0, 10)] int WeightOfWaypoint;
+    [SerializeField] ParticleSystem gesture;
 
+    private bool isMoved = false;
 
+    private void Start()
+    {
+        StartCoroutine(CheckAvailability());
+    }
     //private void Update()
     //{
     //    Debug.Log($"Waypoint: {gameObject.name} // // is Available: {isAvailable} // // ");
@@ -26,6 +32,12 @@ public class Waypoint : MonoBehaviour
         isAvailable = availability;
     }
 
+    public void SetAvailability(bool availability, bool moved)
+    {
+        isAvailable = availability;
+        isMoved = moved;
+    }
+
     public int GetWaeightOfWaypoint()
     {
         return WeightOfWaypoint;
@@ -34,6 +46,26 @@ public class Waypoint : MonoBehaviour
     public Vector3 GetPosition()
     {
         return transform.position;
+    }
+
+    private IEnumerator CheckAvailability()
+    {
+        while (true)
+        {
+            if (isMoved)
+            {
+                GetComponent<BoxCollider>().enabled = false;
+                gesture.Stop();
+            }
+                
+            else if (!isMoved && !gesture.isPlaying)
+            {
+                gesture.Play();
+                GetComponent<BoxCollider>().enabled = true;
+            }
+
+            yield return new WaitForSeconds(1);
+        }
     }
 
 }
