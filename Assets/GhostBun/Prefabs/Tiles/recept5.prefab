@@ -124,6 +124,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SO_Floor_02
       objectReference: {fileID: 0}
+    - target: {fileID: 2618014047416336623, guid: 3d269699e9a95ee49bb83301b89a0510,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 3438672277375332820, guid: 3d269699e9a95ee49bb83301b89a0510,
         type: 3}
       propertyPath: m_LocalPosition.x

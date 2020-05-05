@@ -1088,6 +1088,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor_Carpet_Grey
       objectReference: {fileID: 0}
+    - target: {fileID: 2611798964416833285, guid: f4a1eca76470130438fa85bb64965789,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4a1eca76470130438fa85bb64965789, type: 3}
 --- !u!4 &8737581498662250202 stripped

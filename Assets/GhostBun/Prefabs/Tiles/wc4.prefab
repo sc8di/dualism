@@ -179,6 +179,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SO_Floor_01
       objectReference: {fileID: 0}
+    - target: {fileID: 2925429671400065013, guid: 1cf6fa659041dc241a26777032c52ea8,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cf6fa659041dc241a26777032c52ea8, type: 3}
 --- !u!4 &2113118507156567923 stripped
@@ -198,6 +203,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SO_Sinks
+      objectReference: {fileID: 0}
+    - target: {fileID: 487818235013107903, guid: 28d021d78d2670f4688ec54316b25a4d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5381768813841626501, guid: 28d021d78d2670f4688ec54316b25a4d,
         type: 3}
