@@ -33,7 +33,7 @@ public class MissionManager : MonoBehaviour, IGameManager
         if (_currentLevel < _maxLevel)
         {
             _currentLevel++;
-            SceneManager.LoadScene(_currentLevel);
+            SceneManager.LoadScene(_currentLevel, LoadSceneMode.Single);
             CurrentScene = SceneManager.GetSceneByBuildIndex(_currentLevel).name;
         }
         else
@@ -50,6 +50,14 @@ public class MissionManager : MonoBehaviour, IGameManager
     {
         Messenger.Broadcast(GameEvent.LEVEL_COMPLETE);
     }
+    /// <summary>
+    /// Рестарт текущего уровня.
+    /// </summary>
+    public void ExitInMenu()
+    {
+        _currentLevel = 0;
+        SceneManager.LoadScene(_currentLevel, LoadSceneMode.Single);
+    }
 
     /// <summary>
     /// Рестарт текущего уровня.
@@ -57,6 +65,6 @@ public class MissionManager : MonoBehaviour, IGameManager
     public void RestartCurrentLevel()
     {
         _currentLevel = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(_currentLevel);
+        SceneManager.LoadScene(_currentLevel, LoadSceneMode.Single);
     }
 }

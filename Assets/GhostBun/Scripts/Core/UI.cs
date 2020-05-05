@@ -10,7 +10,9 @@ using Cursor = UnityEngine.Cursor;
 public class UI : MonoBehaviour
 {
     [SerializeField] private GameObject _popup;
-    [SerializeField] private TextMeshProUGUI _levelEnding;
+    [SerializeField] private GameObject _startWords;
+    [SerializeField] private GameObject _failLevelWords;
+    [SerializeField] private GameObject _endWords;
     [SerializeField] private TextMeshProUGUI _clock;
     [SerializeField] private Routine _routine;
     [SerializeField] private RadialSlider[] _slidersOfNeeds;
@@ -33,18 +35,33 @@ public class UI : MonoBehaviour
         Messenger.RemoveListener(GameEvent.LEVEL_FAILED, OnLevelFailed);
         Messenger.RemoveListener(GameEvent.GAME_COMPLETE, OnGameComplete);
     }
-    
+
     private void Start()
     {
-        _popup.SetActive(false);
-        isShowMenu = false;
-
+        Managers.Player.SetNewNeeds();
+        
         foreach (var slider in _slidersOfNeeds)
         {
             Debug.Log(slider.name);
             slider.currentValue = 100;
         }
+        
+        _popup.SetActive(false);
+        isShowMenu = false;
+
+        _startWords.SetActive(true);
+        _endWords.SetActive(false);
+
+        SetTimeScale(0);
+        _failLevelWords.SetActive(false);
     }
+
+    public void StartGame()
+    {
+        _startWords.SetActive(false);
+        SetTimeScale(1);
+    }
+
 
     private void Update()
     {
@@ -60,9 +77,14 @@ public class UI : MonoBehaviour
         _popup.gameObject.SetActive(isShowMenu);
             
         if (isShowMenu) 
-            Time.timeScale = 0;
+            SetTimeScale(0);
         else 
-            Time.timeScale = 1;
+            SetTimeScale(1);
+    }
+
+    private void SetTimeScale(int value)
+    {
+        Time.timeScale = value;
     }
 
     private void FixedUpdate()
@@ -82,21 +104,13 @@ public class UI : MonoBehaviour
     public void RestartLevel()
     {
         Managers.Mission.RestartCurrentLevel();
-        Time.timeScale = 1;
+        SetTimeScale(1);
     }
 
     private void OnLevelComplete()
     {
-        StartCoroutine(CompleteLevel());
-    }
-
-    private static IEnumerator CompleteLevel()
-    {
-        // Отображение надписи о завершении уровня.
-
-        yield return new WaitForSeconds(2);
-        
-        Managers.Mission.GoToNext();
+        _endWords.SetActive(true);
+        SetTimeScale(0);
     }
 
     private void OnLevelFailed()
@@ -104,13 +118,13 @@ public class UI : MonoBehaviour
         StartCoroutine(FailLevel());
     }
 
-    private static IEnumerator FailLevel()
+    private IEnumerator FailLevel()
     {
-        // Отображение надписи о проигрыше.
+        _failLevelWords.SetActive(true);
 
-        yield return new WaitForSeconds(2);
-        
-        // Перезапуск уровня.
+        yield return new WaitForSeconds(3);
+
+        Managers.Mission.RestartCurrentLevel();
     }
 
     public void SaveGame()

@@ -7,6 +7,7 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="AllRigidbodies.cs" t="Include" />
         <e p="Emerald AI" t="Include">
           <e p="Credit" t="Include">
             <e p="Credit.txt" t="Include" />
@@ -178,6 +179,8 @@
             <e p="DetectPlayer.cs" t="Include" />
             <e p="DetectPlayerTelekinesis.cs" t="Include" />
             <e p="GhostBun.cs" t="Include" />
+            <e p="GlobalPush.cs" t="Include" />
+            <e p="GodzillaP.cs" t="Include" />
             <e p="InputManager.cs" t="Include" />
             <e p="Navigation" t="Include">
               <e p="CharacterWaypointsNavigation.cs" t="Include" />

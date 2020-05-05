@@ -12,22 +12,26 @@ public class PlayerManager : MonoBehaviour, IGameManager
     public float NeedChanger;
     public List<Need> Needs;
 
-
     /// <summary>
     /// Инициализация менеджера.
     /// </summary>
     public void Startup()
     {
         Debug.Log($"Player manager starting...");
-        
+
+        SetNewNeeds();
+
+        Status = ManagerStatus.Started;
+    }
+
+    public void SetNewNeeds()
+    {
         Needs = new List<Need>();
 
         for (int i = 0; i < 5; i++)
         {
             Needs.Add(new Need(100f, $"need{i+1}"));
         }
-
-        Status = ManagerStatus.Started;
     }
 
     private void FixedUpdate()
@@ -66,43 +70,16 @@ public class PlayerManager : MonoBehaviour, IGameManager
     {
         foreach (var need in Needs)
         {
+            if (need.Value <= 0) break;
+            
             need.Value -= value;
             if (need.Value <= 0)
             {
                 need.Value = 0;
                 Messenger.Broadcast(GameEvent.LEVEL_FAILED);
+                break;
             }
         }
-    }
-
-    /// <summary>
-    /// Обновление данных по здоровью.
-    /// </summary>
-    /// <param name="health"></param>
-    /// <param name="maxHealth"></param>
-    public void UpdateData(int health, int maxHealth)
-    {
-    }
-    
-    /// <summary>
-    /// Изменение количества жизней.
-    /// </summary>
-    /// <param name="value"></param>
-    public void ChangeHealth(int value)
-    {
-        /*Health += value;
-        
-        if (Health > MaxHealth)
-            Health = MaxHealth;
-        else if (Health < 0)
-            Health = 0;
-        
-        if (Health == 0)
-            Messenger.Broadcast(GameEvent.LEVEL_FAILED);
-        else 
-            StartCoroutine(Respawn());
-        
-        Messenger.Broadcast(GameEvent.NEEDS_UPDATED);*/
     }
 
     public void PlayerDetected()
