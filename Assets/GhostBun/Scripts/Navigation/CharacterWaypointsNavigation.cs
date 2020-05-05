@@ -11,6 +11,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     float distanceFalloff = 0.5f;
     [SerializeField] 
     private float _timerToWander = 0.5f;
+    private int maxWeight = 0;
 
     Animator _animator;
     NavMeshAgent _navMeshAgent;
@@ -38,10 +39,17 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        //Записываем максимальный вес выподения Waypoint
+        for (int i = 0; i < wpList.Count; i++)
+        {
+            if (wpList[i].GetWaeightOfWaypoint() > maxWeight)
+                maxWeight = wpList[i].GetWaeightOfWaypoint();
+        }
+        //Старт движения
         if (wpList.Count != 0)
         {
             _targetWaypoint = GetNextRandomWaypoint();
-            _targetWaypoint.CurrentUser = gameObject.name;
+            _targetWaypoint.CurrentUser.Add(gameObject.name);
             _navMeshAgent.SetDestination(_targetWaypoint.GetPosition());
         }
         else
@@ -64,10 +72,10 @@ public class CharacterWaypointsNavigation : MonoBehaviour
             }
         }
 
-        if (Vector3.Distance(transform.position, _targetWaypoint.GetPosition()) < distanceFalloff)
-        {
-            GoToRandomPoint();
-        }
+        //if (Vector3.Distance(transform.position, _targetWaypoint.GetPosition()) < distanceFalloff)
+        //{
+        //    GoToRandomPoint();
+        //}
         _animator.SetFloat("Forward", _navMeshAgent.velocity.magnitude / _navMeshAgent.speed);
     }
     /// <summary>
@@ -77,7 +85,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     {
         //Debug.Log("Go back to the closest waipoint");
         _targetWaypoint = FindTheClosest();
-        _targetWaypoint.CurrentUser = gameObject.name;
+        _targetWaypoint.CurrentUser.Add(gameObject.name);
         _navMeshAgent.SetDestination(_targetWaypoint.GetPosition());
     }
 
@@ -86,7 +94,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
         if (!isWorking)
         {
             _targetWaypoint = GetNextRandomWaypoint();
-            _targetWaypoint.CurrentUser = gameObject.name;
+            _targetWaypoint.CurrentUser.Add(gameObject.name);
             _navMeshAgent.SetDestination(_targetWaypoint.GetPosition());
         }
     }
@@ -109,9 +117,10 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     private Waypoint GetNextRandomWaypoint()
     {
         List<Waypoint> availableWaypoints = new List<Waypoint>();
+        int weight = Random.Range(0, maxWeight);
         foreach (Waypoint wp in wpList)
         {
-            if (wp.isAvailable == true)
+            if (wp.isAvailable == true && wp.GetWaeightOfWaypoint() >= weight)
             {
                 availableWaypoints.Add(wp);
             }
@@ -147,13 +156,13 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     /// <summary>
     /// Метод останавливает анимацию работы
     /// </summary>
-    public void StopWork()
+    public void StopWork(string name)
     {
         Debug.Log("Stop Working");
         _animator.SetTrigger("Walk");
         Waypoint wp = FindTheClosest();
         wp.GetComponent<Work>().StopAllCoroutines();
-        wp.CurrentUser = string.Empty;
+        wp.CurrentUser.Remove(name);
         wp.SetAvailability(true);
         wp.GetComponent<BoxCollider>().enabled = true;
     }
