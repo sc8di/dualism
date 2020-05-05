@@ -158,8 +158,8 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     /// </summary>
     public void StopWork(string name)
     {
-        Debug.Log("Stop Working");
-        _animator.SetTrigger("Walk");
+        //Debug.Log("Stop Working");
+        //_animator.SetTrigger("Walk");
         Waypoint wp = FindTheClosest();
         wp.GetComponent<Work>().StopAllCoroutines();
         wp.CurrentUser.Remove(name);
