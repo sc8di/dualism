@@ -18,11 +18,6 @@ public class SettingsMenu : MonoBehaviour
     {
         _resolutions = Screen.resolutions;
 
-        foreach (var item in _resolutions)
-        {
-            Debug.Log(item.width);
-        }
-        
         _currentResolutionIndex = 4;
 
         ResolutionDropdown.selectedItemIndex = _currentResolutionIndex;
@@ -54,8 +49,6 @@ public class SettingsMenu : MonoBehaviour
         int height = int.Parse(ResolutionDropdown.dropdownItems[resolutionIndex].itemName.Split('x')[1]);
         
         Screen.SetResolution(width, height, Screen.fullScreen);
-        
-        Debug.Log($"{width}x{height}");
     }
 
     /// <summary>
@@ -64,6 +57,7 @@ public class SettingsMenu : MonoBehaviour
     public void OnSoundToggle()
     {
         if (Managers.Audio == null) return;
+        
         Managers.Audio.SoundMute = !Managers.Audio.SoundMute;
     }
 
@@ -74,6 +68,7 @@ public class SettingsMenu : MonoBehaviour
     public void OnSoundValue(float volume)
     {
         if (Managers.Audio == null) return;
+        
         Managers.Audio.SoundVolume = volume;
     }
     
@@ -83,6 +78,7 @@ public class SettingsMenu : MonoBehaviour
     public void OnMusicToggle()
     {
         if (Managers.Audio == null) return;
+        
         Managers.Audio.MusicMute = !Managers.Audio.MusicMute;
     }
 
@@ -93,6 +89,7 @@ public class SettingsMenu : MonoBehaviour
     public void OnMusicValue(float volume)
     {
         if (Managers.Audio == null) return;
+        
         Managers.Audio.MusicVolume = volume;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Michsky.UI.ModernUIPack;
@@ -10,7 +11,10 @@ public class UI : MonoBehaviour
 {
     [SerializeField] private GameObject _popup;
     [SerializeField] private TextMeshProUGUI _levelEnding;
+    [SerializeField] private TextMeshProUGUI _clock;
+    [SerializeField] private Routine _routine;
     [SerializeField] private RadialSlider[] _slidersOfNeeds;
+    private bool isShowMenu;
 
     private void Awake()
     {
@@ -32,7 +36,8 @@ public class UI : MonoBehaviour
     
     private void Start()
     {
-        //popup.SetActive(false);
+        _popup.SetActive(false);
+        isShowMenu = false;
 
         foreach (var slider in _slidersOfNeeds)
         {
@@ -45,10 +50,24 @@ public class UI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && _popup != null)
         {
-            _popup.gameObject.SetActive(!_popup.activeInHierarchy);
-            Cursor.visible = !Cursor.visible;
-            Cursor.lockState = Cursor.visible ? CursorLockMode.None : CursorLockMode.Locked;
+            ResumeGame();
         }
+    }
+
+    public void ResumeGame()
+    {
+        isShowMenu = !isShowMenu;
+        _popup.gameObject.SetActive(isShowMenu);
+            
+        if (isShowMenu) 
+            Time.timeScale = 0;
+        else 
+            Time.timeScale = 1;
+    }
+
+    private void FixedUpdate()
+    {
+        _clock.text = _routine.GetGameTimeInString();
     }
 
     private void OnNeedsUpdated() // OnStressUpdated.
@@ -58,6 +77,12 @@ public class UI : MonoBehaviour
             _slidersOfNeeds[i].SliderValue = Managers.Player.Needs[i].Value;
             _slidersOfNeeds[i].UpdateUI();
         }
+    }
+
+    public void RestartLevel()
+    {
+        Managers.Mission.RestartCurrentLevel();
+        Time.timeScale = 1;
     }
 
     private void OnLevelComplete()

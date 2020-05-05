@@ -56,6 +56,7 @@ public class MissionManager : MonoBehaviour, IGameManager
     /// </summary>
     public void RestartCurrentLevel()
     {
+        _currentLevel = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(_currentLevel);
     }
 }

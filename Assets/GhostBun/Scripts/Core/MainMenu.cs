@@ -5,7 +5,6 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Animator _settingsAnimations;
     [SerializeField] private SettingsMenu _settingsPopup;
-    
     private string _windowFadeIn = "Demo Window In";
     private string _windowFadeOut = "Demo Window Out";
 
@@ -23,7 +22,6 @@ public class MainMenu : MonoBehaviour
     public void ShowSettings()
     {
         _settingsPopup.RefreshDropdown();
-        
         _settingsAnimations.Play(_windowFadeIn);
     }
 
