@@ -56,6 +56,10 @@ public class Routine : MonoBehaviour
             if (currentGameMinute > 59)
             {
                 currentGameHour++;
+                if (currentGameHour > startingHour + dayLengthInMinutes)
+                {
+                    GameEnded();
+                }
                 currentGameMinute = 0;
             }
             Debug.Log(GetGameTimeInString());
@@ -63,6 +67,11 @@ public class Routine : MonoBehaviour
             CheckGameObjectsActivation();
             timeFromLastGameMinute = 0;
         }
+    }
+
+    private void GameEnded()
+    {
+        BroadcastMessage("GameComplete");
     }
 
     private void CheckWaypointsActivation()
