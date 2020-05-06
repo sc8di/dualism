@@ -59,7 +59,7 @@ public class Work : MonoBehaviour
                 _navMeshAgent = other.GetComponent<NavMeshAgent>();
                 _wpNavigation = other.GetComponent<CharacterWaypointsNavigation>();
 
-                StartWorking();
+                StartWorking(other.name);
                 // Останавливаем движение NPC до окончания анимации
                 StartCoroutine(Working(animLength.AnimationsLength[_workAnimationIndex], other.name));
                 StartCoroutine(TurnOffCollider(turnOffTrigerTime + animLength.AnimationsLength[_workAnimationIndex], other.name));
@@ -112,10 +112,11 @@ public class Work : MonoBehaviour
         _navMeshAgent.isStopped = false;
         _waypoint.CurrentUser.Remove(name);
         _wpNavigation.workParticle.SetActive(false);
-        _activeGesture[needID].SetActive(false);
         _wpNavigation.isWorking = false;
-        
-        
+        if (name == "Player")
+            _activeGesture[needID].SetActive(false);
+
+
 
 
         yield return new WaitForEndOfFrame();
@@ -143,17 +144,18 @@ public class Work : MonoBehaviour
         gesture.transform.position -= gestureMove;
 
     }
-    private void StartWorking()
+    private void StartWorking(string name)
     {
         if (!_wpNavigation.isWorking)
         {
             clicableBox.enabled = false;
             _wpNavigation.isWorking = true;
             _wpNavigation.workParticle.SetActive(true);
-            _activeGesture[needID].SetActive(true);
             _waypoint.SetAvailability(false);
             _animator.SetBool("Work", true);
             _animator.SetInteger("Index", _workAnimationIndex);
+            if (name == "Player")
+                _activeGesture[needID].SetActive(true);
         }
     }
 
