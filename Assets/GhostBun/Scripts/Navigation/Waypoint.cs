@@ -10,6 +10,7 @@ public class Waypoint : MonoBehaviour
 
     [SerializeField] [Range(0, 10)] int WeightOfWaypoint;
     [SerializeField] ParticleSystem gesture;
+    [SerializeField] BoxCollider clickBox;
 
     public bool isMoved = false;
 
@@ -55,6 +56,7 @@ public class Waypoint : MonoBehaviour
             if (isMoved)
             {
                 GetComponent<BoxCollider>().enabled = false;
+                clickBox.enabled = false;
                 gesture.Stop();
             }
                 
@@ -62,6 +64,7 @@ public class Waypoint : MonoBehaviour
             {
                 gesture.Play();
                 GetComponent<BoxCollider>().enabled = true;
+                clickBox.enabled = true;
             }
 
             yield return new WaitForSeconds(1);
