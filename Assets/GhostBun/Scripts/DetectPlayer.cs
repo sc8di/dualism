@@ -77,6 +77,8 @@ public class DetectPlayer : MonoBehaviour
 
     public void StartEmote()
     {
+         transform.LookAt(player.transform);
+         transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.y, 0));
          // Останавливаем движение NPC до окончания анимации
          StartCoroutine(WhoaThisDudeIsLevitating(waitTimer));
     }

@@ -6,6 +6,7 @@ public class PlayerManager : MonoBehaviour, IGameManager
 {
     private int _timesPlayerDetected = 0;
     private float _timerChangeNeeds;
+    [SerializeField] private int maximumDetections = 7;
     
     public ManagerStatus Status { get; private set; }
     public float Timer;
@@ -89,7 +90,11 @@ public class PlayerManager : MonoBehaviour, IGameManager
     public void PlayerDetected()
     {
         _timesPlayerDetected++;
-        Debug.Log($"Player Detected! Total detections: {_timesPlayerDetected}");
+        if (_timesPlayerDetected >= maximumDetections)
+        {
+            Messenger.Broadcast(GameEvent.LEVEL_FAILED);
+        }
+
     }
 }
 
