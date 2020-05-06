@@ -15151,6 +15151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 400
   forceMode: 5
+  shakeCameraLength: 0.3
 --- !u!4 &1269247699
 Transform:
   m_ObjectHideFlags: 0
@@ -17137,11 +17138,11 @@ MonoBehaviour:
     minutesActivation: 0
     operation: 1
   - go: {fileID: 1269247696}
-    hoursActivation: 14
-    minutesActivation: 0
+    hoursActivation: 8
+    minutesActivation: 5
     operation: 1
   - go: {fileID: 1091385989}
-    hoursActivation: 8
+    hoursActivation: 14
     minutesActivation: 5
     operation: 1
 --- !u!4 &1437276795
