@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Timer: 3
-  NeedChanger: 0.15
+  NeedChanger: 1
 --- !u!114 &2231834371757520840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,8 +195,13 @@ MonoBehaviour:
   _musicFirstSource: {fileID: 2231834372182413071}
   _musicSecondSource: {fileID: 2231834371856075497}
   _clips:
-  - {fileID: 8300000, guid: 23d4e5f22f1be834692f5ac1f76567d8, type: 3}
-  - {fileID: 8300000, guid: c5b1f688f0ca2d94fae4695e0c7e40e4, type: 3}
+  - {fileID: 8300000, guid: ee48a21d35ccc9041b50bde8402975de, type: 3}
+  - {fileID: 8300000, guid: 9c14caa91b9bc344eabb7d6724a87e11, type: 3}
+  - {fileID: 8300000, guid: a09c1da213eee504eb5aa08a591dd624, type: 3}
+  - {fileID: 8300000, guid: 5a138f599c0e81a46b1896a37b496814, type: 3}
+  - {fileID: 8300000, guid: d938114aef5af99428e13ab189df8fbb, type: 3}
+  - {fileID: 8300000, guid: b28563aaf4226dd41885b8c6de6a9c57, type: 3}
+  - {fileID: 8300000, guid: ba434b12289dcf642b88395f24cc9339, type: 3}
   crossFadeRate: 1.5
 --- !u!114 &-1250839404580665670
 MonoBehaviour:

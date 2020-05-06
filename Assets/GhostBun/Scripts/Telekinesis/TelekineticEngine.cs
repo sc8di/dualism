@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UIElements;
 using EmeraldAI;
 
@@ -15,10 +16,17 @@ public class TelekineticEngine : MonoBehaviour
     [SerializeField] private LayerMask _playerCollideOn;
     [SerializeField] private CapsuleCollider _mainCollider;
     [SerializeField] private Rigidbody _body;
+    [SerializeField] private GameObject _vfxPlayer;
+    [SerializeField] private GameObject _vfxPower;
 
     private bool _enablingPhase = false;
     private float _distanceOffset = 1f;
     private float _rotationForce = 0f;
+
+    private void Start()
+    {
+        _vfxPlayer.SetActive(false);
+    }
 
     //Во время FixedUpdate перемещаем марки к тем позициям, где они должны быть. 
     //С чилдами это не работает.
@@ -42,6 +50,9 @@ public class TelekineticEngine : MonoBehaviour
         //Рижидбади перезаписывает вращение на фазе FixedUpdate, поэтому мы как последние извращенцы делаем это в LateUpdate, чтобы RB не успел все испортить.
         if (_enablingPhase)
         {
+            if (_vfxPlayer.activeInHierarchy == false) 
+                _vfxPlayer.SetActive(true);
+            
             _mainCollider.enabled = true;
             //Пересчитываем дистанцию, которая должна быть между марками
             SetDistanceBetweenPoints(Vector3.Distance(transform.position, _player.transform.position));
@@ -84,6 +95,7 @@ public class TelekineticEngine : MonoBehaviour
     /// </summary>
     public void DisableTelekineticField()
     {
+        _vfxPlayer.SetActive(false);
         _body.angularVelocity = Vector3.zero;
         _rotationForce = 0f;
         _body.rotation = Quaternion.Euler(Vector3.zero);

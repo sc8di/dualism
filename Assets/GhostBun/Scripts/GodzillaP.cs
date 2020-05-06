@@ -5,8 +5,7 @@ using UnityEngine;
 public class GodzillaP : MonoBehaviour
 {
     [SerializeField] private ForceMode _forceMode;
-    [SerializeField] private ShakeTransform _st;
-    [SerializeField] private ShakeTransformEventData _data;
+    [SerializeField] private AudioSource _stomp;
     private AllRigidbodies _allrb;
     
     public float force = 500f;
@@ -20,6 +19,6 @@ public class GodzillaP : MonoBehaviour
     private void PushByStep()
     {
         _allrb.AddForceToAll(transform.up + Random.onUnitSphere * force, _forceMode);
-        _st.AddShakeEvent(_data);
+        _stomp.Play();
     }
 }

@@ -171,8 +171,6 @@
               <e p="Needs.cs" t="Include" />
               <e p="PowerTrip.cs" t="Include" />
               <e p="SettingsMenu.cs" t="Include" />
-              <e p="ShakeTransform.cs" t="Include" />
-              <e p="ShakeTransformEventData.cs" t="Include" />
               <e p="UI.cs" t="Include" />
               <e p="Utils" t="Include">
                 <e p="Messenger.cs" t="Include" />
