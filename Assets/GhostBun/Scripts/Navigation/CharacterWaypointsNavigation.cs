@@ -123,7 +123,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     {
         //Debug.Log("get random");
         List<Waypoint> availableWaypoints = new List<Waypoint>();
-        int weight = Random.Range(0, maxWeight);
+        int weight = Random.Range(0, maxWeight + 1);
         foreach (Waypoint wp in wpList)
         {
             if (wp.isAvailable == true && wp.GetWaeightOfWaypoint() >= weight)
@@ -133,7 +133,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
         }
         int index;
         index = Random.Range(0, availableWaypoints.Count);
-        return wpList[index];
+        return availableWaypoints[index];
     }
 
     /// <summary>

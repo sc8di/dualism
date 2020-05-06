@@ -100,7 +100,7 @@ public class Work : MonoBehaviour
     {
         gesture.transform.position += gestureMove;
 
-        yield return new WaitForSeconds(_navMeshAgent.speed / 10);
+        yield return new WaitForSeconds(_navMeshAgent.speed / 20);
 
         _animator.SetBool("Work", false);
         _navMeshAgent.isStopped = true;

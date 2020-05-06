@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
-    [SerializeField] public bool isAvailable = true;
+    [SerializeField] public bool isAvailable;
     [HideInInspector]
     public List<string> CurrentUser;
 
