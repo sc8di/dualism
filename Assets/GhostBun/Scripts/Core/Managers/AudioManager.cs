@@ -11,7 +11,6 @@ public class AudioManager : MonoBehaviour, IGameManager
     [SerializeField] private AudioSource _musicSecondSource;
     [Tooltip("Массив треков.")]
     [SerializeField] private AudioClip[] _clips;
-
     private AudioSource _firstMusic;
     private AudioSource _secondMusic;
     private bool _crossFading;
@@ -109,13 +108,16 @@ public class AudioManager : MonoBehaviour, IGameManager
         _musicSecondSource.ignoreListenerPause = true;
 
         SoundVolume = 1;
-        MusicVolume = .1f;
+        MusicVolume = .008f;
 
         if (_clips.Length != 0)
             _musicFirstSource.clip = _clips[0];
 
         _firstMusic = _musicFirstSource;
         _secondMusic = _musicSecondSource;
+        
+        _firstMusic.volume = .05f;
+        _secondMusic.volume = 0;
 
         Status = ManagerStatus.Started;
     }
