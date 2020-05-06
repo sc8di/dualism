@@ -722,7 +722,7 @@ GameObject:
   - component: {fileID: 2372802609318061035}
   - component: {fileID: 6558334211528468673}
   m_Layer: 0
-  m_Name: ManInShirt
+  m_Name: Body19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -760,12 +760,13 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f8a70f565df510543b49bf6f0fbcf670, type: 2}
-  - {fileID: 2100000, guid: 637c162f1d0b73e4d9d603b6faa27fed, type: 2}
-  - {fileID: 2100000, guid: 96e8aa6d3b4733045b39925127ae31b2, type: 2}
-  - {fileID: 2100000, guid: d7ccc49ce924fc44d8439d9b39cb5bd1, type: 2}
-  - {fileID: 2100000, guid: 1d2979b4be333804698b3ffeb2c4a396, type: 2}
-  - {fileID: 2100000, guid: 1be8d3f3bf1ee9b4691c3813e1e78305, type: 2}
+  - {fileID: 4835078630258379571, guid: e5b06d1af23f7c541a403d80310909ad, type: 3}
+  - {fileID: 9054928168843377129, guid: e5b06d1af23f7c541a403d80310909ad, type: 3}
+  - {fileID: 842930771401675478, guid: e5b06d1af23f7c541a403d80310909ad, type: 3}
+  - {fileID: -2274090305892019849, guid: e5b06d1af23f7c541a403d80310909ad, type: 3}
+  - {fileID: -4318571312361772713, guid: e5b06d1af23f7c541a403d80310909ad, type: 3}
+  - {fileID: -199717029407708612, guid: e5b06d1af23f7c541a403d80310909ad, type: 3}
+  - {fileID: 5821994970471083102, guid: e5b06d1af23f7c541a403d80310909ad, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -790,7 +791,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300000, guid: 98876376997aa1248b695fb7daa52b26, type: 2}
+  m_Mesh: {fileID: -5748816980148402019, guid: e5b06d1af23f7c541a403d80310909ad, type: 3}
   m_Bones:
   - {fileID: 891308768333863813}
   - {fileID: 4967821400418494025}

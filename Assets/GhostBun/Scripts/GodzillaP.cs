@@ -21,4 +21,9 @@ public class GodzillaP : MonoBehaviour
         _allrb.AddForceToAll(transform.up + Random.onUnitSphere * force, _forceMode);
         _stomp.Play();
     }
+
+    private void DisableMe()
+    {
+        gameObject.SetActive(false);
+    }
 }

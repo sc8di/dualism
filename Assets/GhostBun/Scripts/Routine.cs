@@ -58,7 +58,6 @@ public class Routine : MonoBehaviour
                 currentGameHour++;
                 currentGameMinute = 0;
             }
-            Debug.Log(GetGameTimeInString());
             CheckWaypointsActivation();
             CheckGameObjectsActivation();
             timeFromLastGameMinute = 0;
@@ -78,7 +77,7 @@ public class Routine : MonoBehaviour
             if (waypoints[i].hoursActivation == currentGameHour && waypoints[i].minutesActivation == currentGameMinute)
             {
                 //Операции с вейпоинтами
-                Debug.Log("WAYPOINT STATE CHANGED" + waypoints[i].wp.name);
+                waypoints[i].wp.SetAvailability(waypoints[i].operation == Operation.Enable ? true : false, waypoints[i].operation == Operation.Enable ? false : true);
                 waypoints.RemoveAt(i);
                 i--;
             }
@@ -97,7 +96,6 @@ public class Routine : MonoBehaviour
             if (gameObjects[i].hoursActivation == currentGameHour && gameObjects[i].minutesActivation == currentGameMinute)
             {
                 //Операции с вейпоинтами
-                Debug.Log("GAMEOBJECT STATE CHANGED " + gameObjects[i].go.name);
                 gameObjects[i].go.SetActive(gameObjects[i].operation == Operation.Enable ? true : false);
                 gameObjects.RemoveAt(i);
                 i--;
