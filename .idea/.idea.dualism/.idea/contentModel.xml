@@ -169,7 +169,6 @@
                 <e p="StartupController.cs" t="Include" />
                 <e p="StartupEvent.cs" t="Include" />
               </e>
-              <e p="Needs.cs" t="Include" />
               <e p="PowerTrip.cs" t="Include" />
               <e p="SettingsMenu.cs" t="Include" />
               <e p="UI.cs" t="Include" />
