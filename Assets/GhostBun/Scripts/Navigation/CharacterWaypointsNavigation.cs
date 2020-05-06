@@ -166,6 +166,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     {
         if (isWorking)
         {
+            isWorking = false;
             workParticle.SetActive(false);
             Waypoint wp = FindTheClosest();
             wp.GetComponent<Work>().StopCoroutine("Working");
