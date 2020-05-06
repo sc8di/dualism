@@ -9,7 +9,7 @@ public class Waypoint : MonoBehaviour
     public List<string> CurrentUser;
 
     [SerializeField] [Range(0, 10)] int WeightOfWaypoint;
-    [SerializeField] ParticleSystem gesture;
+    [SerializeField] GameObject gesture;
     [SerializeField] BoxCollider clickBox;
 
     public bool isMoved = false;
@@ -57,12 +57,12 @@ public class Waypoint : MonoBehaviour
             {
                 GetComponent<BoxCollider>().enabled = false;
                 clickBox.enabled = false;
-                gesture.Stop();
+                gesture.SetActive(false);
             }
                 
-            else if (!isMoved && !gesture.isPlaying)
+            else if (!isMoved)
             {
-                gesture.Play();
+                gesture.SetActive(true);
                 GetComponent<BoxCollider>().enabled = true;
                 clickBox.enabled = true;
             }

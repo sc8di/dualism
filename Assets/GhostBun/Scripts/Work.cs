@@ -98,7 +98,7 @@ public class Work : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Working(float delay, string name)
     {
-        gesture.transform.position += gestureMove;
+        gesture.SetActive(false);
 
         yield return new WaitForSeconds(_navMeshAgent.speed / 20);
 
@@ -141,7 +141,7 @@ public class Work : MonoBehaviour
         gameObject.GetComponent<BoxCollider>().enabled = true;
         _waypoint.SetAvailability(true);
         clicableBox.enabled = true;
-        gesture.transform.position -= gestureMove;
+        gesture.SetActive(true);
 
     }
     private void StartWorking(string name)
