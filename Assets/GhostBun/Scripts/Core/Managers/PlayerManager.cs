@@ -61,8 +61,12 @@ public class PlayerManager : MonoBehaviour, IGameManager
     }
 
     public void ChangeNeed(int index, float value)
-    {
-        Needs[index].Value += value;
+    { 
+        if (Needs[index].Value + value > 100f)
+            Needs[index].Value = 100;
+        else
+            Needs[index].Value += value;
+        
         Messenger.Broadcast(GameEvent.NEEDS_UPDATED);
     }
 

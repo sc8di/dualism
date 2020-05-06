@@ -150,7 +150,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
 
             float dist = Vector3.Distance(wpList[i].transform.position, transform.position);
 
-            if (dist < lowestDist && wpList[i].isAvailable)
+            if (dist < lowestDist)
             {
                 lowestDist = dist;
                 _closestWp = wpList[i];

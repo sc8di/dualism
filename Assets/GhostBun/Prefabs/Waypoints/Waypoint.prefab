@@ -56,6 +56,7 @@ MonoBehaviour:
   CurrentUser: []
   WeightOfWaypoint: 0
   gesture: {fileID: 7187059500878637082}
+  clickBox: {fileID: 8928318926009072458}
   isMoved: 0
 --- !u!54 &1881248347908516783
 Rigidbody:
