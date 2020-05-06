@@ -14,6 +14,9 @@ public class DetectPlayer : MonoBehaviour
     [SerializeField]
     float autoDetectDistance = 1f;
 
+    [SerializeField]
+    GameObject gesture;
+
     PlayerManager pm;
     [SerializeField]
     float viewAngle = 15f;
@@ -40,6 +43,7 @@ public class DetectPlayer : MonoBehaviour
 
     private void Start()
     {
+        gesture.SetActive(false);
         pm = FindObjectOfType<PlayerManager>();
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
@@ -85,11 +89,13 @@ public class DetectPlayer : MonoBehaviour
     /// <returns></returns>
     private IEnumerator WhoaThisDudeIsLevitating(float delay)
     {
+        gesture.SetActive(true);
         //Надо сделать связь с CharacterWaypointsNavigation. Останавливать персонажа нужно через него.
         navMeshAgent.isStopped = true;
-        //Сюда вставляется анимация возмущения
+        //Сюда вставляется анимация возмущения??
         yield return new WaitForSeconds(delay);
         navMeshAgent.isStopped = false;
+        gesture.SetActive(false);
         lookForPlayer = true;
     }
 }
