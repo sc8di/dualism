@@ -32,7 +32,7 @@ public class Work : MonoBehaviour
     private Waypoint _waypoint;
 
     [SerializeField] GameObject gesture;
-    [SerializeField] GameObject _activeGesture;
+    [SerializeField] GameObject[] _activeGesture;
     [SerializeField] BoxCollider clicableBox;
     [SerializeField] AnimationsArray animLength;
     [SerializeField] float changeNeedAmount;
@@ -112,7 +112,7 @@ public class Work : MonoBehaviour
         _navMeshAgent.isStopped = false;
         _waypoint.CurrentUser.Remove(name);
         _wpNavigation.workParticle.SetActive(false);
-        _activeGesture.SetActive(false);
+        _activeGesture[needID].SetActive(false);
         _wpNavigation.isWorking = false;
         
         
@@ -150,7 +150,7 @@ public class Work : MonoBehaviour
             clicableBox.enabled = false;
             _wpNavigation.isWorking = true;
             _wpNavigation.workParticle.SetActive(true);
-            _activeGesture.SetActive(true);
+            _activeGesture[needID].SetActive(true);
             _waypoint.SetAvailability(false);
             _animator.SetBool("Work", true);
             _animator.SetInteger("Index", _workAnimationIndex);
@@ -159,7 +159,7 @@ public class Work : MonoBehaviour
 
     public void StopParticle()
     {
-        _activeGesture.SetActive(false);
+        _activeGesture[needID].SetActive(false);
         //gesture.transform.position -= gestureMove;
     }
     private void SetAnimationClip()
