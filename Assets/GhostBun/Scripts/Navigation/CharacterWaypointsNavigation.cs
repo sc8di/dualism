@@ -11,7 +11,9 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     float distanceFalloff = 0.5f;
     [SerializeField] 
     private float _timerToWander = 0.5f;
-    private int maxWeight = 0;
+    [SerializeField]
+    public GameObject workParticle;
+
 
     Animator _animator;
     NavMeshAgent _navMeshAgent;
@@ -19,21 +21,22 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     Waypoint _closestWp;
 
     private float _wanderTimer = 0;
+    private int maxWeight = 0;
 
     public bool isWorking { get; set; } = false;
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue;
-        if (wpList.Count > 1)
-        {
-            for (int i = 1; i < wpList.Count; i++)
-            {
-                Gizmos.DrawLine(wpList[i].GetPosition(), wpList[i - 1].GetPosition());
-            }
-            Gizmos.DrawLine(wpList[0].GetPosition(), wpList[wpList.Count - 1].GetPosition());
-        }
-    }
+    //private void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.blue;
+    //    if (wpList.Count > 1)
+    //    {
+    //        for (int i = 1; i < wpList.Count; i++)
+    //        {
+    //            Gizmos.DrawLine(wpList[i].GetPosition(), wpList[i - 1].GetPosition());
+    //        }
+    //        Gizmos.DrawLine(wpList[0].GetPosition(), wpList[wpList.Count - 1].GetPosition());
+    //    }
+    //}
 
     private void Start()
     {
@@ -53,19 +56,18 @@ public class CharacterWaypointsNavigation : MonoBehaviour
             _navMeshAgent.SetDestination(_targetWaypoint.GetPosition());
         }
         else
-            Debug.Log("List of waypoints is empty");
+            Debug.LogError("List of waypoints is empty");
 
     }
-
     private void FixedUpdate()
     {
         //Запускаем движение по waypoints после достижения точки заданной игроком
         if ( _navMeshAgent.velocity == Vector3.zero && !isWorking)
         {
-            _wanderTimer += Time.deltaTime;
-            if (_wanderTimer > _timerToWander)// я не согласен что контролировать два таймера одной переменной хорошая идея
+            _wanderTimer += Time.fixedDeltaTime;
+            if (_wanderTimer > _timerToWander)
             {
-                //Debug.Log("I am staying");
+                Debug.Log("I am staying");
                 //_wpNavigation.goToMove();
                 if (gameObject.tag == "Player")
                     goToMove();
@@ -119,6 +121,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     /// <returns>Возвращает Waypoint object</returns>
     private Waypoint GetNextRandomWaypoint()
     {
+        Debug.Log("get random");
         List<Waypoint> availableWaypoints = new List<Waypoint>();
         int weight = Random.Range(0, maxWeight);
         foreach (Waypoint wp in wpList)
@@ -143,7 +146,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
 
         for (int i = 0; i < wpList.Count; i++)
         {
-            //Debug.Log("get closest, How many times is it calls?");
+            Debug.Log("get closest, How many times is it calls?");
 
             float dist = Vector3.Distance(wpList[i].transform.position, transform.position);
 
@@ -169,7 +172,5 @@ public class CharacterWaypointsNavigation : MonoBehaviour
         wp.SetAvailability(true);
         wp.GetComponent<BoxCollider>().enabled = true;
     }
-
-    
 }
 

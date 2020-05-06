@@ -32,12 +32,14 @@ public class Work : MonoBehaviour
     private Waypoint _waypoint;
     private PlayerManager pm;
 
-    [SerializeField] ParticleSystem gesture;
+    [SerializeField] GameObject gesture;
+    [SerializeField] GameObject _activeGesture;
     [SerializeField] AnimationsArray animLength;
     [SerializeField] float changeNeedAmount;
     [SerializeField] [Range(0, 4)] int needID;
 
     private int _workAnimationIndex;
+    private float _timer;
 
     private void Start()
     {
@@ -58,9 +60,12 @@ public class Work : MonoBehaviour
                 _navMeshAgent = other.GetComponent<NavMeshAgent>();
                 _wpNavigation = other.GetComponent<CharacterWaypointsNavigation>();
 
+                StartWorking();
                 // Останавливаем движение NPC до окончания анимации
                 StartCoroutine(Working(animLength.AnimationsLength[_workAnimationIndex], other.tag));
                 StartCoroutine(TurnOffCollider(turnOffTrigerTime + animLength.AnimationsLength[_workAnimationIndex], other.tag));
+                //StartCoroutine(TurnOffParticle(animLength.AnimationsLength[_workAnimationIndex]));
+                
             }
         }
         else
@@ -77,13 +82,14 @@ public class Work : MonoBehaviour
                 // Останавливаем движение NPC до окончания анимации
                 StartCoroutine(Working(animLength.AnimationsLength[_workAnimationIndex], other.tag));
                 StartCoroutine(TurnOffCollider(turnOffTrigerTime + animLength.AnimationsLength[_workAnimationIndex], other.tag));
+                //StartCoroutine(TurnOffParticle(animLength.AnimationsLength[_workAnimationIndex]));
             }
         }
     }
 
     private void ChangeNeed()
     {
-        //pm.ChangeNeed(needID, changeNeedAmount);
+        pm.ChangeNeed(needID, changeNeedAmount);
     }
 
     /// <summary>
@@ -93,27 +99,33 @@ public class Work : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Working(float delay, string name)
     {
-        _wpNavigation.isWorking = true;
-        _waypoint.SetAvailability(false);
         gesture.transform.position += gestureMove;
 
         yield return new WaitForSeconds(_navMeshAgent.speed / 10);
 
+        _animator.SetBool("Work", false);
         _navMeshAgent.isStopped = true;
-        _animator.SetTrigger("Work");
-        _animator.SetInteger("Index", _workAnimationIndex);
         
 
         yield return new WaitForSeconds(delay);
 
+        _animator.SetBool("Work", false);
+        _animator.SetTrigger("Walk");
         _navMeshAgent.isStopped = false;
         _wpNavigation.isWorking = false;
+        _waypoint.CurrentUser.Remove(name);
+        _wpNavigation.workParticle.SetActive(false);
+        _activeGesture.SetActive(false);
         gesture.transform.position -= gestureMove;
+        
 
-        if (name == "Player")
-            ChangeNeed(); //Изменение потребности после оконачания анимации.
+
         yield return new WaitForEndOfFrame();
-        _wpNavigation.GoToRandomPoint();
+        //Изменение потребности после оконачания анимации.
+        if (name == "Player")
+            ChangeNeed();
+        //_wpNavigation.GoToRandomPoint();
+        Debug.Log("Go after work");
     }
 
     /// <summary>
@@ -129,9 +141,20 @@ public class Work : MonoBehaviour
 
         gameObject.GetComponent<BoxCollider>().enabled = true;
         _waypoint.SetAvailability(true);
-        _waypoint.CurrentUser.Remove(name);
-    }
 
+    }
+    private void StartWorking()
+    {
+        if (!_wpNavigation.isWorking)
+        {
+            _wpNavigation.isWorking = true;
+            _wpNavigation.workParticle.SetActive(true);
+            _activeGesture.SetActive(true);
+            _waypoint.SetAvailability(false);
+            _animator.SetBool("Work", true);
+            _animator.SetInteger("Index", _workAnimationIndex);
+        }
+    }
     private void SetAnimationClip()
     {
         switch (Animation)
