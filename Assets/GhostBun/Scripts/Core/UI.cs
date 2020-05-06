@@ -16,7 +16,8 @@ public class UI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _clock;
     [SerializeField] private Routine _routine;
     [SerializeField] private RadialSlider[] _slidersOfNeeds;
-    private bool isShowMenu;
+    
+    public bool isShowMenu;
 
     private void Awake()
     {
