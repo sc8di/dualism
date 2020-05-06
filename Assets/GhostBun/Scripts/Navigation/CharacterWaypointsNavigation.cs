@@ -77,10 +77,10 @@ public class CharacterWaypointsNavigation : MonoBehaviour
             }
         }
 
-        //if (Vector3.Distance(transform.position, _targetWaypoint.GetPosition()) < distanceFalloff)
-        //{
-        //    GoToRandomPoint();
-        //}
+        if (Vector3.Distance(transform.position, _targetWaypoint.GetPosition()) < distanceFalloff && !isWorking)
+        {
+            GoToRandomPoint();
+        }
         _animator.SetFloat("Forward", _navMeshAgent.velocity.magnitude / _navMeshAgent.speed);
     }
     /// <summary>
