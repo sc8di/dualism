@@ -67,6 +67,7 @@ public class InputManager : MonoBehaviour
                 //_wpNavigation.goToMove();
                 _wpNavigation.GoToRandomPoint();
                 //Выключаеманимацию телекинеза
+                _animator.ResetTrigger("Telekinetic");
                 _animator.SetTrigger("Walk");
                 //Включаем персонажу мозг.
                 _navMeshAgent.isStopped = false;
@@ -96,6 +97,7 @@ public class InputManager : MonoBehaviour
                         _wpNavigation.StopWork(_player.name);
                         //Включаем анимацию телекинеза
                         //Debug.Log("Start animation telekinetic");
+                        _animator.ResetTrigger("Walk");
                         _animator.SetTrigger("Telekinetic");
                     }
                 }
