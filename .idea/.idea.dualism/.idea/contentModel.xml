@@ -150,6 +150,7 @@
           <e p="Scripts" t="Include">
             <e p="AlwaysLookAtCamera.cs" t="Include" />
             <e p="AnimationsArray.cs" t="Include" />
+            <e p="CheckClick.cs" t="Include" />
             <e p="Core" t="Include">
               <e p="MainMenu.cs" t="Include" />
               <e p="Managers" t="Include">

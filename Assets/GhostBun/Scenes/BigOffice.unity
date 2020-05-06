@@ -20079,6 +20079,10 @@ MonoBehaviour:
   _walkOn:
     serializedVersion: 2
     m_Bits: 512
+  goTo:
+    serializedVersion: 2
+    m_Bits: 0
+  ui: {fileID: 0}
   _timerToGo: 0.2
 --- !u!4 &1787959894
 Transform:
