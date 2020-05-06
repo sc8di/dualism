@@ -500,7 +500,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh139354
+  m_Name: pb_Mesh23288
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -663,6 +663,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 254150911}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &32607848 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 1657413217}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f331e08cd8902b546a13d457580e8e9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &56509652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2382,7 +2394,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.06666667
+  m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: 488707dba229e6f45a8a9b5cc8488b28, type: 2}
 --- !u!4 &202021375
@@ -2741,7 +2753,7 @@ PrefabInstance:
     - target: {fileID: 7315046856609235652, guid: e921daafb9db09f4d860725efea03c04,
         type: 3}
       propertyPath: wpList.Array.size
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7315046856609235652, guid: e921daafb9db09f4d860725efea03c04,
         type: 3}
@@ -2798,6 +2810,16 @@ PrefabInstance:
       propertyPath: workParticle
       value: 
       objectReference: {fileID: 254150912}
+    - target: {fileID: 7315046856609235652, guid: e921daafb9db09f4d860725efea03c04,
+        type: 3}
+      propertyPath: wpList.Array.data[10]
+      value: 
+      objectReference: {fileID: 869953697}
+    - target: {fileID: 7315046856609235652, guid: e921daafb9db09f4d860725efea03c04,
+        type: 3}
+      propertyPath: wpList.Array.data[11]
+      value: 
+      objectReference: {fileID: 32607848}
     - target: {fileID: 7315046856609235659, guid: e921daafb9db09f4d860725efea03c04,
         type: 3}
       propertyPath: player
@@ -4973,7 +4995,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionMarker: {fileID: 0}
   positionableObject: {fileID: 494591320}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
@@ -5044,7 +5065,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionMarker: {fileID: 0}
   positionableObject: {fileID: 720803303}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
@@ -6016,7 +6036,7 @@ PrefabInstance:
     - target: {fileID: 8261090838339993458, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
       propertyPath: changeNeedAmount
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8261090838339993458, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
@@ -20218,7 +20238,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh138970
+  m_Name: pb_Mesh22876
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20375,6 +20395,18 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &869953697 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 185073512736943432, guid: 3dc55cae8434e114bbabc2470f96c1ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 942086012}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f331e08cd8902b546a13d457580e8e9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &883005366
 GameObject:
   m_ObjectHideFlags: 0
@@ -20541,7 +20573,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh139554
+  m_Name: pb_Mesh23504
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21945,7 +21977,7 @@ PrefabInstance:
     - target: {fileID: 4716727636880248635, guid: 247154258ffa35d49b56230b0f179a2b,
         type: 3}
       propertyPath: wpList.Array.size
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4716727636880248635, guid: 247154258ffa35d49b56230b0f179a2b,
         type: 3}
@@ -22007,6 +22039,11 @@ PrefabInstance:
       propertyPath: workParticle
       value: 
       objectReference: {fileID: 953899144}
+    - target: {fileID: 4716727636880248635, guid: 247154258ffa35d49b56230b0f179a2b,
+        type: 3}
+      propertyPath: wpList.Array.data[11]
+      value: 
+      objectReference: {fileID: 869953697}
     - target: {fileID: 4716727636880248636, guid: 247154258ffa35d49b56230b0f179a2b,
         type: 3}
       propertyPath: player
@@ -22037,7 +22074,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh138880
+  m_Name: pb_Mesh22786
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -30058,7 +30095,7 @@ PrefabInstance:
     - target: {fileID: 5326461488514228700, guid: 161948661b22d58448dc5c49ee9df3fc,
         type: 3}
       propertyPath: wpList.Array.size
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5326461488514228700, guid: 161948661b22d58448dc5c49ee9df3fc,
         type: 3}
@@ -30120,6 +30157,11 @@ PrefabInstance:
       propertyPath: workParticle
       value: 
       objectReference: {fileID: 1243097436}
+    - target: {fileID: 5326461488514228700, guid: 161948661b22d58448dc5c49ee9df3fc,
+        type: 3}
+      propertyPath: wpList.Array.data[11]
+      value: 
+      objectReference: {fileID: 32607848}
     - target: {fileID: 5326461488514228701, guid: 161948661b22d58448dc5c49ee9df3fc,
         type: 3}
       propertyPath: player
@@ -30979,7 +31021,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionMarker: {fileID: 0}
   positionableObject: {fileID: 272200743}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
@@ -31766,7 +31807,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionMarker: {fileID: 0}
   positionableObject: {fileID: 667878654}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
@@ -32523,6 +32563,22 @@ MonoBehaviour:
     hoursActivation: 16
     minutesActivation: 40
     operation: 0
+  - wp: {fileID: 869953697}
+    hoursActivation: 11
+    minutesActivation: 30
+    operation: 1
+  - wp: {fileID: 32607848}
+    hoursActivation: 14
+    minutesActivation: 30
+    operation: 1
+  - wp: {fileID: 869953697}
+    hoursActivation: 12
+    minutesActivation: 0
+    operation: 0
+  - wp: {fileID: 32607848}
+    hoursActivation: 15
+    minutesActivation: 0
+    operation: 0
   gameObjects:
   - go: {fileID: 1091385989}
     hoursActivation: 14
@@ -32864,7 +32920,7 @@ PrefabInstance:
     - target: {fileID: 8261090838339993458, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
       propertyPath: Animation
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8261090838339993458, guid: 3dc55cae8434e114bbabc2470f96c1ac,
         type: 3}
@@ -35483,7 +35539,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionMarker: {fileID: 0}
   positionableObject: {fileID: 1880254831}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
@@ -44173,7 +44228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionMarker: {fileID: 0}
   positionableObject: {fileID: 293652652}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
@@ -44854,7 +44908,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionMarker: {fileID: 0}
   positionableObject: {fileID: 963247212}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
@@ -45073,7 +45126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionMarker: {fileID: 0}
   positionableObject: {fileID: 1476310587}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
@@ -45229,6 +45281,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 120880313589753224, guid: 09f2aa3eacc524f4993e58620e9913d3,
         type: 3}
+      propertyPath: wpList.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 120880313589753224, guid: 09f2aa3eacc524f4993e58620e9913d3,
+        type: 3}
       propertyPath: wpList.Array.data[0]
       value: 
       objectReference: {fileID: 1906561374}
@@ -45287,6 +45344,11 @@ PrefabInstance:
       propertyPath: workParticle
       value: 
       objectReference: {fileID: 120880312813315809}
+    - target: {fileID: 120880313589753224, guid: 09f2aa3eacc524f4993e58620e9913d3,
+        type: 3}
+      propertyPath: wpList.Array.data[11]
+      value: 
+      objectReference: {fileID: 869953697}
     - target: {fileID: 120880313589753225, guid: 09f2aa3eacc524f4993e58620e9913d3,
         type: 3}
       propertyPath: player
@@ -46457,6 +46519,8 @@ MonoBehaviour:
   - {fileID: 1789953364}
   - {fileID: 56509654}
   - {fileID: 507918992}
+  - {fileID: 869953697}
+  - {fileID: 32607848}
   distanceFalloff: 1
   _timerToWander: 0.5
   workParticle: {fileID: 1493528283}
