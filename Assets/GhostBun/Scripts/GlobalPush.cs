@@ -5,6 +5,7 @@ using Cinemachine;
 
 public class GlobalPush : MonoBehaviour
 {
+    [SerializeField] private AudioSource _shake;
     public float force = 500f;
     [SerializeField]
     ForceMode forceMode;
@@ -36,7 +37,6 @@ public class GlobalPush : MonoBehaviour
         if (!atstart)
         {
             StartCoroutine(ShakeCamera(shakeCameraLength));
-            allrb.AddForceToAll(transform.forward * force, forceMode);
         }
     }
 
@@ -47,6 +47,8 @@ public class GlobalPush : MonoBehaviour
 
     private IEnumerator ShakeCamera(float seconds)
     {
+        _shake.Play();
+        allrb.AddForceToAll(transform.forward * force, forceMode);
         noise.m_AmplitudeGain = 3;
         yield return new WaitForSeconds(seconds);
         noise.m_AmplitudeGain = 0;
