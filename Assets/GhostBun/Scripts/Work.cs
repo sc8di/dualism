@@ -114,7 +114,7 @@ public class Work : MonoBehaviour
         _wpNavigation.workParticle.SetActive(false);
         _activeGesture.SetActive(false);
         _wpNavigation.isWorking = false;
-        gesture.transform.position -= gestureMove;
+        
         
 
 
@@ -140,6 +140,7 @@ public class Work : MonoBehaviour
         gameObject.GetComponent<BoxCollider>().enabled = true;
         _waypoint.SetAvailability(true);
         clicableBox.enabled = true;
+        gesture.transform.position -= gestureMove;
 
     }
     private void StartWorking()
