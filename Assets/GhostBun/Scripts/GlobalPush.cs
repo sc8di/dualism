@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class GlobalPush : MonoBehaviour
 {
     public float force = 500f;
     [SerializeField]
     ForceMode forceMode;
+    [SerializeField] private float shakeCameraLength = 0.3f;
+
+    CinemachineBasicMultiChannelPerlin noise;
 
     AllRigidbodies allrb;
     bool atstart = true;
@@ -22,6 +26,7 @@ public class GlobalPush : MonoBehaviour
 
     private void Start()
     {
+        noise = FindObjectOfType<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         allrb = FindObjectOfType<AllRigidbodies>();
         gameObject.SetActive(false);
     }
@@ -30,13 +35,21 @@ public class GlobalPush : MonoBehaviour
     {
         if (!atstart)
         {
+            StartCoroutine(ShakeCamera(shakeCameraLength));
             allrb.AddForceToAll(transform.forward * force, forceMode);
-            gameObject.SetActive(false);
         }
     }
 
     private void OnDisable()
     {
         atstart = false;
+    }
+
+    private IEnumerator ShakeCamera(float seconds)
+    {
+        noise.m_AmplitudeGain = 3;
+        yield return new WaitForSeconds(seconds);
+        noise.m_AmplitudeGain = 0;
+        gameObject.SetActive(false);
     }
 }
