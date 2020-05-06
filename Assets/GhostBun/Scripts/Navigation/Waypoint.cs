@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
-    [SerializeField] public bool isAvailable { get; protected set; } = true;
+    [SerializeField] public bool isAvailable = true;
     [HideInInspector]
     public List<string> CurrentUser;
 
     [SerializeField] [Range(0, 10)] int WeightOfWaypoint;
     [SerializeField] ParticleSystem gesture;
 
-    private bool isMoved = false;
+    public bool isMoved = false;
 
     private void Start()
     {
