@@ -9,7 +9,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
 
     [SerializeField]
     float distanceFalloff = 0.5f;
-    [SerializeField] 
+    [SerializeField]
     private float _timerToWander = 0.5f;
     [SerializeField]
     public GameObject workParticle;
@@ -62,17 +62,17 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     private void FixedUpdate()
     {
         //Запускаем движение по waypoints после достижения точки заданной игроком
-        if ( _navMeshAgent.velocity == Vector3.zero && !isWorking)
+        if (_navMeshAgent.velocity == Vector3.zero && !isWorking)
         {
             _wanderTimer += Time.fixedDeltaTime;
             if (_wanderTimer > _timerToWander)
             {
-                Debug.Log("I am staying");
+                //Debug.Log("I am staying");
                 //_wpNavigation.goToMove();
-                if (gameObject.tag == "Player")
-                    goToMove();
-                else 
-                    GoToRandomPoint();
+                //if (gameObject.tag == "Player")
+                //    goToMove();
+                //else 
+                GoToRandomPoint();
                 _wanderTimer = 0f;
             }
         }
@@ -121,7 +121,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     /// <returns>Возвращает Waypoint object</returns>
     private Waypoint GetNextRandomWaypoint()
     {
-        Debug.Log("get random");
+        //Debug.Log("get random");
         List<Waypoint> availableWaypoints = new List<Waypoint>();
         int weight = Random.Range(0, maxWeight);
         foreach (Waypoint wp in wpList)
@@ -146,7 +146,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
 
         for (int i = 0; i < wpList.Count; i++)
         {
-            Debug.Log("get closest, How many times is it calls?");
+            //Debug.Log("get closest, How many times is it calls?");
 
             float dist = Vector3.Distance(wpList[i].transform.position, transform.position);
 
@@ -164,13 +164,17 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     /// </summary>
     public void StopWork(string name)
     {
+        if (isWorking)
+        {
+            workParticle.SetActive(false);
+            Waypoint wp = FindTheClosest();
+            wp.GetComponent<Work>().StopCoroutine("Working");
+            wp.GetComponent<Work>().StopParticle();
+            wp.CurrentUser.Remove(name);
+        }
         //Debug.Log("Stop Working");
         //_animator.SetTrigger("Walk");
-        Waypoint wp = FindTheClosest();
-        wp.GetComponent<Work>().StopAllCoroutines();
-        wp.CurrentUser.Remove(name);
-        wp.SetAvailability(true);
-        wp.GetComponent<BoxCollider>().enabled = true;
+
     }
 }
 

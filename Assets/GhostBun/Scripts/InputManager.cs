@@ -9,6 +9,8 @@ public class InputManager : MonoBehaviour
     [SerializeField] private float _rotateSpeed = 50f;
     [SerializeField] private GameObject _player;
     [SerializeField] private LayerMask _walkOn;
+    [SerializeField] private LayerMask goTo;
+    [SerializeField] private UI ui;
     [SerializeField] private float _timerToGo = .1f;
 
     private TelekineticEngine _telekineticEngine;
@@ -27,20 +29,31 @@ public class InputManager : MonoBehaviour
     
     private void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        //Debug.Log("UI: " + ui.IsShowUI);
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !ui.IsShowUI)
         {
             _touchTimer = 0;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, 100, goTo) )
+            {
+                if (hit.collider.GetComponent<CheckClick>())
+                {
+                    _navMeshAgent.SetDestination(hit.collider.GetComponent<CheckClick>().parent.position);
+                    hit.collider.GetComponent<CheckClick>().waypoint.CurrentUser.Add(_player.name);
+                    if(!_wpNavigation.isWorking)
+                        hit.collider.GetComponent<CheckClick>().Check();
+                }
+            }
         }
         
 
-        if (Input.GetKeyUp(KeyCode.Mouse0))
+        if (Input.GetKeyUp(KeyCode.Mouse0) && !ui.IsShowUI)
         {
             if (_touchTimer < _timerToGo)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out RaycastHit hit, 100, _walkOn))
+                if (Physics.Raycast(ray, out RaycastHit hit, 100, _walkOn) )
                 {
                     _navMeshAgent.SetDestination(hit.point);
                     //_wpNavigation.StopWork(_player.name);
@@ -61,7 +74,7 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && !ui.IsShowUI)
         {            
             if (_touchTimer < _timerToGo)       //Когда ждем на левую почку крысы     
                 _touchTimer += Time.deltaTime;  //Запускаем таймер.

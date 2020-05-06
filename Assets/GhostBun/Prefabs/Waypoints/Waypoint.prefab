@@ -85,6 +85,7 @@ MonoBehaviour:
   gestureMove: {x: -0.5, y: 1, z: -0.5}
   gesture: {fileID: 1659079279885710160}
   _activeGesture: {fileID: 3097916393238791524}
+  clicableBox: {fileID: 8928318926009072458}
   animLength: {fileID: 0}
   changeNeedAmount: 0
   needID: 0
@@ -110,7 +111,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 357338011850916092}
-  m_Layer: 0
+  - component: {fileID: 8928318926009072458}
+  - component: {fileID: 5329226154224837877}
+  m_Layer: 17
   m_Name: GestureObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,6 +135,33 @@ Transform:
   m_Father: {fileID: 185073512736943433}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8928318926009072458
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659079279885710160}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.9935246, z: 1}
+  m_Center: {x: 0, y: 1.4445755, z: 0}
+--- !u!114 &5329226154224837877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659079279885710160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403f2742596e89f4d95fd6f1f43484e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoint: {fileID: 185073512736943432}
+  parent: {fileID: 185073512736943433}
 --- !u!1 &3097916393238791524
 GameObject:
   m_ObjectHideFlags: 0
