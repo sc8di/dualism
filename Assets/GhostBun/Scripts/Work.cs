@@ -30,7 +30,6 @@ public class Work : MonoBehaviour
     private NavMeshAgent _navMeshAgent;
     private CharacterWaypointsNavigation _wpNavigation;
     private Waypoint _waypoint;
-    private PlayerManager pm;
 
     [SerializeField] GameObject gesture;
     [SerializeField] GameObject _activeGesture;
@@ -44,7 +43,6 @@ public class Work : MonoBehaviour
 
     private void Start()
     {
-        pm = FindObjectOfType<PlayerManager>();
         SetAnimationClip();
         _waypoint = GetComponent<Waypoint>();
     }
@@ -90,7 +88,7 @@ public class Work : MonoBehaviour
 
     private void ChangeNeed()
     {
-        pm.ChangeNeed(needID, changeNeedAmount);
+        Managers.Player.ChangeNeed(needID, changeNeedAmount);
     }
 
     /// <summary>
