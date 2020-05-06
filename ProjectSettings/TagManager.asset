@@ -10,6 +10,7 @@ TagManager:
   - World
   - NPC
   - PlayerTelekinesis
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - TelekineticField
   - Objects
   - PlayerTelekinesis
-  - 
+  - WayPoint
   - 
   - 
   - 

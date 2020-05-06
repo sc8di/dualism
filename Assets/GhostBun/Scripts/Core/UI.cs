@@ -17,8 +17,8 @@ public class UI : MonoBehaviour
     [SerializeField] private Routine _routine;
     [SerializeField] private RadialSlider[] _slidersOfNeeds;
     private bool _isShowMenu;
-    
-    public bool IsShowUI;
+
+    public bool IsShowUI { get; private set; }
 
     private void Awake()
     {
@@ -63,7 +63,7 @@ public class UI : MonoBehaviour
     {
         _startWords.SetActive(false);
         SetTimeScale(1);
-        IsShowUI = false;
+        StartCoroutine(ChangeIsShowUI());
     }
 
 
@@ -87,8 +87,8 @@ public class UI : MonoBehaviour
         }
         else
         {
-            IsShowUI = false;
             SetTimeScale(1);
+            StartCoroutine(ChangeIsShowUI());
         }
     }
 
@@ -152,5 +152,13 @@ public class UI : MonoBehaviour
     private void OnGameComplete()
     {
         // Отображение надписи о завершении игры.
+    }
+
+    private IEnumerator ChangeIsShowUI()
+    {
+
+        yield return new WaitForEndOfFrame();
+
+        IsShowUI = false;
     }
 }
