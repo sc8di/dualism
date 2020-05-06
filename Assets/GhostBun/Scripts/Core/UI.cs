@@ -16,8 +16,9 @@ public class UI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _clock;
     [SerializeField] private Routine _routine;
     [SerializeField] private RadialSlider[] _slidersOfNeeds;
+    private bool _isShowMenu;
     
-    public bool isShowMenu;
+    public bool IsShowUI;
 
     private void Awake()
     {
@@ -48,7 +49,8 @@ public class UI : MonoBehaviour
         }
         
         _popup.SetActive(false);
-        isShowMenu = false;
+        _isShowMenu = false;
+        IsShowUI = true;
 
         _startWords.SetActive(true);
         _endWords.SetActive(false);
@@ -61,6 +63,7 @@ public class UI : MonoBehaviour
     {
         _startWords.SetActive(false);
         SetTimeScale(1);
+        IsShowUI = false;
     }
 
 
@@ -74,13 +77,19 @@ public class UI : MonoBehaviour
 
     public void ResumeGame()
     {
-        isShowMenu = !isShowMenu;
-        _popup.gameObject.SetActive(isShowMenu);
-            
-        if (isShowMenu) 
+        _isShowMenu = !_isShowMenu;
+        _popup.gameObject.SetActive(_isShowMenu);
+
+        if (_isShowMenu)
+        {
+            IsShowUI = true;
             SetTimeScale(0);
-        else 
+        }
+        else
+        {
+            IsShowUI = false;
             SetTimeScale(1);
+        }
     }
 
     private void SetTimeScale(int value)
@@ -112,6 +121,7 @@ public class UI : MonoBehaviour
     {
         _endWords.SetActive(true);
         SetTimeScale(0);
+        IsShowUI = true;
     }
 
     private void OnLevelFailed()
@@ -122,6 +132,7 @@ public class UI : MonoBehaviour
     private IEnumerator FailLevel()
     {
         _failLevelWords.SetActive(true);
+        IsShowUI = true;
 
         yield return new WaitForSeconds(3);
 
