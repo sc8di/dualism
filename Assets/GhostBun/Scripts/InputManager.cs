@@ -30,7 +30,7 @@ public class InputManager : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Minus))
+        /*if (Input.GetKeyDown(KeyCode.Minus))
         {
             Managers.Player.SetPlayerDetectedCount(0);
             for (int i = 0; i < 5; i++)
@@ -42,7 +42,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Delete))
         {
             _routine.currentGameHour = 17;
-        }
+        }*/
 
         //Debug.Log("UI: " + ui.IsShowUI);
         if (Input.GetKeyDown(KeyCode.Mouse0) && !ui.IsShowUI)
