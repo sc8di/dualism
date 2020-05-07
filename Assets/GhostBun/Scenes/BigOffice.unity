@@ -22510,7 +22510,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 969dd1164082a194593c23db59482c3c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -49748,6 +49748,16 @@ PrefabInstance:
       propertyPath: _vfxPower
       value: 
       objectReference: {fileID: 1418179202}
+    - target: {fileID: 5811167615621095768, guid: ab9d1c1f6246fb94c8f2ae3a365783f3,
+        type: 3}
+      propertyPath: maximumRotationForce
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811167615621095768, guid: ab9d1c1f6246fb94c8f2ae3a365783f3,
+        type: 3}
+      propertyPath: rotationForceMultiplier
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab9d1c1f6246fb94c8f2ae3a365783f3, type: 3}
 --- !u!1001 &8030469589690046386
