@@ -99,12 +99,12 @@ public class Work : MonoBehaviour
     private IEnumerator Working(float delay, string name)
     {
 
-        _animator.SetBool("Work", false);
         _navMeshAgent.isStopped = true;
 
 
         yield return new WaitForSeconds(delay);
 
+        _animator.SetBool("Work", false);
         Debug.Log("Work Stop");
         _animator.SetTrigger("Walk");
         _navMeshAgent.isStopped = false;
