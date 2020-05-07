@@ -5849,6 +5849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea4f95174a5a23489e6d8d99d8fbe01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 14, z: 0}
   _forceMode: 5
   _force: -1000
   _bunSpeed: 2
@@ -21165,6 +21166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea4f95174a5a23489e6d8d99d8fbe01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 14, z: 0}
   _forceMode: 5
   _force: -1000
   _bunSpeed: 2
@@ -22218,7 +22220,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 969dd1164082a194593c23db59482c3c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -23561,6 +23563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea4f95174a5a23489e6d8d99d8fbe01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 14, z: 0}
   _forceMode: 5
   _force: 1800
   _bunSpeed: 1
@@ -24462,6 +24465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea4f95174a5a23489e6d8d99d8fbe01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 14, z: 0}
   _forceMode: 5
   _force: -1400
   _bunSpeed: 2
@@ -24527,6 +24531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea4f95174a5a23489e6d8d99d8fbe01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 14, z: 0}
   _forceMode: 5
   _force: 1800
   _bunSpeed: 3
@@ -31649,6 +31654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea4f95174a5a23489e6d8d99d8fbe01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 14, z: 0}
   _forceMode: 5
   _force: -800
   _bunSpeed: 6
@@ -39073,6 +39079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea4f95174a5a23489e6d8d99d8fbe01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 14, z: 0}
   _forceMode: 5
   _force: -3000
   _bunSpeed: 8

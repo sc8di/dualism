@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GhostBun : MonoBehaviour
 {
+    [SerializeField] private Vector3 rotation;
     [SerializeField] private ForceMode _forceMode;
     [SerializeField] private float _force;
     [SerializeField] private float _bunSpeed = 5f;
@@ -23,9 +24,9 @@ public class GhostBun : MonoBehaviour
 
     private void FixedUpdate()
     {
+        _body.MoveRotation(Quaternion.Euler(transform.eulerAngles + rotation * Time.deltaTime));
         if (_target != null)
         {
-
             if (_target.activeInHierarchy)
             {
                 _distanceToTarget = Vector3.Distance(transform.position, _target.transform.position);
