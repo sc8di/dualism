@@ -11,14 +11,19 @@ public class GhostBun : MonoBehaviour
 
     private List<Rigidbody> _rbList;
     private Vector3 _startingLocation;
+    private Quaternion _startingRotation;
     private Rigidbody _body;
     private float _distanceToTarget;
+
+    private Vector3 _xyz;
 
     private void Start()
     {
         _rbList = new List<Rigidbody>();
         _startingLocation = transform.position;
+        _startingRotation = transform.rotation;
         _body = GetComponent<Rigidbody>();
+        _xyz = Vector3.one;
     }
 
     private void FixedUpdate()
@@ -32,6 +37,8 @@ public class GhostBun : MonoBehaviour
                 {
                     transform.LookAt(_target.transform);
                     _body.MovePosition(transform.position + transform.forward * _bunSpeed * Time.fixedDeltaTime);
+                    _xyz += Vector3.one;
+                    _body.MoveRotation(Quaternion.Euler(_xyz));
                 }
             }
             else
@@ -41,6 +48,8 @@ public class GhostBun : MonoBehaviour
                 {
                     transform.LookAt(_startingLocation);
                     _body.MovePosition(transform.position + transform.forward * _bunSpeed * Time.fixedDeltaTime);
+                    _xyz += Vector3.one;
+                    _body.MoveRotation(Quaternion.Euler(_xyz));
                 }
             }
 
@@ -57,6 +66,11 @@ public class GhostBun : MonoBehaviour
                 Vector3 directionalForce = (transform.position - _rbList[i].transform.position).normalized * _force;
                 _rbList[i].AddForce(directionalForce * Time.fixedDeltaTime, _forceMode);
             }
+        }
+        else
+        {
+            _xyz += Vector3.one;
+            _body.MoveRotation(Quaternion.Euler(_xyz));
         }
     }
 
