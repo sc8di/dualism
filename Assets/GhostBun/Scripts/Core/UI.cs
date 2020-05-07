@@ -151,7 +151,9 @@ public class UI : MonoBehaviour
 
     private void OnGameComplete()
     {
-        // Отображение надписи о завершении игры.
+        _endWords.SetActive(true);
+        SetTimeScale(0);
+        IsShowUI = true;
     }
 
     private IEnumerator ChangeIsShowUI()

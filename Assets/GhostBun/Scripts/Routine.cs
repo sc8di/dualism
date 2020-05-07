@@ -15,7 +15,7 @@ public class Routine : MonoBehaviour
     [SerializeField] List<GameObjectOperation> gameObjects;
     float timeFromLastGameMinute = 0f;
     float gameMinuteInSeconds = 0f;
-    int currentGameHour = 0;
+    public int currentGameHour = 0;
     int currentGameMinute = 0;
 
     [System.Serializable]
