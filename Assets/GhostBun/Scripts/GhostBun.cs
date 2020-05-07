@@ -30,6 +30,7 @@ public class GhostBun : MonoBehaviour
                 _distanceToTarget = Vector3.Distance(transform.position, _target.transform.position);
                 if (_distanceToTarget > _stopThreshold)
                 {
+                    transform.LookAt(_target.transform);
                     _body.MovePosition(transform.position + transform.forward * _bunSpeed * Time.fixedDeltaTime);
                 }
             }
@@ -38,6 +39,7 @@ public class GhostBun : MonoBehaviour
                 _distanceToTarget = Vector3.Distance(transform.position, _startingLocation);
                 if (_distanceToTarget > _stopThreshold)
                 {
+                    transform.LookAt(_startingLocation);
                     _body.MovePosition(transform.position + transform.forward * _bunSpeed * Time.fixedDeltaTime);
                 }
             }
