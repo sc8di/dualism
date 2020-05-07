@@ -2599,7 +2599,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: 488707dba229e6f45a8a9b5cc8488b28, type: 2}
 --- !u!4 &202021375
@@ -5410,6 +5410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionMarker: {fileID: 0}
   positionableObject: {fileID: 494591320}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
@@ -5480,6 +5481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionMarker: {fileID: 0}
   positionableObject: {fileID: 720803303}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
@@ -7296,10 +7298,10 @@ RectTransform:
   m_Father: {fileID: 1240400615}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -961, y: -101}
-  m_SizeDelta: {x: 108.7, y: 81.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -160}
+  m_SizeDelta: {x: 217.40002, y: 163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &604585915
 MonoBehaviour:
@@ -7319,7 +7321,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b65428c3c865d514dbac8301f822409a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2e6bda4569616d64b8713888eb8959ed, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -21267,6 +21269,79 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 887658901}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &891470925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 891470926}
+  - component: {fileID: 891470928}
+  - component: {fileID: 891470927}
+  m_Layer: 5
+  m_Name: GodzillaTriangle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &891470926
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891470925}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1240400615}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -160}
+  m_SizeDelta: {x: 217.40002, y: 163}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &891470927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891470925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 252e57acb07b7aa48876aa3131a9deef, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &891470928
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891470925}
+  m_CullTransparentMesh: 0
 --- !u!43 &894124222
 Mesh:
   m_ObjectHideFlags: 0
@@ -31916,6 +31991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionMarker: {fileID: 0}
   positionableObject: {fileID: 272200743}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
@@ -32767,6 +32843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionMarker: {fileID: 0}
   positionableObject: {fileID: 667878654}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
@@ -33617,11 +33694,11 @@ MonoBehaviour:
     hoursActivation: 16
     minutesActivation: 35
     operation: 0
-  - go: {fileID: 604585913}
+  - go: {fileID: 891470925}
     hoursActivation: 13
     minutesActivation: 55
     operation: 1
-  - go: {fileID: 604585913}
+  - go: {fileID: 891470925}
     hoursActivation: 14
     minutesActivation: 0
     operation: 0
@@ -36699,6 +36776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionMarker: {fileID: 0}
   positionableObject: {fileID: 1880254831}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
@@ -45743,6 +45821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionMarker: {fileID: 0}
   positionableObject: {fileID: 293652652}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
@@ -46548,6 +46627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionMarker: {fileID: 0}
   positionableObject: {fileID: 963247212}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
@@ -46766,6 +46846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6b3bfa15e279946b8d8208c43e11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionMarker: {fileID: 0}
   positionableObject: {fileID: 1476310587}
   ghostMaterial: {fileID: 2100000, guid: c739a1c28863eab4b9f8efc783f7533b, type: 2}
   reactivateObjectAfterSeconds: 3
