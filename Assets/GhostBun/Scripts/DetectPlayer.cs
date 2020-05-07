@@ -5,33 +5,21 @@ using UnityEngine.AI;
 
 public class DetectPlayer : MonoBehaviour
 {
-    [SerializeField]
-    GameObject player;
-    [SerializeField]
-    LayerMask detectionLayer;
-    [SerializeField]
-    float detectionDistance = 8f;
-    [SerializeField]
-    float autoDetectDistance = 1f;
-
-    [SerializeField]
-    GameObject gesture;
-
-    PlayerManager pm;
-    [SerializeField]
-    float viewAngle = 15f;
-
-    NavMeshAgent navMeshAgent;
+    [SerializeField] private GameObject player;
+    [SerializeField] private LayerMask detectionLayer;
+    [SerializeField] private float detectionDistance = 8f;
+    [SerializeField] private float autoDetectDistance = 1f;
+    [SerializeField] private float viewAngle = 15f;
+    [SerializeField] private GameObject gesture;
+    [SerializeField] private float lookAtPlayerEverySeconds = 3f;
+    private float timeSinceLookedAtPlayer = 0f;
+    private NavMeshAgent navMeshAgent;
+    private PlayerManager pm;
+    private Vector3 directionToPlayer;
+    private float distanceToPlayer;
+    private bool lookForPlayer = true;
 
     public float waitTimer = 10f;
-
-    Vector3 directionToPlayer;
-    float distanceToPlayer;
-    bool lookForPlayer = true;
-
-    float timeSinceLookedAtPlayer = 0f;
-    [SerializeField]
-    float lookAtPlayerEverySeconds = 3f;
 
     private void OnDrawGizmosSelected()
     {
@@ -46,6 +34,8 @@ public class DetectPlayer : MonoBehaviour
         gesture.SetActive(false);
         pm = FindObjectOfType<PlayerManager>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+
+        timeSinceLookedAtPlayer = 0f;
     }
 
     private void FixedUpdate()

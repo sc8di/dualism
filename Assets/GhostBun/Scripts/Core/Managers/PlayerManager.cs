@@ -35,6 +35,11 @@ public class PlayerManager : MonoBehaviour, IGameManager
         }
     }
 
+    public void SetPlayerDetectedCount(int value)
+    {
+        _timesPlayerDetected = value;
+    }
+
     private void FixedUpdate()
     {
         _timerChangeNeeds += Time.fixedDeltaTime;

@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class DetectPlayerTelekinesis : MonoBehaviour
 {
-    public int timesPlayerDetected = 0;
+    public int timesPlayerDetected;
+
+    private void Start()
+    {
+        timesPlayerDetected = 0;
+        Managers.Player.SetPlayerDetectedCount(timesPlayerDetected);
+    }
 
     public void PlayerDetected()
     {
