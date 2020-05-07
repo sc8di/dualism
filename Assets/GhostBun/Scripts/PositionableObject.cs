@@ -32,11 +32,14 @@ public class PositionableObject : MonoBehaviour
 
     private void Start()
     {
-        positionMarker = Instantiate(positionableObject, transform);
-        positionMarker.GetComponent<MeshRenderer>().material = ghostMaterial;
-        Destroy(positionMarker.GetComponent<Rigidbody>());
-        Destroy(positionMarker.GetComponent<NavMeshObstacle>());
-        Destroy(positionMarker.GetComponent<BoxCollider>());
+        if (!positionMarker)
+        {
+            positionMarker = Instantiate(positionableObject, transform);
+            positionMarker.GetComponent<MeshRenderer>().material = ghostMaterial;
+            Destroy(positionMarker.GetComponent<Rigidbody>());
+            Destroy(positionMarker.GetComponent<NavMeshObstacle>());
+            Destroy(positionMarker.GetComponent<BoxCollider>());
+        }
         thisTrigger = GetComponent<SphereCollider>();
         ActivateWaypoint(false , false);
     }
