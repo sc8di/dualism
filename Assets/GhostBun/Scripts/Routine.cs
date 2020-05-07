@@ -57,6 +57,11 @@ public class Routine : MonoBehaviour
             {
                 currentGameHour++;
                 currentGameMinute = 0;
+
+                if (currentGameHour >= 18)
+                {
+                    Messenger.Broadcast(GameEvent.GAME_COMPLETE);
+                }
             }
             CheckWaypointsActivation();
             CheckGameObjectsActivation();
