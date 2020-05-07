@@ -33091,7 +33091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149f19f831057b44f8760e544ba2575c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayLengthInMinutes: 9
+  dayLengthInMinutes: 7
   startingHour: 8
   waypoints:
   - wp: {fileID: 1599809364}
@@ -33280,6 +33280,14 @@ MonoBehaviour:
     operation: 0
   - wp: {fileID: 32607848}
     hoursActivation: 15
+    minutesActivation: 0
+    operation: 0
+  - wp: {fileID: 1906561374}
+    hoursActivation: 12
+    minutesActivation: 30
+    operation: 1
+  - wp: {fileID: 1906561374}
+    hoursActivation: 13
     minutesActivation: 0
     operation: 0
   gameObjects:
