@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private LayerMask goTo;
     [SerializeField] private UI ui;
     [SerializeField] private float _timerToGo = .1f;
+    [SerializeField] private Routine _routine;
 
     private TelekineticEngine _telekineticEngine;
     private NavMeshAgent _navMeshAgent;
@@ -36,6 +37,11 @@ public class InputManager : MonoBehaviour
             {
                 Managers.Player.ChangeNeed(i, 100);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            _routine.currentGameHour = 17;
         }
 
         //Debug.Log("UI: " + ui.IsShowUI);

@@ -100,7 +100,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 9308cfb3c5ed238419bf08371964b406,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -33182,6 +33182,7 @@ MonoBehaviour:
     hoursActivation: 16
     minutesActivation: 2
     operation: 0
+  currentGameHour: 0
 --- !u!4 &1437276795
 Transform:
   m_ObjectHideFlags: 0
@@ -36668,6 +36669,7 @@ MonoBehaviour:
     m_Bits: 131072
   ui: {fileID: 1240400614}
   _timerToGo: 0.2
+  _routine: {fileID: 1437276794}
 --- !u!4 &1787959894
 Transform:
   m_ObjectHideFlags: 0
