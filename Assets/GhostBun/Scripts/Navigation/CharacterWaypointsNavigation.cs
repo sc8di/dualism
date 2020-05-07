@@ -67,7 +67,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
             _wanderTimer += Time.fixedDeltaTime;
             if (_wanderTimer > _timerToWander)
             {
-                //Debug.Log("I am staying");
+                Debug.Log("I am staying");
                 //_wpNavigation.goToMove();
                 //if (gameObject.tag == "Player")
                 //    goToMove();
@@ -80,6 +80,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
         if (Vector3.Distance(transform.position, _targetWaypoint.GetPosition()) < distanceFalloff && !isWorking)
         {
             GoToRandomPoint();
+            Debug.Log("I want to another work");
         }
         _animator.SetFloat("Forward", _navMeshAgent.velocity.magnitude / _navMeshAgent.speed);
     }
@@ -121,7 +122,8 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     /// <returns>Возвращает Waypoint object</returns>
     private Waypoint GetNextRandomWaypoint()
     {
-        //Debug.Log("get random");
+        Waypoint NextWaypoint;
+        Debug.Log("get random:" + gameObject.name);
         List<Waypoint> availableWaypoints = new List<Waypoint>();
         int weight = Random.Range(0, maxWeight + 1);
         foreach (Waypoint wp in wpList)
@@ -131,9 +133,15 @@ public class CharacterWaypointsNavigation : MonoBehaviour
                 availableWaypoints.Add(wp);
             }
         }
+        if(availableWaypoints.Count == 0)
+        {
+            Debug.LogError($"{availableWaypoints} is empty");
+            GetNextRandomWaypoint();
+        }
         int index;
         index = Random.Range(0, availableWaypoints.Count);
-        return availableWaypoints[index];
+        NextWaypoint = availableWaypoints[index];
+        return NextWaypoint;
     }
 
     /// <summary>
@@ -146,7 +154,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
 
         for (int i = 0; i < wpList.Count; i++)
         {
-            //Debug.Log("get closest, How many times is it calls?");
+            Debug.Log("get closest, How many times is it calls?");
 
             float dist = Vector3.Distance(wpList[i].transform.position, transform.position);
 
@@ -166,6 +174,7 @@ public class CharacterWaypointsNavigation : MonoBehaviour
     {
         if (isWorking)
         {
+            Debug.Log("Work was ended");
             isWorking = false;
             workParticle.SetActive(false);
             Waypoint wp = FindTheClosest();

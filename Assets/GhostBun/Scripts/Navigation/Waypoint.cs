@@ -60,7 +60,7 @@ public class Waypoint : MonoBehaviour
                 gesture.SetActive(false);
             }
                 
-            else if (!isMoved)
+            else if (!isMoved && isAvailable)
             {
                 gesture.SetActive(true);
                 GetComponent<BoxCollider>().enabled = true;
