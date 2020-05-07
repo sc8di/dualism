@@ -3025,6 +3025,16 @@ PrefabInstance:
       propertyPath: wpList.Array.data[11]
       value: 
       objectReference: {fileID: 32607848}
+    - target: {fileID: 7315046856609235652, guid: e921daafb9db09f4d860725efea03c04,
+        type: 3}
+      propertyPath: _timerToWander
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315046856609235653, guid: e921daafb9db09f4d860725efea03c04,
+        type: 3}
+      propertyPath: m_Speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7315046856609235659, guid: e921daafb9db09f4d860725efea03c04,
         type: 3}
       propertyPath: player
@@ -22879,6 +22889,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4716727636880248634, guid: 247154258ffa35d49b56230b0f179a2b,
+        type: 3}
+      propertyPath: m_Speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4716727636880248635, guid: 247154258ffa35d49b56230b0f179a2b,
         type: 3}
       propertyPath: wpList.Array.size
@@ -22949,6 +22964,11 @@ PrefabInstance:
       propertyPath: wpList.Array.data[11]
       value: 
       objectReference: {fileID: 869953697}
+    - target: {fileID: 4716727636880248635, guid: 247154258ffa35d49b56230b0f179a2b,
+        type: 3}
+      propertyPath: _timerToWander
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4716727636880248636, guid: 247154258ffa35d49b56230b0f179a2b,
         type: 3}
       propertyPath: player
@@ -31132,6 +31152,11 @@ PrefabInstance:
       propertyPath: wpList.Array.data[11]
       value: 
       objectReference: {fileID: 32607848}
+    - target: {fileID: 5326461488514228700, guid: 161948661b22d58448dc5c49ee9df3fc,
+        type: 3}
+      propertyPath: _timerToWander
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5326461488514228701, guid: 161948661b22d58448dc5c49ee9df3fc,
         type: 3}
       propertyPath: player
@@ -31142,6 +31167,11 @@ PrefabInstance:
       propertyPath: gesture
       value: 
       objectReference: {fileID: 1213103875}
+    - target: {fileID: 5326461488514228703, guid: 161948661b22d58448dc5c49ee9df3fc,
+        type: 3}
+      propertyPath: m_Speed
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 161948661b22d58448dc5c49ee9df3fc, type: 3}
 --- !u!4 &1243097435 stripped
@@ -47000,6 +47030,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 120880313589753223, guid: 09f2aa3eacc524f4993e58620e9913d3,
+        type: 3}
+      propertyPath: m_Speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 120880313589753224, guid: 09f2aa3eacc524f4993e58620e9913d3,
         type: 3}
       propertyPath: wpList.Array.size
@@ -47070,6 +47105,11 @@ PrefabInstance:
       propertyPath: wpList.Array.data[11]
       value: 
       objectReference: {fileID: 869953697}
+    - target: {fileID: 120880313589753224, guid: 09f2aa3eacc524f4993e58620e9913d3,
+        type: 3}
+      propertyPath: _timerToWander
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 120880313589753225, guid: 09f2aa3eacc524f4993e58620e9913d3,
         type: 3}
       propertyPath: player
@@ -48308,7 +48348,7 @@ MonoBehaviour:
   - {fileID: 869953697}
   - {fileID: 32607848}
   distanceFalloff: 1
-  _timerToWander: 0.5
+  _timerToWander: 2.5
   workParticle: {fileID: 1493528283}
 --- !u!1001 &5811167616156188569
 PrefabInstance:
