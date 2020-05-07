@@ -5,11 +5,11 @@ using UnityEngine.AI;
 
 public class Work : MonoBehaviour
 {
-    public enum Tag { Player,NPC, Both}
+    public enum Tag { Player, NPC, Both }
 
     public Tag chooseTag;
-    public enum WorkAnimation 
-    { 
+    public enum WorkAnimation
+    {
         WorkOnComputer,
         InteractWithDocuments,
         InteractWithPrinter,
@@ -20,7 +20,7 @@ public class Work : MonoBehaviour
         Looking,
         TalkingSit,
     }
-    
+
     public WorkAnimation Animation;
 
     public float turnOffTrigerTime = 10f;
@@ -48,7 +48,7 @@ public class Work : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(chooseTag == Tag.Both)
+        if (chooseTag == Tag.Both)
         {
             if (other.CompareTag("Player") && _waypoint.CurrentUser.Contains(other.name)
                 || other.CompareTag("NPC") && _waypoint.CurrentUser.Contains(other.name))
@@ -64,7 +64,7 @@ public class Work : MonoBehaviour
                 StartCoroutine(Working(animLength.AnimationsLength[_workAnimationIndex], other.name));
                 StartCoroutine(TurnOffCollider(turnOffTrigerTime + animLength.AnimationsLength[_workAnimationIndex], other.name));
                 //StartCoroutine(TurnOffParticle(animLength.AnimationsLength[_workAnimationIndex]));
-                
+
             }
         }
         else
@@ -98,16 +98,14 @@ public class Work : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Working(float delay, string name)
     {
-        gesture.SetActive(false);
-
-        yield return new WaitForSeconds(_navMeshAgent.speed / 20);
 
         _animator.SetBool("Work", false);
         _navMeshAgent.isStopped = true;
-        
+
 
         yield return new WaitForSeconds(delay);
 
+        Debug.Log("Work Stop");
         _animator.SetTrigger("Walk");
         _navMeshAgent.isStopped = false;
         _waypoint.CurrentUser.Remove(name);
@@ -116,15 +114,11 @@ public class Work : MonoBehaviour
         if (name == "Player")
             _activeGesture[needID].SetActive(false);
 
-
-
-
         yield return new WaitForEndOfFrame();
         //Изменение потребности после оконачания анимации.
         if (name == "Player")
             ChangeNeed();
         _wpNavigation.GoToRandomPoint();
-        Debug.Log("Go after work");
     }
 
     /// <summary>
@@ -134,10 +128,9 @@ public class Work : MonoBehaviour
     /// <returns></returns>
     private IEnumerator TurnOffCollider(float delay, string name)
     {
-        gameObject.GetComponent<BoxCollider>().enabled = false;
-
         yield return new WaitForSeconds(delay);
 
+        Debug.Log($"{gameObject.name} Avalaible again");
         gameObject.GetComponent<BoxCollider>().enabled = true;
         _waypoint.SetAvailability(true);
         clicableBox.enabled = true;
@@ -148,7 +141,10 @@ public class Work : MonoBehaviour
     {
         if (!_wpNavigation.isWorking)
         {
+            gameObject.GetComponent<BoxCollider>().enabled = false;
             clicableBox.enabled = false;
+            Debug.Log("Start work");
+            gesture.SetActive(false);
             _wpNavigation.isWorking = true;
             _wpNavigation.workParticle.SetActive(true);
             _waypoint.SetAvailability(false);
